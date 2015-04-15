@@ -3,13 +3,10 @@ package cross.threebodyship.userinterface;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Graphics;
-import java.awt.Panel;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -40,11 +37,13 @@ public class GameUI extends JPanel implements Observer {
     public GameUI(Game game, GameController gameController) {
         this.game = game;
         this.gameController = gameController;
-        
+
         canvasWidth = game.maxX * unitWidth;
         canvasHeight = game.maxY * unitWidth;
-
-        setLayout(new BorderLayout());
+        
+        setLayout(null);
+        setBounds(0, 0, 1000, 600);
+        setBackground(Color.BLUE);
         
         JPanel panelTop = new JPanel();
         panelTop.setLayout(new BorderLayout());
@@ -52,15 +51,16 @@ public class GameUI extends JPanel implements Observer {
         panelTop.add(labelSpeed, BorderLayout.NORTH);
         labelDirection = new JLabel("方向: ");
         panelTop.add(labelDirection, BorderLayout.SOUTH);
-        add(panelTop, BorderLayout.NORTH);
+        add(panelTop);
+        panelTop.setBounds(10, 50, 800, 50);
 
         paintCanvas = new Canvas();
         paintCanvas.setSize(canvasWidth + 1, canvasHeight + 1);
         paintCanvas.addKeyListener(gameController);
-        add(paintCanvas, BorderLayout.CENTER);
+        add(paintCanvas);
+        paintCanvas.setBounds(10, 100, canvasWidth + 1, canvasHeight + 1);
 
         addKeyListener(gameController);
-        
     }
     
     public void paint() {

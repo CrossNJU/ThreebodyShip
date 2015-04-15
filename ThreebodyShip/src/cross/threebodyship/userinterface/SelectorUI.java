@@ -20,6 +20,8 @@ public class SelectorUI extends JPanel implements Observer {
 
 	public SelectorUI() {
 		// TODO Auto-generated constructor stub
+		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
+		
 		JLabel label = new JLabel("This is a Selector");
 		add(label, BorderLayout.SOUTH);
 		

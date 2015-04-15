@@ -27,22 +27,20 @@ public class Stage extends Observable implements Runnable {
 		this.beforeImageName = beforeImageName;
 		this.afterImageName = afterImageName;
 		this.game = game;
-		
-		startStage();
-		stageThread = new Thread(this);
-		stageThread.start();
 	}
 	
 	public void startStage() {
 		Thread gameThread = new Thread(game);
 		gameThread.start();
+		stageThread = new Thread(this);
+		stageThread.start();
 	}
 	
 	public void win() {
 		checkAchievement();
 		System.out.println("Win");
 		setChanged();
-		notifyObservers();
+		notifyObservers("win");
 	}
 	
 	public void restart() {

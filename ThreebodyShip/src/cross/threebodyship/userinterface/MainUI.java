@@ -1,7 +1,6 @@
 package cross.threebodyship.userinterface;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -9,7 +8,6 @@ import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cross.threebodyship.model.Game;
@@ -25,6 +23,9 @@ public class MainUI implements Observer {
 	JPanel starterPanel;
 	SelectorUI selectorPanel;
 	StageUI stagePanel;
+
+	public final static int WIDTH = 1024;
+	public final static int HEIGHT = 768;
 	
 	public MainUI() {
 		init();
@@ -32,36 +33,83 @@ public class MainUI implements Observer {
 	
 	public void init() {
         mainFrame = new JFrame("Threebody Ship");
+        mainFrame.setLayout(null);
         mainPanel = new JPanel();
+        mainPanel.setLayout(null);
+        mainPanel.setBounds(0, 0, WIDTH, HEIGHT);
+        mainPanel.setBackground(Color.GREEN);
         
         selectorPanel = new SelectorUI();
-		selectorPanel.stageButton.addActionListener(new StageListener());
-		selectorPanel.backButton.addActionListener(new BackToStarterListener());
+		selectorPanel.stageButton.addActionListener(new StageButtonListener());
+		selectorPanel.backButton.addActionListener(new BackToStarterButtonListener());
         
         starterPanel = new JPanel();
+        starterPanel.setLayout(null);
+        starterPanel.setBounds(20, 20, WIDTH, HEIGHT);
+        starterPanel.setBackground(Color.ORANGE);
+        
         JButton startButton = new JButton("Start");
-        startButton.addActionListener(new StartListener());
-        starterPanel.add(BorderLayout.CENTER, startButton);
-        mainPanel.add(starterPanel, BorderLayout.NORTH);
+        startButton.setBounds(10, 10, 200, 200);
+        startButton.setBackground(Color.YELLOW);
+        
+        startButton.addActionListener(new StartButtonListener());
+        starterPanel.add(startButton);
+        mainPanel.add(starterPanel);
         
         mainFrame.add(mainPanel);
         //currentPanel = starterPanel;
         
-        //mainFrame.addKeyListener(starterController);
         mainFrame.pack();
-        mainFrame.setSize(1024, 768);
+        mainFrame.setSize(WIDTH, HEIGHT);
         mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
 	}
+
+	//切换显示Panel
+	public void displayPanel(JPanel panel) {
+		mainPanel.removeAll();
+		mainPanel.add(panel);
+		mainPanel.revalidate();
+		mainPanel.repaint();
+	}
 	
-	private class StartListener implements ActionListener {
+	//显示Stage
+	public void displayStage(Stage stage) {
+		stagePanel = new StageUI(stage);
+		stagePanel.backButton.addActionListener(new BackToSelectorButtonListener());
+		stage.addObserver(stagePanel);
+		stage.addObserver(this);
+		displayPanel(stagePanel.beforePanel);
+		stagePanel.startStageButton.addActionListener(new StartStageButtonListener(stage));
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		String msg = (String) arg;
+        //WinGame之后
+		if (msg.equals("win")) {
+			System.out.println("To Next in Starter");
+			Stage stage = (Stage) o;
+			stagePanel.nextStageButton.addActionListener(new NextStageButtonListener(stage));
+	        displayPanel(stagePanel.afterPanel);
+		}
+//		stagePanel.nextButton = new JButton("Next Stage >");
+//		stagePanel.add(stagePanel.nextButton);
+//		stagePanel.nextButton.addActionListener(new NextListener(stage));
+//		stagePanel.revalidate();
+//		stagePanel.repaint();
+	}
+
+	//ActionListerners内部类
+	//写到独立的类之后，所有的addActionListener可以搬到相应的UI类里
+	private class StartButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			displayPanel(selectorPanel);
 		}
 	}
-	private class StageListener implements ActionListener {
+	private class StageButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//后期移到Selector的run()里
@@ -72,61 +120,46 @@ public class MainUI implements Observer {
 			displayStage(stage);
 		}
 	}
-	private class BackToStarterListener implements ActionListener {
+	private class BackToStarterButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			displayPanel(starterPanel);
 		}
 	}
-	private class BackToSelectorListener implements ActionListener {
+	private class BackToSelectorButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			currentStage.leave();
 			displayPanel(selectorPanel);
 		}
 	}
-	private class NextListener implements ActionListener {
+	private class NextStageButtonListener implements ActionListener {
 		Stage stage;
-		public NextListener(Stage stage) {
+		public NextStageButtonListener(Stage stage) {
 			this.stage = stage;
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-	        Game game = new Game(720,480);
+	        //这里需要取到下一个Stage的数据
 	        //Stage nextStage = stage.nextStage;
 	        //or currentStage = currentStage.nextStage;
+	        Game game = new Game(720,480);
 			Stage nextStage = new Stage("二而生三", "Ch1-Stage2-Before.png", "Ch1-Stage2-After.png", game);
 			currentStage = stage;
 			
 			displayStage(nextStage);
 		}
 	}
-	
-	public void displayStage(Stage stage) {
-		
-		stagePanel = new StageUI(stage);
-		stagePanel.backButton.addActionListener(new BackToSelectorListener());
-		stage.addObserver(stagePanel);
-		stage.addObserver(this);
-		displayPanel(stagePanel);
-	}
-	public void displayPanel(JPanel panel) {
-		mainPanel.removeAll();
-		mainPanel.add(panel);
-		mainPanel.revalidate();
-		mainPanel.repaint();
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		Stage stage = (Stage) o;
-
-		System.out.println("To Next in Starter");
-		stagePanel.nextButton = new JButton("Next Stage >");
-		stagePanel.add(stagePanel.nextButton);
-		stagePanel.nextButton.addActionListener(new NextListener(stage));
-		stagePanel.revalidate();
-		stagePanel.repaint();
+	private class StartStageButtonListener implements ActionListener {
+		Stage stage;
+		public StartStageButtonListener(Stage stage) {
+			this.stage = stage;
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			displayPanel(stagePanel);
+	        stagePanel.add(stagePanel.backButton);
+			stage.startStage();
+		}
 	}
 }

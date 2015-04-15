@@ -2,8 +2,6 @@ package cross.threebodyship.model;
 
 import java.util.Observable;
 
-import javax.swing.JOptionPane;
-
 /*
  * Game主要包含运动算法和输赢判断逻辑
  * 运动算法可能需要简化
