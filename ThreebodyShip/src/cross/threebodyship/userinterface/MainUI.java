@@ -64,6 +64,7 @@ public class MainUI implements Observer {
         mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
+        mainFrame.addKeyListener(stagePanel.gamePanel.controller);
 	}
 
 	//切换显示Panel

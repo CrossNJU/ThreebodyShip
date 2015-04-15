@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -15,107 +16,112 @@ import cross.threebodyship.model.Ship;
 import cross.threebodyship.model.Star;
 import cross.threebodyship.transaction.GameController;
 
-public class GameUI extends JPanel implements Observer {
-    /**
+public class GameUI extends JPanel implements Observer{
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	Canvas mainCanvas;
+	GameController controller;
+	Game game;
+	JLabel speedLabel;
+	JLabel degreeLabel;
 	
-	GameController gameController = null;
-    Game game = null;
-
-    Canvas paintCanvas;
-    JLabel labelSpeed;
-    JLabel labelDirection;
-
-    public static int canvasWidth;
-    public static int canvasHeight;
-
-    public final static int unitWidth = 1;
-    public final static int unitHeight = 1;
-
-    public GameUI(Game game, GameController gameController) {
-        this.game = game;
-        this.gameController = gameController;
-
-        canvasWidth = game.maxX * unitWidth;
-        canvasHeight = game.maxY * unitWidth;
-        
-        setLayout(null);
-        setBounds(0, 0, 1000, 600);
-        setBackground(Color.BLUE);
-        
-        JPanel panelTop = new JPanel();
-        panelTop.setLayout(new BorderLayout());
-        labelSpeed = new JLabel("速度: ");
-        panelTop.add(labelSpeed, BorderLayout.NORTH);
-        labelDirection = new JLabel("方向: ");
-        panelTop.add(labelDirection, BorderLayout.SOUTH);
-        add(panelTop);
-        panelTop.setBounds(10, 50, 800, 50);
-
-        paintCanvas = new Canvas();
-        paintCanvas.setSize(canvasWidth + 1, canvasHeight + 1);
-        paintCanvas.addKeyListener(gameController);
-        add(paintCanvas);
-        paintCanvas.setBounds(10, 100, canvasWidth + 1, canvasHeight + 1);
-
-        addKeyListener(gameController);
-    }
-    
-    public void paint() {
-        Graphics g = paintCanvas.getGraphics();
-
-        //绘制背景
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, canvasWidth, canvasHeight);
-        
-        //绘制星球
-        drawStar(g, game.star);
-        
-        //绘制飞船
-        drawShip(g, game.ship);
-        
-        updateSpeed();
-        updateDirection();
-    }
-    private void drawStar(Graphics g, Star star) {
-        //引力范围
-        g.setColor(Color.LIGHT_GRAY);
-        g.fillOval((star.x - star.range) * unitWidth,
-                (star.y - star.range) * unitHeight,
-                star.range * 2 * unitWidth,
-                star.range * 2 * unitHeight);
-        //星球
-        g.setColor(Color.DARK_GRAY);
-        g.fillOval((star.x - star.r) * unitWidth,
-                (star.y - star.r) * unitHeight,
-                star.r * 2 * unitWidth,
-                star.r * 2 * unitHeight);
-    }
-    private void drawShip(Graphics g, Ship ship) {
-        g.setColor(Color.RED);
-        g.fillOval((int) ((ship.x - 3) * unitWidth), (int) ((ship.y - 3) * unitHeight), 6 * unitWidth, 6 * unitHeight);
-    }
-    public void updateSpeed() {
-        String s = "速度: " + game.ship.getSpeed();
-        labelSpeed.setText(s);
-    }
-    public void updateDirection() {
-        String s = "方向: " + game.ship.direction;
-        labelDirection.setText(s);
-    }
-    
-    public void end() {
+	public GameUI(Game game,int width,int height){
+		this.game = game;
+		mainCanvas = new Canvas();
+		mainCanvas.setSize(width, height);
+		controller = new GameController(this.game);
 		
+		JPanel text = new JPanel();
+		speedLabel = new JLabel();
+		degreeLabel = new JLabel();
+		
+		//可以去掉。。。
+		text.add(speedLabel);
+		text.add(degreeLabel);
+		
+		this.add(text,BorderLayout.NORTH);
+		this.add(mainCanvas,BorderLayout.CENTER);
+		this.setLocation(100,100);
+		
+		this.addKeyListener(controller);
+	}
+	
+	//主画板
+	public void repaintMain(){
+		//mainCanvas.repaint();
+		Graphics g = mainCanvas.getGraphics();
+		g.setColor(Color.GRAY);
+		g.fillRect(0,0,mainCanvas.getWidth(),mainCanvas.getHeight());
+			
+		//System.out.println(1);
+		speedLabel.setText("speed:"+Double.toString(game.ship.getSpeed()));
+		degreeLabel.setText("degreeToEast:"+Double.toString(Math.toDegrees(game.ship.getDegreeToEast())));
+
+		paintWinArea(g);
+		paintStartArea(g);
+		paintStar(g,game.star);
+		paintShip(g,game.ship);
+	}
+		
+	//画获胜区域
+	public void paintWinArea(Graphics g){
+		g.setColor(Color.yellow);
+		
+		int height = mainCanvas.getHeight();
+		int width = mainCanvas.getWidth();
+		double r = height/4;
+		int locationx = width + (int)r/2 - (int)r ;
+		int locationy = (int)height/2 - (int)r ;
+		
+		g.fillOval(locationx, locationy, (int)r*2, (int)r*2);
+	}
+	
+	//画开始的发射台
+	public void paintStartArea(Graphics g){
+		g.setColor(Color.yellow);
+		
+		int height = mainCanvas.getHeight();
+		double r = height/4;
+		int locationx = -(int)r*3/2;
+		int locationy = (int)height/2 - (int)r;
+		
+		g.fillOval(locationx, locationy, (int)r*2, (int)r*2);
+	}
+	
+	//画星球
+	public void paintStar(Graphics g, Star star){
+		
+		g.setColor(Color.pink);
+			
+		g.fillOval((int)(star.getLocation().x-star.getGravityScope()/2), 
+				(int)(star.getLocation().y-star.getGravityScope()/2),
+				star.getGravityScope(),
+				star.getGravityScope());
+			
+		g.setColor(Color.BLUE);
+			
+		g.fillOval((int)(star.getLocation().x-star.getSize()/2),
+				(int)(star.getLocation().y-star.getSize()/2),
+				star.getSize(),
+				star.getSize());
+	}
+		
+	//画飞船
+	public void paintShip(Graphics g, Ship ship){
+		
+		g.setColor(Color.red);
+			
+		g.fillOval((int)(ship.getLocation().x-ship.getSize()/2),
+				(int)(ship.getLocation().y-ship.getSize()/2),
+				ship.getSize(),
+				ship.getSize());
+	}
+	
+	//观察Game的动态
+	public void update(Observable o, Object arg0) {
+		repaintMain();
 	}
 
-	@Override
-    public void update(Observable o, Object arg) {
-		Game game = (Game) o;
-		if (!game.isInterrupted) {
-			paint();
-		}
-        
-    }
 }

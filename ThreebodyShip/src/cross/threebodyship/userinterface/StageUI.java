@@ -41,7 +41,7 @@ public class StageUI extends JPanel implements Observer {
 
         //Game部分
 		GameController gameController = new GameController(stage.game);
-        gamePanel = new GameUI(stage.game, gameController);
+        gamePanel = new GameUI(stage.game, 600,500);
         stage.game.addObserver(gamePanel);
         gamePanel.setSize(MainUI.WIDTH, MainUI.HEIGHT);
 		gamePanel.setLocation(0, 0);

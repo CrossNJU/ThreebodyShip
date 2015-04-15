@@ -53,7 +53,7 @@ public class Stage extends Observable implements Runnable {
 	
 	public void leave() {
 		isBack = true;
-		game.isInterrupted = true;
+		game.setState(false);;
 		//game = null;
 		//stageThread = null;
 	}
@@ -62,7 +62,7 @@ public class Stage extends Observable implements Runnable {
 	public void run() {
 		try {
 			while (!isBack) {
-				if (game.isComplished) {
+				if (game.inGame) {
 					win();
 					break;
 				}

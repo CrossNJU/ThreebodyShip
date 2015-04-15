@@ -1,58 +1,76 @@
 package cross.threebodyship.model;
 
 public class Ship {
-    boolean paused = false;
-    double v;
-    public double direction = 0.0;
-    public double x;
-    public double y;
-    double timeInterval = 200.0;								//刷新时间，单位时间
-    double speedUpRate = 1.5;
-    double speedDownRate = 0.75;
-
-    public Ship() {
-    	reset();
-    }
-
-    public void reset(){
-        direction = 0.0;
-        v = 0.01;
-        paused = false;
-    }
-    
-    public void move(Point nextPoint) {
-        x = nextPoint.x;
-        y = nextPoint.y;
+	private Point centerPoint;
+	private int size;
+	private double speed;
+	private double degreeToEast;
+	private double degreeToStar;
+	private double mass = 6000;
+	private boolean isAlive = false;
+	public boolean outOfBorder = false;
+	
+	public Ship(){
+		centerPoint = new Point();
 	}
-
-    public void speedUp() {
-        v *= speedUpRate;
-    }
-
-    public void speedDown() {
-        v *= speedDownRate;
-    }
-
-    public void changePauseState() {
-        paused = !paused;
-    }
-    public double getSpeed() {
-		return v;
+	
+	public Point getLocation(){
+		return this.centerPoint;
 	}
-    public long getTimeInterval() {
-    	timeInterval = 1 / v;
-		return (long) timeInterval;
+	
+	public void setLocation(double x,double y){
+		this.centerPoint.setPoint(x, y);
 	}
-    public Point step() {
-        double vX = v * Math.cos(direction);
-        double vY = v * Math.sin(direction);
-        
-        double x2 = vX * timeInterval;
-        double y2 = vY * timeInterval;
-		x2 = x + x2;
-		y2 = y + y2;
-        
-        Point nextPoint = new Point(x2, y2);
-        return nextPoint;
+	
+	public int getSize(){
+		return this.size;
+	}
+	
+	public void setSize(int size){
+		this.size = size;
+	}
+	
+	public double getSpeed(){
+		return this.speed;
+	}
+	
+	public void setSpeed(double speed){
+		this.speed = speed;
+	}
+	
+	public void changeSpeed(double rate){
+		this.speed *= rate;
+	}
+	
+	public double getDegreeToEast(){
+		return this.degreeToEast;
+	}
+	
+	public void setDegreeToEast(double degree){
+		this.degreeToEast = degree;
+	}
+	
+	public double getDegreeToStar(){
+		return this.degreeToStar;
+	}
+	
+	public void setDegreeToStar(double degree){
+		this.degreeToStar = degree;
+	}
+	
+	public double getMass(){
+		return this.mass;
+	}
+	
+	public void setMass(double mass){
+		this.mass = mass;
+	}
+	
+	public boolean getState(){
+		return this.isAlive;
+	}
+	
+	public void setState(boolean state){
+		this.isAlive = state;
 	}
 }
