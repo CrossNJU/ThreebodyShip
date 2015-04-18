@@ -22,8 +22,9 @@ public class StageStartButtonListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		stageUI.stage.startStage();
 		DisplayPanel.stageDisplay(stageUI, newPane);
+		stageUI.stage.startStage();
+		stageUI.gamePanel.requestFocus();
 	}
 
 	@Override

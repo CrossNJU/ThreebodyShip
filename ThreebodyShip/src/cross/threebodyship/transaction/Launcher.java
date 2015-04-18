@@ -28,13 +28,13 @@ public class Launcher {
 		 * 
 		 */
 		
-		//启动游戏
-		Game game = new Game(600,500);
-		GameUI gameUI = new GameUI(game,600,500);
-		
-		game.addObserver(gameUI);
-		Thread gameThread = new Thread(game);
-		
-		gameThread.start();
+//		//启动游戏
+//		Game game = new Game(600,500);
+//		GameUI gameUI = new GameUI(game,600,500);
+//		
+//		game.addObserver(gameUI);
+//		Thread gameThread = new Thread(game);
+//		
+//		gameThread.start();
 	}
 }

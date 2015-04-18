@@ -34,7 +34,7 @@ public class StageUI extends JPanel implements Observer {
 	JButton backButton;
 	JButton startStageButton;
 	JButton nextStageButton;
-	GameUI gamePanel;
+	public GameUI gamePanel;
 	MainUI mainUI;
 	
     public Stage stage;
