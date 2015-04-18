@@ -4,9 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -52,9 +54,10 @@ public class GameUI extends JPanel implements Observer{
 	public void repaintMain(){
 		//mainCanvas.repaint();
 		Graphics g = mainCanvas.getGraphics();
-		g.setColor(Color.GRAY);
-		g.fillRect(0,0,mainCanvas.getWidth(),mainCanvas.getHeight());
-			
+		//g.setColor(Color.GRAY);
+		//g.fillRect(0,0,mainCanvas.getWidth(),mainCanvas.getHeight());
+		Image GB = new ImageIcon("img/GameBackground/bg-chap00-stage01.png").getImage();	
+		g.drawImage(GB,0,0,mainCanvas.getWidth(),mainCanvas.getHeight(),0,0,1024,768, null);
 		//System.out.println(1);
 		speedLabel.setText("speed:"+Double.toString(game.ship.getSpeed()));
 		degreeLabel.setText("degreeToEast:"+Double.toString(Math.toDegrees(game.ship.getDegreeToEast())));
@@ -116,7 +119,11 @@ public class GameUI extends JPanel implements Observer{
 		g.fillOval((int)(ship.getLocation().x-ship.getSize()/2),
 				(int)(ship.getLocation().y-ship.getSize()/2),
 				ship.getSize(),
-				ship.getSize());
+				ship.getSize()); 
+		/*Image Ship_img = new ImageIcon("img/Ship/ship.png").getImage();
+		g.drawImage(Ship_img,(int)(ship.getLocation().x-ship.getSize()/2),
+				(int)(ship.getLocation().y-ship.getSize()/2),
+				ship.getSize(),ship.getSize(),0,0,425,431,null); */
 	}
 	
 	//观察Game的动态
