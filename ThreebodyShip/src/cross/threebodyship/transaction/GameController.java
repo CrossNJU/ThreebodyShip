@@ -2,16 +2,24 @@ package cross.threebodyship.transaction;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import cross.threebodyship.model.Game;
+import cross.threebodyship.model.Rect;
 import cross.threebodyship.model.Ship;
 
-public class GameController implements KeyListener{
+public class GameController implements KeyListener,MouseMotionListener,MouseListener{
 	Game game;
+	Thread t;
+	Rect r;
 	private int count = 0;
 	
 	public GameController(Game game) {
 		this.game = game;
+		r = new Rect(game);
+		t = new Thread(r);
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -88,5 +96,59 @@ public class GameController implements KeyListener{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if(game.isStarting){
+			game.mousePoint.x = e.getX();
+			game.mousePoint.y = e.getY();
+			
+			double theta = Math.atan((e.getY() - game.startingPoint.y)/
+					(e.getX() - game.startingPoint.x));
+			
+			double x = game.startingPoint.x + game.r*Math.cos(theta);
+			double y = game.startingPoint.y + game.r*Math.sin(theta);
+			
+			game.ship.setLocation(x, y);
+			
+			if(theta<0) theta += Math.PI*2;
+			
+			game.ship.setDegreeToEast(theta);
+			System.out.println("theta:"+Math.toDegrees(theta));
+		}
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		game.breakPress = true;
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		t.start();
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		//t.interrupt();
+		r.stop2 = true;
+		game.isStarting = false;
+		game.inGame = true;
+		//System.out.println("hi");
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
-}
+	}

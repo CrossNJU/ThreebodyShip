@@ -1,25 +1,42 @@
 package cross.threebodyship.model;
 
-import java.awt.BorderLayout;
 import java.util.Observable;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 public class Game extends Observable implements Runnable{
 	private boolean isRunning = false;
 	public boolean isStarting = false;
 	public boolean inGame = false;
+	//public boolean isFailed = false;
 	
 	private long refreshInterval = 100;
+	
 	public Ship ship;
 	public Star star;
+	
 	public double speedChangeRate = 1.1;
+	
 	public Point border;
-	public double distance;
+	public Point startingPoint;
+	public Point mousePoint;
+	
+	public double distance = 10000;
+	public double r;
+	public int rectwidth = 0;
+	public int rectheight = 0;
+	public boolean breakPress = false;
 	
 	public Game(){
-
+		border = new Point();
+		startingPoint = new Point();
+		mousePoint = new Point();
+		
+		border.x = 1024;
+		border.y = 768;
+		startingPoint.x = -border.y/8;
+		startingPoint.y = border.y/2;
+		r = border.y/4;
+		
 		reset();
 	}
 	
@@ -170,11 +187,11 @@ public class Game extends Observable implements Runnable{
 	}
 	
 	//结束判定
-	private void check(){
+	public boolean checkFail(){
 		//判断是否出界
-		JFrame result = new JFrame();
-		JLabel state = new JLabel();
-		Boolean gameEnd = false;
+		//JFrame result = new JFrame();
+		//JLabel state = new JLabel();
+		Boolean isFailed = false;
 		
 		if((ship.getLocation().x<0)||
 				(ship.getLocation().x+ship.getSize()>border.x)||
@@ -183,31 +200,27 @@ public class Game extends Observable implements Runnable{
 				) ship.outOfBorder = true;
 		
 		if(ship.outOfBorder){
-			ship.setState(false);
-			state.setText("you lose!");
-			gameEnd = true;
+			isFailed = true;
+			//gameEnd = true;
 		}	
-		
-		if(checkWin()) {
-			ship.setState(false);
-			state.setText("you win!");
-			gameEnd = true;
-		}
 		
 		if(distance<star.getSize()/2){
 			ship.setState(false);
-			state.setText("you lose!");
-			gameEnd = true;
+			System.out.println("you lose!");
+			isFailed = true;
+			//state.setText("you lose!");
+			//gameEnd = true;
 		}
 		
+		return isFailed;
 		//过关或出界或被星球吸引，则游戏结束
-		if(gameEnd){
+		/*if(gameEnd){
 			result.add(state,BorderLayout.CENTER);
 			result.setVisible(true);
 			result.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			result.setLocationRelativeTo(null);
 			result.pack();
-		}
+		}*/
 		
 	}
 	
@@ -257,7 +270,7 @@ public class Game extends Observable implements Runnable{
 			
 			if((this.inGame)&&(ship.getState())){
 				update();
-				check();
+				//check();
 				this.setChanged();
 				this.notifyObservers();
 			}

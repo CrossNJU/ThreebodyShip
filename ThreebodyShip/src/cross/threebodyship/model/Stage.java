@@ -63,14 +63,17 @@ public class Stage extends Observable implements Runnable {
 	public void run() {
 		try {
 			while (!isBack) {
-				if (game.inGame) {
+				if(game.inGame){
+				if (game.checkWin()) {
 					win();
+					game.inGame = false;
 					break;
 				}
-				if (isFailed) {
+				if (game.checkFail()) {
 					restart();
 				}
-				System.out.println("Check if complished or else");
+				}
+				//System.out.println("Check if complished or else");
 				Thread.sleep(300);
 			}
 		} catch (Exception e) {
