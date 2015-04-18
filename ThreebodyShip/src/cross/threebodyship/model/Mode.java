@@ -14,6 +14,15 @@ public class Mode {
 		case "故事模式":
 			modeType = 1;
 			break;
+		case "挑战模式":
+			modeType = 2;
+			break;
+		case "成就":
+			modeType = 3;
+			break;
+		case "设置":
+			modeType = 4;
+			break;
 		default:
 			break;
 		}

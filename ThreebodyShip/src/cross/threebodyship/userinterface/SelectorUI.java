@@ -82,11 +82,22 @@ public class SelectorUI extends JPanel {
 	public void setModeButton() {
 		for (Mode mode : selector.mode) {
 			JButton modeButton = new JButton(mode.modeName);
+			
 			switch (mode.modeType) {
 			case 1:
 				
 				break;
-
+			case 2:
+				
+				break;
+				
+			case 3:
+				
+				break;
+				
+			case 4:
+				
+				break;
 			default:
 				break;
 			}
@@ -143,7 +154,7 @@ public class SelectorUI extends JPanel {
 			// j = 1;
 			// }
 
-			//num表示的是关卡数，i表示的是章节数，j表示每个章节的第几关
+			// num表示的是关卡数，i表示的是章节数，j表示每个章节的第几关
 			int num = 0;
 			for (int i = 0; i < mode.chap.length; i++) {
 				JLabel chapLabel = new JLabel(mode.chap[i]);
