@@ -23,7 +23,6 @@ import javax.swing.ViewportLayout;
 
 import cross.threebodyship.listener.ModeButtonListener;
 import cross.threebodyship.listener.EnterStageButtonListener;
-import cross.threebodyship.model.Chap;
 import cross.threebodyship.model.Mode;
 import cross.threebodyship.model.Selector;
 import cross.threebodyship.model.Stage;

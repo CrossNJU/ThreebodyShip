@@ -95,8 +95,7 @@ public class StageUI extends JPanel implements Observer {
 		nextStageButton.setBounds((int) (MainUI.WIDTH * 0.8),
 				(int) (MainUI.HEIGHT * 0.45), 100, 100);
 		nextStageButton.addMouseListener(new EnterStageButtonListener(mainUI,
-				new Stage("二而生三", "Ch1-Stage1-Before.png",
-						"Ch1-Stage1-After.png")));
+				stage.nextStage));
 
 		afterPanel.add(nextStageButton);
 	}

@@ -19,16 +19,23 @@ public class Mode {
 		}
 			
 		if(modeType == 1){
-			stages.add(new Stage("从一开始", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			stages.add(new Stage("一而生二", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			stages.add(new Stage("二而生三", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			stages.add(new Stage("三相跌生", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			stages.add(new Stage("黄金三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			stages.add(new Stage("魔鬼三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			stages.add(new Stage("魔鬼三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			stages.add(new Stage("魔鬼三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			stages.add(new Stage("魔鬼三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
+			addStage(new Stage("从一开始", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
+			addStage(new Stage("一而生二", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
+			addStage(new Stage("二而生三", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
+			addStage(new Stage("三相跌生", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
+			addStage(new Stage("黄金三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
+			addStage(new Stage("魔鬼三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
+			addStage(new Stage("魔鬼三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
+			addStage(new Stage("魔鬼三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
+			addStage(new Stage("魔鬼三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
 		}
+	}
+	
+	public void addStage(Stage stage){
+		if(stages.size()>0){
+			stages.get(stages.size()-1).nextStage = stage;
+		}
+		stages.add(stage);
 	}
 	
 	
