@@ -41,8 +41,8 @@ public class SelectorUI extends JPanel {
 		this.frameHeight = MainUI.HEIGHT;
 		this.frameWidth = mainUI.WIDTH;
 		this.selector = selector;
-		
-		//选择界面初始化
+
+		// 选择界面初始化
 		setSize(frameWidth, frameHeight);
 		setLayout(null);
 		setVisible(true);
@@ -52,7 +52,7 @@ public class SelectorUI extends JPanel {
 
 	// 生成新的选择界面
 	public void newSelectorUI() {
-		//将Selector中的按钮与模式添加到UI中
+		// 将Selector中的按钮与模式添加到UI中
 		setModeButton();
 		setModePanel();
 
@@ -82,28 +82,37 @@ public class SelectorUI extends JPanel {
 	public void setModeButton() {
 		for (Mode mode : selector.mode) {
 			JButton modeButton = new JButton(mode.modeName);
+			switch (mode.modeType) {
+			case 1:
+				
+				break;
+
+			default:
+				break;
+			}
 			this.modeButton.add(modeButton);
 		}
 	}
 
 	// 设置模式界面
 	public void setModePanel() {
-		modePane.add(new StoryPane());
+		modePane.add(new StoryPane(selector.mode.get(0)));
 		modePane.add(new ChallengePanel(frameWidth, frameHeight));
 		modePane.add(new AchievementPanel(frameWidth, frameHeight));
 		modePane.add(new SettingPanel(frameWidth, frameHeight));
 	}
 
 	// 模式界面设计
+	// 故事界面
 	class StoryPane extends JScrollPane {
 		int panelWidth;
 		int panelHeight;
 
-		public StoryPane() {
+		public StoryPane(Mode mode) {
 			panelWidth = (int) (frameWidth * 0.7);
 			panelHeight = frameHeight;
 			setSize(panelWidth, panelHeight);
-			
+
 			//
 			JPanel StoryPanel = new JPanel();
 			StoryPanel.setPreferredSize(new Dimension(getViewport().getWidth(),
@@ -111,34 +120,56 @@ public class SelectorUI extends JPanel {
 			StoryPanel.setLayout(null);
 			StoryPanel.setBackground(Color.white);
 
-			//添加章节文本与关卡按钮
-			int i = 1;
-			int j = 1;
-			for (Chap chap : selector.chap) {
-				JLabel chapLabel = new JLabel("CHAP  " + chap.chapNum + " : "
-						+ chap.chapName);
+			// 添加章节文本与关卡按钮
+			// int i = 1;
+			// int j = 1;
+			// for (Chap chap : selector.chap) {
+			// c
+			// for (Stage stage : chap.stage) {
+			// JButton stageButton = new JButton(stage.title);
+			//
+			// stageButton.setBounds((int) (panelWidth * 0.2) * j,
+			// (int) (panelHeight * 0.2) * i + 60, 100, 40);
+			// stageButton.setVisible(true);
+			// stageButton
+			// .addMouseListener(new EnterStageButtonListener(mainUI,stage));
+			//
+			// StoryPanel.add(stageButton);
+			//
+			// j++;
+			// }
+			//
+			// i++;
+			// j = 1;
+			// }
+
+			//num表示的是关卡数，i表示的是章节数，j表示每个章节的第几关
+			int num = 0;
+			for (int i = 0; i < mode.chap.length; i++) {
+				JLabel chapLabel = new JLabel(mode.chap[i]);
 
 				chapLabel.setBounds((int) (panelWidth * 0.2),
-						(int) (panelHeight * 0.2) * i, 100, 40);
+						(int) (panelHeight * 0.3) * (i+1), 100, 40);
 				chapLabel.setForeground(Color.BLACK);
 				chapLabel.setVisible(true);
 				StoryPanel.add(chapLabel);
-				for (Stage stage : chap.stage) {
-					JButton stageButton = new JButton(stage.title);
 
-					stageButton.setBounds((int) (panelWidth * 0.2) * j,
-							(int) (panelHeight * 0.2) * i + 60, 100, 40);
+				for (int j = 0; j < 3; j++) {
+					if (i == mode.stages.size()) {
+						break;
+					}
+					JButton stageButton = new JButton(
+							mode.stages.get(num).title);
+
+					stageButton.setBounds((int) (panelWidth * 0.2) * (j+1),
+							(int) (panelHeight * 0.3) * (i+1) + 60, 100, 40);
 					stageButton.setVisible(true);
-					stageButton
-							.addMouseListener(new EnterStageButtonListener(mainUI,stage));
+					stageButton.addMouseListener(new EnterStageButtonListener(
+							mainUI, mode.stages.get(num)));
 
 					StoryPanel.add(stageButton);
-
-					j++;
+					num++;
 				}
-
-				i++;
-				j = 1;
 			}
 
 			getViewport().add(StoryPanel);
