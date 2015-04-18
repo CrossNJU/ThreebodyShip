@@ -18,10 +18,8 @@ public class MainUI extends JFrame {
 	public StarterUI starterPanel;
 	public SelectorUI selectorPanel;
 	public StageUI stagePanel;
-	public int insetWidth = this.getInsets().left + this.getInsets().right;
-	public int insetHeight = this.getInsets().bottom + this.getInsets().top;
-	int frameWidth = 1024 -insetWidth;
-	int frameHeight = 768 - insetHeight;
+	int frameWidth = 1024;
+	int frameHeight = 768;
 
 	public void mainrun() {
 		Selector selector = new Selector();
@@ -29,6 +27,7 @@ public class MainUI extends JFrame {
 		setSize(1024, 768);
 		setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setUndecorated(true);
 		setVisible(true);
 
 		// 初始化开始界面

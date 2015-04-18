@@ -10,7 +10,7 @@ public class Launcher {
 	public static void main(String[] args) {
 		MainUI mainUI = new MainUI();
 		mainUI.mainrun();
-		System.out.println(mainUI.insetHeight);
+
 //		starter.addObserver(starterUI);
 //		Thread starterThread = new Thread(starter);
 //		starterThread.start();
