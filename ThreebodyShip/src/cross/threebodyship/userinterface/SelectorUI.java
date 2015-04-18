@@ -39,8 +39,8 @@ public class SelectorUI extends JPanel {
 
 	public SelectorUI(Selector selector, MainUI mainUI) {
 		this.mainUI = mainUI;
-		this.frameHeight = mainUI.frameHeight;
-		this.frameWidth = mainUI.frameWidth;
+		this.frameHeight = MainUI.HEIGHT;
+		this.frameWidth = mainUI.WIDTH;
 		this.selector = selector;
 		
 		//选择界面初始化

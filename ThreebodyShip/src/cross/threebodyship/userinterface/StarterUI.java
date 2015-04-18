@@ -16,8 +16,8 @@ public class StarterUI extends JPanel {
 	public JButton startGameButton = new JButton("开始游戏");
 
 	public StarterUI(MainUI mainUI) {
-		this.frameHeight = mainUI.frameHeight;
-		this.frameWidth = mainUI.frameWidth;
+		this.frameHeight = MainUI.HEIGHT;
+		this.frameWidth = MainUI.WIDTH;
 		
 
 		startGameButton.setBounds((int) (frameWidth * 0.40),

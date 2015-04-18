@@ -45,16 +45,16 @@ public class StageUI extends JPanel implements Observer {
 		stage.addObserver(this);
 
 		setLayout(null);
-		setBounds(0, 0, mainUI.frameWidth, mainUI.frameHeight);
+		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
 		setBackground(Color.WHITE);
 		setVisible(true);
-		
+
 		// Game部分
 		initGamePanel(this);
 
 		// Game之前，显示章节内容（图片）
 		initBeforePanel(this);
-		
+
 		// Game之后，显示（图片）
 		initAfterPanel(this);
 
@@ -62,42 +62,45 @@ public class StageUI extends JPanel implements Observer {
 		add(currentPane);
 
 	}
-	
-	public void initBeforePanel(StageUI stageUI){
+
+	public void initBeforePanel(StageUI stageUI) {
 		beforePanel = new JPanel();
 		beforePanel.setLayout(null);
-		beforePanel.setBounds(0, 0, mainUI.frameWidth, mainUI.frameHeight);
-		beforePanel.setBackground(Color.MAGENTA);
+		beforePanel.setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
+		beforePanel.setBackground(Color.WHITE);
 
-		startStageButton = new JButton("Start Stage");
-		startStageButton.setBounds(0, 0, 100, 100);
-		startStageButton.addMouseListener(new StageStartButtonListener(stageUI,
+		JLabel stageTitle = new JLabel(stage.title);
+		stageTitle.setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
+		stageTitle.addMouseListener(new StageStartButtonListener(stageUI,
 				gamePanel));
-		beforePanel.add(startStageButton);
+		beforePanel.add(stageTitle);
 		currentPane = beforePanel;
 	}
-	
-	public void initGamePanel(StageUI stageUI){
+
+	public void initGamePanel(StageUI stageUI) {
 		GameController gameController = new GameController(stage.game);
-		gamePanel = new GameUI(stage.game,mainUI.frameWidth, mainUI.frameHeight);
+		gamePanel = new GameUI(stage.game, MainUI.WIDTH, MainUI.HEIGHT);
 		stage.game.addObserver(gamePanel);
-		gamePanel.setSize(mainUI.frameWidth, mainUI.frameHeight);
+		gamePanel.setSize(MainUI.WIDTH, MainUI.HEIGHT);
 		gamePanel.setLocation(0, 0);
 	}
-	
-	public void initAfterPanel(StageUI stageUI){
+
+	public void initAfterPanel(StageUI stageUI) {
 		afterPanel = new JPanel();
 		afterPanel.setLayout(null);
-		afterPanel.setBounds(0, 0, mainUI.frameWidth, mainUI.frameHeight);
-		afterPanel.setBackground(Color.MAGENTA);
+		afterPanel.setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
+		afterPanel.setBackground(Color.white);
+
 		nextStageButton = new JButton("Next Stage >");
-		nextStageButton.setBounds(0, 0, 100, 100);
+		nextStageButton.setBounds((int) (MainUI.WIDTH * 0.8),
+				(int) (MainUI.HEIGHT * 0.45), 100, 100);
 		nextStageButton.addMouseListener(new EnterStageButtonListener(mainUI,
 				new Stage("二而生三", "Ch1-Stage1-Before.png",
 						"Ch1-Stage1-After.png")));
+
 		afterPanel.add(nextStageButton);
 	}
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
 		String msg = (String) arg;

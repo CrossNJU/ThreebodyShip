@@ -18,8 +18,8 @@ public class MainUI extends JFrame {
 	public StarterUI starterPanel;
 	public SelectorUI selectorPanel;
 	public StageUI stagePanel;
-	int frameWidth = 1024;
-	int frameHeight = 768;
+	public final static int WIDTH = 1024;
+	public final static int HEIGHT = 768;
 
 	public void mainrun() {
 		Selector selector = new Selector();
