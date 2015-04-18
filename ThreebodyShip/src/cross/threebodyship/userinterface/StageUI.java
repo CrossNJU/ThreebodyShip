@@ -1,6 +1,11 @@
 package cross.threebodyship.userinterface;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -8,8 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import cross.threebodyship.listener.EnterStageButtonListener;
+import cross.threebodyship.listener.StageButtonListener;
+import cross.threebodyship.listener.StageStartButtonListener;
 import cross.threebodyship.model.Stage;
 import cross.threebodyship.transaction.GameController;
+import cross.threebodyship.util.DisplayPanel;
 
 public class StageUI extends JPanel implements Observer {
 
@@ -18,6 +27,7 @@ public class StageUI extends JPanel implements Observer {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	public Component currentPane;
 	JPanel beforePanel;	
 	JPanel afterPanel;
 	
@@ -25,16 +35,19 @@ public class StageUI extends JPanel implements Observer {
 	JButton startStageButton;
 	JButton nextStageButton;
 	GameUI gamePanel;
+	MainUI mainUI;
 	
-    Stage stage;
+    public Stage stage;
 
-	public StageUI(Stage stage) {
+	public StageUI(MainUI mainUI,Stage stage) {
 		this.stage = stage;
+		this.mainUI = mainUI;
+		stage.addObserver(this);
 		
 		setLayout(null);
-        setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
+        setBounds(0, 0, 1024, 768);
 		setBackground(Color.RED);
-		
+		setVisible(true);
 		JLabel label = new JLabel("This is a Stage" + stage.title);
 		label.setBounds(0, 0, 300, 30);
 		add(label);
@@ -45,16 +58,20 @@ public class StageUI extends JPanel implements Observer {
         stage.game.addObserver(gamePanel);
         gamePanel.setSize(MainUI.WIDTH, MainUI.HEIGHT);
 		gamePanel.setLocation(0, 0);
-        add(gamePanel);
+//        add(gamePanel);
         
         //Game之前，显示章节内容（图片）
         beforePanel = new JPanel();
         beforePanel.setLayout(null);
         beforePanel.setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
         beforePanel.setBackground(Color.MAGENTA);
+        
         startStageButton = new JButton("Start Stage");
 		startStageButton.setBounds(0, 0, 100, 100);
+		startStageButton.addMouseListener(new StageStartButtonListener(this, gamePanel));
 		beforePanel.add(startStageButton);
+		currentPane = beforePanel;
+		
 
         //按得了，但是显示不出来= =
         backButton = new JButton("Back to Selector");
@@ -63,20 +80,26 @@ public class StageUI extends JPanel implements Observer {
         //Game之后，显示（图片）
         afterPanel = new JPanel();
         afterPanel.setLayout(null);
-        afterPanel.setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
+        afterPanel.setBounds(0, 0, MainUIPre.WIDTH, MainUIPre.HEIGHT);
         afterPanel.setBackground(Color.MAGENTA);
 		nextStageButton = new JButton("Next Stage >");
 		nextStageButton.setBounds(0, 0, 100, 100);
+		nextStageButton.addMouseListener(new EnterStageButtonListener(mainUI, stage));
 		afterPanel.add(nextStageButton);
+		
+		//stage.startStage();
+		add(currentPane);
+		
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		//貌似目前不需通知StageUI只需通知MainUI更新即可
-//		System.out.println("To Next");
-//		String msg = (String) arg;
-//		if (msg.equals("win")) {
-//			System.out.println("win in StageUI");
-//		}
+		String msg = (String) arg;
+        //WinGame之后
+		if (msg.equals("win")) {
+			System.out.println("To Next in Starter");
+			Stage stage = (Stage) o;
+			DisplayPanel.stageDisplay(this, afterPanel);
+		}
 	}
 }

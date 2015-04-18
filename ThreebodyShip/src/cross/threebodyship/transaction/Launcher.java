@@ -3,11 +3,13 @@ package cross.threebodyship.transaction;
 import cross.threebodyship.model.Game;
 import cross.threebodyship.userinterface.GameUI;
 import cross.threebodyship.userinterface.MainUI;
+import cross.threebodyship.userinterface.MainUIPre;
 
 
 public class Launcher {
 	public static void main(String[] args) {
 		MainUI mainUI = new MainUI();
+		mainUI.mainrun();
 //		starter.addObserver(starterUI);
 //		Thread starterThread = new Thread(starter);
 //		starterThread.start();

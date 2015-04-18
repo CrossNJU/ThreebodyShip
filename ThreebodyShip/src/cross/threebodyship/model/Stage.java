@@ -15,19 +15,20 @@ public class Stage extends Observable implements Runnable {
 	
 	public Stage nextStage;
 	
-	public Game game;
+	public Game game = new Game(720, 480);
 	
 	Thread stageThread;
 	
-	public Stage(String title, String beforeImageName, String afterImageName, Game game) {
+	public Stage(String title, String beforeImageName, String afterImageName) {
 		this.title = title;
 		this.isComplished = false;
 		this.isFailed = false;
 		this.isBack = false;
 		this.beforeImageName = beforeImageName;
 		this.afterImageName = afterImageName;
-		this.game = game;
+//		this.game = game;
 	}
+	
 	
 	public void startStage() {
 		Thread gameThread = new Thread(game);
