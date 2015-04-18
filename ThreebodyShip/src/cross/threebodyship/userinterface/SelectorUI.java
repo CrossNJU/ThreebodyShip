@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.LayoutManager;
 import java.awt.ScrollPane;
@@ -13,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.concurrent.SynchronousQueue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -49,6 +52,11 @@ public class SelectorUI extends JPanel {
 		setBackground(Color.gray);
 		newSelectorUI();
 	}
+	
+	public void paintComponent(Graphics g) {
+		Image SB_img = new ImageIcon("img/GameBackground/bg-selector.png").getImage();
+		g.drawImage(SB_img,0,0,MainUI.WIDTH,MainUI.HEIGHT,0,0,1024,768,null);
+	}
 
 	// 生成新的选择界面
 	public void newSelectorUI() {
@@ -58,8 +66,8 @@ public class SelectorUI extends JPanel {
 
 		// 加入模式按钮
 		for (int i = 0; i < modeButton.size(); i++) {
-//			modeButton.get(i).setBounds((int) (frameWidth * 0.1),
-//					(int) (frameHeight * 0.2 * (i + 1)), 100, 50);
+			modeButton.get(i).setBounds((int) (frameWidth * 0.05),
+					(int) (frameHeight * 0.2 * (i + 1)), 276, 67);
 			modeButton.get(i).setVisible(true);
 			modeButton.get(i).addMouseListener(
 					new ModeButtonListener(this, modePane.get(i)));
@@ -84,20 +92,27 @@ public class SelectorUI extends JPanel {
 			JButton modeButton = new JButton(mode.modeName);
 			switch (mode.modeType) {
 			case 1:
-				
+				modeButton.setIcon(new ImageIcon("img/Selector/btn-mode-story-normal.png"));
+				modeButton.setRolloverIcon(new ImageIcon("img/Selector/btn-mode-story-hover.png"));
 				break;
 			case 2:
-				
+				modeButton.setIcon(new ImageIcon("img/Selector/btn-mode-challenges-normal.png"));
+				modeButton.setRolloverIcon(new ImageIcon("img/Selector/btn-mode-challenges-hover.png"));
 				break;
 			case 3:
-				
+				modeButton.setIcon(new ImageIcon("img/Selector/btn-mode-achievements-normal.png"));
+				modeButton.setRolloverIcon(new ImageIcon("img/Selector/btn-mode-achievements-hover.png"));
 				break;
 			case 4:
-				
+				modeButton.setIcon(new ImageIcon("img/Selector/btn-mode-settings-normal.png"));
+				modeButton.setRolloverIcon(new ImageIcon("img/Selector/btn-mode-settings-hover.png"));
 				break;
 			default:
 				break;
 			}
+			modeButton.setContentAreaFilled(false);
+			modeButton.setBorderPainted(false);
+			modeButton.setFocusPainted(false);
 			this.modeButton.add(modeButton);
 		}
 	}
@@ -120,13 +135,20 @@ public class SelectorUI extends JPanel {
 			panelWidth = (int) (frameWidth * 0.7);
 			panelHeight = frameHeight;
 			setSize(panelWidth, panelHeight);
-
+			setOpaque(false);
+			setBackground(null);
+			getViewport().setOpaque(false);
+			getViewport().setBackground(null);
+		
+			
 			//
 			JPanel StoryPanel = new JPanel();
 			StoryPanel.setPreferredSize(new Dimension(getViewport().getWidth(),
 					panelHeight * 3));
 			StoryPanel.setLayout(null);
-			StoryPanel.setBackground(Color.white);
+			StoryPanel.setBackground(null);
+			StoryPanel.setOpaque(false);
+			
 
 			// 添加章节文本与关卡按钮
 			// int i = 1;
@@ -170,10 +192,22 @@ public class SelectorUI extends JPanel {
 							mode.stages.get(num).title);
 
 					stageButton.setBounds((int) (panelWidth * 0.2) * (j+1),
-							(int) (panelHeight * 0.3) * (i+1) + 60, 100, 40);
+							(int) (panelHeight * 0.3) * (i+1) + 60, 154, 154);
 					stageButton.setVisible(true);
 					stageButton.addMouseListener(new EnterStageButtonListener(
 							mainUI, mode.stages.get(num)));
+					
+					String imageString = "img/Button/btn-chap01"  + "-stage0" + (num+1) + "-normal.png";
+					String imageHoverString = "img/Button/btn-chap01"  + "-stage0" + (num+1) + "-hover.png";
+					ImageIcon image = new ImageIcon(imageString);
+					ImageIcon imageHover = new ImageIcon(imageHoverString);
+					
+					stageButton.setIcon(image);
+					stageButton.setRolloverIcon(imageHover);
+					stageButton.setContentAreaFilled(false);
+					stageButton.setBorderPainted(false);
+					stageButton.setFocusPainted(false);
+					
 
 					StoryPanel.add(stageButton);
 					num++;
