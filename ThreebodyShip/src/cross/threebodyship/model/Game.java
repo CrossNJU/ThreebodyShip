@@ -18,10 +18,8 @@ public class Game extends Observable implements Runnable{
 	public Point border;
 	public double distance;
 	
-	public Game(int width,int height){
-		border = new Point();
-		this.border.x = width;
-		this.border.y = height;
+	public Game(){
+
 		reset();
 	}
 	

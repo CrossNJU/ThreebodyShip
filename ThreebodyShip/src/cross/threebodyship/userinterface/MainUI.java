@@ -18,8 +18,8 @@ public class MainUI extends JFrame {
 	public StarterUI starterPanel;
 	public SelectorUI selectorPanel;
 	public StageUI stagePanel;
-	int insetWidth = getInsets().left + getInsets().right;
-	int insetHeight = getInsets().bottom + getInsets().top;
+	public int insetWidth = this.getInsets().left + this.getInsets().right;
+	public int insetHeight = this.getInsets().bottom + this.getInsets().top;
 	int frameWidth = 1024 -insetWidth;
 	int frameHeight = 768 - insetHeight;
 

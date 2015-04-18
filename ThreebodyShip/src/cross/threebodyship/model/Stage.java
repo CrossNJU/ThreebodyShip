@@ -15,7 +15,7 @@ public class Stage extends Observable implements Runnable {
 	
 	public Stage nextStage;
 	
-	public Game game = new Game(720, 480);
+	public Game game = new Game();
 	
 	Thread stageThread;
 	

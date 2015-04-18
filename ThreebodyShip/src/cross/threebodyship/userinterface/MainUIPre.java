@@ -115,7 +115,7 @@ public class MainUIPre implements Observer {
 		public void actionPerformed(ActionEvent e) {
 			//后期移到Selector的run()里
 			//game和stage从selector里取
-	        Game game = new Game(720,480);
+	        Game game = new Game();
 			Stage stage = new Stage("一而生二", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png");
 			currentStage = stage;
 			displayStage(stage);
@@ -144,7 +144,7 @@ public class MainUIPre implements Observer {
 	        //这里需要取到下一个Stage的数据
 	        //Stage nextStage = stage.nextStage;
 	        //or currentStage = currentStage.nextStage;
-	        Game game = new Game(720,480);
+	        Game game = new Game();
 			Stage nextStage = new Stage("二而生三", "Ch1-Stage2-Before.png", "Ch1-Stage2-After.png");
 			currentStage = stage;
 			
