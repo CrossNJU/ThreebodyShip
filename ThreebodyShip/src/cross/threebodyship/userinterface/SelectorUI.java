@@ -226,8 +226,8 @@ public class SelectorUI extends JPanel {
 			panelWidth = (int) (frameWidth * 0.7);
 			panelHeight = frameHeight;
 			setSize(panelWidth, panelHeight);
-			setBackground(Color.blue);
-		}
+			setOpaque(false);
+			setBackground(null);		}
 	}
 
 	class AchievementPanel extends JPanel {
@@ -238,8 +238,8 @@ public class SelectorUI extends JPanel {
 			panelWidth = (int) (frameWidth * 0.7);
 			panelHeight = frameHeight;
 			setSize(panelWidth, panelHeight);
-			setBackground(Color.red);
-		}
+			setOpaque(false);
+			setBackground(null);		}
 	}
 
 	class SettingPanel extends JPanel {
@@ -250,7 +250,7 @@ public class SelectorUI extends JPanel {
 			panelWidth = (int) (frameWidth * 0.7);
 			panelHeight = frameHeight;
 			setSize(panelWidth, panelHeight);
-			setBackground(Color.yellow);
-		}
+			setOpaque(false);
+			setBackground(null);		}
 	}
 }
