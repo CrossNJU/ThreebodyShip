@@ -180,10 +180,10 @@ public class Game extends Observable implements Runnable{
 		
 		//初始化星球
 		star = new Star();
-		star.setLocation(300, 250);
+		star.setLocation(512, 518);
 		star.setMass(40000000);
-		star.setSize(50);
-		star.setGravityScope(160);
+		star.setSize(366);
+		star.setGravityScope(710);
 	}
 	
 	//结束判定
