@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -59,9 +61,10 @@ public class GameUI extends JPanel implements Observer{
 	public void repaintMain(){
 		//mainCanvas.repaint();
 		Graphics g = mainCanvas.getGraphics();
-		g.setColor(Color.GRAY);
-		g.fillRect(0,0,mainCanvas.getWidth(),mainCanvas.getHeight());
-			
+//		g.setColor(Color.GRAY);
+//		g.fillRect(0,0,mainCanvas.getWidth(),mainCanvas.getHeight());
+		Image GB_IMG = new ImageIcon("img/GameBackground/bg-chap00-stage01.png").getImage();
+		g.drawImage(GB_IMG, 0, 0,mainCanvas.getWidth(),mainCanvas.getHeight(),0,0,1024,768,null);
 		//System.out.println(1);
 		speedLabel.setText("speed:"+Double.toString(game.ship.getSpeed()));
 		degreeLabel.setText("degreeToEast:"+Double.toString(Math.toDegrees(game.ship.getDegreeToEast())));
