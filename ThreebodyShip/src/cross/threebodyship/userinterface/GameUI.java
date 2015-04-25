@@ -5,9 +5,9 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+//import java.awt.event.MouseEvent;
+//import java.awt.event.MouseListener;
+//import java.awt.event.MouseMotionListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -70,7 +70,7 @@ public class GameUI extends JPanel implements Observer{
 		degreeLabel.setText("degreeToEast:"+Double.toString(Math.toDegrees(game.ship.getDegreeToEast())));
 
 //		paintWinArea(g);
-//		paintStartArea(g);
+		paintStartArea(g);
 //		paintStar(g,game.star);
 		paintShip(g,game.ship);
 		if(game.isStarting) {
@@ -111,9 +111,9 @@ public class GameUI extends JPanel implements Observer{
 		g.setColor(Color.yellow);
 		
 		int height = mainCanvas.getHeight();
-		double r = height/4;
-		int locationx = -(int)r*3/2;
-		int locationy = (int)height/2 - (int)r;
+		double r = 690;
+		int locationx = -1330;
+		int locationy = (int)(height/2 - r);
 		
 		g.fillOval(locationx, locationy, (int)r*2, (int)r*2);
 	}

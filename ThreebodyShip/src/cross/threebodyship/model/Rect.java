@@ -17,7 +17,7 @@ public class Rect implements Runnable{
 		
 		while(!stop2){
 			try {
-				Thread.sleep(game.getRI());
+				Thread.sleep(game.getRI()*3);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -35,7 +35,7 @@ public class Rect implements Runnable{
 			}
 			game.ship.setSpeed(speed*rate);
 			
-			System.out.println("speed:"+game.ship.getSpeed());
+//			System.out.println("speed:"+game.ship.getSpeed());
 			
 		}
 		// TODO Auto-generated method stub

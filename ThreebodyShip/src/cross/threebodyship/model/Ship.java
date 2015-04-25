@@ -6,12 +6,13 @@ public class Ship {
 	private double speed;
 	private double degreeToEast;
 	private double degreeToStar;
-	private double mass = 6000;
+	private double mass;
 	private boolean isAlive = false;
 	public boolean outOfBorder = false;
 	
 	public Ship(){
 		centerPoint = new Point();
+//		this.mass = 10*Math.PI*4/3*size*size*size;
 	}
 	
 	public Point getLocation(){

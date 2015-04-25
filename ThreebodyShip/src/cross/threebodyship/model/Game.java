@@ -33,9 +33,9 @@ public class Game extends Observable implements Runnable{
 		
 		border.x = 1024;
 		border.y = 768;
-		startingPoint.x = -border.y/8;
+		startingPoint.x = -640;
 		startingPoint.y = border.y/2;
-		r = border.y/4;
+		r = 690;
 		
 		reset();
 	}
@@ -59,6 +59,7 @@ public class Game extends Observable implements Runnable{
 			double a = Star.G*star.getMass()/
 					(star.getSize()*star.getSize()/4);
 			
+			System.out.println("mass:"+star.getMass());
 			//System.out.println("a:"+a);
 			/*bug 代码
 			double theta1 = Math.atan((double)(star.getLocation().y-
@@ -181,7 +182,7 @@ public class Game extends Observable implements Runnable{
 		//初始化星球
 		star = new Star();
 		star.setLocation(512, 518);
-		star.setMass(40000000);
+		//star.setMass(40000000);
 		star.setSize(366);
 		star.setGravityScope(710);
 	}

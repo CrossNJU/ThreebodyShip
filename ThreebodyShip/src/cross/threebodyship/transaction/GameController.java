@@ -18,8 +18,8 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 	
 	public GameController(Game game) {
 		this.game = game;
-		r = new Rect(game);
-		t = new Thread(r);
+//		r = new Rect(game);
+//		t = new Thread(r);
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -119,16 +119,19 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 			if(theta<0) theta += Math.PI*2;
 			
 			game.ship.setDegreeToEast(theta);
-			System.out.println("theta:"+Math.toDegrees(theta));
+//			System.out.println("theta:"+Math.toDegrees(theta));
 		}
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		game.breakPress = true;
+//		game.breakPress = true;
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
+//		r.stop2 = false;
+		r = new Rect(this.game);
+		t = new Thread(r);
 		t.start();
 	}
 	@Override

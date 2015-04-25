@@ -27,7 +27,7 @@ public class MainUI extends JFrame {
 		setSize(1024, 768);
 		setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setUndecorated(true);
+//		setUndecorated(true);
 		setVisible(true);
 
 		// 初始化开始界面
