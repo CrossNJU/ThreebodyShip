@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 public class StarterUI extends JPanel {
 	int frameHeight;
 	int frameWidth;
-	public JButton startGameButton = new JButton("开始游戏");
+	public JButton startGameButton = new JButton();
 	//Image Start_img = new ImageIcon("img/Start/bg-starter-mid.png").getImage();
 
 	public StarterUI(MainUI mainUI) {
@@ -28,9 +28,13 @@ public class StarterUI extends JPanel {
 		
 		//
 		
-		startGameButton.setBounds((int) (frameWidth * 0.40),
-				(int) (frameHeight * 0.6), (int) (frameWidth * 0.2), 60);
-		startGameButton.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		startGameButton.setBounds((int) (frameWidth * 0.412),
+				(int) (frameHeight * 0.43),188,188);
+		//startGameButton.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		startGameButton.setIcon(new ImageIcon("img/Button/btn-start.png"));
+		startGameButton.setFocusable(false);
+		startGameButton.setContentAreaFilled(false);
+		startGameButton.setBorderPainted(false);
 		
 		JLabel title = new JLabel("ThreebodyShip",JLabel.CENTER);
 		title.setBounds((int) (frameWidth * 0.3),
