@@ -1,12 +1,16 @@
 package cross.threebodyship.userinterface;
 
 import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cross.threebodyship.listener.DragMainUIListener;
 import cross.threebodyship.listener.MainChangeListener;
 import cross.threebodyship.model.Selector;
 import cross.threebodyship.model.Stage;
@@ -20,16 +24,26 @@ public class MainUI extends JFrame {
 	public StageUI stagePanel;
 	public final static int WIDTH = 1024;
 	public final static int HEIGHT = 768;
+	
+	public int oldX;
+	public int oldY;
+	public DragMainUIListener drag;
 
 	public void mainrun() {
 		Selector selector = new Selector();
+		drag = new DragMainUIListener(this);
 
 		setSize(1024, 768);
 		setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setUndecorated(true);
+		setUndecorated(true);
 		setVisible(true);
 
+		//实现窗口拖拽
+		addMouseListener(drag);
+		addMouseMotionListener(drag);
+		
+		
 		// 初始化开始界面
 		starterPanel = new StarterUI(this);
 		// 初始化选择界面

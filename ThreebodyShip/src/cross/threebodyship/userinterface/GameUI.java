@@ -138,13 +138,18 @@ public class GameUI extends JPanel implements Observer{
 		
 	//画飞船
 	public void paintShip(Graphics g, Ship ship){
-		
-		g.setColor(Color.red);
-			
-		g.fillOval((int)(ship.getLocation().x-ship.getSize()/2),
-				(int)(ship.getLocation().y-ship.getSize()/2),
-				ship.getSize(),
-				ship.getSize());
+//		
+//		g.setColor(Color.red);
+//			
+//		g.fillOval((int)(ship.getLocation().x-ship.getSize()/2),
+//				(int)(ship.getLocation().y-ship.getSize()/2),
+//				ship.getSize(),
+//				ship.getSize());
+//		
+		Image ship_img = new ImageIcon("img/Ship/ship.png").getImage();
+		g.drawImage(ship_img, (int)(ship.getLocation().x-ship.getSize()/2),
+				(int)(ship.getLocation().y-ship.getSize()/2),(int)(ship.getLocation().x-ship.getSize()/2)+ship.getSize()*2,
+		(int)(ship.getLocation().y-ship.getSize()/2)+ship.getSize()*2,0,0,425,431,null);
 	}
 	
 	//观察Game的动态
