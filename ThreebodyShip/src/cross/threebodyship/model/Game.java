@@ -1,6 +1,9 @@
 package cross.threebodyship.model;
 
+import java.awt.Graphics;
 import java.util.Observable;
+
+import cross.threebodyship.userinterface.StopUI;
 
 
 public class Game extends Observable implements Runnable{
@@ -275,6 +278,7 @@ public class Game extends Observable implements Runnable{
 				this.setChanged();
 				this.notifyObservers();
 			}
+			
 		}
 		
 		this.setState(false);

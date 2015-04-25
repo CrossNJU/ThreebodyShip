@@ -48,7 +48,7 @@ public class StarterUI extends JPanel {
 		add(startGameButton);
 		JLabel backLabel = new JLabel();
 		backLabel.setIcon(new ImageIcon("img/Starter/bg-starter-mid.png"));
-		backLabel.setBounds(0, 0, 1024, 768);
+		backLabel.setBounds(0, 0, frameWidth, frameHeight);
 		backLabel.setVisible(true);
 		add(backLabel);
 		add(title);

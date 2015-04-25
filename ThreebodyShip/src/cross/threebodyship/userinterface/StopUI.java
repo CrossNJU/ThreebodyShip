@@ -36,10 +36,15 @@ public class StopUI extends JPanel{
 		resume.setBounds((int)(panelWidth*0.5-95),(int)(panelHeight*0.5-95),190,190);
 		this.setButton(restart, restart.getName());
 		restart.setBounds(panelWidth-339, (int)(panelHeight*0.437), 99, 99);
+		
+		add(menu);
+		add(resume);
+		add(restart);
 	}
 	
 	public void setButton(JButton button,String btnName){
 		button.setIcon(new ImageIcon("img/Button/btn-"+btnName+"-normal.png"));
+		button.setRolloverIcon(new ImageIcon("img/Button/btn-"+btnName+"-hover.png"));
 		button.setContentAreaFilled(false);
 		button.setBorderPainted(false);
 		button.setFocusable(false);

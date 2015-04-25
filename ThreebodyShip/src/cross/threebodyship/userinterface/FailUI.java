@@ -13,7 +13,7 @@ public class FailUI extends JPanel{
 	int panelHeight;
 	
 	JButton menu;
-	JButton restart;
+	JButton again;
 	
 	public FailUI(){
 		this.panelWidth = MainUI.WIDTH;
@@ -28,6 +28,23 @@ public class FailUI extends JPanel{
 	public void paintComonent(Graphics g){
 		Image cover_img = new ImageIcon("img/GameBackground/cover-40.png").getImage();
 		g.drawImage(cover_img, 0, 0, panelWidth, panelHeight, 0, 0, 1024, 768, null);
+	}
+	
+	public void addButton(JButton button){
+		this.setButton(menu, menu.getName());
+		menu.setBounds((int)(panelWidth*0.532),(int)(panelHeight*0.437) , 99, 99);
+		this.setButton(again, again.getName());
+		again.setBounds(panelWidth-339, (int)(panelHeight*0.437), 99, 99);
+		add(menu);
+		add(again);
+	}
+	
+	public void setButton(JButton button,String btnName){
+		button.setIcon(new ImageIcon("img/Button/btn-"+btnName+"-normal.png"));
+		button.setRolloverIcon(new ImageIcon("img/Button/btn-"+btnName+"-hover.png"));
+		button.setContentAreaFilled(false);
+		button.setBorderPainted(false);
+		button.setFocusable(false);
 	}
 
 }
