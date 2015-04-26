@@ -80,6 +80,10 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 					temp.setSpeed(temp.getSpeed()/this.game.speedChangeRate);
 					break;
 				}
+				case KeyEvent.VK_H:{
+					Ship temp = this.game.ship;
+					temp.isRound = true;
+				}
 			}
 		
 		if(keycode == KeyEvent.VK_ENTER) this.game.reset();
@@ -111,8 +115,8 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 			double theta = Math.atan((e.getY() - game.startingPoint.y)/
 					(e.getX() - game.startingPoint.x));
 			
-			double x = game.startingPoint.x + game.r*Math.cos(theta);
-			double y = game.startingPoint.y + game.r*Math.sin(theta);
+			double x = game.startingPoint.x + game.StartingAreaR*Math.cos(theta);
+			double y = game.startingPoint.y + game.StartingAreaR*Math.sin(theta);
 			
 			game.ship.setLocation(x, y);
 			

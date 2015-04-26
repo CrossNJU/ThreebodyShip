@@ -7,8 +7,10 @@ public class Ship {
 	private double degreeToEast;
 	private double degreeToStar;
 	private double mass;
+	
 	private boolean isAlive = false;
 	public boolean outOfBorder = false;
+	public boolean isRound = false;
 	
 	public Ship(){
 		centerPoint = new Point();

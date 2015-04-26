@@ -18,16 +18,17 @@ public class Game extends Observable implements Runnable{
 	public Star star;
 	
 	public double speedChangeRate = 1.1;
+	public double FchangeRate;
 	
 	public Point border;
 	public Point startingPoint;
 	public Point mousePoint;
 	
 	public double distance = 10000;
-	public double r;
+	public double StartingAreaR;
 	public int rectwidth = 0;
 	public int rectheight = 0;
-	public boolean breakPress = false;
+//	public boolean breakPress = false;
 	
 	public Game(){
 		border = new Point();
@@ -38,7 +39,7 @@ public class Game extends Observable implements Runnable{
 		border.y = 768;
 		startingPoint.x = -640;
 		startingPoint.y = border.y/2;
-		r = 690;
+		StartingAreaR = 690;
 		
 		reset();
 	}
@@ -58,48 +59,10 @@ public class Game extends Observable implements Runnable{
 				);
 		//System.out.println("distance:"+distance);
 		//如果进入引力区
-		if(distance<star.getGravityScope()/2){
-			double a = Star.G*star.getMass()/
+		if((distance<star.getGravityScope()/2)&&(!ship.isRound)){
+			double a = FchangeRate*Star.G*star.getMass()/
 					(star.getSize()*star.getSize()/4);
 			
-			System.out.println("mass:"+star.getMass());
-			//System.out.println("a:"+a);
-			/*bug 代码
-			double theta1 = Math.atan((double)(star.getLocation().y-
-					ship.getLocation().y)/(star.getLocation().x-
-					ship.getLocation().x));
-			if((ship.getLocation().x<star.getLocation().x)&&
-					ship.getLocation().y>star.getLocation().y) theta1 += 2*Math.PI;
-			else{
-				if(ship.getLocation().x>star.getLocation().x)
-					theta1 += Math.PI;
-			}
-			
-			double theta3 = theta1 - ship.getDegreeToEast();
-			if(theta3<0) theta3 = -theta3;
-			else if(theta3>Math.PI) theta3 = Math.PI*2 - theta3;
-			//System.out.println("stary:"+star.getLocation().x);
-			//System.out.println("shipy:"+ship.getLocation().x);
-			ship.setDegreeToStar(theta3);
-			
-			System.out.println("degreeToStar:"+Math.toDegrees(ship.getDegreeToStar()));
-			
-			double v1 = ship.getSpeed()*Math.cos(ship.getDegreeToStar());
-			double v2 = ship.getSpeed()*Math.sin(ship.getDegreeToStar());
-			
-			v1 = v1 + a*this.getRI();
-			
-			double vNew = Math.sqrt(v1*v1+v2*v2);
-			
-			ship.setSpeed(vNew);
-			
-			double theta2 = Math.atan(v2/v1);
-			if(theta2<0) theta2 += Math.PI;
-			System.out.println("theta2:"+Math.toDegrees(theta2));
-			double thetaNew = ship.getDegreeToStar() - theta2;
-			
-			ship.setDegreeToEast(thetaNew);
-			*/
 			
 			//计算星球飞船连线与正东的夹角
 			double theta1 = Math.atan((double)(star.getLocation().y-
@@ -157,9 +120,20 @@ public class Game extends Observable implements Runnable{
 			//System.out.println("theta2:"+Math.toDegrees(theta2));
 			
 		}else{
-			nowX += vx*t;
-			nowY += vy*t;
+			if(!ship.isRound){
+				nowX += vx*t;
+				nowY += vy*t;
+			}
+			else{
+				double dTheta = ship.getSpeed()*t/distance;
+				ship.setDegreeToEast(ship.getDegreeToEast()+dTheta);
+				
+				nowX = star.getLocation().x + distance*Math.cos(ship.getDegreeToEast());
+				nowY = star.getLocation().y + distance*Math.sin(ship.getDegreeToEast());
+			}
 		}
+		
+		
 		ship.setLocation(nowX, nowY);
 		//System.out.println(ship.getLocation().x);
 		
@@ -178,7 +152,7 @@ public class Game extends Observable implements Runnable{
 		ship.setLocation(20, 245);
 		ship.setMass(1000);
 		ship.setSize(10);
-		ship.setSpeed(3);
+		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
 		
@@ -188,6 +162,8 @@ public class Game extends Observable implements Runnable{
 		//star.setMass(40000000);
 		star.setSize(366);
 		star.setGravityScope(710);
+		
+		this.FchangeRate = ship.getSpeed();
 	}
 	
 	//结束判定

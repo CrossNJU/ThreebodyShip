@@ -17,14 +17,14 @@ public class Rect implements Runnable{
 		
 		while(!stop2){
 			try {
-				Thread.sleep(game.getRI()*3);
+				Thread.sleep(game.getRI()*2);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 			width += 5;
-			if(width>30) width = 0;
+			if(width>40) width = 0;
 			game.rectwidth = width;
 			game.rectheight = height;
 			

@@ -148,8 +148,8 @@ public class GameUI extends JPanel implements Observer{
 //		
 		Image ship_img = new ImageIcon("img/Ship/ship.png").getImage();
 		g.drawImage(ship_img, (int)(ship.getLocation().x-ship.getSize()/2),
-				(int)(ship.getLocation().y-ship.getSize()/2),(int)(ship.getLocation().x-ship.getSize()/2)+ship.getSize()*2,
-		(int)(ship.getLocation().y-ship.getSize()/2)+ship.getSize()*2,0,0,425,431,null);
+				(int)(ship.getLocation().y-ship.getSize()/2),(int)(ship.getLocation().x-ship.getSize()/2)+ship.getSize()*3,
+		(int)(ship.getLocation().y-ship.getSize()/2)+ship.getSize()*3,0,0,425,431,null);
 	}
 	
 	//观察Game的动态
