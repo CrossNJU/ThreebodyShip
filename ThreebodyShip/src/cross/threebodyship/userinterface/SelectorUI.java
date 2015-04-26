@@ -26,6 +26,7 @@ import javax.swing.ViewportLayout;
 
 import cross.threebodyship.listener.ModeButtonListener;
 import cross.threebodyship.listener.EnterStageButtonListener;
+import cross.threebodyship.listener.ScrollListener;
 import cross.threebodyship.model.Mode;
 import cross.threebodyship.model.Selector;
 import cross.threebodyship.model.Stage;
@@ -52,10 +53,12 @@ public class SelectorUI extends JPanel {
 		setBackground(Color.gray);
 		newSelectorUI();
 	}
-	
+
 	public void paintComponent(Graphics g) {
-		Image SB_img = new ImageIcon("img/GameBackground/bg-selector.png").getImage();
-		g.drawImage(SB_img,0,0,MainUI.WIDTH,MainUI.HEIGHT,0,0,1024,768,null);
+		Image SB_img = new ImageIcon("img/GameBackground/bg-selector.png")
+				.getImage();
+		g.drawImage(SB_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0, 0, 1024, 768,
+				null);
 	}
 
 	// 生成新的选择界面
@@ -92,20 +95,28 @@ public class SelectorUI extends JPanel {
 			JButton modeButton = new JButton(mode.modeName);
 			switch (mode.modeType) {
 			case 1:
-				modeButton.setIcon(new ImageIcon("img/Selector/btn-mode-story-normal.png"));
-				modeButton.setRolloverIcon(new ImageIcon("img/Selector/btn-mode-story-hover.png"));
+				modeButton.setIcon(new ImageIcon(
+						"img/Selector/btn-mode-story-normal.png"));
+				modeButton.setRolloverIcon(new ImageIcon(
+						"img/Selector/btn-mode-story-hover.png"));
 				break;
 			case 2:
-				modeButton.setIcon(new ImageIcon("img/Selector/btn-mode-challenges-normal.png"));
-				modeButton.setRolloverIcon(new ImageIcon("img/Selector/btn-mode-challenges-hover.png"));
+				modeButton.setIcon(new ImageIcon(
+						"img/Selector/btn-mode-challenges-normal.png"));
+				modeButton.setRolloverIcon(new ImageIcon(
+						"img/Selector/btn-mode-challenges-hover.png"));
 				break;
 			case 3:
-				modeButton.setIcon(new ImageIcon("img/Selector/btn-mode-achievements-normal.png"));
-				modeButton.setRolloverIcon(new ImageIcon("img/Selector/btn-mode-achievements-hover.png"));
+				modeButton.setIcon(new ImageIcon(
+						"img/Selector/btn-mode-achievements-normal.png"));
+				modeButton.setRolloverIcon(new ImageIcon(
+						"img/Selector/btn-mode-achievements-hover.png"));
 				break;
 			case 4:
-				modeButton.setIcon(new ImageIcon("img/Selector/btn-mode-settings-normal.png"));
-				modeButton.setRolloverIcon(new ImageIcon("img/Selector/btn-mode-settings-hover.png"));
+				modeButton.setIcon(new ImageIcon(
+						"img/Selector/btn-mode-settings-normal.png"));
+				modeButton.setRolloverIcon(new ImageIcon(
+						"img/Selector/btn-mode-settings-hover.png"));
 				break;
 			default:
 				break;
@@ -119,7 +130,7 @@ public class SelectorUI extends JPanel {
 
 	// 设置模式界面
 	public void setModePanel() {
-		modePane.add(new StoryPane(selector.mode.get(0)));
+		modePane.add(new StoryPanel(selector.mode.get(0)));
 		modePane.add(new ChallengePanel(frameWidth, frameHeight));
 		modePane.add(new AchievementPanel(frameWidth, frameHeight));
 		modePane.add(new SettingPanel(frameWidth, frameHeight));
@@ -127,62 +138,98 @@ public class SelectorUI extends JPanel {
 
 	// 模式界面设计
 	// 故事界面
-	class StoryPane extends JScrollPane {
+	// class StoryPane extends JScrollPane {
+	// int panelWidth;
+	// int panelHeight;
+	//
+	// public StoryPane(Mode mode) {
+	// panelWidth = (int) (frameWidth * 0.7);
+	// panelHeight = frameHeight;
+	// setSize(panelWidth, panelHeight);
+	// setOpaque(false);
+	// setBackground(null);
+	// getViewport().setOpaque(false);
+	// getViewport().setBackground(null);
+	//
+	//
+	// //
+	// JPanel StoryPanel = new JPanel();
+	// StoryPanel.setPreferredSize(new Dimension(getViewport().getWidth(),
+	// panelHeight * 3));
+	// StoryPanel.setLayout(null);
+	// StoryPanel.setBackground(null);
+	// StoryPanel.setOpaque(false);
+	//
+	//
+	// //num表示的是关卡数，i表示的是章节数，j表示每个章节的第几关
+	// int num = 0;
+	// for (int i = 0; i < mode.chap.length; i++) {
+	// JLabel chapLabel = new JLabel(mode.chap[i]);
+	//
+	// chapLabel.setBounds((int) (panelWidth * 0.2),
+	// (int) (panelHeight * 0.3) * (i+1), 100, 40);
+	// chapLabel.setForeground(Color.BLACK);
+	// chapLabel.setVisible(true);
+	// StoryPanel.add(chapLabel);
+	//
+	// for (int j = 0; j < 3; j++) {
+	// if (i == mode.stages.size()) {
+	// break;
+	// }
+	// JButton stageButton = new JButton(
+	// mode.stages.get(num).title);
+	//
+	// stageButton.setBounds((int) (panelWidth * 0.2) * (j+1),
+	// (int) (panelHeight * 0.3) * (i+1) + 60, 154, 154);
+	// stageButton.setVisible(true);
+	// stageButton.addMouseListener(new EnterStageButtonListener(
+	// mainUI, mode.stages.get(num)));
+	//
+	// String imageString = "img/Button/btn-chap01" + "-stage0" + (num+1) +
+	// "-normal.png";
+	// String imageHoverString = "img/Button/btn-chap01" + "-stage0" + (num+1) +
+	// "-hover.png";
+	// ImageIcon image = new ImageIcon(imageString);
+	// ImageIcon imageHover = new ImageIcon(imageHoverString);
+	//
+	// stageButton.setIcon(image);
+	// stageButton.setRolloverIcon(imageHover);
+	// stageButton.setContentAreaFilled(false);
+	// stageButton.setBorderPainted(false);
+	// stageButton.setFocusPainted(false);
+	//
+	//
+	// StoryPanel.add(stageButton);
+	// num++;
+	// }
+	// }
+	//
+	// getViewport().add(StoryPanel);
+	// }
+	// }
+
+	class StoryPanel extends JPanel {
 		int panelWidth;
 		int panelHeight;
 
-		public StoryPane(Mode mode) {
+		public StoryPanel(Mode mode) {
 			panelWidth = (int) (frameWidth * 0.7);
 			panelHeight = frameHeight;
-			setSize(panelWidth, panelHeight);
+			setSize(panelWidth, panelHeight*2);
 			setOpaque(false);
 			setBackground(null);
-			getViewport().setOpaque(false);
-			getViewport().setBackground(null);
-		
-			
-			//
-			JPanel StoryPanel = new JPanel();
-			StoryPanel.setPreferredSize(new Dimension(getViewport().getWidth(),
-					panelHeight * 3));
-			StoryPanel.setLayout(null);
-			StoryPanel.setBackground(null);
-			StoryPanel.setOpaque(false);
-			
+			setLayout(null);
 
-			// 添加章节文本与关卡按钮
-			// int i = 1;
-			// int j = 1;
-			// for (Chap chap : selector.chap) {
-			// c
-			// for (Stage stage : chap.stage) {
-			// JButton stageButton = new JButton(stage.title);
-			//
-			// stageButton.setBounds((int) (panelWidth * 0.2) * j,
-			// (int) (panelHeight * 0.2) * i + 60, 100, 40);
-			// stageButton.setVisible(true);
-			// stageButton
-			// .addMouseListener(new EnterStageButtonListener(mainUI,stage));
-			//
-			// StoryPanel.add(stageButton);
-			//
-			// j++;
-			// }
-			//
-			// i++;
-			// j = 1;
-			// }
-
-			//num表示的是关卡数，i表示的是章节数，j表示每个章节的第几关
+			// num表示的是关卡数，i表示的是章节数，j表示每个章节的第几关
 			int num = 0;
 			for (int i = 0; i < mode.chap.length; i++) {
 				JLabel chapLabel = new JLabel(mode.chap[i]);
 
 				chapLabel.setBounds((int) (panelWidth * 0.2),
-						(int) (panelHeight * 0.3) * (i+1), 100, 40);
+						(int) (panelHeight * 0.3) * (i + 1), 100, 40);
 				chapLabel.setForeground(Color.BLACK);
 				chapLabel.setVisible(true);
-				StoryPanel.add(chapLabel);
+				add(chapLabel);
 
 				for (int j = 0; j < 3; j++) {
 					if (i == mode.stages.size()) {
@@ -191,30 +238,31 @@ public class SelectorUI extends JPanel {
 					JButton stageButton = new JButton(
 							mode.stages.get(num).title);
 
-					stageButton.setBounds((int) (panelWidth * 0.2) * (j+1),
-							(int) (panelHeight * 0.3) * (i+1) + 60, 154, 154);
+					stageButton.setBounds((int) (panelWidth * 0.2) * (j + 1),
+							(int) (panelHeight * 0.3) * (i + 1) + 60, 154, 154);
 					stageButton.setVisible(true);
 					stageButton.addMouseListener(new EnterStageButtonListener(
 							mainUI, mode.stages.get(num)));
-					
-					String imageString = "img/Button/btn-chap01"  + "-stage0" + (num+1) + "-normal.png";
-					String imageHoverString = "img/Button/btn-chap01"  + "-stage0" + (num+1) + "-hover.png";
+
+					String imageString = "img/Button/btn-chap01" + "-stage0"
+							+ (num + 1) + "-normal.png";
+					String imageHoverString = "img/Button/btn-chap01"
+							+ "-stage0" + (num + 1) + "-hover.png";
 					ImageIcon image = new ImageIcon(imageString);
 					ImageIcon imageHover = new ImageIcon(imageHoverString);
-					
+
 					stageButton.setIcon(image);
 					stageButton.setRolloverIcon(imageHover);
 					stageButton.setContentAreaFilled(false);
 					stageButton.setBorderPainted(false);
 					stageButton.setFocusPainted(false);
-					
 
-					StoryPanel.add(stageButton);
+					add(stageButton);
 					num++;
 				}
 			}
-
-			getViewport().add(StoryPanel);
+			
+			addMouseWheelListener(new ScrollListener(this));
 		}
 	}
 
@@ -227,7 +275,8 @@ public class SelectorUI extends JPanel {
 			panelHeight = frameHeight;
 			setSize(panelWidth, panelHeight);
 			setOpaque(false);
-			setBackground(null);		}
+			setBackground(null);
+		}
 	}
 
 	class AchievementPanel extends JPanel {
@@ -239,7 +288,8 @@ public class SelectorUI extends JPanel {
 			panelHeight = frameHeight;
 			setSize(panelWidth, panelHeight);
 			setOpaque(false);
-			setBackground(null);		}
+			setBackground(null);
+		}
 	}
 
 	class SettingPanel extends JPanel {
@@ -251,6 +301,7 @@ public class SelectorUI extends JPanel {
 			panelHeight = frameHeight;
 			setSize(panelWidth, panelHeight);
 			setOpaque(false);
-			setBackground(null);		}
+			setBackground(null);
+		}
 	}
 }
