@@ -5,7 +5,7 @@ public class Ship {
 	private int size;
 	private double speed;
 	private double degreeToEast;
-	private double degreeToStar;
+//	private double degreeToStar;
 	private double mass;
 	
 	private boolean isAlive = false;
@@ -52,14 +52,14 @@ public class Ship {
 	public void setDegreeToEast(double degree){
 		this.degreeToEast = degree;
 	}
-	
-	public double getDegreeToStar(){
-		return this.degreeToStar;
-	}
-	
-	public void setDegreeToStar(double degree){
-		this.degreeToStar = degree;
-	}
+//	
+//	public double getDegreeToStar(){
+//		return this.degreeToStar;
+//	}
+//	
+//	public void setDegreeToStar(double degree){
+//		this.degreeToStar = degree;
+//	}
 	
 	public double getMass(){
 		return this.mass;
