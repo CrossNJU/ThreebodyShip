@@ -36,6 +36,7 @@ public class Game extends Observable implements Runnable{
 		startingPoint = new Point();
 		mousePoint = new Point();
 		starList = new ArrayList<Star>();
+		ship = new Ship();
 		
 		border.x = 1024;
 		border.y = 768;
@@ -68,15 +69,14 @@ public class Game extends Observable implements Runnable{
 				(ship.getLocation().y-starList.get(i).getLocation().y)*
 				(ship.getLocation().y-starList.get(i).getLocation().y)
 				);
-		
-			
-			if(distance<starList.get(i).getGravityScope()/2) {
-				isInScope = true;
-			}
-			
+
 			if(distance<starList.get(i).getSize()/2){
 				ship.setState(false);
 			}
+			
+			if(distance<starList.get(i).getGravityScope()/2) {
+				isInScope = true;
+			
 			
 			//计算星球飞船连线与正西方向顺时针的夹角
 			double theta1 = Math.atan((double)(starList.get(i).getLocation().y-
@@ -97,13 +97,13 @@ public class Game extends Observable implements Runnable{
 			f2.theta = theta1;
 			
 			f = f.joinForce(f2);
-			
+			}
 //			System.out.println(f.f+" "+f.theta);
 		}
 		
 		//如果进入引力区
 		if((isInScope)&&(!ship.isRound)){
-			
+//			System.out.println(1);
 			//计算速度，加速度，位移
 			double ax = f.f*Math.cos(f.theta);
 			double ay = f.f*Math.sin(f.theta);
@@ -120,6 +120,7 @@ public class Game extends Observable implements Runnable{
 			ship.setSpeed(vNew);
 			
 			double theta2 = Math.atan(vy/vx);
+//			System.out.println(1);
 			
 			//修改theta2
 			if(ship.getDegreeToEast()<Math.PI/2){
@@ -175,25 +176,11 @@ public class Game extends Observable implements Runnable{
 		this.isStarting = true;
 		this.inGame = false;
 		
-		//初始化飞船
-		ship = new Ship();
-//		ship.setDegreeToEast(0);
-//		ship.setDegreeToStar(0);
-//		ship.setLocation(20, 245);
-		ship.setMass(1000);
-		ship.setSize(10);
-		ship.setSpeed(4);
-		ship.setState(true);
-		ship.outOfBorder = false;
+		//初始化
+		Data data = new Data(gameNumber);
 		
-		//初始化星球
-		Star star = new Star();
-		star.setLocation(512, 518);
-		//star.setMass(40000000);
-		star.setSize(366);
-		star.setGravityScope(710);
-		
-		starList.add(star);
+		ship = data.ship;
+		starList = data.starList;
 		
 		this.FchangeRate = ship.getSpeed();
 	}
