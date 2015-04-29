@@ -93,7 +93,7 @@ public class MainUIPre implements Observer {
 			System.out.println("To Next in Starter");
 			Stage stage = (Stage) o;
 			stagePanel.nextStageButton.addActionListener(new NextStageButtonListener(stage));
-	        displayPanel(stagePanel.afterPanel);
+//	        displayPanel(stagePanel.afterPanel);
 		}
 //		stagePanel.nextButton = new JButton("Next Stage >");
 //		stagePanel.add(stagePanel.nextButton);

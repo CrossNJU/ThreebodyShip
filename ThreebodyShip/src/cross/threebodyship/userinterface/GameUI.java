@@ -30,6 +30,7 @@ public class GameUI extends JPanel implements Observer{
 	Game game;
 	JLabel speedLabel;
 	JLabel degreeLabel;
+	public int num;
 	
 	public GameUI(Game game,int width,int height){
 		this.game = game;
@@ -63,7 +64,7 @@ public class GameUI extends JPanel implements Observer{
 		Graphics g = mainCanvas.getGraphics();
 //		g.setColor(Color.GRAY);
 //		g.fillRect(0,0,mainCanvas.getWidth(),mainCanvas.getHeight());
-		Image GB_IMG = new ImageIcon("img/GameBackground/bg-chap00-stage01.png").getImage();
+		Image GB_IMG = new ImageIcon("img/GameBackground/bg-stage"+game.gameNumber+".png").getImage();
 		g.drawImage(GB_IMG, 0, 0,mainCanvas.getWidth(),mainCanvas.getHeight(),0,0,1024,768,null);
 		//System.out.println(1);
 		speedLabel.setText("speed:"+Double.toString(game.ship.getSpeed()));

@@ -12,6 +12,7 @@ public class Stage extends Observable implements Runnable {
 	String achievement = null;
 	String beforeImageName;
 	String afterImageName;
+	public int num;
 	
 	public Stage nextStage;
 	
@@ -46,6 +47,8 @@ public class Stage extends Observable implements Runnable {
 	
 	public void restart() {
 		System.out.println("Restart");
+		setChanged();
+		notifyObservers("fail");
 	}
 	
 	public void checkAchievement() {
@@ -71,6 +74,8 @@ public class Stage extends Observable implements Runnable {
 				}
 				if (game.checkFail()) {
 					restart();
+					game.inGame = false;
+					break;
 				}
 				}
 				//System.out.println("Check if complished or else");

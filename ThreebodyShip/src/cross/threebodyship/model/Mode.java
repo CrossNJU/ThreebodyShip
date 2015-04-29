@@ -46,6 +46,8 @@ public class Mode {
 			stages.get(stages.size()-1).nextStage = stage;
 		}
 		stages.add(stage);
+		stage.num = stages.size();
+		stage.game.gameNumber = stage.num;
 	}
 	
 	
