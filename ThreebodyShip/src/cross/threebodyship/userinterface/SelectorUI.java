@@ -223,10 +223,10 @@ public class SelectorUI extends JPanel {
 			// num表示的是关卡数，i表示的是章节数，j表示每个章节的第几关
 			int num = 0;
 			for (int i = 0; i < mode.chap.length; i++) {
-				JLabel chapLabel = new JLabel(mode.chap[i]);
-
+				JLabel chapLabel = new JLabel();
 				chapLabel.setBounds((int) (panelWidth * 0.2),
-						(int) (panelHeight * 0.3) * (i + 1), 100, 40);
+						(int) (panelHeight * 0.3) * (i + 1), 200, 40);
+				chapLabel.setIcon(new ImageIcon("img/Component/chap0"+i+".png"));
 				chapLabel.setForeground(Color.BLACK);
 				chapLabel.setVisible(true);
 				add(chapLabel);

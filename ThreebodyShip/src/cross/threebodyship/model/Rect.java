@@ -24,7 +24,7 @@ public class Rect implements Runnable{
 			}
 			
 			width += 5;
-			if(width>40) width = 0;
+			if(width>138) width = 0;
 			game.rectwidth = width;
 			game.rectheight = height;
 			

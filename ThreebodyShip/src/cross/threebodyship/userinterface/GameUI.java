@@ -76,15 +76,29 @@ public class GameUI extends JPanel implements Observer{
 		paintShip(g,game.ship);
 		if(game.isStarting) {
 			paintLine(g);
-			paintRect(g);
+//			paintRect(g);
+			paintPowerTank(g);
 		}
 	}
 		
 	//画开始的速度条
-	public void paintRect(Graphics g){
-		//System.out.println(game.rectheight);
-		g.setColor(Color.blue);
-		g.fillRect((int)game.mousePoint.x,(int)game.mousePoint.y, game.rectwidth, game.rectheight);
+//	public void paintRect(Graphics g){
+//		//System.out.println(game.rectheight);
+//		g.setColor(Color.blue);
+//		g.fillRect((int)game.mousePoint.x,(int)game.mousePoint.y, game.rectwidth, game.rectheight);
+//	}
+	
+	public void paintPowerTank(Graphics g) {
+		Image tank = new ImageIcon("img/Component/powertank.png").getImage();
+		Image power = new ImageIcon("img/Component/powerfull.png").getImage();
+		if (game.rectwidth > 0) {
+			g.drawImage(tank, (int) (game.mousePoint.x),
+					(int) (game.mousePoint.y) - 30, 134, 38, null);
+		}
+		g.drawImage(power, (int) (game.mousePoint.x),
+				(int) (game.mousePoint.y) - 28, (int) (game.mousePoint.x)
+						+ game.rectwidth - 2, (int) (game.mousePoint.y) + 10,
+				0, 0, game.rectwidth, 38, null);
 	}
 	
 	//画开始方向线

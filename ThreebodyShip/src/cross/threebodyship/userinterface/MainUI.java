@@ -1,12 +1,17 @@
 package cross.threebodyship.userinterface;
 
 import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -42,6 +47,12 @@ public class MainUI extends JFrame {
 		//实现窗口拖拽
 		addMouseListener(drag);
 		addMouseMotionListener(drag);
+		
+		//添加鼠标
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Image cur = new ImageIcon("img/Component/mouse@2x.png").getImage();
+		Cursor cu = kit.createCustomCursor(cur, new Point(0,0),"stick");
+		setCursor(cu);
 		
 		
 		// 初始化开始界面

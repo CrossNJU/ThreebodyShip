@@ -115,12 +115,11 @@ public class StageUI extends JPanel implements Observer {
 				"img/GameBackground/bg-stage"+stage.num+"-after.png"));
 		backLabel.setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
 		backLabel.setVisible(true);
-
 		//
 
 		nextStageButton = new JButton("Next Stage >");
-		nextStageButton.setBounds((int) (MainUI.WIDTH * 0.8),
-				(int) (MainUI.HEIGHT * 0.45), 142, 142);
+		nextStageButton.setBounds((int) (MainUI.WIDTH * 0.75),
+				(int) (MainUI.HEIGHT * 0.40), 142, 142);
 		nextStageButton.setIcon(new ImageIcon(
 				"img/Button/btn-nextstage-normal.png"));
 		nextStageButton.setRolloverIcon(new ImageIcon(
@@ -145,7 +144,7 @@ public class StageUI extends JPanel implements Observer {
 		
 		
 		JLabel failLabel = new JLabel();
-//		failLabel.setIcon(new ImageIcon("img/GameBackground/cover-40.png"));
+		failLabel.setIcon(new ImageIcon("img/GameBackground/cover-40.png"));
 		failLabel.setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
 		failLabel.setVisible(true);
 		failLabel.setOpaque(false);
@@ -225,8 +224,8 @@ public class StageUI extends JPanel implements Observer {
 		}
 
 		if (msg.equals("fail")) {
-//			add(failPanel);
-//			repaint();
+			mainUI.repaint();
+			gamePanel.repaintMain();
 		}
 	}
 }
