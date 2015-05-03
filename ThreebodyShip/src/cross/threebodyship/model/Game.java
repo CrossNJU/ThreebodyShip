@@ -8,6 +8,8 @@ import cross.threebodyship.userinterface.StopUI;
 
 
 public class Game extends Observable implements Runnable{
+	public static double maxDistance = 10000;
+	
 	private boolean isRunning = false;
 	public boolean isStarting = false;
 	public boolean inGame = false;
@@ -75,14 +77,31 @@ public class Game extends Observable implements Runnable{
 
 			if(distance<starList.get(i).getSize()/2){
 				if(starList.get(i).style.equals("BlackHole")){
+					//修改distance
+					distance = maxDistance;
+					
 					BlackHole blackHole = (BlackHole)starList.get(i);
-					FchangeRate *= blackHole.FaddRate;
+					
+					//修改vx，vy
+					double alpher = Math.atan((ship.getLocation().y-blackHole.getLocation().y)
+							/(ship.getLocation().x-blackHole.getLocation().x));
+					if(ship.getLocation().x>blackHole.getLocation().x) alpher+=Math.PI;
+					if((ship.getLocation().x<blackHole.getLocation().x)
+							&&(ship.getLocation().y>blackHole.getLocation().y)) alpher+=Math.PI*2;
+					
+					vx = ship.getSpeed()*Math.cos(alpher);
+					vy = ship.getSpeed()*Math.sin(alpher);
+					
 				}else
 				ship.setState(false);
 			}
 			
 			if(distance<starList.get(i).getGravityScope()/2) {
 				isInScope = true;
+				if(starList.get(i).style.equals("BlackHole")){
+					BlackHole blackHole = (BlackHole)starList.get(i);
+					FchangeRate *= blackHole.FaddRate;
+				}
 				
 				if(starList.get(i).style.equals("IAF")){
 					IAFStar star = (IAFStar)starList.get(i);
