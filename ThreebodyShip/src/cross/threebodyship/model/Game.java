@@ -56,11 +56,13 @@ public class Game extends Observable implements Runnable{
 		double vy = ship.getSpeed()*Math.sin(ship.getDegreeToEast());
 		double t = this.refreshInterval/100;
 		
+		FchangeRate = ship.getSpeed();
+		
 		boolean isInScope = false;
 //		count = 0;
 		Force f = new Force();
 		f.f = 0;
-		Star starI = new IAFStar();
+//		Star starI = new IAFStar();
 //		System.out.println(starList.size());
 		//考虑多星球
 		for(int i=0; i<starList.size(); i++){
@@ -72,6 +74,10 @@ public class Game extends Observable implements Runnable{
 				);
 
 			if(distance<starList.get(i).getSize()/2){
+				if(starList.get(i).style.equals("BlackHole")){
+					BlackHole blackHole = (BlackHole)starList.get(i);
+					FchangeRate *= blackHole.FaddRate;
+				}else
 				ship.setState(false);
 			}
 			
@@ -192,7 +198,7 @@ public class Game extends Observable implements Runnable{
 		ship = data.ship;
 		starList = data.starList;
 		
-		this.FchangeRate = ship.getSpeed();
+//		this.FchangeRate = ship.getSpeed();
 	}
 	
 	//结束判定

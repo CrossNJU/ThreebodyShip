@@ -121,7 +121,7 @@ public class Data {
 		starList.add(starTwo);
 	}
 	public void setGame7(){
-		IAFStar starOne = new IAFStar();
+		BlackHole starOne = new BlackHole();
 		Star starTwo = new Star();
 		//初始化飞船
 		ship.setMass(1000);
@@ -131,8 +131,8 @@ public class Data {
 		ship.outOfBorder = false;
 		//初始化星球
 		
-		starOne.style = "IAF";
-		starOne.SpeedChangeRate = 0.7;
+		starOne.style = "BlackHole";
+		starOne.FaddRate = 7;
 		starOne.setLocation(280,120);
 		starOne.setSize(300);
 		starOne.setGravityScope(960);
