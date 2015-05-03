@@ -17,6 +17,7 @@ public class Game extends Observable implements Runnable{
 	public Ship ship;
 //	public Star star;
 	public ArrayList<Star> starList;
+	public Data data;
 	
 	public double speedChangeRate = 1.1;
 	public double FchangeRate;
@@ -44,7 +45,7 @@ public class Game extends Observable implements Runnable{
 		startingPoint.y = border.y/2;
 		StartingAreaR = 690;
 		
-		reset();
+//		reset();
 	}
 	
 	//飞行轨迹计算
@@ -177,7 +178,7 @@ public class Game extends Observable implements Runnable{
 		this.inGame = false;
 		
 		//初始化
-		Data data = new Data(gameNumber);
+//		data = new Data(gameNumber);
 		
 		ship = data.ship;
 		starList = data.starList;
@@ -217,9 +218,9 @@ public class Game extends Observable implements Runnable{
 	
 	//获胜判定
 	public boolean checkWin(){
-		double winX = 1670;
+		double winX = border.x + border.y/8;
 		double winY = border.y/2;
-		double winR = 690;
+		double winR = border.y/4-10;
 		
 		double dis = Math.sqrt((ship.getLocation().x-winX)*(ship.getLocation().x-winX)
 				+(ship.getLocation().y-winY)*(ship.getLocation().y-winY));
@@ -247,7 +248,7 @@ public class Game extends Observable implements Runnable{
 	//主要过程
 	@Override
 	public void run() {
-		//reset();
+		reset();
 		
 		while(this.getState()){
 			try{

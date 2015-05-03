@@ -13,8 +13,8 @@ public class Data {
 		ship = new Ship();
 		
 		switch(gameNumber){
-		case 0:setGame0();break;
-		case 1:setGame1();break;
+		case 1:setGame0();break;
+		case 2:setGame1();break;
 		}
 	}
 	

@@ -70,8 +70,8 @@ public class GameUI extends JPanel implements Observer{
 		speedLabel.setText("speed:"+Double.toString(game.ship.getSpeed()));
 		degreeLabel.setText("degreeToEast:"+Double.toString(Math.toDegrees(game.ship.getDegreeToEast())));
 
-		paintWinArea(g);
-		paintStartArea(g);
+//		paintWinArea(g);
+//		paintStartArea(g);
 //		paintStar(g,game.star);
 		paintShip(g,game.ship);
 		if(game.isStarting) {

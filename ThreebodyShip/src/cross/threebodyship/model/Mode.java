@@ -48,6 +48,7 @@ public class Mode {
 		stages.add(stage);
 		stage.num = stages.size();
 		stage.game.gameNumber = stage.num;
+		stage.game.data = new Data(stage.game.gameNumber);
 	}
 	
 	
