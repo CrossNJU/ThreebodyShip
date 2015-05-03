@@ -45,13 +45,16 @@ public class Data {
 		ship.outOfBorder = false;
 		//初始化星球
 		
-		starOne.setLocation(400,200);
+		starOne.setLocation(412,87);
 		starOne.setSize(180);
-		starOne.setGravityScope(350);
+		starOne.setGravityScope(353);
 		
-		starTwo.setLocation(670,500);
+		starTwo.setLocation(673,666);
 		starTwo.setSize(180);
-		starTwo.setGravityScope(350);
+		starTwo.setGravityScope(353);
+		
+		starList.add(starOne);
+		starList.add(starTwo);
 		
 	}
 	
