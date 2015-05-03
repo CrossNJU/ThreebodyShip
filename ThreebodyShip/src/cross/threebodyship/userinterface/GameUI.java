@@ -136,8 +136,10 @@ public class GameUI extends JPanel implements Observer{
 	//画星球
 	public void paintstar(Graphics g, ArrayList<Star> starList){
 		
-		g.setColor(Color.pink);
+		
 		for(int i=0;i<starList.size();i++){
+			
+			g.setColor(Color.pink);
 		g.fillOval((int)(starList.get(i).getLocation().x-starList.get(i).getGravityScope()/2), 
 				(int)(starList.get(i).getLocation().y-starList.get(i).getGravityScope()/2),
 				starList.get(i).getGravityScope(),
