@@ -70,7 +70,7 @@ public class GameUI extends JPanel implements Observer{
 		speedLabel.setText("speed:"+Double.toString(game.ship.getSpeed()));
 		degreeLabel.setText("degreeToEast:"+Double.toString(Math.toDegrees(game.ship.getDegreeToEast())));
 
-//		paintWinArea(g);
+		paintWinArea(g);
 		paintStartArea(g);
 //		paintStar(g,game.star);
 		paintShip(g,game.ship);
@@ -113,10 +113,9 @@ public class GameUI extends JPanel implements Observer{
 		g.setColor(Color.yellow);
 		
 		int height = mainCanvas.getHeight();
-		int width = mainCanvas.getWidth();
-		double r = height/4;
-		int locationx = width + (int)r/2 - (int)r ;
-		int locationy = (int)height/2 - (int)r ;
+		double r = 690;
+		int locationx = 980;
+		int locationy = (int)(height/2 - r) ;
 		
 		g.fillOval(locationx, locationy, (int)r*2, (int)r*2);
 	}
