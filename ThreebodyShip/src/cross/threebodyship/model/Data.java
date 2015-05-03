@@ -18,6 +18,8 @@ public class Data {
 		case 2:setGame2();break;
 		case 3:setGame3();break;
 		case 4:setGame4();break;
+		
+		case 7:setGame7();break;
 		}
 	}
 	
@@ -114,6 +116,30 @@ public class Data {
 		starTwo.setLocation(709,546);
 		starTwo.setSize(300);
 		starTwo.setGravityScope(640);
+		
+		starList.add(starOne);
+		starList.add(starTwo);
+	}
+	public void setGame7(){
+		IAFStar starOne = new IAFStar();
+		Star starTwo = new Star();
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(10);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		//初始化星球
+		
+		starOne.style = "IAF";
+		starOne.SpeedChangeRate = 0.7;
+		starOne.setLocation(280,120);
+		starOne.setSize(300);
+		starOne.setGravityScope(960);
+		
+		starTwo.setLocation(777,674);
+		starTwo.setSize(346);
+		starTwo.setGravityScope(644);
 		
 		starList.add(starOne);
 		starList.add(starTwo);
