@@ -48,12 +48,12 @@ public class Data {
 		//初始化星球
 		
 		starOne.setLocation(412,87);
-		starOne.setSize(180);
-		starOne.setGravityScope(353);
+		starOne.setSize(360);
+		starOne.setGravityScope(706);
 		
 		starTwo.setLocation(673,666);
-		starTwo.setSize(180);
-		starTwo.setGravityScope(353);
+		starTwo.setSize(360);
+		starTwo.setGravityScope(706);
 		
 		starList.add(starOne);
 		starList.add(starTwo);
