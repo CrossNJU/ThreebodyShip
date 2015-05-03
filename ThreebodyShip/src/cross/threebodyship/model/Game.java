@@ -60,7 +60,7 @@ public class Game extends Observable implements Runnable{
 //		count = 0;
 		Force f = new Force();
 		f.f = 0;
-		
+		Star starI = new IAFStar();
 //		System.out.println(starList.size());
 		//考虑多星球
 		for(int i=0; i<starList.size(); i++){
@@ -77,27 +77,36 @@ public class Game extends Observable implements Runnable{
 			
 			if(distance<starList.get(i).getGravityScope()/2) {
 				isInScope = true;
+				
+				if(starList.get(i).style.equals("IAF")){
+					IAFStar star = (IAFStar)starList.get(i);
+					if(star.changed == false){
+						vx*=star.SpeedChangeRate;
+						vy*=star.SpeedChangeRate;
+						star.changed = true;
+					}
+				}
 			
-			
-			//计算星球飞船连线与正西方向顺时针的夹角
-			double theta1 = Math.atan((double)(starList.get(i).getLocation().y-
-				ship.getLocation().y)/(starList.get(i).getLocation().x-
-				ship.getLocation().x));
-			if((ship.getLocation().x<starList.get(i).getLocation().x)&&
-				ship.getLocation().y>starList.get(i).getLocation().y) theta1 += 2*Math.PI;
-			else{
-				if(ship.getLocation().x>starList.get(i).getLocation().x)
-					theta1 += Math.PI;
-			}
+				//计算星球飞船连线与正西方向顺时针的夹角
+				double theta1 = Math.atan((double)(starList.get(i).getLocation().y-
+						ship.getLocation().y)/(starList.get(i).getLocation().x-
+						ship.getLocation().x));
+				if((ship.getLocation().x<starList.get(i).getLocation().x)&&
+						ship.getLocation().y>starList.get(i).getLocation().y) theta1 += 2*Math.PI;
+				else{
+					if(ship.getLocation().x>starList.get(i).getLocation().x)
+						theta1 += Math.PI;
+				}
 
-			double a = FchangeRate*Star.G*starList.get(i).getMass()/
-				(starList.get(i).getSize()*starList.get(i).getSize()/4);
+				double a = FchangeRate*Star.G*starList.get(i).getMass()/
+						(starList.get(i).getSize()*starList.get(i).getSize()/4);
 			
-			Force f2 = new Force();
-			f2.f = a;
-			f2.theta = theta1;
+				//合成力
+				Force f2 = new Force();
+				f2.f = a;
+				f2.theta = theta1;
 			
-			f = f.joinForce(f2);
+				f = f.joinForce(f2);
 			}
 //			System.out.println(f.f+" "+f.theta);
 		}

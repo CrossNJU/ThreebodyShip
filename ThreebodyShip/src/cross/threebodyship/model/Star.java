@@ -7,6 +7,8 @@ public class Star {
 	private Point centerPoint;
 	private int gravityScope;
 	
+	public String style = "Normal";
+	
 	public Star(){
 		centerPoint = new Point();
 //		this.mass = Math.PI*4/3*size*size*size;

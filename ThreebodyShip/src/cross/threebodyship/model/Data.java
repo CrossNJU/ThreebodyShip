@@ -5,6 +5,7 @@ package cross.threebodyship.model;
 import java.util.ArrayList;
 
 public class Data {
+//	private static final String IAFStar = null;
 	public ArrayList<Star> starList;
 	public Ship ship;
 	
@@ -16,6 +17,7 @@ public class Data {
 		case 1:setGame1();break;
 		case 2:setGame2();break;
 		case 3:setGame3();break;
+		case 4:setGame4();break;
 		}
 	}
 	
@@ -88,6 +90,33 @@ public class Data {
 		starList.add(starTwo);
 		starList.add(starThree);
 		
+	}
+	
+	public void setGame4(){
+		IAFStar starOne = new IAFStar();
+		IAFStar starTwo = new IAFStar();
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(10);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		//初始化星球
+		
+		starOne.style = "IAF";
+		starOne.SpeedChangeRate = 0.7;
+		starOne.setLocation(320,210);
+		starOne.setSize(300);
+		starOne.setGravityScope(640);
+		
+		starTwo.style = "IAF";
+		starTwo.SpeedChangeRate = 0.7;
+		starTwo.setLocation(709,546);
+		starTwo.setSize(300);
+		starTwo.setGravityScope(640);
+		
+		starList.add(starOne);
+		starList.add(starTwo);
 	}
 	
 }
