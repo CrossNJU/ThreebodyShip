@@ -217,9 +217,9 @@ public class Game extends Observable implements Runnable{
 	
 	//获胜判定
 	public boolean checkWin(){
-		double winX = border.x + border.y/8;
+		double winX = 1670;
 		double winY = border.y/2;
-		double winR = border.y/4-10;
+		double winR = 690;
 		
 		double dis = Math.sqrt((ship.getLocation().x-winX)*(ship.getLocation().x-winX)
 				+(ship.getLocation().y-winY)*(ship.getLocation().y-winY));
