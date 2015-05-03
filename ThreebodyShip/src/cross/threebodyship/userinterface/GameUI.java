@@ -5,6 +5,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.ArrayList;
 //import java.awt.event.MouseEvent;
 //import java.awt.event.MouseListener;
 //import java.awt.event.MouseMotionListener;
@@ -71,8 +72,8 @@ public class GameUI extends JPanel implements Observer{
 		degreeLabel.setText("degreeToEast:"+Double.toString(Math.toDegrees(game.ship.getDegreeToEast())));
 
 //		paintWinArea(g);
-//		paintStartArea(g);
-//		paintStar(g,game.star);
+//		paintstarList.get(i)tArea(g);
+		paintstar(g,game.starList);
 		paintShip(g,game.ship);
 		if(game.isStarting) {
 			paintLine(g);
@@ -121,7 +122,7 @@ public class GameUI extends JPanel implements Observer{
 	}
 	
 	//画开始的发射台
-	public void paintStartArea(Graphics g){
+	public void paintstartArea(Graphics g){
 		g.setColor(Color.yellow);
 		
 		int height = mainCanvas.getHeight();
@@ -133,21 +134,22 @@ public class GameUI extends JPanel implements Observer{
 	}
 	
 	//画星球
-	public void paintStar(Graphics g, Star star){
+	public void paintstar(Graphics g, ArrayList<Star> starList){
 		
 		g.setColor(Color.pink);
-			
-		g.fillOval((int)(star.getLocation().x-star.getGravityScope()/2), 
-				(int)(star.getLocation().y-star.getGravityScope()/2),
-				star.getGravityScope(),
-				star.getGravityScope());
+		for(int i=0;i<starList.size();i++){
+		g.fillOval((int)(starList.get(i).getLocation().x-starList.get(i).getGravityScope()/2), 
+				(int)(starList.get(i).getLocation().y-starList.get(i).getGravityScope()/2),
+				starList.get(i).getGravityScope(),
+				starList.get(i).getGravityScope());
 			
 		g.setColor(Color.BLUE);
 			
-		g.fillOval((int)(star.getLocation().x-star.getSize()/2),
-				(int)(star.getLocation().y-star.getSize()/2),
-				star.getSize(),
-				star.getSize());
+		g.fillOval((int)(starList.get(i).getLocation().x-starList.get(i).getSize()/2),
+				(int)(starList.get(i).getLocation().y-starList.get(i).getSize()/2),
+				starList.get(i).getSize(),
+				starList.get(i).getSize());
+		}
 	}
 		
 	//画飞船
