@@ -21,6 +21,7 @@ public class Data {
 		case 5:setGame5();break;
 		case 6:setGame6();break;
 		case 7:setGame7();break;
+		case 8:setGame8();break;
 		}
 	}
 	
@@ -94,6 +95,34 @@ public class Data {
 		starList.add(starThree);
 		
 	}
+	public void setGame4(){
+		IAFStar starOne = new IAFStar();
+		IAFStar starTwo = new IAFStar();
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(10);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		//初始化星球
+		
+		starOne.style = "IAF";
+		starOne.SpeedChangeRate = 1.5;
+		starOne.setLocation(240,515);
+		starOne.setSize(212);
+		starOne.setGravityScope(454);
+		
+		starTwo.style = "IAF";
+		starTwo.SpeedChangeRate = 1.5;
+		starTwo.setLocation(679,337);
+		starTwo.setSize(326);
+		starTwo.setGravityScope(628);
+		
+		starList.add(starOne);
+		starList.add(starTwo);
+	}
+	
+
 	
 	public void setGame5(){
 		IAFStar starOne = new IAFStar();
@@ -121,52 +150,7 @@ public class Data {
 		starList.add(starOne);
 		starList.add(starTwo);
 	}
-	public void setGame7(){
-		BlackHole starOne = new BlackHole();
-		//初始化飞船
-		ship.setMass(1000);
-		ship.setSize(10);
-		ship.setSpeed(4);
-		ship.setState(true);
-		ship.outOfBorder = false;
-		//初始化星球
 		
-		starOne.style = "BlackHole";
-		starOne.FaddRate = 1.1;
-		starOne.setLocation(513,567);
-		starOne.setSize(306);
-		starOne.setGravityScope(756);
-		starOne.deadR = 32;
-	
-		
-		starList.add(starOne);
-	}
-	public void setGame4(){
-		IAFStar starOne = new IAFStar();
-		IAFStar starTwo = new IAFStar();
-		//初始化飞船
-		ship.setMass(1000);
-		ship.setSize(10);
-		ship.setSpeed(4);
-		ship.setState(true);
-		ship.outOfBorder = false;
-		//初始化星球
-		
-		starOne.style = "IAF";
-		starOne.SpeedChangeRate = 1.5;
-		starOne.setLocation(240,515);
-		starOne.setSize(212);
-		starOne.setGravityScope(454);
-		
-		starTwo.style = "IAF";
-		starTwo.SpeedChangeRate = 1.5;
-		starTwo.setLocation(679,337);
-		starTwo.setSize(326);
-		starTwo.setGravityScope(628);
-		
-		starList.add(starOne);
-		starList.add(starTwo);
-	}
 	public void setGame6(){
 		IAFStar starOne = new IAFStar();
 		IAFStar starTwo = new IAFStar();
@@ -198,6 +182,53 @@ public class Data {
 		starList.add(starOne);
 		starList.add(starTwo);
 		starList.add(starThree);
+	}
+	
+	public void setGame7(){
+		BlackHole starOne = new BlackHole();
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(10);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		//初始化星球
+		
+		starOne.style = "BlackHole";
+		starOne.FaddRate = 1.1;
+		starOne.setLocation(513,567);
+		starOne.setSize(306);
+		starOne.setGravityScope(756);
+		starOne.deadR = 32;
+	
+		
+		starList.add(starOne);
+	}
+
+	public void setGame8(){
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(10);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		//初始化星球				
+		BlackHole starOne = new BlackHole();
+		Star starTwo = new Star();
+		
+		starOne.style = "BlackHole";
+		starOne.FaddRate = 1.1;
+		starOne.setLocation(363, 104);
+		starOne.setSize(284);
+		starOne.setGravityScope(688);
+		starOne.deadR = 37;
+		
+		starTwo.setLocation(736, 609);
+		starTwo.setSize(204);
+		starTwo.setGravityScope(502);
+		
+		starList.add(starOne);
+		starList.add(starTwo);
 	}
 	
 }
