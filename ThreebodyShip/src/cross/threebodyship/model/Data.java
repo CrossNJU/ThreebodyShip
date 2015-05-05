@@ -185,17 +185,17 @@ public class Data {
 		
 		starOne.style = "IAF";
 		starOne.SpeedChangeRate = 0.5;
-		starOne.setLocation(364,165);
+		starOne.setLocation(324,165);
 		starOne.setSize(132);
 		starOne.setGravityScope(282);
 		
 		starTwo.style = "IAF";
 		starTwo.SpeedChangeRate = 1.5;
-		starTwo.setLocation(688,426);
+		starTwo.setLocation(688,390);
 		starTwo.setSize(246);
 		starTwo.setGravityScope(592);
 		
-		starThree.setLocation(207,597);
+		starThree.setLocation(207,500);
 		starThree.setSize(234);
 		starThree.setGravityScope(414);
 		
