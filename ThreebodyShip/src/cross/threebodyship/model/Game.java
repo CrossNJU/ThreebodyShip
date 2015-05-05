@@ -93,7 +93,7 @@ public class Game extends Observable implements Runnable{
 					else{
 						//修改distance
 					distance = maxDistance;
-					ship.setSpeed(1);
+					ship.setSpeed(2);
 					
 					//修改vx，vy
 					double alpher = Math.atan((ship.getLocation().y-blackHole.getLocation().y)
@@ -114,7 +114,7 @@ public class Game extends Observable implements Runnable{
 				isInScope = true;
 				if(starList.get(i).style.equals("BlackHole")){
 					BlackHole blackHole = (BlackHole)starList.get(i);
-					FchangeRate *= blackHole.FaddRate;
+					FchangeRate = FchangeRate*blackHole.FaddRate;
 				}
 				
 				if(starList.get(i).style.equals("IAF")){

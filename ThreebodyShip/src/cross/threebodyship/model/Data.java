@@ -95,7 +95,7 @@ public class Data {
 		
 	}
 	
-	public void setGame4(){
+	public void setGame5(){
 		IAFStar starOne = new IAFStar();
 		IAFStar starTwo = new IAFStar();
 		//初始化飞船
@@ -107,13 +107,13 @@ public class Data {
 		//初始化星球
 		
 		starOne.style = "IAF";
-		starOne.SpeedChangeRate = 0.7;
+		starOne.SpeedChangeRate = 0.8;
 		starOne.setLocation(320,210);
 		starOne.setSize(300);
 		starOne.setGravityScope(640);
 		
 		starTwo.style = "IAF";
-		starTwo.SpeedChangeRate = 0.7;
+		starTwo.SpeedChangeRate = 0.8;
 		starTwo.setLocation(709,546);
 		starTwo.setSize(300);
 		starTwo.setGravityScope(640);
@@ -123,7 +123,6 @@ public class Data {
 	}
 	public void setGame7(){
 		BlackHole starOne = new BlackHole();
-		Star starTwo = new Star();
 		//初始化飞船
 		ship.setMass(1000);
 		ship.setSize(10);
@@ -133,19 +132,16 @@ public class Data {
 		//初始化星球
 		
 		starOne.style = "BlackHole";
-		starOne.FaddRate = 7;
-		starOne.setLocation(280,120);
-		starOne.setSize(300);
-		starOne.setGravityScope(960);
-		
-		starTwo.setLocation(777,674);
-		starTwo.setSize(346);
-		starTwo.setGravityScope(644);
+		starOne.FaddRate = 1.1;
+		starOne.setLocation(513,567);
+		starOne.setSize(306);
+		starOne.setGravityScope(756);
+		starOne.deadR = 32;
+	
 		
 		starList.add(starOne);
-		starList.add(starTwo);
 	}
-	public void setGame5(){
+	public void setGame4(){
 		IAFStar starOne = new IAFStar();
 		IAFStar starTwo = new IAFStar();
 		//初始化飞船
