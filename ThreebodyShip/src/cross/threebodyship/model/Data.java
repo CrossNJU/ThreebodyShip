@@ -8,9 +8,11 @@ public class Data {
 //	private static final String IAFStar = null;
 	public ArrayList<Star> starList;
 	public Ship ship;
+	public ArrayList<Planet> planets;
 	
 	public Data(int gameNumber){
 		starList = new ArrayList<Star>();
+		planets = new ArrayList<Planet>();
 		ship = new Ship();
 		
 		switch(gameNumber){

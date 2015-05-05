@@ -19,6 +19,7 @@ public class Game extends Observable implements Runnable{
 	public Ship ship;
 //	public Star star;
 	public ArrayList<Star> starList;
+	public ArrayList<Planet> planets;
 	public Data data;
 	
 	public double speedChangeRate = 1.1;
@@ -42,6 +43,7 @@ public class Game extends Observable implements Runnable{
 		mousePoint = new Point();
 		winPoint = new Point();
 		starList = new ArrayList<Star>();
+		planets = new ArrayList<Planet>();
 		ship = new Ship();
 		
 		border.x = 1024;
@@ -231,6 +233,11 @@ public class Game extends Observable implements Runnable{
 		ship = data.ship;
 		starList = data.starList;
 		
+		//启动planets线程
+		for(int i = 0; i<planets.size(); i++){
+			Thread t = new Thread(planets.get(i));
+			t.start();
+		}
 //		this.FchangeRate = ship.getSpeed();
 	}
 	
