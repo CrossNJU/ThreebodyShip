@@ -24,6 +24,7 @@ public class Data {
 		case 6:setGame6();break;
 		case 7:setGame7();break;
 		case 8:setGame8();break;
+		case 9:setGame9();break;
 		}
 	}
 	
@@ -231,6 +232,41 @@ public class Data {
 		
 		starList.add(starOne);
 		starList.add(starTwo);
+	}
+	
+	public void setGame9(){
+		IAFStar starOne = new IAFStar();
+		IAFStar starTwo = new IAFStar();
+		BlackHole starThree = new BlackHole();
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(10);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		//初始化星球
+		starOne.style = "IAF";
+		starOne.SpeedChangeRate = 0.7;
+		starOne.setLocation(414, 226);
+		starOne.setSize(182);
+		starOne.setGravityScope(426);
+		
+		starTwo.style = "IAF";
+		starTwo.SpeedChangeRate = 1.5;
+		starTwo.setLocation(734, 408);
+		starTwo.setSize(186);
+		starTwo.setGravityScope(470);
+		
+		starThree.style = "BlackHole";
+		starThree.FaddRate = 1.1;
+		starThree.setLocation(305, 676);
+		starThree.setSize(322);
+		starThree.setGravityScope(622);
+		starThree.deadR = 52;
+		
+		starList.add(starOne);
+		starList.add(starTwo);
+		starList.add(starThree);
 	}
 	
 }
