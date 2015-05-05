@@ -87,10 +87,13 @@ public class Game extends Observable implements Runnable{
 
 			if(distance<starList.get(i).getSize()/2){
 				if(starList.get(i).style.equals("BlackHole")){
-					//修改distance
-					distance = maxDistance;
-					
 					BlackHole blackHole = (BlackHole)starList.get(i);
+					
+					if(distance<blackHole.deadR) ship.setState(false);
+					else{
+						//修改distance
+					distance = maxDistance;
+					ship.setSpeed(1);
 					
 					//修改vx，vy
 					double alpher = Math.atan((ship.getLocation().y-blackHole.getLocation().y)
@@ -101,6 +104,7 @@ public class Game extends Observable implements Runnable{
 					
 					vx = ship.getSpeed()*Math.cos(alpher);
 					vy = ship.getSpeed()*Math.sin(alpher);
+					}
 					
 				}else
 				ship.setState(false);

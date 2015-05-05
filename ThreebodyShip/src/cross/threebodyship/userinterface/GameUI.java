@@ -63,8 +63,8 @@ public class GameUI extends JPanel implements Observer{
 	public void repaintMain(){
 		//mainCanvas.repaint();
 		Graphics g = mainCanvas.getGraphics();
-//		g.setColor(Color.GRAY);
-//		g.fillRect(0,0,mainCanvas.getWidth(),mainCanvas.getHeight());
+		g.setColor(Color.GRAY);
+		g.fillRect(0,0,mainCanvas.getWidth(),mainCanvas.getHeight());
 		Image GB_IMG = new ImageIcon("img/GameBackground/bg-stage"+game.gameNumber+".png").getImage();
 		g.drawImage(GB_IMG, 0, 0,mainCanvas.getWidth(),mainCanvas.getHeight(),0,0,1024,768,null);
 		//System.out.println(1);

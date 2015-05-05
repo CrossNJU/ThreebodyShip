@@ -17,7 +17,7 @@ public class Rect implements Runnable{
 		
 		while(!stop2){
 			try {
-				Thread.sleep(game.getRI()*2);
+				Thread.sleep(game.getRI());
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -30,7 +30,7 @@ public class Rect implements Runnable{
 			
 			double rate = game.speedChangeRate;
 			
-			for(int i=0; i<=(int)width/5; i++){
+			for(int i=0; i<=(int)width/10; i++){
 				rate *= game.speedChangeRate;
 			}
 			game.ship.setSpeed(speed*rate);
