@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cross.threebodyship.model.Game;
+import cross.threebodyship.model.Planet;
 import cross.threebodyship.model.Ship;
 import cross.threebodyship.model.Star;
 import cross.threebodyship.transaction.GameController;
@@ -73,6 +74,7 @@ public class GameUI extends JPanel implements Observer{
 
 //		paintWinArea(g);
 //		paintstarList.get(i)tArea(g);
+		paintplanet(g,game.planets);
 		paintstar(g,game.starList);
 		paintShip(g,game.ship);
 		if(game.isStarting) {
@@ -153,6 +155,17 @@ public class GameUI extends JPanel implements Observer{
 				starList.get(i).getSize(),
 				starList.get(i).getSize());
 		}
+	}
+	
+	public void paintplanet(Graphics g,ArrayList<Planet> planets){
+		g.setColor(Color.green);
+		
+		for(int i = 0; i< planets.size(); i++){
+			Planet planet = planets.get(i);
+			g.fillOval((int)(planet.location.x-planet.size/2),(int)(planet.location.y-planet.size/2)
+					, planet.size, planet.size);
+		}
+		
 	}
 		
 	//画飞船
