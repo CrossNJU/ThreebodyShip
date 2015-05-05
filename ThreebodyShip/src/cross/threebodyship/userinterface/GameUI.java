@@ -80,6 +80,7 @@ public class GameUI extends JPanel implements Observer{
 //			paintRect(g);
 			paintPowerTank(g);
 		}
+		System.out.println("is Painting");
 	}
 		
 	//画开始的速度条
