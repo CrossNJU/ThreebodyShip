@@ -113,12 +113,12 @@ public class GameUI extends JPanel implements Observer{
 	public void paintWinArea(Graphics g){
 		g.setColor(Color.yellow);
 		
-		int height = mainCanvas.getHeight();
-		double r = 690;
-		int locationx = 980;
-		int locationy = (int)(height/2 - r) ;
+//		int height = mainCanvas.getHeight();
+//		double r = 690;
+		int locationx = (int)(game.winPoint.x - game.winAreaR);
+		int locationy = (int)(game.winPoint.y -  game.winAreaR) ;
 		
-		g.fillOval(locationx, locationy, (int)r*2, (int)r*2);
+		g.fillOval(locationx, locationy, (int)game.winAreaR*2, (int)game.winAreaR*2);
 	}
 	
 	//画开始的发射台
