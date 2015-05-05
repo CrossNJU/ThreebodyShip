@@ -19,16 +19,19 @@ public class Game extends Observable implements Runnable{
 	public Ship ship;
 //	public Star star;
 	public ArrayList<Star> starList;
+	public ArrayList<Planet> planets;
 	public Data data;
 	
 	public double speedChangeRate = 1.1;
-	public double FchangeRate;
+	public static double FchangeRate = 12;
 	
 	public Point border;
 	public Point startingPoint;
+	public Point winPoint;
 	public Point mousePoint;
 	
 	public double StartingAreaR;
+	public double winAreaR;
 	public int rectwidth = 0;
 	public int rectheight = 0;
 	
@@ -38,13 +41,18 @@ public class Game extends Observable implements Runnable{
 		border = new Point();
 		startingPoint = new Point();
 		mousePoint = new Point();
+		winPoint = new Point();
 		starList = new ArrayList<Star>();
+		planets = new ArrayList<Planet>();
 		ship = new Ship();
 		
 		border.x = 1024;
 		border.y = 768;
 		startingPoint.x = -640;
 		startingPoint.y = border.y/2;
+		winPoint.x = 1670;
+		winPoint.y = border.y/2;
+		winAreaR = 690;
 		StartingAreaR = 690;
 		
 //		reset();
@@ -52,16 +60,20 @@ public class Game extends Observable implements Runnable{
 	
 	//飞行轨迹计算
 	public void update(){
+		//正常情况下飞船轨迹
 		double nowX = ship.getLocation().x;
 		double nowY = ship.getLocation().y;
 		double vx = ship.getSpeed()*Math.cos(ship.getDegreeToEast());
 		double vy = ship.getSpeed()*Math.sin(ship.getDegreeToEast());
 		double t = this.refreshInterval/100;
 		
-		FchangeRate = ship.getSpeed();
+		//引力加大参数
+//		FchangeRate = ship.getSpeed();
 		
+		//判定是否进入某一星球引力区
 		boolean isInScope = false;
 //		count = 0;
+		//初始化万有引力
 		Force f = new Force();
 		f.f = 0;
 //		Star starI = new IAFStar();
@@ -77,10 +89,13 @@ public class Game extends Observable implements Runnable{
 
 			if(distance<starList.get(i).getSize()/2){
 				if(starList.get(i).style.equals("BlackHole")){
-					//修改distance
-					distance = maxDistance;
-					
 					BlackHole blackHole = (BlackHole)starList.get(i);
+					
+					if(distance<blackHole.deadR) ship.setState(false);
+					else{
+						//修改distance
+					distance = maxDistance;
+					ship.setSpeed(2);
 					
 					//修改vx，vy
 					double alpher = Math.atan((ship.getLocation().y-blackHole.getLocation().y)
@@ -91,6 +106,7 @@ public class Game extends Observable implements Runnable{
 					
 					vx = ship.getSpeed()*Math.cos(alpher);
 					vy = ship.getSpeed()*Math.sin(alpher);
+					}
 					
 				}else
 				ship.setState(false);
@@ -100,7 +116,7 @@ public class Game extends Observable implements Runnable{
 				isInScope = true;
 				if(starList.get(i).style.equals("BlackHole")){
 					BlackHole blackHole = (BlackHole)starList.get(i);
-					FchangeRate *= blackHole.FaddRate;
+					FchangeRate = FchangeRate*blackHole.FaddRate;
 				}
 				
 				if(starList.get(i).style.equals("IAF")){
@@ -212,11 +228,16 @@ public class Game extends Observable implements Runnable{
 		this.inGame = false;
 		
 		//初始化
-//		data = new Data(gameNumber);
+		data = new Data(gameNumber);
 		
 		ship = data.ship;
 		starList = data.starList;
 		
+		//启动planets线程
+		for(int i = 0; i<planets.size(); i++){
+			Thread t = new Thread(planets.get(i));
+			t.start();
+		}
 //		this.FchangeRate = ship.getSpeed();
 	}
 	
@@ -252,14 +273,11 @@ public class Game extends Observable implements Runnable{
 	
 	//获胜判定
 	public boolean checkWin(){
-		double winX = border.x + border.y/8;
-		double winY = border.y/2;
-		double winR = border.y/4-10;
 		
-		double dis = Math.sqrt((ship.getLocation().x-winX)*(ship.getLocation().x-winX)
-				+(ship.getLocation().y-winY)*(ship.getLocation().y-winY));
-		//System.out.println("dis:"+dis);
-		if(dis<winR) return true;
+		double dis = Math.sqrt((ship.getLocation().x-winPoint.x)*(ship.getLocation().x-winPoint.x)
+				+(ship.getLocation().y-winPoint.y)*(ship.getLocation().y-winPoint.y));
+		System.out.println("dis:"+dis);
+		if(dis<winAreaR) return true;
 		else return false;
 	}
 	
