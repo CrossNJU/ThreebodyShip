@@ -25,6 +25,8 @@ public class Data {
 		case 7:setGame7();break;
 		case 8:setGame8();break;
 		case 9:setGame9();break;
+		case 10:setGame10();break;
+		case 11:setGame11();break;
 		}
 	}
 	
@@ -268,6 +270,33 @@ public class Data {
 		starList.add(starTwo);
 		starList.add(starThree);
 	}
+	public void setGame10(){
+		Star starOne = new Star();
+		Planet starTwo = new Planet();
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(10);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		//初始化星球
+		starOne.setLocation(513, 590);
+		starOne.setSize(316);
+		starOne.setGravityScope(726);
+		
+		starTwo.location.x = 513;
+		starTwo.location.y = 311;
+		starTwo.roundR = 281;
+		starTwo.roundStar = starOne;
+		starTwo.size = 128;
+		starTwo.speed = 5;
+		
+		
+		starList.add(starOne);
+		planets.add(starTwo);
+	}
+	
+	public void setGame11(){}
 	
 }
 //>>>>>>> origin/master
