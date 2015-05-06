@@ -26,7 +26,7 @@ public class Data {
 		case 8:setGame8();break;
 		case 9:setGame9();break;
 //		case 10:setGame10();break;
-		case 11:setGame11();break;
+//		case 11:setGame11();break;
 		}
 	}
 	
@@ -210,32 +210,32 @@ public class Data {
 		starList.add(starOne);
 	}
 
-	public void setGame8(){
-		//初始化飞船
-		ship.setMass(1000);
-		ship.setSize(10);
-		ship.setSpeed(4);
-		ship.setState(true);
-		ship.outOfBorder = false;
-		//初始化星球				
-		BlackHole starOne = new BlackHole();
-		Star starTwo = new Star();
-		
-		starOne.style = "BlackHole";
-		starOne.FaddRate = 1.1;
-		starOne.setLocation(363, 104);
-		starOne.setSize(284);
-		starOne.setGravityScope(688);
-		starOne.deadR = 37;
-		
-		starTwo.setLocation(736, 609);
-		starTwo.setSize(204);
-		starTwo.setGravityScope(502);
-		
-		starList.add(starOne);
-		starList.add(starTwo);
-	}
-	
+//	public void setGame8(){
+//		//初始化飞船
+//		ship.setMass(1000);
+//		ship.setSize(10);
+//		ship.setSpeed(4);
+//		ship.setState(true);
+//		ship.outOfBorder = false;
+//		//初始化星球				
+//		BlackHole starOne = new BlackHole();
+//		Star starTwo = new Star();
+//		
+//		starOne.style = "BlackHole";
+//		starOne.FaddRate = 1.1;
+//		starOne.setLocation(363, 104);
+//		starOne.setSize(284);
+//		starOne.setGravityScope(688);
+//		starOne.deadR = 37;
+//		
+//		starTwo.setLocation(736, 609);
+//		starTwo.setSize(204);
+//		starTwo.setGravityScope(502);
+//		
+//		starList.add(starOne);
+//		starList.add(starTwo);
+//	}
+//	
 //	public void setGame9(){
 //		IAFStar starOne = new IAFStar();
 //		IAFStar starTwo = new IAFStar();
@@ -289,14 +289,49 @@ public class Data {
 		starTwo.roundR = 281;
 		starTwo.roundStar = starOne;
 		starTwo.size = 128;
-		starTwo.speed = 5;
+		starTwo.speed = 20;
 		
 		
 		starList.add(starOne);
 		planets.add(starTwo);
 	}
 	
-	public void setGame11(){}
+	public void setGame8(){
+		IAFStar starOne = new IAFStar();
+		Star starTwo = new Star();
+		Planet starThree = new Planet();
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(10);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		//初始化星球
+		starOne.style = "IAFStar";
+		starOne.SpeedChangeRate = 0.7;
+		starOne.setLocation(233, 512);
+		starOne.setSize(154);
+		starOne.setGravityScope(364);
+		
+		starTwo.setLocation(634, 255);
+		starTwo.setSize(252);
+		starTwo.setGravityScope(586);
+		
+		starThree.location.x = 808;
+		starThree.location.y = 384;
+		starThree.roundR = 216;
+		starThree.roundStar = starTwo;
+		starThree.size = 44;
+		starThree.speed = 20;
+		
+		
+		starList.add(starOne);
+		starList.add(starTwo);
+		planets.add(starThree);
+	}
 	
 }
 //>>>>>>> origin/master
+
+
+
