@@ -172,14 +172,14 @@ public class Game extends Observable implements Runnable{
 			
 			double theta2 = Math.atan(vy/vx);
 //			System.out.println(1);
-			
+			System.out.println("vx:"+vx);
 			//修改theta2
-			if(ship.getDegreeToEast()<Math.PI/2){
+			if(ship.getDegreeToEast()<=Math.PI/2){
 				if(theta2<0) theta2+=Math.PI*2;
 				ship.setDegreeToEast(theta2);
 			}
 			else if(ship.getDegreeToEast()<Math.PI){
-				if(vx<0) theta2+=Math.PI;
+//				if(vx<0) theta2+=Math.PI;
 				ship.setDegreeToEast(theta2);
 			}
 			else if(ship.getDegreeToEast()<Math.PI*3/2){
@@ -276,7 +276,7 @@ public class Game extends Observable implements Runnable{
 		
 		double dis = Math.sqrt((ship.getLocation().x-winPoint.x)*(ship.getLocation().x-winPoint.x)
 				+(ship.getLocation().y-winPoint.y)*(ship.getLocation().y-winPoint.y));
-		System.out.println("dis:"+dis);
+//		System.out.println("dis:"+dis);
 		if(dis<winAreaR) return true;
 		else return false;
 	}
