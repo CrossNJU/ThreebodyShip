@@ -74,15 +74,15 @@ public class GameUI extends JPanel implements Observer{
 
 //		paintWinArea(g);
 //		paintstarList.get(i)tArea(g);
-		paintplanet(g,game.planets);
 		paintstar(g,game.starList);
+		paintplanet(g,game.planets);
 		paintShip(g,game.ship);
 		if(game.isStarting) {
 			paintLine(g);
 //			paintRect(g);
 			paintPowerTank(g);
 		}
-		System.out.println("is Painting");
+//		System.out.println("is Painting");
 	}
 		
 	//画开始的速度条

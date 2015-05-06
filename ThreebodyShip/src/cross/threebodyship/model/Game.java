@@ -179,7 +179,7 @@ public class Game extends Observable implements Runnable{
 				ship.setDegreeToEast(theta2);
 			}
 			else if(ship.getDegreeToEast()<Math.PI){
-//				if(vx<0) theta2+=Math.PI;
+				if(vx<0) theta2+=Math.PI;
 				ship.setDegreeToEast(theta2);
 			}
 			else if(ship.getDegreeToEast()<Math.PI*3/2){
@@ -233,7 +233,7 @@ public class Game extends Observable implements Runnable{
 		ship = data.ship;
 		starList = data.starList;
 		planets = data.planets;
-		
+		System.out.println("planets:"+planets.size());
 		//启动planets线程
 		for(int i = 0; i<planets.size(); i++){
 			Thread t = new Thread(planets.get(i));
