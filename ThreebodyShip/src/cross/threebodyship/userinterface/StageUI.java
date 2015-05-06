@@ -88,8 +88,7 @@ public class StageUI extends JPanel implements Observer {
 		}
 
 		if (msg.equals("fail")) {
-			add(failUI);
-			remove(gamePanel);
+			DisplayPanel.stageDisplay(this, failUI);
 		}
 	}
 }

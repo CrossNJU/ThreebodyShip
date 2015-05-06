@@ -26,6 +26,7 @@ public class EnterStageButtonListener implements MouseListener {
 		// TODO Auto-generated method stub
 		mainUI.stagePanel = new StageUI(mainUI,stage);
 		DisplayPanel.mainDisplay(mainUI, mainUI.stagePanel);
+		mainUI.stagePanel.gamePanel.game.reset();
 	}
 
 	@Override

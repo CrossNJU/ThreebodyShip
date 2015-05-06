@@ -28,7 +28,7 @@ public class GameUI extends JPanel implements Observer{
 	private static final long serialVersionUID = 1L;
 	Canvas mainCanvas;
 	GameController controller;
-	Game game;
+	public Game game;
 	JLabel speedLabel;
 	JLabel degreeLabel;
 	public int num;

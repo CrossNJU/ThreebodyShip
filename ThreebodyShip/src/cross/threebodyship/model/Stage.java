@@ -10,8 +10,6 @@ public class Stage extends Observable implements Runnable {
 	boolean isFailed;
 	volatile boolean isBack;
 	String achievement = null;
-	String beforeImageName;
-	String afterImageName;
 	public int num;
 	
 	public Stage nextStage;
@@ -20,13 +18,11 @@ public class Stage extends Observable implements Runnable {
 	
 	Thread stageThread;
 	
-	public Stage(String title, String beforeImageName, String afterImageName) {
+	public Stage(String title) {
 		this.title = title;
 		this.isComplished = false;
 		this.isFailed = false;
 		this.isBack = false;
-		this.beforeImageName = beforeImageName;
-		this.afterImageName = afterImageName;
 //		this.game = game;
 	}
 	

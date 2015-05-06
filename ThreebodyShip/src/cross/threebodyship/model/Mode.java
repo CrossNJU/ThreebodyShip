@@ -29,15 +29,15 @@ public class Mode {
 		}
 			
 		if(modeType == 1){
-			addStage(new Stage("从一开始", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			addStage(new Stage("一而生二", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			addStage(new Stage("二而生三", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			addStage(new Stage("三相跌生", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			addStage(new Stage("黄金三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			addStage(new Stage("魔鬼三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			addStage(new Stage("魔鬼三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			addStage(new Stage("魔鬼三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
-			addStage(new Stage("魔鬼三角", "Ch1-Stage1-Before.png", "Ch1-Stage1-After.png"));
+			addStage(new Stage("从一开始"));
+			addStage(new Stage("一而生二"));
+			addStage(new Stage("二而生三"));
+			addStage(new Stage("三相跌生"));
+			addStage(new Stage("黄金三角"));
+			addStage(new Stage("魔鬼三角"));
+			addStage(new Stage("魔鬼三角"));
+			addStage(new Stage("魔鬼三角"));
+			addStage(new Stage("魔鬼三角"));
 		}
 	}
 	
