@@ -10,6 +10,8 @@ public class Planet implements Runnable {
 	public Point location;
 	public static long time = 1;
 	
+	public boolean stop = false;
+	
 	public Planet(){
 		location = new Point();
 //		start
@@ -21,6 +23,7 @@ public class Planet implements Runnable {
 	}
 	
 	public void run() {
+		while (!stop){ 
 		try {
 			Theta += speed*time/roundR;
 			
@@ -32,6 +35,7 @@ public class Planet implements Runnable {
 			Thread.sleep(time*100);
 		} catch (Exception e) {
 			// TODO: handle exception
+		}
 		}
 	}
 }

@@ -232,6 +232,7 @@ public class Game extends Observable implements Runnable{
 		
 		ship = data.ship;
 		starList = data.starList;
+		planets = data.planets;
 		
 		//启动planets线程
 		for(int i = 0; i<planets.size(); i++){
@@ -239,6 +240,7 @@ public class Game extends Observable implements Runnable{
 			t.start();
 		}
 //		this.FchangeRate = ship.getSpeed();
+		FchangeRate = 12;
 	}
 	
 	//结束判定
