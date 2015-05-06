@@ -232,7 +232,7 @@ public class SelectorUI extends JPanel {
 				add(chapLabel);
 
 				for (int j = 0; j < 3; j++) {
-					if (i == mode.stages.size()) {
+					if (num == mode.stages.size()) {
 						break;
 					}
 					JButton stageButton = new JButton(
