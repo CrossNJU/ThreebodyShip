@@ -87,7 +87,7 @@ public class Game extends Observable implements Runnable{
 				(ship.getLocation().y-starList.get(i).getLocation().y)
 				);
 
-			if(distance<starList.get(i).getSize()/2){
+			if(distance-ship.getSize()/2<starList.get(i).getSize()/2){
 				if(starList.get(i).style.equals("BlackHole")){
 					BlackHole blackHole = (BlackHole)starList.get(i);
 					
@@ -152,6 +152,19 @@ public class Game extends Observable implements Runnable{
 //			System.out.println(f.f+" "+f.theta);
 		}
 		
+		//计算是否撞到行星
+		for(int i =0;i< planets.size(); i++){
+			double distance = Math.sqrt((ship.getLocation().x-planets.get(i).location.x)*
+					(ship.getLocation().x-planets.get(i).location.x)+
+					(ship.getLocation().y-planets.get(i).location.y)*
+					(ship.getLocation().y-planets.get(i).location.y));
+			
+			if(distance-ship.getSize()/2<planets.get(i).size/2) {
+				ship.setState(false);
+				break;
+			}
+		}
+		
 		//如果进入引力区
 		if((isInScope)&&(!ship.isRound)){
 //			System.out.println(1);
@@ -172,9 +185,9 @@ public class Game extends Observable implements Runnable{
 			
 			double theta2 = Math.atan(vy/vx);
 //			System.out.println(1);
-			
+//			System.out.println("vx:"+vx);
 			//修改theta2
-			if(ship.getDegreeToEast()<Math.PI/2){
+			if(ship.getDegreeToEast()<=Math.PI/2){
 				if(theta2<0) theta2+=Math.PI*2;
 				ship.setDegreeToEast(theta2);
 			}
@@ -232,13 +245,15 @@ public class Game extends Observable implements Runnable{
 		
 		ship = data.ship;
 		starList = data.starList;
-		
+		planets = data.planets;
+//		System.out.println("planets:"+planets.size());
 		//启动planets线程
 		for(int i = 0; i<planets.size(); i++){
 			Thread t = new Thread(planets.get(i));
 			t.start();
 		}
 //		this.FchangeRate = ship.getSpeed();
+		FchangeRate = 12;
 	}
 	
 	//结束判定
@@ -276,7 +291,7 @@ public class Game extends Observable implements Runnable{
 		
 		double dis = Math.sqrt((ship.getLocation().x-winPoint.x)*(ship.getLocation().x-winPoint.x)
 				+(ship.getLocation().y-winPoint.y)*(ship.getLocation().y-winPoint.y));
-		System.out.println("dis:"+dis);
+//		System.out.println("dis:"+dis);
 		if(dis<winAreaR) return true;
 		else return false;
 	}
