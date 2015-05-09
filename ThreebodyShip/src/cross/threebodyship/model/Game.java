@@ -124,6 +124,7 @@ public class Game extends Observable implements Runnable{
 				if(starList.get(i).style.equals("IAF")){
 					IAFStar star = (IAFStar)starList.get(i);
 					if(star.changed == false){
+						System.out.println(1);
 						vx*=star.SpeedChangeRate;
 						vy*=star.SpeedChangeRate;
 						star.changed = true;
