@@ -35,10 +35,15 @@ public class GameUI extends JPanel implements Observer{
 	public int num;
 	
 	public GameUI(Game game,int width,int height){
+		setLayout(null);
+		setSize(MainUI.WIDTH,MainUI.HEIGHT);
+		
 		this.game = game;
 		mainCanvas = new Canvas();
 		mainCanvas.setSize(width, height);
 		controller = new GameController(this.game);
+		
+		add(mainCanvas);
 		
 		//System.out.println(mainCanvas.getHeight());
 		
@@ -46,13 +51,13 @@ public class GameUI extends JPanel implements Observer{
 		speedLabel = new JLabel();
 		degreeLabel = new JLabel();
 		
-		//可以去掉。。。
+//		//可以去掉。。。
 		text.add(speedLabel);
 		text.add(degreeLabel);
 		
-		this.add(text,BorderLayout.NORTH);
-		this.add(mainCanvas,BorderLayout.CENTER);
-		this.setLocation(100,100);
+//		this.add(text,BorderLayout.NORTH);
+//		this.add(mainCanvas,BorderLayout.CENTER);
+//		this.setLocation(100,100);
 		
 		//this.requestFocus();
 		mainCanvas.addKeyListener(controller);
