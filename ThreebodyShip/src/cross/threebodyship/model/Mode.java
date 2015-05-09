@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Mode {
 	public String modeName;
-	public String[] chap = new String[]{"chap00","chap01","chap02"};
+	public String[] chap = new String[]{"chap00","chap01","chap02","chap03"};
 	public ArrayList<Stage> stages = new ArrayList<Stage>();
 	public int modeType;
 	
@@ -38,6 +38,7 @@ public class Mode {
 			addStage(new Stage("魔鬼三角"));
 			addStage(new Stage("魔鬼三角"));
 			addStage(new Stage("魔鬼三角"));
+			addStage(new Stage("cr"));
 		}
 	}
 	
