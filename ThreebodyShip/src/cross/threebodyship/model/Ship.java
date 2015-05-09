@@ -5,8 +5,13 @@ public class Ship {
 	private int size;
 	private double speed;
 	private double degreeToEast;
+	public double degreeToWest;
+	public double roundDtheta;
 //	private double degreeToStar;
 	private double mass;
+	public double distanceToClosestStar;
+	
+	Star closestStar;
 	
 	private boolean isAlive = false;
 	public boolean outOfBorder = false;
@@ -14,6 +19,7 @@ public class Ship {
 	
 	public Ship(){
 		centerPoint = new Point();
+//		roundStar = new S
 //		this.mass = 10*Math.PI*4/3*size*size*size;
 	}
 	

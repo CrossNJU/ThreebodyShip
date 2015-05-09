@@ -147,13 +147,13 @@ public class GameUI extends JPanel implements Observer{
 		
 		for(int i=0;i<starList.size();i++){
 			
-			g.setColor(Color.pink);
-		g.fillOval((int)(starList.get(i).getLocation().x-starList.get(i).getGravityScope()/2), 
-				(int)(starList.get(i).getLocation().y-starList.get(i).getGravityScope()/2),
-				starList.get(i).getGravityScope(),
-				starList.get(i).getGravityScope());
+//			g.setColor(Color.pink);
+//		g.fillOval((int)(starList.get(i).getLocation().x-starList.get(i).getGravityScope()/2), 
+//				(int)(starList.get(i).getLocation().y-starList.get(i).getGravityScope()/2),
+//				starList.get(i).getGravityScope(),
+//				starList.get(i).getGravityScope());
 			
-		g.setColor(Color.BLUE);
+		g.setColor(new Color(0, 0, 0, 100));
 			
 		g.fillOval((int)(starList.get(i).getLocation().x-starList.get(i).getSize()/2),
 				(int)(starList.get(i).getLocation().y-starList.get(i).getSize()/2),

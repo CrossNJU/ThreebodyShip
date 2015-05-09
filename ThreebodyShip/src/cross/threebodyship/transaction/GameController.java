@@ -83,6 +83,7 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 				case KeyEvent.VK_H:{
 					Ship temp = this.game.ship;
 					temp.isRound = true;
+					temp.roundDtheta = temp.getSpeed()*game.getRI()/100/temp.distanceToClosestStar;
 				}
 			}
 		

@@ -80,21 +80,23 @@ public class Game extends Observable implements Runnable{
 //		System.out.println(starList.size());
 		//考虑多星球
 		for(int i=0; i<starList.size(); i++){
+			
+			ship.closestStar = starList.get(i);
 		
-			double distance = Math.sqrt((ship.getLocation().x-starList.get(i).getLocation().x)*
+			ship.distanceToClosestStar = Math.sqrt((ship.getLocation().x-starList.get(i).getLocation().x)*
 				(ship.getLocation().x-starList.get(i).getLocation().x)+
 				(ship.getLocation().y-starList.get(i).getLocation().y)*
 				(ship.getLocation().y-starList.get(i).getLocation().y)
 				);
 
-			if(distance-ship.getSize()/2<starList.get(i).getSize()/2){
+			if(ship.distanceToClosestStar-ship.getSize()/2<starList.get(i).getSize()/2){
 				if(starList.get(i).style.equals("BlackHole")){
 					BlackHole blackHole = (BlackHole)starList.get(i);
 					
-					if(distance<blackHole.deadR) ship.setState(false);
+					if(ship.distanceToClosestStar<blackHole.deadR) ship.setState(false);
 					else{
 						//修改distance
-					distance = maxDistance;
+					ship.distanceToClosestStar = maxDistance;
 					ship.setSpeed(2);
 					
 					//修改vx，vy
@@ -112,7 +114,7 @@ public class Game extends Observable implements Runnable{
 				ship.setState(false);
 			}
 			
-			if(distance<starList.get(i).getGravityScope()/2) {
+			if(ship.distanceToClosestStar<starList.get(i).getGravityScope()/2) {
 				isInScope = true;
 				if(starList.get(i).style.equals("BlackHole")){
 					BlackHole blackHole = (BlackHole)starList.get(i);
@@ -129,14 +131,14 @@ public class Game extends Observable implements Runnable{
 				}
 			
 				//计算星球飞船连线与正西方向顺时针的夹角
-				double theta1 = Math.atan((double)(starList.get(i).getLocation().y-
+				ship.degreeToWest = Math.atan((double)(starList.get(i).getLocation().y-
 						ship.getLocation().y)/(starList.get(i).getLocation().x-
 						ship.getLocation().x));
 				if((ship.getLocation().x<starList.get(i).getLocation().x)&&
-						ship.getLocation().y>starList.get(i).getLocation().y) theta1 += 2*Math.PI;
+						ship.getLocation().y>starList.get(i).getLocation().y) ship.degreeToWest += 2*Math.PI;
 				else{
 					if(ship.getLocation().x>starList.get(i).getLocation().x)
-						theta1 += Math.PI;
+						ship.degreeToWest += Math.PI;
 				}
 
 				double a = FchangeRate*Star.G*starList.get(i).getMass()/
@@ -145,7 +147,7 @@ public class Game extends Observable implements Runnable{
 				//合成力
 				Force f2 = new Force();
 				f2.f = a;
-				f2.theta = theta1;
+				f2.theta = ship.degreeToWest;
 			
 				f = f.joinForce(f2);
 			}
@@ -214,16 +216,18 @@ public class Game extends Observable implements Runnable{
 				nowY += vy*t;
 			}
 			else{
-//				double dTheta = ship.getSpeed()*t/distance;
-//				System.out.println(Math.toDegrees(dTheta));
-////				if(count == 0) {
-////					dTheta += theta1-ship.getDegreeToEast();
-////					count ++;
-////				}else count ++;
-//				ship.setDegreeToEast(f.theta+Math.PI*3/2);
-//				
-//				nowX = star.getLocation().x + distance*Math.cos(theta1+Math.PI+dTheta);
-//				nowY = star.getLocation().y + distance*Math.sin(theta1+Math.PI+dTheta);
+//				double dTheta = ship.getSpeed()*t/ship.distanceToClosestStar;
+//				System.out.println(Math.toDegrees(ship.roundDtheta));
+//				if(count == 0) {
+//					dTheta += ship.degreeToWest-ship.getDegreeToEast();
+//					count ++;
+//				}else count ++;
+				ship.setDegreeToEast(f.theta+Math.PI*3/2);
+				
+				nowX = ship.closestStar.getLocation().x + ship.distanceToClosestStar*
+						Math.cos(ship.degreeToWest+Math.PI+ship.roundDtheta);
+				nowY = ship.closestStar.getLocation().y + ship.distanceToClosestStar*
+						Math.sin(ship.degreeToWest+Math.PI+ship.roundDtheta);
 			}
 		}
 
