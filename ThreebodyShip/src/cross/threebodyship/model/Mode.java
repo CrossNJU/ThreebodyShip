@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Mode {
 	public String modeName;
-	public String[] chap = new String[]{"chap00","chap01","chap02","chap03"};
+	public String[] chap = new String[]{"chap00","chap01","chap02","chap03","chap04","chap05"};
 	public ArrayList<Stage> stages = new ArrayList<Stage>();
 	public int modeType;
 	
@@ -39,6 +39,17 @@ public class Mode {
 			addStage(new Stage("魔鬼三角"));
 			addStage(new Stage("魔鬼三角"));
 			addStage(new Stage("cr"));
+			addStage(new Stage("crr"));
+			addStage(new Stage("crrr"));
+			addStage(new Stage("cr"));
+			addStage(new Stage("crr"));
+			addStage(new Stage("crrr"));
+			addStage(new Stage("Game13"));
+			addStage(new Stage("Game14"));
+			addStage(new Stage("Game15"));
+			addStage(new Stage("Game16"));
+			addStage(new Stage("Game17"));
+			addStage(new Stage("Game18"));
 		}
 	}
 	
