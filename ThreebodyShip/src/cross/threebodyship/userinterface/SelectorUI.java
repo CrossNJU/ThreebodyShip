@@ -1,20 +1,25 @@
 package cross.threebodyship.userinterface;
 
+import java.awt.AlphaComposite;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Label;
 import java.awt.LayoutManager;
+import java.awt.MediaTracker;
 import java.awt.ScrollPane;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.concurrent.SynchronousQueue;
 
+import javax.sound.midi.Track;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,6 +29,8 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ViewportLayout;
 
+import org.omg.CORBA.ULongLongSeqHelper;
+
 import cross.threebodyship.listener.ModeButtonListener;
 import cross.threebodyship.listener.EnterStageButtonListener;
 import cross.threebodyship.listener.ScrollListener;
@@ -31,7 +38,7 @@ import cross.threebodyship.model.Mode;
 import cross.threebodyship.model.Selector;
 import cross.threebodyship.model.Stage;
 
-public class SelectorUI extends JPanel {
+public class SelectorUI extends MainPanel {
 	int frameWidth;
 	int frameHeight;
 	Selector selector = null;
@@ -39,30 +46,68 @@ public class SelectorUI extends JPanel {
 	ArrayList<JButton> modeButton = new ArrayList<JButton>();
 	ArrayList<Component> modePane = new ArrayList<Component>();
 	public Component currentPane = null;// 存放当前的PANEL
+	
+	
+	Image[] shine = new Image[100];
+	int currentShine = 0;
+	boolean isSetup = false;
+	MediaTracker tracker = null;
+	int bgX = 0;
+	
+	ShineThread st = null;
+	
+	float alpha = 1f;
+	
 
 	public SelectorUI(Selector selector, MainUI mainUI) {
 		this.mainUI = mainUI;
 		this.frameHeight = MainUI.HEIGHT;
 		this.frameWidth = mainUI.WIDTH;
 		this.selector = selector;
+		
+		init();
+	}
 
+	public void paintComponent(Graphics g) {
+		Graphics2D g2d=(Graphics2D)g;
+		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+		g2d.setComposite(alphaComposite);
+		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
+		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0+bgX, 0, 1024+bgX, 768, null);
+		Image shineFirst = new ImageIcon("img/GameBackground/Selector/shine/bg-selector-shine-64.png").getImage();
+		g.drawImage(shineFirst, 0, 0, null);
+		
+        g.drawImage(shine[currentShine], 0, 0, null);
+
+		Image star = new ImageIcon("img/GameBackground/Selector/menu.png").getImage();
+		g.drawImage(star, 0,0,337,768,null);
+		
+	}
+	
+	
+	public void setupShineImg(){
+		tracker = new MediaTracker(this);
+		Toolkit toolkit = getToolkit();
+		for(int i = 0; i < 50; i++){
+			shine[i] = toolkit.getImage("img/GameBackground/Selector/shine/bg-selector-shine-" + (i+38) + ".png");
+		}
+		for(int i = 50 ; i<100; i++){
+			shine[i] = toolkit.getImage("img/GameBackground/Selector/shine/bg-selector-shine-" + (138-i) + ".png");
+		}
+		
+		for(int i = 0; i<shine.length;i++){
+			tracker.addImage(shine[i], 0);
+		}
+	}
+
+	// 生成新的选择界面
+	public void init() {
 		// 选择界面初始化
 		setSize(frameWidth, frameHeight);
 		setLayout(null);
 		setVisible(true);
 		setBackground(Color.gray);
-		newSelectorUI();
-	}
-
-	public void paintComponent(Graphics g) {
-		Image SB_img = new ImageIcon("img/GameBackground/bg-selector.png")
-				.getImage();
-		g.drawImage(SB_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0, 0, 1024, 768,
-				null);
-	}
-
-	// 生成新的选择界面
-	public void newSelectorUI() {
+		
 		// 将Selector中的按钮与模式添加到UI中
 		setModeButton();
 		setModePanel();
@@ -86,7 +131,12 @@ public class SelectorUI extends JPanel {
 				add(currentPane);
 			}
 		}
-
+		
+		st = new ShineThread();
+		setupShineImg();
+		st.start();
+		
+		
 	}
 
 	// 设置模式按钮
@@ -130,178 +180,51 @@ public class SelectorUI extends JPanel {
 
 	// 设置模式界面
 	public void setModePanel() {
-		modePane.add(new StoryPanel(selector.mode.get(0)));
-		modePane.add(new ChallengePanel(frameWidth, frameHeight));
-		modePane.add(new AchievementPanel(frameWidth, frameHeight));
-		modePane.add(new SettingPanel(frameWidth, frameHeight));
+		modePane.add(new StoryUI(this));
+		modePane.add(new ChallengeUI(this));
+		modePane.add(new AchievementUI(this));
+		modePane.add(new SettingUI(this));
 	}
 
-	// 模式界面设计
-	// 故事界面
-	// class StoryPane extends JScrollPane {
-	// int panelWidth;
-	// int panelHeight;
-	//
-	// public StoryPane(Mode mode) {
-	// panelWidth = (int) (frameWidth * 0.7);
-	// panelHeight = frameHeight;
-	// setSize(panelWidth, panelHeight);
-	// setOpaque(false);
-	// setBackground(null);
-	// getViewport().setOpaque(false);
-	// getViewport().setBackground(null);
-	//
-	//
-	// //
-	// JPanel StoryPanel = new JPanel();
-	// StoryPanel.setPreferredSize(new Dimension(getViewport().getWidth(),
-	// panelHeight * 3));
-	// StoryPanel.setLayout(null);
-	// StoryPanel.setBackground(null);
-	// StoryPanel.setOpaque(false);
-	//
-	//
-	// //num表示的是关卡数，i表示的是章节数，j表示每个章节的第几关
-	// int num = 0;
-	// for (int i = 0; i < mode.chap.length; i++) {
-	// JLabel chapLabel = new JLabel(mode.chap[i]);
-	//
-	// chapLabel.setBounds((int) (panelWidth * 0.2),
-	// (int) (panelHeight * 0.3) * (i+1), 100, 40);
-	// chapLabel.setForeground(Color.BLACK);
-	// chapLabel.setVisible(true);
-	// StoryPanel.add(chapLabel);
-	//
-	// for (int j = 0; j < 3; j++) {
-	// if (i == mode.stages.size()) {
-	// break;
-	// }
-	// JButton stageButton = new JButton(
-	// mode.stages.get(num).title);
-	//
-	// stageButton.setBounds((int) (panelWidth * 0.2) * (j+1),
-	// (int) (panelHeight * 0.3) * (i+1) + 60, 154, 154);
-	// stageButton.setVisible(true);
-	// stageButton.addMouseListener(new EnterStageButtonListener(
-	// mainUI, mode.stages.get(num)));
-	//
-	// String imageString = "img/Button/btn-chap01" + "-stage0" + (num+1) +
-	// "-normal.png";
-	// String imageHoverString = "img/Button/btn-chap01" + "-stage0" + (num+1) +
-	// "-hover.png";
-	// ImageIcon image = new ImageIcon(imageString);
-	// ImageIcon imageHover = new ImageIcon(imageHoverString);
-	//
-	// stageButton.setIcon(image);
-	// stageButton.setRolloverIcon(imageHover);
-	// stageButton.setContentAreaFilled(false);
-	// stageButton.setBorderPainted(false);
-	// stageButton.setFocusPainted(false);
-	//
-	//
-	// StoryPanel.add(stageButton);
-	// num++;
-	// }
-	// }
-	//
-	// getViewport().add(StoryPanel);
-	// }
-	// }
-
-	class StoryPanel extends JPanel {
-		int panelWidth;
-		int panelHeight;
-
-		public StoryPanel(Mode mode) {
-			panelWidth = (int) (frameWidth * 0.7);
-			panelHeight = frameHeight;
-			setSize(panelWidth, panelHeight*2);
-			setOpaque(false);
-			setBackground(null);
-			setLayout(null);
-
-			// num表示的是关卡数，i表示的是章节数，j表示每个章节的第几关
-			int num = 0;
-			for (int i = 0; i < mode.chap.length; i++) {
-				JLabel chapLabel = new JLabel();
-				chapLabel.setBounds((int) (panelWidth * 0.2),
-						(int) (panelHeight * 0.3) * (i + 1), 200, 40);
-				chapLabel.setIcon(new ImageIcon("img/Component/chap0"+i+".png"));
-				chapLabel.setForeground(Color.BLACK);
-				chapLabel.setVisible(true);
-				add(chapLabel);
-
-				for (int j = 0; j < 3; j++) {
-					if (num == mode.stages.size()) {
-						break;
-					}
-					JButton stageButton = new JButton(
-							mode.stages.get(num).title);
-
-					stageButton.setBounds((int) (panelWidth * 0.2) * (j + 1),
-							(int) (panelHeight * 0.3) * (i + 1) + 60, 154, 154);
-					stageButton.setVisible(true);
-					stageButton.addMouseListener(new EnterStageButtonListener(
-							mainUI, mode.stages.get(num)));
-
-					String imageString = "img/Button/btn-chap01" + "-stage0"
-							+ (num + 1) + "-normal.png";
-					String imageHoverString = "img/Button/btn-chap01"
-							+ "-stage0" + (num + 1) + "-hover.png";
-					ImageIcon image = new ImageIcon(imageString);
-					ImageIcon imageHover = new ImageIcon(imageHoverString);
-
-					stageButton.setIcon(image);
-					stageButton.setRolloverIcon(imageHover);
-					stageButton.setContentAreaFilled(false);
-					stageButton.setBorderPainted(false);
-					stageButton.setFocusPainted(false);
-
-					add(stageButton);
-					num++;
-				}
+	//闪烁的动画线程
+	class ShineThread extends Thread{
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			super.run();
+			
+			try {
+				tracker.waitForID(0);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 			
-			addMouseWheelListener(new ScrollListener(this));
+			while(true){
+				repaint();
+				try {
+					Thread.sleep(60);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}		
+				currentShine++;
+				bgX++;
+				currentShine%=shine.length;
+				bgX%=1669-1024;
+				
+			}
+			
 		}
+
 	}
-
-	class ChallengePanel extends JPanel {
-		int panelWidth;
-		int panelHeight;
-
-		public ChallengePanel(int frameWidth, int frameHeight) {
-			panelWidth = (int) (frameWidth * 0.7);
-			panelHeight = frameHeight;
-			setSize(panelWidth, panelHeight);
-			setOpaque(false);
-			setBackground(null);
-		}
+	
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+		super.stop();
+		
+		st = null;
 	}
+	
 
-	class AchievementPanel extends JPanel {
-		int panelWidth;
-		int panelHeight;
-
-		public AchievementPanel(int frameWidth, int frameHeight) {
-			panelWidth = (int) (frameWidth * 0.7);
-			panelHeight = frameHeight;
-			setSize(panelWidth, panelHeight);
-			setOpaque(false);
-			setBackground(null);
-		}
-	}
-
-	class SettingPanel extends JPanel {
-		int panelWidth;
-		int panelHeight;
-
-		public SettingPanel(int frameWidth, int frameHeight) {
-			panelWidth = (int) (frameWidth * 0.7);
-			panelHeight = frameHeight;
-			setSize(panelWidth, panelHeight);
-			setOpaque(false);
-			setBackground(null);
-		}
-	}
 }
