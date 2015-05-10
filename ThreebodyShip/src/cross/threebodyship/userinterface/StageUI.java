@@ -27,7 +27,7 @@ import cross.threebodyship.model.Stage;
 import cross.threebodyship.transaction.GameController;
 import cross.threebodyship.util.DisplayPanel;
 
-public class StageUI extends JPanel implements Observer {
+public class StageUI extends ThreebodyPanel implements Observer {
 
 	/**
 	 * 
@@ -49,6 +49,10 @@ public class StageUI extends JPanel implements Observer {
 	public StageUI(MainUI mainUI, Stage stage) {
 		this.stage = stage;
 		this.mainUI = mainUI;
+
+	}
+	
+	public void init(){
 		stage.addObserver(this);
 
 		setLayout(null);
@@ -88,7 +92,10 @@ public class StageUI extends JPanel implements Observer {
 		}
 
 		if (msg.equals("fail")) {
-			DisplayPanel.stageDisplay(this, failUI);
+			gamePanel.add(failUI);
+			gamePanel.validate();
+			failUI.requestFocus();
+
 		}
 	}
 }

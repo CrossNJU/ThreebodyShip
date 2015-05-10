@@ -26,7 +26,6 @@ public class Stage extends Observable implements Runnable {
 //		this.game = game;
 	}
 	
-	
 	public void startStage() {
 		Thread gameThread = new Thread(game);
 		gameThread.start();

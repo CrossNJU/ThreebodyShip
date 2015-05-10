@@ -23,16 +23,15 @@ public class FailUI extends JPanel{
 	public void initFailUI(){
 		setLayout(null);
 		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
+//		setOpaque(false);
 
 		
 		setButton(menuButton, "menu");
-		menuButton.setBounds((int) (MainUI.WIDTH * 0.532),
-				(int) (MainUI.HEIGHT * 0.437), 99, 99);
+		menuButton.setBounds(369,341,90,90);
 		menuButton.addMouseListener(new MainChangeListener(stageUI.mainUI, stageUI.mainUI.selectorPanel));
 		
-		setButton(restartButton, "restart");
-		restartButton.setBounds((int) (MainUI.WIDTH - 339),
-				(int) (MainUI.HEIGHT * 0.437), 99, 99);
+		setButton(restartButton, "again");
+		restartButton.setBounds(487,291,183,183);
 		restartButton.addMouseListener(new EnterStageButtonListener(stageUI.mainUI, stageUI.stage));
 		
 		add(menuButton);
@@ -42,8 +41,8 @@ public class FailUI extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g){
-		Image img1 = new ImageIcon("img/GameBackground/Background.png").getImage();
-		g.drawImage(img1,0,0,null);
+//		Image img1 = new ImageIcon("img/GameBackground/Background.png").getImage();
+//		g.drawImage(img1,0,0,null);
 		
 		Image img = new ImageIcon("img/GameBackground/cover-40.png").getImage();
 		g.drawImage(img, 0, 0, null);

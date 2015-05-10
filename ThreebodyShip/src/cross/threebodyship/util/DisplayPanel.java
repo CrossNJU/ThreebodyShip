@@ -3,6 +3,7 @@ package cross.threebodyship.util;
 import java.awt.Component;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import cross.threebodyship.userinterface.MainUI;
 import cross.threebodyship.userinterface.SelectorUI;

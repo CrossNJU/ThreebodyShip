@@ -37,6 +37,7 @@ public class StarterUI extends JPanel {
 		startGameButton.setFocusable(false);
 		startGameButton.setContentAreaFilled(false);
 		startGameButton.setBorderPainted(false);
+		
 		add(startGameButton);
 
 	}

@@ -1,5 +1,6 @@
 package cross.threebodyship.userinterface;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Image;
@@ -15,8 +16,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
+
 import cross.threebodyship.listener.DragMainUIListener;
 import cross.threebodyship.listener.MainChangeListener;
+import cross.threebodyship.listener.OpaqueDisplayListener;
 import cross.threebodyship.model.Selector;
 import cross.threebodyship.model.Stage;
 
@@ -43,7 +47,9 @@ public class MainUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);
 		setVisible(true);
+		setBackground(null);
 
+		
 		//实现窗口拖拽
 		addMouseListener(drag);
 		addMouseMotionListener(drag);
@@ -60,7 +66,7 @@ public class MainUI extends JFrame {
 		// 初始化选择界面
 		selectorPanel = new SelectorUI(selector, this);
 
-		starterPanel.startGameButton.addMouseListener(new MainChangeListener(
+		starterPanel.startGameButton.addMouseListener(new OpaqueDisplayListener(
 				this, selectorPanel));
 		currentPane = starterPanel;
 

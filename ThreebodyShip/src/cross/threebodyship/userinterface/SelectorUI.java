@@ -27,7 +27,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.ViewportLayout;
+import javax.xml.bind.attachment.AttachmentMarshaller;
 
 import org.omg.CORBA.ULongLongSeqHelper;
 
@@ -38,7 +41,7 @@ import cross.threebodyship.model.Mode;
 import cross.threebodyship.model.Selector;
 import cross.threebodyship.model.Stage;
 
-public class SelectorUI extends MainPanel {
+public class SelectorUI extends ThreebodyPanel {
 	int frameWidth;
 	int frameHeight;
 	Selector selector = null;
@@ -54,10 +57,7 @@ public class SelectorUI extends MainPanel {
 	MediaTracker tracker = null;
 	int bgX = 0;
 	
-	ShineThread st = null;
-	
-	float alpha = 1f;
-	
+	ShineAnimeThread sat = null;
 
 	public SelectorUI(Selector selector, MainUI mainUI) {
 		this.mainUI = mainUI;
@@ -68,50 +68,20 @@ public class SelectorUI extends MainPanel {
 		init();
 	}
 
-	public void paintComponent(Graphics g) {
-		Graphics2D g2d=(Graphics2D)g;
-		AlphaComposite alphaComposite=AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
-		g2d.setComposite(alphaComposite);
-		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
-		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0+bgX, 0, 1024+bgX, 768, null);
-		Image shineFirst = new ImageIcon("img/GameBackground/Selector/shine/bg-selector-shine-64.png").getImage();
-		g.drawImage(shineFirst, 0, 0, null);
-		
-        g.drawImage(shine[currentShine], 0, 0, null);
-
-		Image star = new ImageIcon("img/GameBackground/Selector/menu.png").getImage();
-		g.drawImage(star, 0,0,337,768,null);
-		
-	}
-	
-	
-	public void setupShineImg(){
-		tracker = new MediaTracker(this);
-		Toolkit toolkit = getToolkit();
-		for(int i = 0; i < 50; i++){
-			shine[i] = toolkit.getImage("img/GameBackground/Selector/shine/bg-selector-shine-" + (i+38) + ".png");
-		}
-		for(int i = 50 ; i<100; i++){
-			shine[i] = toolkit.getImage("img/GameBackground/Selector/shine/bg-selector-shine-" + (138-i) + ".png");
-		}
-		
-		for(int i = 0; i<shine.length;i++){
-			tracker.addImage(shine[i], 0);
-		}
-	}
-
 	// 生成新的选择界面
 	public void init() {
+		alpha = 0f;
+		
 		// 选择界面初始化
 		setSize(frameWidth, frameHeight);
 		setLayout(null);
 		setVisible(true);
-		setBackground(Color.gray);
+		setBackground(null);
 		
 		// 将Selector中的按钮与模式添加到UI中
 		setModeButton();
 		setModePanel();
-
+		
 		// 加入模式按钮
 		for (int i = 0; i < modeButton.size(); i++) {
 			modeButton.get(i).setBounds((int) (frameWidth * 0.05),
@@ -121,7 +91,7 @@ public class SelectorUI extends MainPanel {
 					new ModeButtonListener(this, modePane.get(i)));
 			add(modeButton.get(i));
 		}
-
+		
 		// 加入模式界面
 		for (int i = 0; i < modePane.size(); i++) {
 			modePane.get(i).setLocation((int) (frameWidth * 0.3), 0);
@@ -132,13 +102,14 @@ public class SelectorUI extends MainPanel {
 			}
 		}
 		
-		st = new ShineThread();
+		sat = new ShineAnimeThread();
 		setupShineImg();
-		st.start();
-		
+		sat.start();
+			
+//		aat.execute();
 		
 	}
-
+	
 	// 设置模式按钮
 	public void setModeButton() {
 		for (Mode mode : selector.mode) {
@@ -177,7 +148,7 @@ public class SelectorUI extends MainPanel {
 			this.modeButton.add(modeButton);
 		}
 	}
-
+	
 	// 设置模式界面
 	public void setModePanel() {
 		modePane.add(new StoryUI(this));
@@ -185,14 +156,48 @@ public class SelectorUI extends MainPanel {
 		modePane.add(new AchievementUI(this));
 		modePane.add(new SettingUI(this));
 	}
+	
+	//载入闪烁的图片
+	public void setupShineImg(){
+		tracker = new MediaTracker(this);
+		Toolkit toolkit = getToolkit();
+		for(int i = 0; i < 50; i++){
+			shine[i] = toolkit.getImage("img/GameBackground/Selector/shine/bg-selector-shine-" + (i+38) + ".png");
+		}
+		for(int i = 50 ; i<100; i++){
+			shine[i] = toolkit.getImage("img/GameBackground/Selector/shine/bg-selector-shine-" + (138-i) + ".png");
+		}
+		
+		for(int i = 0; i<shine.length;i++){
+			tracker.addImage(shine[i], 0);
+		}
+	}
 
+	public void paintComponent(Graphics g) {
+		//绘制透明度
+		Graphics2D g2d = (Graphics2D) g;  
+        g2d.setComposite(AlphaComposite.getInstance(  
+                AlphaComposite.SRC_OVER, alpha));  
+        
+		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
+		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0+bgX, 0, 1024+bgX, 768, null);
+		Image shineFirst = new ImageIcon("img/GameBackground/Selector/shine/bg-selector-shine-64.png").getImage();
+		g.drawImage(shineFirst, 0, 0, null);
+		
+		g.drawImage(shine[currentShine], 0, 0, null);
+		
+		Image star = new ImageIcon("img/GameBackground/Selector/menu.png").getImage();
+		g.drawImage(star, 0,0,337,768,null);
+
+	}
+
+	
 	//闪烁的动画线程
-	class ShineThread extends Thread{
+	class ShineAnimeThread extends Thread{
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
 			super.run();
-			
 			try {
 				tracker.waitForID(0);
 			} catch (InterruptedException e1) {
@@ -201,7 +206,15 @@ public class SelectorUI extends MainPanel {
 			}
 			
 			while(true){
-				repaint();
+				SwingUtilities.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						repaint();						
+					}
+				});
+				
 				try {
 					Thread.sleep(60);
 				} catch (Exception e) {
@@ -210,21 +223,50 @@ public class SelectorUI extends MainPanel {
 				currentShine++;
 				bgX++;
 				currentShine%=shine.length;
-				bgX%=1669-1024;
-				
+				bgX%=1669-1024;	
+//				System.out.println(SwingUtilities.isEventDispatchThread());
 			}
-			
 		}
 
 	}
 	
-	@Override
-	public void stop() {
-		// TODO Auto-generated method stub
-		super.stop();
-		
-		st = null;
-	}
-	
-
+	//渐显的动画线程
+//	public class AlphaAnimeThread extends SwingWorker<Boolean, Boolean>{
+//
+//
+//		@Override
+//		protected Boolean doInBackground() throws Exception {
+//			// TODO Auto-generated method stub
+//			while((alpha<1)&&alpha>=0){
+//				SwingUtilities.invokeLater(new Runnable() {
+//					@Override
+//					public void run() {
+//						// TODO Auto-generated method stub
+//						repaint();
+//					}
+//				});
+//				try {
+//					Thread.sleep(5);
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//				}
+//				if(alpha<0.99){
+//					alpha = alpha + 0.01f;
+//				}
+//				else {
+//					alpha = 1f;
+//				}
+//			}
+//			return null;
+//		
+//		}
+//		
+//		public void done(){
+//			repaint();
+//			getFocusListeners();
+////			cancel(true);
+////			aat = null;
+//		}
+//		
+//	}
 }
