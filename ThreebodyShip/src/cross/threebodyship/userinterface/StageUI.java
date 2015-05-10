@@ -49,7 +49,8 @@ public class StageUI extends ThreebodyPanel implements Observer {
 	public StageUI(MainUI mainUI, Stage stage) {
 		this.stage = stage;
 		this.mainUI = mainUI;
-
+		
+		init();
 	}
 	
 	public void init(){
