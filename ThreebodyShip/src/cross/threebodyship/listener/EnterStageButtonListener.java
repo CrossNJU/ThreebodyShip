@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import cross.threebodyship.model.Game;
 import cross.threebodyship.model.Stage;
 import cross.threebodyship.userinterface.MainUI;
 import cross.threebodyship.userinterface.SelectorUI;
@@ -25,6 +26,8 @@ public class EnterStageButtonListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		stage.game = new Game();
+		stage.game.gameNumber = stage.num;
 		mainUI.stagePanel = new StageUI(mainUI, stage);
 		DisplayPanel.mainDisplay(mainUI, mainUI.stagePanel);
 		stage.game.reset();

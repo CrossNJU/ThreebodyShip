@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 
@@ -76,7 +77,7 @@ public class StageUI extends ThreebodyPanel implements Observer {
 
 	public void initGamePanel(StageUI stageUI) {
 		GameController gameController = new GameController(stage.game);
-		gamePanel = new GameUI(stage.game, MainUI.WIDTH, MainUI.HEIGHT);
+		gamePanel = new GameUI(stage.game,this);
 		stage.game.addObserver(gamePanel);
 		gamePanel.setSize(MainUI.WIDTH, MainUI.HEIGHT);
 		gamePanel.setLocation(0, 0);
@@ -93,10 +94,19 @@ public class StageUI extends ThreebodyPanel implements Observer {
 		}
 
 		if (msg.equals("fail")) {
-			gamePanel.add(failUI);
-			gamePanel.validate();
-			failUI.requestFocus();
-
+			SwingUtilities.invokeLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					failUI.setVisible(true);
+					gamePanel.add(failUI,0);
+					gamePanel.validate();
+					gamePanel.repaint();
+					failUI.aat.execute();
+				}
+			});
+			
 		}
 	}
 }

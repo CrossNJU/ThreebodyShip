@@ -13,6 +13,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -27,55 +28,51 @@ public class GameUI extends JPanel implements Observer{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Canvas mainCanvas;
+	StageUI stageUI;
+	PauseUI pauseUI;
 	GameController controller;
 	public Game game;
 	JLabel speedLabel;
 	JLabel degreeLabel;
 	public int num;
+	JButton pauseButton;
 	
-	public GameUI(Game game,int width,int height){
+	
+	
+	public GameUI(Game game,StageUI stageUI){
+		this.stageUI = stageUI;
+		this.game = game;
+		
+		init();
+	}
+	
+	public void init(){
 		setLayout(null);
 		setSize(MainUI.WIDTH,MainUI.HEIGHT);
 		
-		this.game = game;
-		mainCanvas = new Canvas();
-		mainCanvas.setSize(width, height);
+		pauseUI = new PauseUI(stageUI);
+		
 		controller = new GameController(this.game);
 		
-		add(mainCanvas);
+		addKeyListener(controller);
+		addMouseListener(controller);
+		addMouseMotionListener(controller);
 		
-		//System.out.println(mainCanvas.getHeight());
-		
-		JPanel text = new JPanel();
-		speedLabel = new JLabel();
-		degreeLabel = new JLabel();
-		
-//		//可以去掉。。。
-		text.add(speedLabel);
-		text.add(degreeLabel);
-		
-//		this.add(text,BorderLayout.NORTH);
-//		this.add(mainCanvas,BorderLayout.CENTER);
-//		this.setLocation(100,100);
-		
-		//this.requestFocus();
-		mainCanvas.addKeyListener(controller);
-		mainCanvas.addMouseListener(controller);
-		mainCanvas.addMouseMotionListener(controller);
+		pauseButton = new JButton();
+		pauseButton.setBounds(924, 0, 100, 100);
+		pauseButton.setIcon(new ImageIcon("img/Button/btn-menu-normal.png"));
+		pauseButton.setRolloverIcon(new ImageIcon("img/Button/btn-menu-hover.png"));
+		pauseButton.setContentAreaFilled(false);
+		pauseButton.setBorderPainted(false);
+		pauseButton.setFocusPainted(false);
+		add(pauseButton);
 	}
 	
-	//主画板
-	public void repaintMain(){
-		//mainCanvas.repaint();
-		Graphics g = mainCanvas.getGraphics();
-		g.setColor(Color.GRAY);
-		g.fillRect(0,0,mainCanvas.getWidth(),mainCanvas.getHeight());
+	public void paintComponent(Graphics g){
+		g.fillRect(0,0,MainUI.WIDTH,MainUI.HEIGHT);
 		Image GB_IMG = new ImageIcon("img/GameBackground/bg-stage"+game.gameNumber+".png").getImage();
-		g.drawImage(GB_IMG, 0, 0,mainCanvas.getWidth(),mainCanvas.getHeight(),0,0,1024,768,null);
-		//System.out.println(1);
-		speedLabel.setText("speed:"+Double.toString(game.ship.getSpeed()));
-		degreeLabel.setText("degreeToEast:"+Double.toString(Math.toDegrees(game.ship.getDegreeToEast())));
+		g.drawImage(GB_IMG, 0, 0,MainUI.WIDTH,MainUI.HEIGHT,0,0,1024,768,null);
+
 
 //		paintWinArea(g);
 //		paintstarList.get(i)tArea(g);
@@ -87,16 +84,9 @@ public class GameUI extends JPanel implements Observer{
 //			paintRect(g);
 			paintPowerTank(g);
 		}
-//		System.out.println("is Painting");
 	}
-		
-	//画开始的速度条
-//	public void paintRect(Graphics g){
-//		//System.out.println(game.rectheight);
-//		g.setColor(Color.blue);
-//		g.fillRect((int)game.mousePoint.x,(int)game.mousePoint.y, game.rectwidth, game.rectheight);
-//	}
 	
+
 	public void paintPowerTank(Graphics g) {
 		Image tank = new ImageIcon("img/Component/powertank.png").getImage();
 		Image power = new ImageIcon("img/Component/powerfull.png").getImage();
@@ -133,7 +123,7 @@ public class GameUI extends JPanel implements Observer{
 	public void paintstartArea(Graphics g){
 		g.setColor(Color.yellow);
 		
-		int height = mainCanvas.getHeight();
+		int height = MainUI.HEIGHT;
 		double r = 690;
 		int locationx = -1330;
 		int locationy = (int)(height/2 - r);
@@ -191,7 +181,7 @@ public class GameUI extends JPanel implements Observer{
 	
 	//观察Game的动态
 	public void update(Observable o, Object arg0) {
-		repaintMain();
+		repaint();
 	}
 
 }

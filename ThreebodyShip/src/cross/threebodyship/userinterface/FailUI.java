@@ -1,6 +1,8 @@
 package cross.threebodyship.userinterface;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -10,7 +12,7 @@ import javax.swing.JPanel;
 import cross.threebodyship.listener.EnterStageButtonListener;
 import cross.threebodyship.listener.MainChangeListener;
 
-public class FailUI extends JPanel{
+public class FailUI extends ThreebodyPanel{
 	JButton menuButton = new JButton();
 	JButton restartButton = new JButton();
 	StageUI stageUI = null;
@@ -23,7 +25,7 @@ public class FailUI extends JPanel{
 	public void initFailUI(){
 		setLayout(null);
 		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
-//		setOpaque(false);
+		setOpaque(false);
 
 		
 		setButton(menuButton, "menu");
@@ -43,7 +45,10 @@ public class FailUI extends JPanel{
 	public void paintComponent(Graphics g){
 //		Image img1 = new ImageIcon("img/GameBackground/Background.png").getImage();
 //		g.drawImage(img1,0,0,null);
-		
+		Graphics2D g2d = (Graphics2D) g;  
+        g2d.setComposite(AlphaComposite.getInstance(  
+                AlphaComposite.SRC_OVER, alpha));  
+        
 		Image img = new ImageIcon("img/GameBackground/cover-40.png").getImage();
 		g.drawImage(img, 0, 0, null);
 	}
