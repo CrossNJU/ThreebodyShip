@@ -391,64 +391,8 @@ public class Data {
 		planets.add(starFour);
 		planets.add(starFive);
 	}
-	public void setGame13(){
-		Star starOne = new Star();
-		SuperStar starTwo = new SuperStar();
-		
-		//初始化飞船
-		ship.setMass(1000);
-		ship.setSize(10);
-		ship.setSpeed(4);
-		ship.setState(true);
-		ship.outOfBorder = false;
-		//初始化星球
-		starOne.setLocation(253, 216);
-		starOne.setSize(150);
-		starOne.setGravityScope(348);
-		
-		starTwo.setLocation(651, 461);
-		starTwo.setSize(290);
-		starTwo.setGravityScope(600);
-		starTwo.leftTime = 5;
-		starTwo.style = "Super";
-		
-		starList.add(starOne);
-		starList.add(starTwo);
-		
-	}
-	public void setGame14(){
-		SuperStar starOne = new SuperStar();
-		IAFStar starTwo = new IAFStar();
-		BlackHole starThree = new BlackHole();
-		
-		//初始化飞船
-		ship.setMass(1000);
-		ship.setSize(10);
-		ship.setSpeed(4);
-		ship.setState(true);
-		ship.outOfBorder = false;
-		//初始化星球
-		
-		starOne.style = "Super";
-		starOne.leftTime = 5;
-		starOne.setLocation(369, 384);
-		starOne.setSize(204);
-		starOne.setGravityScope(478);
-		
-		starTwo.style = "IAF";
-		starTwo.SpeedChangeRate = 0.5;
-		starTwo.setLocation(656, 166);
-		starTwo.setSize(134);
-		starTwo.setGravityScope(294);
-		
-		starThree.style = "BlackHole";
-		starThree.deadR = 29;
-		starThree.FaddRate = 1.1;
-		starThree.setLocation(769, 564);
-		starThree.setSize(214);
-		starThree.setGravityScope(402);
-		
-	}
+	public void setGame13(){}
+	public void setGame14(){}
 	public void setGame15(){}
 	public void setGame16(){}
 	public void setGame17(){}
