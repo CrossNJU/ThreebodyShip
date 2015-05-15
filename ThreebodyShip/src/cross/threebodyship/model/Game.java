@@ -90,7 +90,7 @@ public class Game extends Observable implements Runnable{
 				if(starList.get(i).style.equals("BlackHole")){
 					BlackHole blackHole = (BlackHole)starList.get(i);
 					
-					if(ship.distanceToClosestStar<blackHole.deadR) ship.setState(false);
+					if(ship.distanceToClosestStar - ship.getSize()/2<blackHole.deadR) ship.setState(false);
 					else{
 						//修改distance
 					ship.distanceToClosestStar = maxDistance;
@@ -251,23 +251,19 @@ public class Game extends Observable implements Runnable{
 	}
 	
 	//结束判定
-	public boolean checkFail(){
+	public void checkOutOfBorder(){
 		//判断是否出界
-		Boolean isFailed = false;
+//		Boolean isFailed = false;
 		
 		if((ship.getLocation().x<0)||
-				(ship.getLocation().x+ship.getSize()>border.x)||
-				(ship.getLocation().y<0)||
-				(ship.getLocation().y+ship.getSize()>border.y)
+				(ship.getLocation().x+ship.getSize()/2>border.x)||
+				(ship.getLocation().y-ship.getSize()/2<0)||
+				(ship.getLocation().y+ship.getSize()/2>border.y)
 				) ship.outOfBorder = true;
 		
 		if(ship.outOfBorder){
 			isFailed = true;
-			this.isFailed = true;
 		}	
-		
-		return isFailed;
-		
 	}
 	
 	//获胜判定
@@ -312,6 +308,7 @@ public class Game extends Observable implements Runnable{
 			
 			if((this.inGame)&&(ship.getState())){
 				update();
+				checkOutOfBorder();
 				this.setChanged();
 				this.notifyObservers();
 			}

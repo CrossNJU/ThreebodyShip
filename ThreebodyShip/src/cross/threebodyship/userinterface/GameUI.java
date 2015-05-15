@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import cross.threebodyship.listener.PauseButtonListener;
+//import cross.threebodyship.listener.PauseButtonListener;
 import cross.threebodyship.model.Game;
 import cross.threebodyship.model.Planet;
 import cross.threebodyship.model.Ship;
@@ -83,7 +83,7 @@ public class GameUI extends JPanel implements Observer{
 		pauseButton.setContentAreaFilled(false);
 		pauseButton.setBorderPainted(false);
 		pauseButton.setFocusPainted(false);
-		pauseButton.addMouseListener(new PauseButtonListener(this, pauseUI));
+//		pauseButton.addMouseListener(new PauseButtonListener(this, pauseUI));
 		add(pauseButton);
 		
 	}
@@ -183,7 +183,7 @@ public class GameUI extends JPanel implements Observer{
 		
 //		Image ship_img = new ImageIcon("img/Ship/ship.png").getImage();
 		g.drawImage(ship_img, (int)(ship.getLocation().x-ship.getSize()/2),
-				(int)(ship.getLocation().y-ship.getSize()/2),100,100,null);
+				(int)(ship.getLocation().y-ship.getSize()/2),ship.getSize(),ship.getSize(),null);
 	}
 	
 	//观察Game的动态

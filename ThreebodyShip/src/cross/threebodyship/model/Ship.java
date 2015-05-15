@@ -1,7 +1,9 @@
 package cross.threebodyship.model;
 
 public class Ship {
+	//中心点
 	private Point centerPoint;
+	//直径
 	private int size;
 	private double speed;
 	private double degreeToEast;

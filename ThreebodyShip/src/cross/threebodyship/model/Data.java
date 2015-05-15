@@ -42,7 +42,7 @@ public class Data {
 		
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(100);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
