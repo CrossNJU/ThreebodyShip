@@ -29,7 +29,7 @@ public class StoryUI extends JPanel{
 			JLabel chapLabel = new JLabel();
 			chapLabel.setBounds((int) (panelWidth * 0.2),
 					(int) (panelHeight * 0.3) * (i + 1), 200, 40);
-			chapLabel.setIcon(new ImageIcon("img/Component/chap0"+i+".png"));
+			chapLabel.setIcon(new ImageIcon("img/Selector/chap0"+i+".png"));
 			chapLabel.setForeground(Color.BLACK);
 			chapLabel.setVisible(true);
 			add(chapLabel);

@@ -16,9 +16,13 @@ import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.SynchronousQueue;
 
+import javax.imageio.ImageIO;
 import javax.sound.midi.Track;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -40,6 +44,7 @@ import cross.threebodyship.listener.ScrollListener;
 import cross.threebodyship.model.Mode;
 import cross.threebodyship.model.Selector;
 import cross.threebodyship.model.Stage;
+import cross.threebodyship.util.RotateImage;
 
 public class SelectorUI extends ThreebodyPanel {
 	int frameWidth;
@@ -50,6 +55,7 @@ public class SelectorUI extends ThreebodyPanel {
 	ArrayList<Component> modePane = new ArrayList<Component>();
 	public Component currentPane = null;// 存放当前的PANEL
 	
+	int degree = 0;
 	
 	Image[] shine = new Image[100];
 	int currentShine = 0;
@@ -58,6 +64,9 @@ public class SelectorUI extends ThreebodyPanel {
 	int bgX = 0;
 	
 	ShineAnimeThread sat = null;
+
+	
+	BufferedImage ship;
 
 	public SelectorUI(Selector selector, MainUI mainUI) {
 		this.mainUI = mainUI;
@@ -71,7 +80,7 @@ public class SelectorUI extends ThreebodyPanel {
 	// 生成新的选择界面
 	public void init() {
 		alpha = 0f;
-		
+//		delay = 10;
 		// 选择界面初始化
 		setSize(frameWidth, frameHeight);
 		setLayout(null);
@@ -104,10 +113,8 @@ public class SelectorUI extends ThreebodyPanel {
 		
 		sat = new ShineAnimeThread();
 		setupShineImg();
-		sat.start();
-			
-//		aat.execute();
-		
+		sat.execute();
+
 	}
 	
 	// 设置模式按钮
@@ -162,10 +169,10 @@ public class SelectorUI extends ThreebodyPanel {
 		tracker = new MediaTracker(this);
 		Toolkit toolkit = getToolkit();
 		for(int i = 0; i < 50; i++){
-			shine[i] = toolkit.getImage("img/GameBackground/Selector/shine/bg-selector-shine-" + (i+38) + ".png");
+			shine[i] = toolkit.getImage("img/Selector/shine/bg-selector-shine-" + (i+38) + ".png");
 		}
 		for(int i = 50 ; i<100; i++){
-			shine[i] = toolkit.getImage("img/GameBackground/Selector/shine/bg-selector-shine-" + (138-i) + ".png");
+			shine[i] = toolkit.getImage("img/Selector/shine/bg-selector-shine-" + (138-i) + ".png");
 		}
 		
 		for(int i = 0; i<shine.length;i++){
@@ -181,23 +188,25 @@ public class SelectorUI extends ThreebodyPanel {
         
 		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
 		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0+bgX, 0, 1024+bgX, 768, null);
-		Image shineFirst = new ImageIcon("img/GameBackground/Selector/shine/bg-selector-shine-64.png").getImage();
+		Image shineFirst = new ImageIcon("img/Selector/shine/bg-selector-shine-64.png").getImage();
 		g.drawImage(shineFirst, 0, 0, null);
 		
 		g.drawImage(shine[currentShine], 0, 0, null);
 		
-		Image star = new ImageIcon("img/GameBackground/Selector/menu.png").getImage();
+		Image star = new ImageIcon("img/Selector/menu.png").getImage();
 		g.drawImage(star, 0,0,337,768,null);
+		
+		g2d.drawImage(ship, 0, 0, 100,100,null);
 
 	}
 
 	
+	
 	//闪烁的动画线程
-	class ShineAnimeThread extends Thread{
+	class ShineAnimeThread extends SwingWorker<Boolean, Boolean>{
 		@Override
-		public void run() {
+		protected Boolean doInBackground() throws Exception {
 			// TODO Auto-generated method stub
-			super.run();
 			try {
 				tracker.waitForID(0);
 			} catch (InterruptedException e1) {
@@ -226,47 +235,50 @@ public class SelectorUI extends ThreebodyPanel {
 				bgX%=1669-1024;	
 //				System.out.println(SwingUtilities.isEventDispatchThread());
 			}
+//			return null;
 		}
 
 	}
 	
 	//渐显的动画线程
-//	public class AlphaAnimeThread extends SwingWorker<Boolean, Boolean>{
-//
-//
-//		@Override
-//		protected Boolean doInBackground() throws Exception {
-//			// TODO Auto-generated method stub
-//			while((alpha<1)&&alpha>=0){
-//				SwingUtilities.invokeLater(new Runnable() {
-//					@Override
-//					public void run() {
-//						// TODO Auto-generated method stub
-//						repaint();
-//					}
-//				});
-//				try {
-//					Thread.sleep(5);
-//				} catch (Exception e) {
-//					// TODO: handle exception
-//				}
-//				if(alpha<0.99){
-//					alpha = alpha + 0.01f;
-//				}
-//				else {
-//					alpha = 1f;
-//				}
-//			}
-//			return null;
-//		
-//		}
-//		
-//		public void done(){
-//			repaint();
-//			getFocusListeners();
-////			cancel(true);
-////			aat = null;
-//		}
-//		
-//	}
+	public class AlphaAnimeThread extends SwingWorker<Boolean, Boolean>{
+
+
+		@Override
+		protected Boolean doInBackground() throws Exception {
+			// TODO Auto-generated method stub
+			while((alpha<1)&&alpha>=0){
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						repaint();
+					}
+				});
+				try {
+					Thread.sleep(5);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				if(alpha<0.99){
+					alpha = alpha + 0.01f;
+				}
+				else {
+					alpha = 1f;
+				}
+			}
+			return null;
+		
+		}
+		
+		public void done(){
+			repaint();
+			getFocusListeners();
+//			cancel(true);
+//			aat = null;
+		}
+		
+	}
+	
+	
 }

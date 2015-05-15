@@ -25,6 +25,7 @@ public class FailUI extends ThreebodyPanel{
 	public void initFailUI(){
 		setLayout(null);
 		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
+		setBackground(null);
 		setOpaque(false);
 
 		

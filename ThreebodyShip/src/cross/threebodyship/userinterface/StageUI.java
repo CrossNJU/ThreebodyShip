@@ -1,9 +1,11 @@
 package cross.threebodyship.userinterface;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -71,6 +73,8 @@ public class StageUI extends ThreebodyPanel implements Observer {
 		failUI = new FailUI(this);
 		pauseUI = new PauseUI(this);
 		
+		add(beforeUI);
+		currentPane = gamePanel;
 		add(currentPane);
 
 	}
@@ -83,6 +87,12 @@ public class StageUI extends ThreebodyPanel implements Observer {
 		gamePanel.setLocation(0, 0);
 	}
 
+	protected void paintComponent(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;  
+        g2d.setComposite(AlphaComposite.getInstance(  
+                AlphaComposite.SRC_OVER, alpha));  
+		
+	};
 	@Override
 	public void update(Observable o, Object arg) {
 		String msg = (String) arg;
@@ -90,7 +100,12 @@ public class StageUI extends ThreebodyPanel implements Observer {
 		if (msg.equals("win")) {
 			System.out.println("To Next in Starter");
 			Stage stage = (Stage) o;
-			DisplayPanel.stageDisplay(this, winUI);
+			remove(currentPane);
+			currentPane = winUI;
+			add(currentPane);
+			revalidate();
+			repaint();
+			winUI.aat.execute();
 		}
 
 		if (msg.equals("fail")) {
@@ -99,6 +114,13 @@ public class StageUI extends ThreebodyPanel implements Observer {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
+					//
+					// try {
+					// Thread.sleep(10000);
+					// } catch (InterruptedException e) {
+					// // TODO Auto-generated catch block
+					// e.printStackTrace();
+					// }
 					failUI.setVisible(true);
 					gamePanel.add(failUI,0);
 					gamePanel.validate();

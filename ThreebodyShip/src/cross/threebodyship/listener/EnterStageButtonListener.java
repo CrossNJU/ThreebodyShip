@@ -32,6 +32,7 @@ public class EnterStageButtonListener implements MouseListener {
 		stage.game.gameNumber = stage.num;
 		mainUI.stagePanel = new StageUI(mainUI, stage);
 		DisplayPanel.mainDisplay(mainUI, mainUI.stagePanel);
+		mainUI.stagePanel.aat.execute();
 		stage.game.reset();
 		}
 	}

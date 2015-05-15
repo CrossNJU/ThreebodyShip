@@ -4,7 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 //import java.awt.event.MouseEvent;
 //import java.awt.event.MouseListener;
@@ -12,16 +16,20 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 import cross.threebodyship.model.Game;
 import cross.threebodyship.model.Planet;
 import cross.threebodyship.model.Ship;
 import cross.threebodyship.model.Star;
 import cross.threebodyship.transaction.GameController;
+import cross.threebodyship.util.RotateImage;
 
 public class GameUI extends JPanel implements Observer{
 	/**
@@ -36,8 +44,12 @@ public class GameUI extends JPanel implements Observer{
 	JLabel degreeLabel;
 	public int num;
 	JButton pauseButton;
+	public BeforeUI beforeUI;
+	JLabel stageTitle = null;
 	
-	
+	int degree = 0;
+	BufferedImage ship_img;
+	public RotateThread rt = new RotateThread();
 	
 	public GameUI(Game game,StageUI stageUI){
 		this.stageUI = stageUI;
@@ -58,14 +70,18 @@ public class GameUI extends JPanel implements Observer{
 		addMouseListener(controller);
 		addMouseMotionListener(controller);
 		
+//		beforeUI = new BeforeUI(this);
+//		add(beforeUI);
+		
 		pauseButton = new JButton();
 		pauseButton.setBounds(924, 0, 100, 100);
-		pauseButton.setIcon(new ImageIcon("img/Button/btn-menu-normal.png"));
-		pauseButton.setRolloverIcon(new ImageIcon("img/Button/btn-menu-hover.png"));
+		pauseButton.setIcon(new ImageIcon("img/Button/btn-pause-normal.png"));
+		pauseButton.setRolloverIcon(new ImageIcon("img/Button/btn-pause-hover.png"));
 		pauseButton.setContentAreaFilled(false);
 		pauseButton.setBorderPainted(false);
 		pauseButton.setFocusPainted(false);
 		add(pauseButton);
+		
 	}
 	
 	public void paintComponent(Graphics g){
@@ -73,15 +89,9 @@ public class GameUI extends JPanel implements Observer{
 		Image GB_IMG = new ImageIcon("img/GameBackground/bg-stage"+game.gameNumber+".png").getImage();
 		g.drawImage(GB_IMG, 0, 0,MainUI.WIDTH,MainUI.HEIGHT,0,0,1024,768,null);
 
-
-//		paintWinArea(g);
-//		paintstarList.get(i)tArea(g);
-//		paintstar(g,game.starList);
 		paintplanet(g,game.planets);
 		paintShip(g,game.ship);
 		if(game.isStarting) {
-			paintLine(g);
-//			paintRect(g);
 			paintPowerTank(g);
 		}
 	}
@@ -165,23 +175,51 @@ public class GameUI extends JPanel implements Observer{
 		
 	//画飞船
 	public void paintShip(Graphics g, Ship ship){
-//		
-//		g.setColor(Color.red);
-//			
-//		g.fillOval((int)(ship.getLocation().x-ship.getSize()/2),
-//				(int)(ship.getLocation().y-ship.getSize()/2),
-//				ship.getSize(),
-//				ship.getSize());
-//		
-		Image ship_img = new ImageIcon("img/Ship/ship.png").getImage();
+		
+		
+//		Image ship_img = new ImageIcon("img/Ship/ship.png").getImage();
 		g.drawImage(ship_img, (int)(ship.getLocation().x-ship.getSize()/2),
-				(int)(ship.getLocation().y-ship.getSize()/2),(int)(ship.getLocation().x-ship.getSize()/2)+ship.getSize()*3,
-		(int)(ship.getLocation().y-ship.getSize()/2)+ship.getSize()*3,0,0,425,431,null);
+				(int)(ship.getLocation().y-ship.getSize()/2),100,100,null);
 	}
 	
 	//观察Game的动态
 	public void update(Observable o, Object arg0) {
 		repaint();
+	}
+	
+	public class RotateThread extends SwingWorker<Boolean, Boolean>{
+
+		@Override
+		protected Boolean doInBackground() throws Exception {
+			// TODO Auto-generated method stub
+			while(true){
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						repaint();
+					}
+				});
+				
+				try {
+//					Thread.sleep(10);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+				degree++;
+				degree%=360;
+				BufferedImage src;
+				try {
+					src = ImageIO.read(new File("img/Ship/ship.png"));
+					ship_img = RotateImage.Rotate(src, degree);  
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  
+			}
+		}
+		
 	}
 
 }

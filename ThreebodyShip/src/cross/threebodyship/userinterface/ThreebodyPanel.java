@@ -7,6 +7,9 @@ import javax.swing.SwingWorker;
 public class ThreebodyPanel extends JPanel{
 	float alpha;
 	public AlphaAnimeThread aat = null;
+	public int delay = 5;
+	public Boolean isFinish = false;
+	public JPanel currentPane = null;
 	
 	public ThreebodyPanel(){
 		aat = new AlphaAnimeThread();
@@ -26,6 +29,7 @@ public class ThreebodyPanel extends JPanel{
 		protected Boolean doInBackground() throws Exception {
 			// TODO Auto-generated method stub
 			alpha = 0;
+			isFinish = false;
 			while((alpha<1)&&alpha>=0){
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
@@ -35,7 +39,7 @@ public class ThreebodyPanel extends JPanel{
 					}
 				});
 				try {
-					Thread.sleep(5);
+					Thread.sleep(delay);
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -52,6 +56,7 @@ public class ThreebodyPanel extends JPanel{
 		
 		public void done(){
 			repaint();
+			isFinish = true;
 			aat = new AlphaAnimeThread();
 		}
 	}

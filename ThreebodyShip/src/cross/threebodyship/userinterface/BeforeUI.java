@@ -13,12 +13,14 @@ import javax.swing.JPanel;
 
 import cross.threebodyship.listener.StageStartButtonListener;
 
-public class BeforeUI extends JPanel {
+public class BeforeUI extends ThreebodyPanel {
 	JLabel stageTitle = new JLabel();
 	StageUI stageUI = null;
+	GameUI gameUI;
 	
 	
 	public BeforeUI(StageUI stageUI){
+//		this.gameUI = gameUI;
 		this.stageUI = stageUI;
 		initBeforeUI();
 	}
@@ -27,16 +29,16 @@ public class BeforeUI extends JPanel {
 		setLayout(null);
 		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
 		setBackground(null);
+		setOpaque(false);
 		Graphics g = getGraphics();
 		
 		stageTitle.setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
 		stageTitle.setIcon(new ImageIcon(
-				"img/GameBackground/bg-stage1-before.png"));
+				"img/GameBackground/cover-stage" + stageUI.stage.num + "-before.png"));
 		stageTitle.setVisible(true);
-		stageTitle.addMouseListener(new StageStartButtonListener(stageUI,
-				stageUI.gamePanel));
+		stageTitle.addMouseListener(new StageStartButtonListener(stageUI,this));
 		
 		add(stageTitle);
-		stageUI.currentPane = this;
+//		stageUI.currentPane = this;
 	}
 }

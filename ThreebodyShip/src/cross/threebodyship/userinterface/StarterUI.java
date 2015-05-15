@@ -28,18 +28,18 @@ public class StarterUI extends JPanel {
 	public void initStarterUI(){
 		setLayout(null);
 		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
+		setOpaque(false);
 		
 		
 		startGameButton.setBounds((int) (MainUI.WIDTH * 0.412),
 				(int) (MainUI.HEIGHT * 0.43),188,188);
-		//startGameButton.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+
 		startGameButton.setIcon(new ImageIcon("img/Button/btn-start.png"));
 		startGameButton.setFocusable(false);
 		startGameButton.setContentAreaFilled(false);
 		startGameButton.setBorderPainted(false);
 		
 		add(startGameButton);
-
 	}
 	
 	
