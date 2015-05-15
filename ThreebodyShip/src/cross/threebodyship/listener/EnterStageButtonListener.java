@@ -26,12 +26,14 @@ public class EnterStageButtonListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		if (stage.isLocked) System.out.println("you can't goto this stage!");
+		else{
 		stage.game = new Game();
 		stage.game.gameNumber = stage.num;
 		mainUI.stagePanel = new StageUI(mainUI, stage);
 		DisplayPanel.mainDisplay(mainUI, mainUI.stagePanel);
 		stage.game.reset();
-
+		}
 	}
 
 	@Override

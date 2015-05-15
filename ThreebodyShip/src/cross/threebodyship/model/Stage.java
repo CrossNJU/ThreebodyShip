@@ -5,7 +5,7 @@ import java.util.Observable;
 public class Stage extends Observable implements Runnable {
 
 	public String title;
-	boolean isLocked;
+	public boolean isLocked = true;
 	boolean isComplished;
 	boolean isFailed;
 	volatile boolean isBack;
@@ -36,6 +36,7 @@ public class Stage extends Observable implements Runnable {
 	public void win() {
 		checkAchievement();
 		System.out.println("Win");
+		this.nextStage.isLocked = false;
 		setChanged();
 		notifyObservers("win");
 	}

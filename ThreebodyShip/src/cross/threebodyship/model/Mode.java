@@ -56,6 +56,8 @@ public class Mode {
 	public void addStage(Stage stage){
 		if(stages.size()>0){
 			stages.get(stages.size()-1).nextStage = stage;
+		}else {
+			stage.isLocked = false;
 		}
 		stages.add(stage);
 		stage.num = stages.size();
