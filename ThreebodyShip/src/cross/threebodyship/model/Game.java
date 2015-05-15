@@ -1,11 +1,7 @@
 package cross.threebodyship.model;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Observable;
-
-import cross.threebodyship.userinterface.StopUI;
-
 
 public class Game extends Observable implements Runnable{
 	public static double maxDistance = 10000;
@@ -17,7 +13,6 @@ public class Game extends Observable implements Runnable{
 	private long refreshInterval = 100;
 	
 	public Ship ship;
-//	public Star star;
 	public ArrayList<Star> starList;
 	public ArrayList<Planet> planets;
 	public Data data;
@@ -67,21 +62,22 @@ public class Game extends Observable implements Runnable{
 		double vy = ship.getSpeed()*Math.sin(ship.getDegreeToEast());
 		double t = this.refreshInterval/100;
 		
-		//引力加大参数
-//		FchangeRate = ship.getSpeed();
-		
 		//判定是否进入某一星球引力区
 		boolean isInScope = false;
-//		count = 0;
 		//初始化万有引力
 		Force f = new Force();
 		f.f = 0;
-//		Star starI = new IAFStar();
-//		System.out.println(starList.size());
 		//考虑多星球
 		for(int i=0; i<starList.size(); i++){
 			
+			//设置当前离飞船最近的星球
 			ship.closestStar = starList.get(i);
+			
+			//刷新超新星时间
+			if(starList.get(i).style.equals("Super")){
+				SuperStar superStar = (SuperStar)starList.get(i);
+				if(superStar.leftTime>0) superStar.leftTime -= refreshInterval/100;
+			}
 		
 			ship.distanceToClosestStar = Math.sqrt((ship.getLocation().x-starList.get(i).getLocation().x)*
 				(ship.getLocation().x-starList.get(i).getLocation().x)+
@@ -124,11 +120,15 @@ public class Game extends Observable implements Runnable{
 				if(starList.get(i).style.equals("IAF")){
 					IAFStar star = (IAFStar)starList.get(i);
 					if(star.changed == false){
-						System.out.println(1);
 						vx*=star.SpeedChangeRate;
 						vy*=star.SpeedChangeRate;
 						star.changed = true;
 					}
+				}
+				
+				if(starList.get(i).style.equals("Super")){
+					SuperStar superStar = (SuperStar)starList.get(i);
+					if(superStar.leftTime <= 0) ship.setState(false);
 				}
 			
 				//计算星球飞船连线与正西方向顺时针的夹角
@@ -152,7 +152,6 @@ public class Game extends Observable implements Runnable{
 			
 				f = f.joinForce(f2);
 			}
-//			System.out.println(f.f+" "+f.theta);
 		}
 		
 		//计算是否撞到行星
@@ -170,7 +169,6 @@ public class Game extends Observable implements Runnable{
 		
 		//如果进入引力区
 		if((isInScope)&&(!ship.isRound)){
-//			System.out.println(1);
 			//计算速度，加速度，位移
 			double ax = f.f*Math.cos(f.theta);
 			double ay = f.f*Math.sin(f.theta);
@@ -187,8 +185,6 @@ public class Game extends Observable implements Runnable{
 			ship.setSpeed(vNew);
 			
 			double theta2 = Math.atan(vy/vx);
-//			System.out.println(1);
-//			System.out.println("vx:"+vx);
 			//修改theta2
 			if(ship.getDegreeToEast()<=Math.PI/2){
 				if(theta2<0) theta2+=Math.PI*2;
@@ -217,12 +213,6 @@ public class Game extends Observable implements Runnable{
 				nowY += vy*t;
 			}
 			else{
-//				double dTheta = ship.getSpeed()*t/ship.distanceToClosestStar;
-//				System.out.println(Math.toDegrees(ship.roundDtheta));
-//				if(count == 0) {
-//					dTheta += ship.degreeToWest-ship.getDegreeToEast();
-//					count ++;
-//				}else count ++;
 				ship.setDegreeToEast(f.theta+Math.PI*3/2);
 				
 				nowX = ship.closestStar.getLocation().x + ship.distanceToClosestStar*
@@ -231,12 +221,8 @@ public class Game extends Observable implements Runnable{
 						Math.sin(ship.degreeToWest+Math.PI+ship.roundDtheta);
 			}
 		}
-
-//		System.out.println("oldtheta:"+Math.toDegrees(ship.getDegreeToEast()));
 		
 		ship.setLocation(nowX, nowY);
-		//System.out.println(ship.getLocation().x);
-		
 	}
 	
 	//重置参数
@@ -251,21 +237,17 @@ public class Game extends Observable implements Runnable{
 		ship = data.ship;
 		starList = data.starList;
 		planets = data.planets;
-//		System.out.println("planets:"+planets.size());
 		//启动planets线程
 		for(int i = 0; i<planets.size(); i++){
 			Thread t = new Thread(planets.get(i));
 			t.start();
 		}
-//		this.FchangeRate = ship.getSpeed();
 		FchangeRate = 12;
 	}
 	
 	//结束判定
 	public boolean checkFail(){
 		//判断是否出界
-		//JFrame result = new JFrame();
-		//JLabel state = new JLabel();
 		Boolean isFailed = false;
 		
 		if((ship.getLocation().x<0)||
@@ -276,16 +258,7 @@ public class Game extends Observable implements Runnable{
 		
 		if(ship.outOfBorder){
 			isFailed = true;
-			//gameEnd = true;
 		}	
-//		
-//		if(distance<star.getSize()/2){
-//			ship.setState(false);
-//			System.out.println("you lose!");
-//			isFailed = true;
-//			//state.setText("you lose!");
-//			//gameEnd = true;
-//		}
 		
 		return isFailed;
 		
@@ -296,7 +269,6 @@ public class Game extends Observable implements Runnable{
 		
 		double dis = Math.sqrt((ship.getLocation().x-winPoint.x)*(ship.getLocation().x-winPoint.x)
 				+(ship.getLocation().y-winPoint.y)*(ship.getLocation().y-winPoint.y));
-//		System.out.println("dis:"+dis);
 		if(dis<winAreaR) return true;
 		else return false;
 	}
@@ -337,7 +309,6 @@ public class Game extends Observable implements Runnable{
 				this.setChanged();
 				this.notifyObservers();
 			}
-			
 		}
 		
 		this.setState(false);
