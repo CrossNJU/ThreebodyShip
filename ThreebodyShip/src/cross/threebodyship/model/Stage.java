@@ -5,7 +5,7 @@ import java.util.Observable;
 public class Stage extends Observable implements Runnable {
 
 	public String title;
-	public boolean isLocked = true;
+	public boolean isLocked = false;
 	boolean isComplished;
 	boolean isFailed;
 	volatile boolean isBack;
@@ -68,14 +68,14 @@ public class Stage extends Observable implements Runnable {
 					game.inGame = false;
 					break;
 				}
-				if (game.checkFail()) {
+				if (game.isFailed) {
 					restart();
 					game.inGame = false;
 					break;
 				}
 				}
 				//System.out.println("Check if complished or else");
-				Thread.sleep(300);
+				Thread.sleep(game.getRI());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

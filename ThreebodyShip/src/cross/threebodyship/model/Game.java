@@ -9,8 +9,9 @@ public class Game extends Observable implements Runnable{
 	private boolean isRunning = false;
 	public boolean isStarting = false;
 	public boolean inGame = false;
+	public boolean isFailed = false;
 	
-	private long refreshInterval = 100;
+	private long refreshInterval = 50;
 	
 	public Ship ship;
 	public ArrayList<Star> starList;
@@ -60,7 +61,7 @@ public class Game extends Observable implements Runnable{
 		double nowY = ship.getLocation().y;
 		double vx = ship.getSpeed()*Math.cos(ship.getDegreeToEast());
 		double vy = ship.getSpeed()*Math.sin(ship.getDegreeToEast());
-		double t = this.refreshInterval/100;
+		double t = (double)this.refreshInterval/100;
 		
 		//判定是否进入某一星球引力区
 		boolean isInScope = false;
@@ -106,8 +107,10 @@ public class Game extends Observable implements Runnable{
 					vy = ship.getSpeed()*Math.sin(alpher);
 					}
 					
-				}else
+				}else{
+				this.isFailed = true;
 				ship.setState(false);
+				}
 			}
 			
 			if(ship.distanceToClosestStar<starList.get(i).getGravityScope()/2) {
@@ -162,6 +165,7 @@ public class Game extends Observable implements Runnable{
 					(ship.getLocation().y-planets.get(i).location.y));
 			
 			if(distance-ship.getSize()/2<planets.get(i).size/2) {
+				this.isFailed = true;
 				ship.setState(false);
 				break;
 			}
@@ -230,6 +234,7 @@ public class Game extends Observable implements Runnable{
 		this.isRunning = true;
 		this.isStarting = true;
 		this.inGame = false;
+		this.isFailed = false;
 		
 		//初始化
 		data = new Data(gameNumber);
@@ -258,6 +263,7 @@ public class Game extends Observable implements Runnable{
 		
 		if(ship.outOfBorder){
 			isFailed = true;
+			this.isFailed = true;
 		}	
 		
 		return isFailed;
