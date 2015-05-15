@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import cross.threebodyship.listener.PauseButtonListener;
 import cross.threebodyship.model.Game;
 import cross.threebodyship.model.Planet;
 import cross.threebodyship.model.Ship;
@@ -37,7 +38,7 @@ public class GameUI extends JPanel implements Observer{
 	 */
 	private static final long serialVersionUID = 1L;
 	StageUI stageUI;
-	PauseUI pauseUI;
+	public PauseUI pauseUI;
 	GameController controller;
 	public Game game;
 	JLabel speedLabel;
@@ -63,6 +64,8 @@ public class GameUI extends JPanel implements Observer{
 		setSize(MainUI.WIDTH,MainUI.HEIGHT);
 		
 		pauseUI = new PauseUI(stageUI);
+		pauseUI.setVisible(false);
+		add(pauseUI);
 		
 		controller = new GameController(this.game);
 		
@@ -80,6 +83,7 @@ public class GameUI extends JPanel implements Observer{
 		pauseButton.setContentAreaFilled(false);
 		pauseButton.setBorderPainted(false);
 		pauseButton.setFocusPainted(false);
+		pauseButton.addMouseListener(new PauseButtonListener(this, pauseUI));
 		add(pauseButton);
 		
 	}
