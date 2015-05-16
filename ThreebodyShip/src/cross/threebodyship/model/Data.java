@@ -495,8 +495,44 @@ public class Data {
 		
 		
 	}
+	
 	public void setGame16(){}
-	public void setGame17(){}
+	
+	public void setGame17(){
+		Star starOne = new Star();
+		Star starTwo = new Star();
+		IAFStar ICE = new IAFStar();
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(60);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		//初始化星球
+		starOne.setLocation(496, 184);
+		starOne.setSize(166);
+		starOne.setGravityScope(356);
+		
+		starTwo.setLocation(327, 448);
+		starTwo.setSize(186);
+		starTwo.setGravityScope(362);
+		
+		ICE.setLocation(693, 470);
+		ICE.style = "IAF";
+		ICE.setSize(204);
+		ICE.setGravityScope(402);
+		ICE.SpeedChangeRate = 0.7;
+		
+		//加陨石
+		//
+		//
+		
+		starList.add(starOne);
+		starList.add(starTwo);
+		starList.add(ICE);
+		
+	}
+	
 	public void setGame18(){}
 	
 }
