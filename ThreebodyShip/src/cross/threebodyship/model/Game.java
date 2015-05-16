@@ -262,7 +262,9 @@ public class Game extends Observable implements Runnable{
 				nowY = ship.roundStar.getLocation().y + ship.roundDistance*
 						Math.sin(ship.roundDegree+Math.PI+ship.roundDtheta);
 				
-
+				if(nowX - ship.roundStar.getLocation().x<0 && nowY - ship.roundStar.getLocation().y<0)
+					ship.setDegreeToEast(ship.roundDegree + Math.PI*3/2);
+				else ship.setDegreeToEast(ship.roundDegree - Math.PI/2);
 //				double theta2 = Math.atan(vy/vx);
 //		
 //				//修改theta2
