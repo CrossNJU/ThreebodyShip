@@ -33,9 +33,9 @@ public class WinUI extends ThreebodyPanel {
 	int currentAnime = 0;
 	CompleteAnimeThread cat;
 
-	int bgX = 0;
-	BackgroundAnimeThread bat = new BackgroundAnimeThread();
-	
+	// int bgX = 0;
+	// BackgroundAnimeThread bat = new BackgroundAnimeThread();
+
 	public WinUI(StageUI stageUI) {
 		this.stageUI = stageUI;
 		initWinUI();
@@ -44,6 +44,7 @@ public class WinUI extends ThreebodyPanel {
 	public void initWinUI() {
 		setLayout(null);
 		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
+		setOpaque(false);
 
 		nextStageButton = new JButton("Next Stage >");
 		nextStageButton.setBounds((int) (MainUI.WIDTH * 0.75),
@@ -56,16 +57,16 @@ public class WinUI extends ThreebodyPanel {
 		nextStageButton.setBorderPainted(false);
 		nextStageButton.setFocusPainted(false);
 		nextStageButton.addMouseListener(new EnterStageButtonListener(
-				stageUI.mainUI, stageUI.stage.nextStage));
+				stageUI.mainPanel, stageUI.stage.nextStage));
 		add(nextStageButton);
 
 		waat = new WinAlphaAnimeThread();
 
 		cat = new CompleteAnimeThread();
 		setup();
-		
-		bat = new BackgroundAnimeThread();
-		bat.execute();
+
+		// bat = new BackgroundAnimeThread();
+		// bat.execute();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -77,9 +78,9 @@ public class WinUI extends ThreebodyPanel {
 		// ImageIcon("img/GameBackground/bg-stage"+stageUI.stage.num+"-after.png").getImage();
 		// g.drawImage(img, 0, 0, null);
 
-		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
-		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0 + bgX, 0,
-				1024 + bgX, 768, null);
+		// Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
+		// g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0 + bgX, 0,
+		// 1024 + bgX, 768, null);
 
 		Image cover = new ImageIcon("img/Win/cover-after.png").getImage();
 
@@ -169,32 +170,31 @@ public class WinUI extends ThreebodyPanel {
 		}
 	}
 
-	
-	class BackgroundAnimeThread extends SwingWorker<Boolean, Boolean> {
-		@Override
-		protected Boolean doInBackground() throws Exception {
-
-			while (true) {
-				SwingUtilities.invokeLater(new Runnable() {
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						repaint();
-					}
-				});
-
-				try {
-					Thread.sleep(60);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-				bgX++;
-				bgX %= 1669 - 1024;
-				// System.out.println(SwingUtilities.isEventDispatchThread());
-			}
-			// return null;
-		}
-
-	}
+	// class BackgroundAnimeThread extends SwingWorker<Boolean, Boolean> {
+	// @Override
+	// protected Boolean doInBackground() throws Exception {
+	//
+	// while (true) {
+	// SwingUtilities.invokeLater(new Runnable() {
+	//
+	// @Override
+	// public void run() {
+	// // TODO Auto-generated method stub
+	// repaint();
+	// }
+	// });
+	//
+	// try {
+	// Thread.sleep(60);
+	// } catch (Exception e) {
+	// // TODO: handle exception
+	// }
+	// bgX++;
+	// bgX %= 1669 - 1024;
+	// // System.out.println(SwingUtilities.isEventDispatchThread());
+	// }
+	// // return null;
+	// }
+	//
+	// }
 }

@@ -12,6 +12,7 @@ import javax.swing.plaf.PanelUI;
 
 import cross.threebodyship.listener.EnterStageButtonListener;
 import cross.threebodyship.listener.MainChangeListener;
+import cross.threebodyship.listener.OpaqueDisplayListener;
 import cross.threebodyship.listener.ResumeButtonListener;
 
 public class PauseUI extends ThreebodyPanel {
@@ -34,8 +35,8 @@ public class PauseUI extends ThreebodyPanel {
 
 		setButton(menuButton, "menu");
 		menuButton.setBounds(289, 322, 99, 99);
-		menuButton.addMouseListener(new MainChangeListener(stageUI.mainUI,
-				stageUI.mainUI.selectorPanel));
+		menuButton.addMouseListener(new OpaqueDisplayListener(stageUI.mainPanel,
+				stageUI.mainPanel.selectorUI));
 
 		setButton(resumeButton, "resume");
 		resumeButton.setBounds(403, 277, 190, 190);
@@ -44,7 +45,7 @@ public class PauseUI extends ThreebodyPanel {
 		setButton(restartButton, "restart");
 		restartButton.setBounds(600, 322, 99, 99);
 		restartButton.addMouseListener(new EnterStageButtonListener(
-				stageUI.mainUI, stageUI.stage));
+				stageUI.mainPanel, stageUI.stage));
 
 		add(resumeButton);
 		add(restartButton);

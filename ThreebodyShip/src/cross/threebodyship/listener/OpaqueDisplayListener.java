@@ -6,17 +6,18 @@ import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import cross.threebodyship.userinterface.MainPanel;
 import cross.threebodyship.userinterface.MainUI;
 import cross.threebodyship.userinterface.SelectorUI;
 import cross.threebodyship.userinterface.ThreebodyPanel;
 
 public class OpaqueDisplayListener implements MouseListener {
 	MainUI mainUI;
-	ThreebodyPanel mainPanel;
+	MainPanel mainPanel;
 	ThreebodyPanel newpanel;
 	JudgeThread jt = new JudgeThread();
 
-	public OpaqueDisplayListener(ThreebodyPanel mainPanel, ThreebodyPanel newPanel) {
+	public OpaqueDisplayListener(MainPanel mainPanel, ThreebodyPanel newPanel) {
 		// TODO Auto-generated constructor stub
 		this.newpanel = newPanel;
 		this.mainUI = mainUI;
@@ -27,12 +28,13 @@ public class OpaqueDisplayListener implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		mainPanel.add(newpanel);
+		mainPanel.currentPane.alpha = 0;
+		mainPanel.currentPane.repaint();
 		mainPanel.remove(mainPanel.currentPane);
 		mainPanel.currentPane = newpanel;
 		mainPanel.validate();
 		mainPanel.repaint();
 		
-//		jt.execute();
 		newpanel.aat.execute();
 	}
 

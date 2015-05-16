@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import cross.threebodyship.listener.EnterStageButtonListener;
 import cross.threebodyship.listener.MainChangeListener;
+import cross.threebodyship.listener.OpaqueDisplayListener;
 
 public class FailUI extends ThreebodyPanel{
 	JButton menuButton = new JButton();
@@ -31,11 +32,11 @@ public class FailUI extends ThreebodyPanel{
 		
 		setButton(menuButton, "menu");
 		menuButton.setBounds(369,341,90,90);
-		menuButton.addMouseListener(new MainChangeListener(stageUI.mainUI, stageUI.mainUI.selectorPanel));
+		menuButton.addMouseListener(new OpaqueDisplayListener(stageUI.mainPanel, stageUI.mainPanel.selectorUI));
 		
 		setButton(restartButton, "again");
 		restartButton.setBounds(487,291,183,183);
-		restartButton.addMouseListener(new EnterStageButtonListener(stageUI.mainUI, stageUI.stage));
+		restartButton.addMouseListener(new EnterStageButtonListener(stageUI.mainPanel, stageUI.stage));
 		
 		add(menuButton);
 		add(restartButton);

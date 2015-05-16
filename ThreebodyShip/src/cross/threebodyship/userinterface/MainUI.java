@@ -13,14 +13,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.Executors;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
-
-
+import javax.swing.SwingWorker;
 
 import cross.threebodyship.listener.DragMainUIListener;
 import cross.threebodyship.listener.MainChangeListener;
@@ -28,13 +27,12 @@ import cross.threebodyship.listener.OpaqueDisplayListener;
 import cross.threebodyship.model.Selector;
 import cross.threebodyship.model.Stage;
 
+
 //import cross.threebodyship.userinterface.MainUIPre.NextStageButtonListener;
 
 public class MainUI extends JFrame {
-	public ThreebodyPanel mainPanel;
+	public MainPanel mainPanel;
 	public Component currentPane;
-	public StarterUI starterPanel;
-	public SelectorUI selectorPanel;
 	public StageUI stagePanel;
 	public final static int WIDTH = 1024;
 	public final static int HEIGHT = 768;
@@ -46,8 +44,8 @@ public class MainUI extends JFrame {
 	public DragMainUIListener drag;
 
 	public void mainrun() {
-		Selector selector = new Selector();
 		drag = new DragMainUIListener(this);
+		
 
 		setSize(1024, 768);
 		setLayout(null);
@@ -76,25 +74,15 @@ public class MainUI extends JFrame {
 		int width = this.getWidth(); 
 		setLocation(screenWidth-width/2, screenHeight-height/2);
 		
-		mainPanel = new ThreebodyPanel();
+		mainPanel = new MainPanel(this);
 		mainPanel.setBounds(0,0,MainUI.WIDTH,MainUI.HEIGHT);
 		mainPanel.setLayout(null);
 		mainPanel.setVisible(true);
 		
-		// 初始化开始界面
-		starterPanel = new StarterUI(this);
-		// 初始化选择界面
-		selectorPanel = new SelectorUI(selector, this);
-
-		starterPanel.startGameButton.addMouseListener(new OpaqueDisplayListener(
-				mainPanel, selectorPanel));
-		
 		currentPane = mainPanel;
-		mainPanel.currentPane = starterPanel;
-
+		
 		// 添加当前界面
 		add(mainPanel);
-		mainPanel.add(mainPanel.currentPane);
 		repaint();
 	}
 

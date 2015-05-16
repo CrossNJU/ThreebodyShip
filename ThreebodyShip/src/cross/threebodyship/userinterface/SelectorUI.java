@@ -50,7 +50,7 @@ public class SelectorUI extends ThreebodyPanel {
 	int frameWidth;
 	int frameHeight;
 	Selector selector = null;
-	MainUI mainUI = null;
+	MainPanel mainPanel = null;
 	ArrayList<JButton> modeButton = new ArrayList<JButton>();
 	ArrayList<Component> modePane = new ArrayList<Component>();
 	public Component currentPane = null;// 存放当前的PANEL
@@ -67,11 +67,11 @@ public class SelectorUI extends ThreebodyPanel {
 	
 	BufferedImage ship;
 
-	public SelectorUI(Selector selector, MainUI mainUI) {
-		this.mainUI = mainUI;
+	public SelectorUI(Selector selector, MainPanel mainPanel) {
 		this.frameHeight = MainUI.HEIGHT;
-		this.frameWidth = mainUI.WIDTH;
+		this.frameWidth = MainUI.WIDTH;
 		this.selector = selector;
+		this.mainPanel = mainPanel;
 		
 		init();
 	}
@@ -85,6 +85,7 @@ public class SelectorUI extends ThreebodyPanel {
 		setLayout(null);
 		setVisible(true);
 		setBackground(null);
+		setOpaque(false);
 		
 		// 将Selector中的按钮与模式添加到UI中
 		setModeButton();
@@ -184,9 +185,9 @@ public class SelectorUI extends ThreebodyPanel {
 		Graphics2D g2d = (Graphics2D) g;  
         g2d.setComposite(AlphaComposite.getInstance(  
                 AlphaComposite.SRC_OVER, alpha));  
-        
-		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
-		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0+bgX, 0, 1024+bgX, 768, null);
+//        
+//		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
+//		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0+bgX, 0, 1024+bgX, 768, null);
 		
 		Image shineFirst = new ImageIcon("img/Selector/shine/bg-selector-shine-64.png").getImage();
 		g.drawImage(shineFirst, 0, 0, null);
@@ -240,45 +241,7 @@ public class SelectorUI extends ThreebodyPanel {
 
 	}
 	
-	//渐显的动画线程
-	public class AlphaAnimeThread extends SwingWorker<Boolean, Boolean>{
 
-
-		@Override
-		protected Boolean doInBackground() throws Exception {
-			// TODO Auto-generated method stub
-			while((alpha<1)&&alpha>=0){
-				SwingUtilities.invokeLater(new Runnable() {
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						repaint();
-					}
-				});
-				try {
-					Thread.sleep(5);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-				if(alpha<0.99){
-					alpha = alpha + 0.01f;
-				}
-				else {
-					alpha = 1f;
-				}
-			}
-			return null;
-		
-		}
-		
-		public void done(){
-			repaint();
-			getFocusListeners();
-//			cancel(true);
-//			aat = null;
-		}
-		
-	}
 	
 	
 }

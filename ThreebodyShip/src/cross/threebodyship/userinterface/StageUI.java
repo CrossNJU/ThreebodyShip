@@ -24,7 +24,6 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 
 import cross.threebodyship.listener.EnterStageButtonListener;
 import cross.threebodyship.listener.MainChangeListener;
-import cross.threebodyship.listener.StageButtonListener;
 import cross.threebodyship.listener.StageStartButtonListener;
 import cross.threebodyship.model.Stage;
 import cross.threebodyship.transaction.GameController;
@@ -45,13 +44,13 @@ public class StageUI extends ThreebodyPanel implements Observer {
 	PauseUI pauseUI = null;
 
 	public GameUI gamePanel;
-	MainUI mainUI;
+	MainPanel mainPanel = null;
 
 	public Stage stage;
 
-	public StageUI(MainUI mainUI, Stage stage) {
+	public StageUI(MainPanel mainPanel, Stage stage) {
 		this.stage = stage;
-		this.mainUI = mainUI;
+		this.mainPanel = mainPanel;
 		
 		init();
 	}
@@ -61,8 +60,9 @@ public class StageUI extends ThreebodyPanel implements Observer {
 
 		setLayout(null);
 		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
-		setBackground(Color.BLUE);
+//		setBackground(Color.BLUE);
 		setVisible(true);
+		setOpaque(false);
 
 		// Game部分
 		initGamePanel(this);
@@ -92,9 +92,6 @@ public class StageUI extends ThreebodyPanel implements Observer {
         g2d.setComposite(AlphaComposite.getInstance(  
                 AlphaComposite.SRC_OVER, alpha));  
         
-        Image bg_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
-        g.drawImage(bg_img, 0, 0, null);
-		
 	};
 	@Override
 	public void update(Observable o, Object arg) {
@@ -133,5 +130,10 @@ public class StageUI extends ThreebodyPanel implements Observer {
 			});
 			
 		}
+	}
+	
+	public void finalize() throws Throwable{
+		super.finalize();
+		System.out.println("hasRemove");
 	}
 }

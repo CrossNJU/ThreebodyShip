@@ -45,7 +45,7 @@ public class StoryUI extends JPanel{
 						(int) (panelHeight * 0.3) * (i + 1) + 60, 154, 154);
 				stageButton.setVisible(true);
 				stageButton.addMouseListener(new EnterStageButtonListener(
-						selectorUI.mainUI, selectorUI.selector.mode.get(0).stages.get(num)));
+						selectorUI.mainPanel, selectorUI.selector.mode.get(0).stages.get(num)));
 
 				String imageString = "img/Button/btn-chap01" + "-stage0"
 						+ (num + 1) + "-normal.png";

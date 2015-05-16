@@ -32,7 +32,7 @@ import cross.threebodyship.model.Star;
 import cross.threebodyship.transaction.GameController;
 import cross.threebodyship.util.RotateImage;
 
-public class GameUI extends JPanel implements Observer{
+public class GameUI extends ThreebodyPanel implements Observer{
 	/**
 	 * 
 	 */
@@ -62,6 +62,7 @@ public class GameUI extends JPanel implements Observer{
 	public void init(){
 		setLayout(null);
 		setSize(MainUI.WIDTH,MainUI.HEIGHT);
+		setOpaque(false);
 		
 		pauseUI = new PauseUI(stageUI);
 		pauseUI.setVisible(false);
@@ -89,10 +90,15 @@ public class GameUI extends JPanel implements Observer{
 	}
 	
 	public void paintComponent(Graphics g){
-		g.fillRect(0,0,MainUI.WIDTH,MainUI.HEIGHT);
-		Image GB_IMG = new ImageIcon("img/GameBackground/bg-stage"+game.gameNumber+".png").getImage();
-		g.drawImage(GB_IMG, 0, 0,MainUI.WIDTH,MainUI.HEIGHT,0,0,1024,768,null);
+//		g.fillRect(0,0,MainUI.WIDTH,MainUI.HEIGHT);
+		
+		Image cover = new ImageIcon("img/GameBackground/cover-game.png").getImage();
+		g.drawImage(cover, 0, 0,MainUI.WIDTH,MainUI.HEIGHT,0,0,1024,768,null);
 
+		Image GB_IMG = new ImageIcon("img/GameBackground/game-"+game.gameNumber+".png").getImage();
+		g.drawImage(GB_IMG, 0, 0,MainUI.WIDTH,MainUI.HEIGHT,0,0,1024,768,null);
+		
+		
 		paintplanet(g,game.planets);
 		paintstar(g, game.starList);
 //		paintWinArea(g);

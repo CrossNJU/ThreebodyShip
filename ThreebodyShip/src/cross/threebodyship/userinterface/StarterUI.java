@@ -19,7 +19,7 @@ import javax.swing.SwingWorker;
 
 import cross.threebodyship.listener.ExitButtonListener;
 
-public class StarterUI extends JPanel {
+public class StarterUI extends ThreebodyPanel {
 	public JButton startGameButton = new JButton();
 	public JButton exitButton = new JButton();
 	MainUI mainUI = null;
@@ -58,7 +58,7 @@ public class StarterUI extends JPanel {
 		add(startGameButton);
 		add(exitButton);
 		bat = new BackgroundAnimeThread();
-		bat.execute();
+//		bat.execute();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -66,9 +66,9 @@ public class StarterUI extends JPanel {
 		// ImageIcon("img/Starter/bg-starter-mid.png").getImage();
 		// g.drawImage(img, 0, 0, null);
 
-		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
-		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0 + bgX, 0,
-				1024 + bgX, 768, null);
+//		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
+//		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0 + bgX, 0,
+//				1024 + bgX, 768, null);
 		
 		Image cover = new ImageIcon("img/Starter/cover-starter-85.png")
 				.getImage();

@@ -5,7 +5,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 public class ThreebodyPanel extends JPanel{
-	float alpha;
+	public float alpha;
 	public AlphaAnimeThread aat = null;
 	public AlphaDisappearThread adt = null;
 	public int delay = 5;
@@ -59,6 +59,7 @@ public class ThreebodyPanel extends JPanel{
 		public void done(){
 			repaint();
 			isFinish = true;
+			System.out.println(isCancelled());
 			aat = new AlphaAnimeThread();
 		}
 	}

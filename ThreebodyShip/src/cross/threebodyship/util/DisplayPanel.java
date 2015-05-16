@@ -36,4 +36,5 @@ public class DisplayPanel {
 		stageUI.revalidate();
 		stageUI.repaint();
 	}
+	
 }

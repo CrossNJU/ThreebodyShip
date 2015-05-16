@@ -9,7 +9,7 @@ import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import cross.threebodyship.model.Game;
 import cross.threebodyship.model.Stage;
-import cross.threebodyship.userinterface.MainUI;
+import cross.threebodyship.userinterface.MainPanel;
 import cross.threebodyship.userinterface.SelectorUI;
 import cross.threebodyship.userinterface.StageUI;
 import cross.threebodyship.userinterface.ThreebodyPanel;
@@ -17,12 +17,11 @@ import cross.threebodyship.util.DisplayPanel;
 
 public class EnterStageButtonListener implements MouseListener {
 	Stage stage = null;
-	MainUI mainUI = null;
-	ThreebodyPanel mainPanel;
+	MainPanel mainPanel;
 	
-	public EnterStageButtonListener(MainUI mainUI, Stage stage) {
+	public EnterStageButtonListener(MainPanel mainPanel, Stage stage) {
 		// TODO Auto-generated constructor stub
-		this.mainUI = mainUI;
+		this.mainPanel = mainPanel;
 		this.stage = stage;
 	}
 
@@ -33,9 +32,15 @@ public class EnterStageButtonListener implements MouseListener {
 		else{
 		stage.game = new Game();
 		stage.game.gameNumber = stage.num;
-		mainUI.stagePanel = new StageUI(mainUI, stage);
-		DisplayPanel.mainDisplay(mainUI, mainUI.stagePanel);
-		mainUI.stagePanel.aat.execute();
+		mainPanel.remove(mainPanel.currentPane);
+		mainPanel.currentPane = null;
+		mainPanel.mainUI.stagePanel = new StageUI(mainPanel, stage);
+		mainPanel.currentPane = mainPanel.mainUI.stagePanel;
+		mainPanel.add(mainPanel.currentPane);
+		mainPanel.currentPane.setVisible(true);
+		mainPanel.revalidate();
+		mainPanel.repaint();
+		mainPanel.mainUI.stagePanel.aat.execute();
 		stage.game.reset();
 		}
 	}
@@ -65,9 +70,9 @@ public class EnterStageButtonListener implements MouseListener {
 	}
 
 	public void displayPanel(JPanel panel) {
-		mainUI.removeAll();
-		mainUI.add(panel);
-		mainUI.revalidate();
-		mainUI.repaint();
+		mainPanel.removeAll();
+		mainPanel.add(panel);
+		mainPanel.revalidate();
+		mainPanel.repaint();
 	}
 }
