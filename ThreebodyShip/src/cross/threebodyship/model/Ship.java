@@ -19,6 +19,9 @@ public class Ship {
 	public boolean outOfBorder = false;
 	public boolean isRound = false;
 	
+	public double roundDegree;
+	public double roundDistance;
+	
 	public Ship(){
 		centerPoint = new Point();
 //		roundStar = new S

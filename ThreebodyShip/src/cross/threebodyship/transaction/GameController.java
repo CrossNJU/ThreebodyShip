@@ -82,10 +82,11 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 				}
 				case KeyEvent.VK_H:{
 					if(game.isInScope){
-					Ship temp = this.game.ship;
-					temp.isRound = true;
-					temp.roundDtheta = temp.getSpeed()*(double)game.getRI()/100/temp.distanceToClosestStar;
-					break;}
+						Ship temp = this.game.ship;
+						temp.isRound = true;
+						temp.roundDtheta = temp.getSpeed()*(double)game.getRI()/100/temp.distanceToClosestStar;
+						break;
+					}
 				}
 				case KeyEvent.VK_Q:{
 					Ship temp = this.game.ship;
