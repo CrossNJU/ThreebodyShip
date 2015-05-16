@@ -7,6 +7,8 @@ public class Star {
 	private Point centerPoint;
 	private int gravityScope;
 	
+	public boolean isExisted = true;
+	
 	public String style = "Normal";
 	
 	public Star(){

@@ -63,7 +63,7 @@ public class Stage extends Observable implements Runnable {
 		try {
 			while (!isBack) {
 				if(game.inGame){
-				if (game.checkWin()) {
+				if (game.isWin) {
 					win();
 					game.inGame = false;
 					break;
