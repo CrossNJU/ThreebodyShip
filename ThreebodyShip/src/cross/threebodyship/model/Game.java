@@ -19,6 +19,7 @@ public class Game extends Observable implements Runnable{
 	public ArrayList<Star> starList;
 	public ArrayList<Planet> planets;
 	public Data data;
+	public ArrayList<Rock> rockList;
 	
 	public double speedChangeRate = 1.15;
 	public static double FchangeRate = 12;
@@ -42,6 +43,7 @@ public class Game extends Observable implements Runnable{
 		winPoint = new Point();
 		starList = new ArrayList<Star>();
 		planets = new ArrayList<Planet>();
+		rockList = new ArrayList<Rock>();
 		ship = new Ship();
 		
 		border.x = 1024;
@@ -265,40 +267,6 @@ public class Game extends Observable implements Runnable{
 				if(nowX - ship.roundStar.getLocation().x<0 && nowY - ship.roundStar.getLocation().y<0)
 					ship.setDegreeToEast(ship.roundDegree + Math.PI*3/2);
 				else ship.setDegreeToEast(ship.roundDegree - Math.PI/2);
-//				double theta2 = Math.atan(vy/vx);
-//		
-//				//修改theta2
-////				System.out.println(ship.getDegreeToEast());
-//				if(ship.getDegreeToEast()<=Math.PI/2){
-////					System.out.println(1);
-////					System.out.println("thetaold:"+Math.toDegrees(theta2));
-//					if(theta2<0) {
-//						if(vx<0) theta2 += Math.PI;
-//						else theta2+=Math.PI*2;
-//					}
-//					ship.setDegreeToEast(theta2);
-//				}
-//				else if(ship.getDegreeToEast()<Math.PI){
-////					System.out.println(2);
-//					if(vx<0) theta2+=Math.PI;
-//					ship.setDegreeToEast(theta2);
-//				}
-//				else if(ship.getDegreeToEast()<Math.PI*3/2){
-////					System.out.println(3);
-//					if(vx>0) theta2+=Math.PI*2;
-//					else theta2+=Math.PI;
-//					ship.setDegreeToEast(theta2);
-//				}
-//				else {
-////					System.out.println(4);
-//					if(theta2>0){
-//						if(vx<0) theta2+=Math.PI; 
-//					}
-//					else theta2+=Math.PI*2;
-////					System.out.println("thetaold:"+Math.toDegrees(ship.getDegreeToEast()));
-//					ship.setDegreeToEast(theta2);
-//				}
-//				System.out.println(nowX+"  "+nowY);
 			}
 		}
 		
