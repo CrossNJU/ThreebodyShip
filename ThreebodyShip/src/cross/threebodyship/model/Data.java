@@ -453,7 +453,48 @@ public class Data {
 		starList.add(starThree);
 		
 	}
-	public void setGame15(){}
+	public void setGame15(){
+		BlackHole blackhole = new BlackHole();
+		SuperStar superOne = new SuperStar();
+		SuperStar superTwo = new SuperStar();
+		Star star = new Star();
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(60);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		//初始化星球
+		blackhole.deadR = 101;
+		blackhole.FaddRate = 1.1;
+		blackhole.style = "BlackHole";
+		blackhole.setLocation(220, 808);
+		blackhole.setSize(410);
+		blackhole.setGravityScope(642);
+		
+		superOne.setLocation(709, 180);
+		superOne.style = "Super";
+		superOne.leftTime = 500;
+		superOne.setSize(180);
+		superOne.setGravityScope(366);
+		
+		superTwo.setLocation(517, 384);
+		superTwo.style = "Super";
+		superTwo.leftTime = 500;
+		superTwo.setSize(184);
+		superTwo.setGravityScope(394);
+		
+		star.setLocation(801, 430);
+		star.setSize(142);
+		star.setGravityScope(342);
+		
+		starList.add(superOne);
+		starList.add(superTwo);
+		starList.add(blackhole);
+		starList.add(star);
+		
+		
+	}
 	public void setGame16(){}
 	public void setGame17(){}
 	public void setGame18(){}
