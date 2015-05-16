@@ -42,7 +42,7 @@ public class Data {
 		
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(100);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -60,7 +60,7 @@ public class Data {
 		Star starTwo = new Star();
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -84,7 +84,7 @@ public class Data {
 		Star starThree = new Star();
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -112,7 +112,7 @@ public class Data {
 		IAFStar starTwo = new IAFStar();
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -141,7 +141,7 @@ public class Data {
 		IAFStar starTwo = new IAFStar();
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -169,7 +169,7 @@ public class Data {
 		Star starThree = new Star();
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -200,7 +200,7 @@ public class Data {
 		BlackHole starOne = new BlackHole();
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -220,7 +220,7 @@ public class Data {
 	public void setGame8(){
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -249,7 +249,7 @@ public class Data {
 		BlackHole starThree = new BlackHole();
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -282,7 +282,7 @@ public class Data {
 		Planet starTwo = new Planet();
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -309,7 +309,7 @@ public class Data {
 		Planet starThree = new Planet();
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -345,7 +345,7 @@ public class Data {
 		Planet starFive = new Planet();
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -397,7 +397,7 @@ public class Data {
 		
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -423,7 +423,7 @@ public class Data {
 		
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(10);
+		ship.setSize(60);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
@@ -447,6 +447,10 @@ public class Data {
 		starThree.setLocation(769, 564);
 		starThree.setSize(214);
 		starThree.setGravityScope(402);
+		
+		starList.add(starOne);
+		starList.add(starTwo);
+		starList.add(starThree);
 		
 	}
 	public void setGame15(){}
