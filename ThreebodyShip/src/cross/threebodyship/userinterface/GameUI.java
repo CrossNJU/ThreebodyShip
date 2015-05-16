@@ -94,6 +94,9 @@ public class GameUI extends JPanel implements Observer{
 		g.drawImage(GB_IMG, 0, 0,MainUI.WIDTH,MainUI.HEIGHT,0,0,1024,768,null);
 
 		paintplanet(g,game.planets);
+		paintstar(g, game.starList);
+//		paintWinArea(g);
+//		paintstartArea(g);
 		paintShip(g,game.ship);
 		if(game.isStarting) {
 			paintPowerTank(g);
@@ -123,7 +126,7 @@ public class GameUI extends JPanel implements Observer{
 	
 	//画获胜区域
 	public void paintWinArea(Graphics g){
-		g.setColor(Color.yellow);
+		g.setColor(new Color(255, 255, 0, 100));
 		
 //		int height = mainCanvas.getHeight();
 //		double r = 690;
@@ -135,12 +138,12 @@ public class GameUI extends JPanel implements Observer{
 	
 	//画开始的发射台
 	public void paintstartArea(Graphics g){
-		g.setColor(Color.yellow);
+		g.setColor(new Color(255, 255, 0, 100));
 		
 		int height = MainUI.HEIGHT;
-		double r = 690;
-		int locationx = -1330;
-		int locationy = (int)(height/2 - r);
+		double r = game.StartingAreaR;
+		int locationx = (int)(game.startingPoint.x -  game.StartingAreaR);
+		int locationy = (int)(game.startingPoint.y -  game.StartingAreaR);
 		
 		g.fillOval(locationx, locationy, (int)r*2, (int)r*2);
 	}

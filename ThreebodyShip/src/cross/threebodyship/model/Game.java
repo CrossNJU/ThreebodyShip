@@ -44,12 +44,12 @@ public class Game extends Observable implements Runnable{
 		
 		border.x = 1024;
 		border.y = 768;
-		startingPoint.x = -640;
+		startingPoint.x = -220;
 		startingPoint.y = border.y/2;
-		winPoint.x = 1670;
+		winPoint.x = 1244;
 		winPoint.y = border.y/2;
-		winAreaR = 690;
-		StartingAreaR = 690;
+		winAreaR = 262;
+		StartingAreaR = 262;
 		
 //		reset();
 	}
@@ -271,7 +271,7 @@ public class Game extends Observable implements Runnable{
 		
 		double dis = Math.sqrt((ship.getLocation().x-winPoint.x)*(ship.getLocation().x-winPoint.x)
 				+(ship.getLocation().y-winPoint.y)*(ship.getLocation().y-winPoint.y));
-		if(dis<winAreaR) return true;
+		if(dis - ship.getSize()/2<winAreaR) return true;
 		else return false;
 	}
 	
