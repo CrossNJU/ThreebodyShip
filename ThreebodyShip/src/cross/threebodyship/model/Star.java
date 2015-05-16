@@ -8,6 +8,7 @@ public class Star {
 	private int gravityScope;
 	
 	public boolean isExisted = true;
+	public boolean canBeRound = true;
 	
 	public String style = "Normal";
 	

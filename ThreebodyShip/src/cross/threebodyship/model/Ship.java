@@ -5,22 +5,21 @@ public class Ship {
 	private Point centerPoint;
 	//直径
 	private int size;
+	
 	private double speed;
 	private double degreeToEast;
 	public double degreeToWest;
-	public double roundDtheta;
-//	private double degreeToStar;
 	private double mass;
-	public double distanceToClosestStar;
-	
-	Star closestStar;
+	public double distanceToNowStar;
 	
 	private boolean isAlive = false;
 	public boolean outOfBorder = false;
-	public boolean isRound = false;
 	
+	public boolean isRound = false;
 	public double roundDegree;
 	public double roundDistance;
+	public double roundDtheta;
+	public Star roundStar = null;
 	
 	public Ship(){
 		centerPoint = new Point();
