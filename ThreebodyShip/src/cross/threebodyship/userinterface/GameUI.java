@@ -101,6 +101,7 @@ public class GameUI extends JPanel implements Observer{
 		if(game.isStarting) {
 			paintPowerTank(g);
 		}
+		
 	}
 	
 
@@ -209,7 +210,7 @@ public class GameUI extends JPanel implements Observer{
 				});
 				
 				try {
-//					Thread.sleep(10);
+					Thread.sleep(10);
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -218,7 +219,7 @@ public class GameUI extends JPanel implements Observer{
 				degree%=360;
 				BufferedImage src;
 				try {
-					src = ImageIO.read(new File("img/Ship/ship.png"));
+					src = ImageIO.read(new File("img/Ship/ship-0.125.png"));
 					ship_img = RotateImage.Rotate(src, degree);  
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

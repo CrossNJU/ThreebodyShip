@@ -64,7 +64,6 @@ public class SelectorUI extends ThreebodyPanel {
 	int bgX = 0;
 	
 	ShineAnimeThread sat = null;
-
 	
 	BufferedImage ship;
 
@@ -188,6 +187,7 @@ public class SelectorUI extends ThreebodyPanel {
         
 		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
 		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0+bgX, 0, 1024+bgX, 768, null);
+		
 		Image shineFirst = new ImageIcon("img/Selector/shine/bg-selector-shine-64.png").getImage();
 		g.drawImage(shineFirst, 0, 0, null);
 		

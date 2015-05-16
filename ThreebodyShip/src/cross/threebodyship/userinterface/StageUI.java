@@ -91,6 +91,9 @@ public class StageUI extends ThreebodyPanel implements Observer {
 		Graphics2D g2d = (Graphics2D) g;  
         g2d.setComposite(AlphaComposite.getInstance(  
                 AlphaComposite.SRC_OVER, alpha));  
+        
+        Image bg_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
+        g.drawImage(bg_img, 0, 0, null);
 		
 	};
 	@Override
@@ -105,7 +108,7 @@ public class StageUI extends ThreebodyPanel implements Observer {
 			add(currentPane);
 			revalidate();
 			repaint();
-			winUI.aat.execute();
+			winUI.waat.execute();
 		}
 
 		if (msg.equals("fail")) {

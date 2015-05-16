@@ -3,6 +3,7 @@ package cross.threebodyship.listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import cross.threebodyship.userinterface.MainUI;
@@ -13,7 +14,7 @@ public class OpaqueDisplayListener implements MouseListener {
 	MainUI mainUI;
 	ThreebodyPanel mainPanel;
 	ThreebodyPanel newpanel;
-//	JudgeThread jt = new JudgeThread();
+	JudgeThread jt = new JudgeThread();
 
 	public OpaqueDisplayListener(ThreebodyPanel mainPanel, ThreebodyPanel newPanel) {
 		// TODO Auto-generated constructor stub
@@ -29,9 +30,10 @@ public class OpaqueDisplayListener implements MouseListener {
 		mainPanel.remove(mainPanel.currentPane);
 		mainPanel.currentPane = newpanel;
 		mainPanel.validate();
-		newpanel.aat.execute();
-//		jt.execute();
+		mainPanel.repaint();
 		
+//		jt.execute();
+		newpanel.aat.execute();
 	}
 
 	@Override
@@ -59,23 +61,32 @@ public class OpaqueDisplayListener implements MouseListener {
 	}
 	
 	
-//	class JudgeThread extends SwingWorker<Boolean, Boolean>{
-//		
-//		@Override
-//		protected Boolean doInBackground() throws Exception {
-//			// TODO Auto-generated method stub
-//			while(true){
-//				if(newpanel.isFinish){
-//					mainUI.remove(mainUI.currentPane);
-//					mainUI.currentPane = newpanel;
-//					mainUI.revalidate();
-//					break;
-//				}
-//			}
-//			
-//			return null;
-//		}
-//		
-//	}
+	class JudgeThread extends SwingWorker<Boolean, Boolean>{
+		
+		@Override
+		protected Boolean doInBackground() throws Exception {
+			// TODO Auto-generated method stub
+			while(true){
+				if(newpanel.isFinish){
+					SwingUtilities.invokeLater(new Runnable() {
+						
+						@Override
+						public void run() {
+							mainPanel.remove(mainPanel.currentPane);
+							mainPanel.currentPane = newpanel;
+							mainPanel.revalidate();
+							mainPanel.repaint();
+							// TODO Auto-generated method stub
+							
+						}
+					});
+					break;
+				}
+			}
+			
+			return null;
+		}
+		
+	}
 
 }

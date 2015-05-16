@@ -1,6 +1,8 @@
 package cross.threebodyship.userinterface;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -10,8 +12,9 @@ import javax.swing.plaf.PanelUI;
 
 import cross.threebodyship.listener.EnterStageButtonListener;
 import cross.threebodyship.listener.MainChangeListener;
+import cross.threebodyship.listener.ResumeButtonListener;
 
-public class PauseUI extends JPanel {
+public class PauseUI extends ThreebodyPanel {
 	JButton restartButton = new JButton();
 	JButton resumeButton = new JButton();
 	JButton menuButton = new JButton();
@@ -30,18 +33,16 @@ public class PauseUI extends JPanel {
 		setBackground(null);
 
 		setButton(menuButton, "menu");
-		menuButton.setBounds((int) (MainUI.WIDTH * 0.532),
-				(int) (MainUI.HEIGHT * 0.437), 99, 99);
+		menuButton.setBounds(289, 322, 99, 99);
 		menuButton.addMouseListener(new MainChangeListener(stageUI.mainUI,
 				stageUI.mainUI.selectorPanel));
 
 		setButton(resumeButton, "resume");
-		resumeButton.setBounds((int) (MainUI.WIDTH * 0.5 - 95),
-				(int) (MainUI.HEIGHT * 0.5 - 95), 190, 190);
+		resumeButton.setBounds(403, 277, 190, 190);
+		resumeButton.addMouseListener(new ResumeButtonListener(stageUI.gamePanel, this));
 
 		setButton(restartButton, "restart");
-		restartButton.setBounds(MainUI.WIDTH - 339,
-				(int) (MainUI.HEIGHT * 0.437), 99, 99);
+		restartButton.setBounds(600, 322, 99, 99);
 		restartButton.addMouseListener(new EnterStageButtonListener(
 				stageUI.mainUI, stageUI.stage));
 
@@ -52,6 +53,10 @@ public class PauseUI extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+				alpha));
+
 		Image img = new ImageIcon("img/GameBackground/cover-40.png").getImage();
 
 		g.drawImage(img, 0, 0, null);

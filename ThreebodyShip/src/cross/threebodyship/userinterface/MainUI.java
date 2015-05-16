@@ -2,6 +2,7 @@ package cross.threebodyship.userinterface;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -16,6 +17,7 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 
 
 
@@ -36,6 +38,8 @@ public class MainUI extends JFrame {
 	public StageUI stagePanel;
 	public final static int WIDTH = 1024;
 	public final static int HEIGHT = 768;
+	
+//	Container contentPane;
 	
 	public int oldX;
 	public int oldY;

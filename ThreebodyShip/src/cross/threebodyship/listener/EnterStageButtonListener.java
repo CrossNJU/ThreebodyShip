@@ -5,18 +5,21 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import cross.threebodyship.model.Game;
 import cross.threebodyship.model.Stage;
 import cross.threebodyship.userinterface.MainUI;
 import cross.threebodyship.userinterface.SelectorUI;
 import cross.threebodyship.userinterface.StageUI;
+import cross.threebodyship.userinterface.ThreebodyPanel;
 import cross.threebodyship.util.DisplayPanel;
 
 public class EnterStageButtonListener implements MouseListener {
 	Stage stage = null;
 	MainUI mainUI = null;
-
+	ThreebodyPanel mainPanel;
+	
 	public EnterStageButtonListener(MainUI mainUI, Stage stage) {
 		// TODO Auto-generated constructor stub
 		this.mainUI = mainUI;
