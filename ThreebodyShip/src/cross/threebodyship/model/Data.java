@@ -127,7 +127,7 @@ public class Data {
 		starOne.setGravityScope(454);
 		
 		starTwo.style = "IAF";
-		starTwo.SpeedChangeRate = 1.5;
+		starTwo.SpeedChangeRate = 1.3;
 		starTwo.setLocation(679,337);
 		starTwo.setSize(326);
 		starTwo.setGravityScope(628);
@@ -549,7 +549,7 @@ public class Data {
 		rocks.add(rock);
 		
 	}
-	public void setGame17(){
+	public void setGame18(){
 		Star starOne = new Star();
 		IAFStar ice = new IAFStar();
 		IAFStar fire = new IAFStar();
@@ -617,7 +617,68 @@ public class Data {
 		rocks.add(rockFour);
 	}
 	
-	public void setGame18(){}
+	public void setGame17(){
+		Rock rockOne = new Rock();
+		Rock rockTwo = new Rock();
+		Rock rockThree = new Rock();
+		Rock rockFour = new Rock();
+		Star starOne = new Star();
+		Star starTwo = new Star();
+		Star starThree = new Star();
+		Planet planet = new Planet();
+		
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(50);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		
+		//初始化星球
+		starOne.setLocation(512, 174);
+		starOne.setSize(174);
+		starOne.setGravityScope(386);
+		
+		starTwo.setLocation(257, 560);
+		starTwo.setSize(170);
+		starTwo.setGravityScope(390);
+		
+		starThree.setLocation(777, 560);
+		starThree.setSize(184);
+		starThree.setGravityScope(406);
+		
+		planet.location.x = 420;
+		planet.location.y = 269;
+		planet.roundR = 132;
+		planet.roundStar = starOne;
+		planet.size = 66;
+		planet.speed = 20;
+		
+		rockOne.location.x = 225;
+		rockOne.location.y = 174;
+		rockOne.size = 72;
+		
+		rockTwo.location.x = 819;
+		rockTwo.location.y = 174;
+		rockTwo.size = 72;
+		
+		rockThree.location.x = 512;
+		rockThree.location.y = 420;
+		rockThree.size = 72;
+		
+		rockFour.location.x = 512;
+		rockFour.location.y = 614;
+		rockFour.size = 72;
+		
+		starList.add(starThree);
+		starList.add(starOne);
+		starList.add(starTwo);
+		planets.add(planet);
+		rocks.add(rockThree);
+		rocks.add(rockOne);
+		rocks.add(rockTwo);
+		rocks.add(rockFour);
+	}
 	
 }
 //>>>>>>> origin/master
