@@ -60,10 +60,10 @@ public class Game extends Observable implements Runnable{
 	
 	//飞行轨迹计算
 	public void update(){
-		
-		System.out.println("d to e:"+Math.toDegrees(ship.getDegreeToEast()));
-		System.out.println("d to w:"+Math.toDegrees(ship.degreeToWest));
-		System.out.println();
+//		
+//		System.out.println("d to e:"+Math.toDegrees(ship.getDegreeToEast()));
+//		System.out.println("d to w:"+Math.toDegrees(ship.degreeToWest));
+//		System.out.println();
 		
 		//正常情况下飞船轨迹
 		double nowX = ship.getLocation().x;

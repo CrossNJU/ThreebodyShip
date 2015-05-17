@@ -24,11 +24,15 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+
+
 //import cross.threebodyship.listener.PauseButtonListener;
 import cross.threebodyship.model.Game;
 import cross.threebodyship.model.Planet;
+import cross.threebodyship.model.Rock;
 import cross.threebodyship.model.Ship;
 import cross.threebodyship.model.Star;
+import cross.threebodyship.model.SuperStar;
 import cross.threebodyship.transaction.GameController;
 import cross.threebodyship.util.RotateImage;
 
@@ -161,13 +165,21 @@ public class GameUI extends ThreebodyPanel implements Observer{
 		
 		for(int i=0;i<starList.size();i++){
 			
-			g.setColor(new Color(0,255,0,100));
+			double alpha = 100;
+			
+			if(starList.get(i).style.equals("Super")){
+				SuperStar superStar = (SuperStar)starList.get(i);
+				alpha = superStar.leftTime *0.5;
+				
+			}
+			
+			g.setColor(new Color(0,255,0,(int)alpha));
 		g.fillOval((int)(starList.get(i).getLocation().x-starList.get(i).getGravityScope()/2), 
 				(int)(starList.get(i).getLocation().y-starList.get(i).getGravityScope()/2),
 				starList.get(i).getGravityScope(),
 				starList.get(i).getGravityScope());
 			
-		g.setColor(new Color(0, 0, 0, 100));
+		g.setColor(new Color(0, 0, 0, (int)alpha));
 			
 		g.fillOval((int)(starList.get(i).getLocation().x-starList.get(i).getSize()/2),
 				(int)(starList.get(i).getLocation().y-starList.get(i).getSize()/2),
@@ -185,6 +197,15 @@ public class GameUI extends ThreebodyPanel implements Observer{
 					, planet.size, planet.size);
 		}
 		
+	}
+	
+	public void paintRocks(Graphics g, ArrayList<Rock> rocks){
+		g.setColor(Color.blue);
+		
+		for (int i = 0; i < rocks.size(); i++) {
+			Rock rock = rocks.get(i);
+			g.fillOval((int)(rock.location.x - rock.size/2), (int)(rock.location.y - rock.size/2), (int)rock.size, (int)rock.size);
+		}
 	}
 		
 	//画飞船
