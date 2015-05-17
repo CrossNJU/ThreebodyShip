@@ -495,8 +495,88 @@ public class Data {
 		
 		
 	}
-	public void setGame16(){}
-	public void setGame17(){}
+	public void setGame16(){
+		Star starOne = new Star();
+		SuperStar superStar = new SuperStar();
+		Rock rock = new Rock();
+		Planet planetOne = new Planet();
+		Planet planetTwo = new Planet();
+		
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(60);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		//初始化星球
+		
+		superStar.setLocation(204, 180);
+		superStar.setSize(200);
+		superStar.setGravityScope(408);
+		superStar.leftTime = 5;
+		superStar.style = "Super";
+		
+		rock.location.x = 233;
+		rock.location.y = 536;
+		rock.size = 106;
+		
+		starOne.setLocation(648, 385);
+		starOne.setSize(260);
+		starOne.setGravityScope(590);
+		
+		planetOne.location.x = 782;
+		planetOne.location.y = 212;
+		planetOne.size = 88;
+		planetOne.roundR = 219;
+		planetOne.roundStar = starOne;
+		planetOne.speed = 20;
+		
+		planetTwo.location.x = 519;
+		planetTwo.location.y = 562;
+		planetTwo.size = 88;
+		planetTwo.roundR = 219;
+		planetTwo.roundStar = starOne;
+		planetTwo.speed = 20;
+		
+		starList.add(superStar);
+		starList.add(starOne);
+		
+		planets.add(planetOne);
+		planets.add(planetTwo);
+		
+	}
+	public void setGame17(){
+		Star starOne = new Star();
+		Star starTwo = new Star();
+		IAFStar starThree = new IAFStar();
+		
+		//初始化飞船
+		ship.setMass(1000);
+		ship.setSize(60);
+		ship.setSpeed(4);
+		ship.setState(true);
+		ship.outOfBorder = false;
+		//初始化星球
+		starOne.setSize(166);
+		starOne.setLocation(496, 184);
+		starOne.setGravityScope(356);
+		
+		starTwo.setLocation(327, 448);
+		starTwo.setSize(186);
+		starTwo.setGravityScope(362);
+		
+		starThree.style = "IAF";
+		starThree.setSize(204);
+		starThree.setGravityScope(402);
+		starThree.SpeedChangeRate = 0.7;
+		starThree.setLocation(693, 470);
+		
+		starList.add(starOne);
+		starList.add(starTwo);
+		starList.add(starThree);
+		
+	}
+	
 	public void setGame18(){}
 	
 }
