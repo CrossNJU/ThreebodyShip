@@ -105,6 +105,7 @@ public class GameUI extends ThreebodyPanel implements Observer{
 		
 		paintplanet(g,game.planets);
 		paintstar(g, game.starList);
+		paintRocks(g, game.rockList);
 //		paintWinArea(g);
 //		paintstartArea(g);
 		paintShip(g,game.ship);
@@ -169,7 +170,7 @@ public class GameUI extends ThreebodyPanel implements Observer{
 			
 			if(starList.get(i).style.equals("Super")){
 				SuperStar superStar = (SuperStar)starList.get(i);
-				alpha = superStar.leftTime *0.5;
+				alpha = superStar.leftTime *50;
 				
 			}
 			

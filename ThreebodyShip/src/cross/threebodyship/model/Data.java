@@ -136,8 +136,6 @@ public class Data {
 		starList.add(starTwo);
 	}
 	
-
-	
 	public void setGame5(){
 		IAFStar starOne = new IAFStar();
 		IAFStar starTwo = new IAFStar();
@@ -279,6 +277,7 @@ public class Data {
 		starList.add(starTwo);
 		starList.add(starThree);
 	}
+	
 	public void setGame10(){
 		Star starOne = new Star();
 		Planet starTwo = new Planet();
@@ -393,6 +392,7 @@ public class Data {
 		planets.add(starFour);
 		planets.add(starFive);
 	}
+
 	public void setGame13(){
 		Star starOne = new Star();
 		SuperStar starTwo = new SuperStar();
@@ -418,6 +418,7 @@ public class Data {
 		starList.add(starTwo);
 		
 	}
+
 	public void setGame14(){
 		SuperStar starOne = new SuperStar();
 		IAFStar starTwo = new IAFStar();
@@ -476,13 +477,13 @@ public class Data {
 		
 		superOne.setLocation(709, 180);
 		superOne.style = "Super";
-		superOne.leftTime = 500;
+		superOne.leftTime = 5;
 		superOne.setSize(180);
 		superOne.setGravityScope(366);
 		
 		superTwo.setLocation(517, 384);
 		superTwo.style = "Super";
-		superTwo.leftTime = 500;
+		superTwo.leftTime = 5;
 		superTwo.setSize(184);
 		superTwo.setGravityScope(394);
 		
@@ -550,35 +551,70 @@ public class Data {
 	}
 	public void setGame17(){
 		Star starOne = new Star();
-		Star starTwo = new Star();
-		IAFStar starThree = new IAFStar();
+		IAFStar ice = new IAFStar();
+		IAFStar fire = new IAFStar();
+		Planet planet = new Planet();
+		Rock rockOne = new Rock();
+		Rock rockTwo = new Rock();	
+		Rock rockThree = new Rock();	
+		Rock rockFour = new Rock();
 		
 		//初始化飞船
 		ship.setMass(1000);
-		ship.setSize(60);
+		ship.setSize(50);
 		ship.setSpeed(4);
 		ship.setState(true);
 		ship.outOfBorder = false;
 		//初始化星球
-		starOne.setSize(166);
-		starOne.setLocation(496, 184);
-		starOne.setGravityScope(356);
+		starOne.setSize(184);
+		starOne.setLocation(290, 472);
+		starOne.setGravityScope(364);
 		
-		starTwo.setLocation(327, 448);
-		starTwo.setSize(186);
-		starTwo.setGravityScope(362);
+		ice.style = "IAF";
+		ice.SpeedChangeRate = 0.7;
+		ice.setLocation(496, 187);
+		ice.setSize(194);
+		ice.setGravityScope(384);
 		
-		starThree.style = "IAF";
-		starThree.setSize(204);
-		starThree.setGravityScope(402);
-		starThree.SpeedChangeRate = 0.7;
-		starThree.setLocation(693, 470);
+		fire.style = "IAF";
+		fire.SpeedChangeRate = 1.4;
+		fire.setLocation(754, 534);
+		fire.setSize(164);
+		fire.setGravityScope(356);
 		
+		planet.location.x = 862;
+		planet.location.y = 470;
+		planet.roundR = 125;
+		planet.roundStar = fire;
+		planet.size = 70;
+		planet.speed = 20;
+		
+		rockOne.location.x = 760;
+		rockOne.location.y = 179;
+		rockOne.size = 76;
+		
+		rockTwo.location.x = 541;
+		rockTwo.location.y = 422;
+		rockTwo.size = 76;
+		
+		rockThree.location.x = 522;
+		rockThree.location.y = 675;
+		rockThree.size = 76;
+		
+		rockFour.location.x = 62;
+		rockFour.location.y = 498;
+		rockFour.size = 40;
+		
+		starList.add(fire);
+		starList.add(ice);
 		starList.add(starOne);
-		starList.add(starTwo);
-		starList.add(starThree);
 		
+		planets.add(planet);
 		
+		rocks.add(rockThree);
+		rocks.add(rockOne);
+		rocks.add(rockTwo);
+		rocks.add(rockFour);
 	}
 	
 	public void setGame18(){}
