@@ -185,7 +185,8 @@ public class Game extends Observable implements Runnable{
 							(ship.getLocation().y-ship.roundStar.getLocation().y)*
 							(ship.getLocation().y-ship.roundStar.getLocation().y)
 							);
-				}else {
+				}else 
+				if(nowStar.canBeRound){
 					if(ship.roundStar.equals(nowStar)) ship.roundDegree = ship.degreeToWest;
 				}
 				

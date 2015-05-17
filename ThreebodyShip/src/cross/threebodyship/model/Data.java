@@ -477,15 +477,17 @@ public class Data {
 		
 		superOne.setLocation(709, 180);
 		superOne.style = "Super";
-		superOne.leftTime = 5;
+		superOne.leftTime = 7;
 		superOne.setSize(180);
 		superOne.setGravityScope(366);
+		superOne.canBeRound = true;
 		
 		superTwo.setLocation(517, 384);
 		superTwo.style = "Super";
 		superTwo.leftTime = 5;
 		superTwo.setSize(184);
 		superTwo.setGravityScope(394);
+		superTwo.canBeRound = false;
 		
 		star.setLocation(801, 430);
 		star.setSize(142);
