@@ -162,11 +162,14 @@ public class Game extends Observable implements Runnable{
 				if(!ship.isRound && nowStar.canBeRound){
 					ship.roundStar = nowStar;
 					
-					if((ship.getLocation().y>ship.roundStar.getLocation().y && 
+					if((ship.getLocation().y<ship.roundStar.getLocation().y && 
 							(ship.getDegreeToEast() - ship.degreeToWest > 0 && ship.getDegreeToEast() - ship.degreeToWest < Math.PI)) || 
 					   (ship.getLocation().y>ship.roundStar.getLocation().y && 
 							(ship.degreeToWest - ship.getDegreeToEast() < 0 || ship.degreeToWest - ship.getDegreeToEast() > Math.PI)))
 						ship.roundDirection = -1;
+					else {
+						ship.roundDirection = 1;
+					}
 					
 					ship.roundDegree = ship.degreeToWest;
 					ship.roundDistance = Math.sqrt((ship.getLocation().x-ship.roundStar.getLocation().x)*
