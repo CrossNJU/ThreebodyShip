@@ -18,12 +18,13 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import cross.threebodyship.listener.ExitButtonListener;
-import cross.threebodyship.model.ExitButton;
+import cross.threebodyship.model.Point;
+import cross.threebodyship.model.RoundButton;
 
 public class StarterUI extends ThreebodyPanel {
 	public JButton startGameButton = new JButton();
-	public ExitButton exitButton = new ExitButton();
-	public JButton aboutButton = new JButton();
+	public RoundButton exitButton = new RoundButton();
+	public RoundButton aboutButton = new RoundButton();
 	MainUI mainUI = null;
 	int i = 0;
 	int j = 50;
@@ -57,7 +58,7 @@ public class StarterUI extends ThreebodyPanel {
 		exitButton.setBorderPainted(false);
 		exitButton.addMouseListener(new ExitButtonListener(mainUI));
 		
-		aboutButton.setBounds(529, 427, 92, 92);
+//		aboutButton.setBounds(529, 427, 92, 92);
 		aboutButton.setIcon(new ImageIcon("img/Button/btn-about-normal.png"));
 		aboutButton.setRolloverIcon(new ImageIcon("img/Button/btn-about-hover.png"));
 		aboutButton.setFocusable(false);
@@ -71,20 +72,13 @@ public class StarterUI extends ThreebodyPanel {
 		bat = new BackgroundAnimeThread();
 		
 		Thread exitButtonThread = new Thread(exitButton);
-		exitButton.isRound = true;
-		exitButton.location.x = 857.5;
-		exitButton.location.y = 587.5;
-		exitButton.roundPoint.x = 757;
-		exitButton.roundPoint.y = 421;
-		exitButton.r = Math.sqrt((exitButton.location.x-exitButton.roundPoint.x)*
-				(exitButton.location.x-exitButton.roundPoint.x)+
-				(exitButton.location.y-exitButton.roundPoint.y)*
-				(exitButton.location.y-exitButton.roundPoint.y));
-		exitButton.size = 75;
-		exitButton.speed = 5;
-		exitButton.refreshTime = 10;
+		Thread aboutButtonThread = new Thread(aboutButton);
+		exitButton.setData(new Point(820,550), new Point(757, 421), 75, 0);
+		aboutButton.setData(new Point(529,427), new Point(757, 421), 92, Math.PI);
+		
 		
 		exitButtonThread.start();
+		aboutButtonThread.start();
 //		bat.execute();
 	}
 

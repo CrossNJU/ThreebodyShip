@@ -2,7 +2,8 @@ package cross.threebodyship.model;
 
 import javax.swing.JButton;
 
-public class ExitButton extends JButton implements Runnable{
+@SuppressWarnings("serial")
+public class RoundButton extends JButton implements Runnable{
 	
 	public Point location;
 	public double size;
@@ -16,10 +17,26 @@ public class ExitButton extends JButton implements Runnable{
 	
 	public boolean isRound = false;
 	
-	public ExitButton(){
+	public RoundButton(){
 		location = new Point();
 		roundPoint = new Point();
 		
+	}
+	
+	public void setData(Point p1, Point p2, double size, double theta){
+		isRound = true;
+		location.x = p1.x + size/2;
+		location.y = p1.y + size/2;
+		roundPoint.x = p2.x;
+		roundPoint.y = p2.y;
+		r = Math.sqrt((location.x-roundPoint.x)*
+				(location.x-roundPoint.x)+
+				(location.y-roundPoint.y)*
+				(location.y-roundPoint.y));
+		this.size = size;
+		speed = 5;
+		refreshTime = 10;
+		nowtheta = theta;
 	}
 	
 	public void run() {
