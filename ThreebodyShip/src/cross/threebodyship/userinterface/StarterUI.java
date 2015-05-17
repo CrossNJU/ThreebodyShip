@@ -57,6 +57,7 @@ public class StarterUI extends ThreebodyPanel {
 		exitButton.setBorderPainted(false);
 		exitButton.addMouseListener(new ExitButtonListener(mainUI));
 		
+		aboutButton.setBounds(529, 427, 92, 92);
 		aboutButton.setIcon(new ImageIcon("img/Button/btn-about-normal.png"));
 		aboutButton.setRolloverIcon(new ImageIcon("img/Button/btn-about-hover.png"));
 		aboutButton.setFocusable(false);
