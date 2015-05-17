@@ -23,6 +23,7 @@ import cross.threebodyship.model.ExitButton;
 public class StarterUI extends ThreebodyPanel {
 	public JButton startGameButton = new JButton();
 	public ExitButton exitButton = new ExitButton();
+	public JButton aboutButton = new JButton();
 	MainUI mainUI = null;
 	int i = 0;
 	int j = 50;
@@ -55,9 +56,17 @@ public class StarterUI extends ThreebodyPanel {
 		exitButton.setContentAreaFilled(false);
 		exitButton.setBorderPainted(false);
 		exitButton.addMouseListener(new ExitButtonListener(mainUI));
-
+		
+		aboutButton.setIcon(new ImageIcon("img/Button/btn-about-normal.png"));
+		aboutButton.setRolloverIcon(new ImageIcon("img/Button/btn-about-hover.png"));
+		aboutButton.setFocusable(false);
+		aboutButton.setContentAreaFilled(false);
+		aboutButton.setBorderPainted(false);
+		
+		
 		add(startGameButton);
 		add(exitButton);
+		add(aboutButton);
 		bat = new BackgroundAnimeThread();
 		
 		Thread exitButtonThread = new Thread(exitButton);
