@@ -9,10 +9,12 @@ public class Data {
 	public ArrayList<Star> starList;
 	public Ship ship;
 	public ArrayList<Planet> planets;
+	public ArrayList<Rock> rocks;
 	
 	public Data(int gameNumber){
 		starList = new ArrayList<Star>();
 		planets = new ArrayList<Planet>();
+		rocks = new ArrayList<Rock>();
 		ship = new Ship();
 		
 		switch(gameNumber){

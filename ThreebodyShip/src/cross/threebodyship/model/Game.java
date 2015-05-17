@@ -197,6 +197,19 @@ public class Game extends Observable implements Runnable{
 			}
 		}
 		
+		//计算是否撞到陨石
+		for (int i = 0; i < rockList.size(); i++) {
+			double distance = Math.sqrt((ship.getLocation().x-rockList.get(i).location.x)*
+					(ship.getLocation().x-rockList.get(i).location.x)+
+					(ship.getLocation().y-rockList.get(i).location.y)*
+					(ship.getLocation().y-rockList.get(i).location.y));
+			if(distance - ship.getSize()/2<rockList.get(i).size/2){
+				this.isFailed = true;
+				ship.setState(false);
+				break;
+			}
+		}
+		
 		//如果进入引力区
 		if((isInScope)&&(!ship.isRound)){
 			//计算速度，加速度，位移
@@ -288,6 +301,7 @@ public class Game extends Observable implements Runnable{
 		ship = data.ship;
 		starList = data.starList;
 		planets = data.planets;
+		rockList = data.rocks;
 		
 		//启动planets线程
 		for(int i = 0; i<planets.size(); i++){
@@ -362,6 +376,10 @@ public class Game extends Observable implements Runnable{
 				this.setChanged();
 				this.notifyObservers();
 			}
+		}
+		
+		for (int i = 0; i < planets.size(); i++) {
+			planets.get(i).stop = true;
 		}
 		
 		this.setState(false);
