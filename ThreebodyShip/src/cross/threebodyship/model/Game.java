@@ -157,9 +157,17 @@ public class Game extends Observable implements Runnable{
 					if(ship.getLocation().x>starList.get(i).getLocation().x)
 						ship.degreeToWest += Math.PI;
 				}
-
+				
+				//可环绕性
 				if(!ship.isRound && nowStar.canBeRound){
 					ship.roundStar = nowStar;
+					
+					if((ship.getLocation().y>ship.roundStar.getLocation().y && 
+							(ship.getDegreeToEast() - ship.degreeToWest > 0 && ship.getDegreeToEast() - ship.degreeToWest < Math.PI)) || 
+					   (ship.getLocation().y>ship.roundStar.getLocation().y && 
+							(ship.degreeToWest - ship.getDegreeToEast() < 0 || ship.degreeToWest - ship.getDegreeToEast() > Math.PI)))
+						ship.roundDirection = -1;
+					
 					ship.roundDegree = ship.degreeToWest;
 					ship.roundDistance = Math.sqrt((ship.getLocation().x-ship.roundStar.getLocation().x)*
 							(ship.getLocation().x-ship.roundStar.getLocation().x)+
@@ -273,13 +281,19 @@ public class Game extends Observable implements Runnable{
 //				System.out.println("dtheat:"+ship.roundDtheta);
 				
 				nowX = ship.roundStar.getLocation().x + ship.roundDistance*
-						Math.cos(ship.roundDegree+Math.PI+ship.roundDtheta);
+						Math.cos(ship.roundDegree+Math.PI+ship.roundDirection*ship.roundDtheta);
 				nowY = ship.roundStar.getLocation().y + ship.roundDistance*
-						Math.sin(ship.roundDegree+Math.PI+ship.roundDtheta);
+						Math.sin(ship.roundDegree+Math.PI+ship.roundDirection*ship.roundDtheta);
 				
-				if(nowX - ship.roundStar.getLocation().x<0 && nowY - ship.roundStar.getLocation().y<0)
-					ship.setDegreeToEast(ship.roundDegree + Math.PI*3/2);
-				else ship.setDegreeToEast(ship.roundDegree - Math.PI/2);
+				if(ship.roundDirection == 1){
+					if(nowX - ship.roundStar.getLocation().x<0 && nowY - ship.roundStar.getLocation().y<0)
+						ship.setDegreeToEast(ship.roundDegree + Math.PI*3/2);
+					else ship.setDegreeToEast(ship.roundDegree - Math.PI/2);
+				}else {
+					if(nowX - ship.roundStar.getLocation().x<0 && nowY - ship.roundStar.getLocation().y>0)
+						ship.setDegreeToEast(ship.roundDegree - Math.PI*3/2);
+					else ship.setDegreeToEast(ship.roundDegree + Math.PI/2);
+				}
 			}
 		}
 		
@@ -299,6 +313,7 @@ public class Game extends Observable implements Runnable{
 		data = new Data(gameNumber);
 		
 		ship = data.ship;
+		ship.setLocation(-ship.getSize()*2, -ship.getSize()*2);
 		starList = data.starList;
 		planets = data.planets;
 		rockList = data.rocks;

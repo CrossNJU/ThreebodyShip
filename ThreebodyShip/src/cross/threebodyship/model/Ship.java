@@ -16,6 +16,7 @@ public class Ship {
 	public boolean outOfBorder = false;
 	
 	public boolean isRound = false;
+	public double roundDirection = 1;
 	public double roundDegree;
 	public double roundDistance;
 	public double roundDtheta;
@@ -23,6 +24,7 @@ public class Ship {
 	
 	public Ship(){
 		centerPoint = new Point();
+//		setLocation(-2*getSize(), -2*getSize());
 //		roundStar = new S
 //		this.mass = 10*Math.PI*4/3*size*size*size;
 	}
