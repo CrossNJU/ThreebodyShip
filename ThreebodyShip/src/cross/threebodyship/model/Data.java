@@ -545,6 +545,7 @@ public class Data {
 		
 		planets.add(planetOne);
 		planets.add(planetTwo);
+		rocks.add(rock);
 		
 	}
 	public void setGame17(){
@@ -576,6 +577,7 @@ public class Data {
 		starList.add(starOne);
 		starList.add(starTwo);
 		starList.add(starThree);
+		
 		
 	}
 	

@@ -44,12 +44,10 @@ public class Mode {
 			addStage(new Stage("cr"));
 			addStage(new Stage("crr"));
 			addStage(new Stage("crrr"));
-			addStage(new Stage("Game13"));
-			addStage(new Stage("Game14"));
-			addStage(new Stage("Game15"));
 			addStage(new Stage("Game16"));
 			addStage(new Stage("Game17"));
 			addStage(new Stage("Game18"));
+		
 		}
 	}
 	

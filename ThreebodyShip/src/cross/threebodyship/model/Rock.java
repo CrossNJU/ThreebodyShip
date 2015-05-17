@@ -5,6 +5,6 @@ public class Rock {
 	public Point location;
 	
 	public Rock(){
-		
+		location = new Point();
 	}
 }
