@@ -83,18 +83,23 @@ public class Game extends Observable implements Runnable{
 			if(starList.get(i).isExisted) nowStar = starList.get(i);
 			else continue;
 			
-			//刷新超新星时间
-			if(nowStar.style.equals("Super")){
-				SuperStar superStar = (SuperStar)starList.get(i);
-				if(superStar.leftTime>0) superStar.leftTime -= (double)refreshInterval/100;
-			}
-			
 			//计算飞船与当前星球距离
 			ship.distanceToNowStar = Math.sqrt((ship.getLocation().x-nowStar.getLocation().x)*
 				(ship.getLocation().x-nowStar.getLocation().x)+
 				(ship.getLocation().y-nowStar.getLocation().y)*
 				(ship.getLocation().y-nowStar.getLocation().y)
 				);
+			
+			//刷新超新星时间
+			if(nowStar.style.equals("Super")){
+				SuperStar superStar = (SuperStar)starList.get(i);
+				if(superStar.leftTime>0) superStar.leftTime -= (double)refreshInterval/1000;
+				else {
+					superStar.isExisted = false;
+					if(ship.distanceToNowStar<superStar.getGravityScope()/2)
+						ship.setState(false);
+				}
+			}
 			
 			//判定是否撞上星球
 			if(ship.distanceToNowStar-ship.getSize()/2<starList.get(i).getSize()/2){
@@ -144,7 +149,10 @@ public class Game extends Observable implements Runnable{
 				
 //				if(starList.get(i).style.equals("Super")){
 //					SuperStar superStar = (SuperStar)starList.get(i);
-//					if(superStar.leftTime <= 0) ship.setState(false);
+//					if(superStar.leftTime <= 0) {
+//						ship.setState(false);
+//						superStar
+//					}
 //				}
 			
 				//计算星球飞船连线与正西方向顺时针的夹角

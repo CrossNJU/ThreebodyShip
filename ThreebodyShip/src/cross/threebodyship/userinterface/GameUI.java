@@ -171,16 +171,23 @@ public class GameUI extends ThreebodyPanel implements Observer{
 			if(starList.get(i).style.equals("Super")){
 				SuperStar superStar = (SuperStar)starList.get(i);
 				alpha = superStar.leftTime *50;
-				
+				if(alpha<0) alpha = 0;
 			}
-			
-			g.setColor(new Color(0,255,0,(int)alpha));
+			try {
+				g.setColor(new Color(0,255,0,(int)alpha));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		g.fillOval((int)(starList.get(i).getLocation().x-starList.get(i).getGravityScope()/2), 
 				(int)(starList.get(i).getLocation().y-starList.get(i).getGravityScope()/2),
 				starList.get(i).getGravityScope(),
 				starList.get(i).getGravityScope());
-			
-		g.setColor(new Color(0, 0, 0, (int)alpha));
+			try {
+
+				g.setColor(new Color(0, 0, 0, (int)alpha));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 			
 		g.fillOval((int)(starList.get(i).getLocation().x-starList.get(i).getSize()/2),
 				(int)(starList.get(i).getLocation().y-starList.get(i).getSize()/2),

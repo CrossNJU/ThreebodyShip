@@ -6,15 +6,19 @@ public class Ship {
 	//直径
 	private int size;
 	
+	//基本属性
 	private double speed;
 	private double degreeToEast;
 	public double degreeToWest;
 	private double mass;
+	
 	public double distanceToNowStar;
 	
+	//出界或不存在（superstar）的判定
 	private boolean isAlive = false;
 	public boolean outOfBorder = false;
 	
+	//环绕参数
 	public boolean isRound = false;
 	public double roundDirection = 1;
 	public double roundDegree;
