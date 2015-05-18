@@ -34,7 +34,7 @@ public class BeforeUI extends ThreebodyPanel {
 		
 		stageTitle.setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
 		stageTitle.setIcon(new ImageIcon(
-				"img/GameBackground/cover-stage" + stageUI.stage.num + "-before.png"));
+				"img/Before/cover-before-stage" + stageUI.stage.num + ".png"));
 		stageTitle.setVisible(true);
 		stageTitle.addMouseListener(new StageStartButtonListener(stageUI,this));
 		

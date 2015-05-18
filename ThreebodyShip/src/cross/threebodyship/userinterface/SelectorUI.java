@@ -40,6 +40,8 @@ import org.omg.CORBA.ULongLongSeqHelper;
 
 import cross.threebodyship.listener.ModeButtonListener;
 import cross.threebodyship.listener.EnterStageButtonListener;
+import cross.threebodyship.listener.OpaqueDisplayListener;
+import cross.threebodyship.listener.PauseButtonListener;
 import cross.threebodyship.listener.ScrollListener;
 import cross.threebodyship.model.Mode;
 import cross.threebodyship.model.Selector;
@@ -54,6 +56,8 @@ public class SelectorUI extends ThreebodyPanel {
 	ArrayList<JButton> modeButton = new ArrayList<JButton>();
 	ArrayList<Component> modePane = new ArrayList<Component>();
 	public Component currentPane = null;// 存放当前的PANEL
+	
+	JButton backButton = new JButton();
 	
 	int degree = 0;
 	
@@ -87,14 +91,24 @@ public class SelectorUI extends ThreebodyPanel {
 		setBackground(null);
 		setOpaque(false);
 		
+		backButton = new JButton();
+		backButton.setBounds(924, 668, 70, 70);
+		backButton.setIcon(new ImageIcon("img/Button/btn-back-normal.png"));
+		backButton.setRolloverIcon(new ImageIcon("img/Button/btn-back-hover.png"));
+		backButton.setContentAreaFilled(false);
+		backButton.setBorderPainted(false);
+		backButton.setFocusPainted(false);
+		backButton.addMouseListener(new OpaqueDisplayListener(mainPanel, mainPanel.starterUI));
+		add(backButton);
+		
 		// 将Selector中的按钮与模式添加到UI中
 		setModeButton();
 		setModePanel();
 		
 		// 加入模式按钮
 		for (int i = 0; i < modeButton.size(); i++) {
-			modeButton.get(i).setBounds((int) (frameWidth * 0.05),
-					(int) (frameHeight * 0.2 * (i + 1)), 276, 67);
+			modeButton.get(i).setBounds((int) (frameWidth * 0.05)-20,
+					222+67*i, 276, 67);
 			modeButton.get(i).setVisible(true);
 			modeButton.get(i).addMouseListener(
 					new ModeButtonListener(this, modePane.get(i)));

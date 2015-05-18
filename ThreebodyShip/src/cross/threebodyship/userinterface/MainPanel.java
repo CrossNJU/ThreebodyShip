@@ -47,7 +47,7 @@ public class MainPanel extends ThreebodyPanel {
 	}
 	
 	public void paintComponent(Graphics g){
-		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
+		Image B_img = new ImageIcon("img/GameBackground/bg.png").getImage();
 		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0 + bgX, 0,
 				1024 + bgX, 768, null);
 	}

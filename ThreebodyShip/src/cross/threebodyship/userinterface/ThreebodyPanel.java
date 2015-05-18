@@ -59,7 +59,6 @@ public class ThreebodyPanel extends JPanel{
 		public void done(){
 			repaint();
 			isFinish = true;
-			System.out.println(isCancelled());
 			aat = new AlphaAnimeThread();
 		}
 	}

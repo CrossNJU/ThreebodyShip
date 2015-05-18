@@ -83,9 +83,13 @@ public class WinUI extends ThreebodyPanel {
 		// 1024 + bgX, 768, null);
 
 		Image cover = new ImageIcon("img/Win/cover-after.png").getImage();
-
+		Image word = new ImageIcon("img/Win/chapAfter/stage"+stageUI.stage.num+"-after.png").getImage();
+		Image sentence = new ImageIcon("img/Win/chapAfter/stage"+stageUI.stage.num+"-after-sentence.png").getImage();
+		
 		g.drawImage(cover, 0, 0, null);
-		g.drawImage(completeAnime[currentAnime], 327, 309, 354, 90, null);
+		g.drawImage(completeAnime[currentAnime], 297, 308, 450, 99, null);
+		g.drawImage(word, 409, 281, null);
+		g.drawImage(sentence, 325, 410, null);
 
 	}
 

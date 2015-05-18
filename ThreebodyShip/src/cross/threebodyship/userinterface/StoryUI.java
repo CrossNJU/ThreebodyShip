@@ -11,14 +11,14 @@ import cross.threebodyship.listener.EnterStageButtonListener;
 import cross.threebodyship.listener.ScrollListener;
 import cross.threebodyship.model.Mode;
 
-public class StoryUI extends JPanel{
+public class StoryUI extends JPanel {
 	int panelWidth;
 	int panelHeight;
 
 	public StoryUI(SelectorUI selectorUI) {
 		panelWidth = (int) (MainUI.WIDTH * 0.7);
 		panelHeight = MainUI.HEIGHT;
-		setSize(panelWidth, panelHeight*2);
+		setSize(panelWidth, panelHeight * 3);
 		setOpaque(false);
 		setBackground(null);
 		setLayout(null);
@@ -27,9 +27,9 @@ public class StoryUI extends JPanel{
 		int num = 0;
 		for (int i = 0; i < selectorUI.selector.mode.get(0).chap.length; i++) {
 			JLabel chapLabel = new JLabel();
-			chapLabel.setBounds((int) (panelWidth * 0.2),
-					(int) (panelHeight * 0.3) * (i + 1), 200, 40);
-			chapLabel.setIcon(new ImageIcon("img/Selector/chap0"+i+".png"));
+			chapLabel.setBounds((int) (panelWidth * 0.2)-40,
+					(int) (panelHeight * 0.3) * (i + 1)-100, 220, 60);
+			chapLabel.setIcon(new ImageIcon("img/Selector/chap0" + i + ".png"));
 			chapLabel.setForeground(Color.BLACK);
 			chapLabel.setVisible(true);
 			add(chapLabel);
@@ -41,16 +41,17 @@ public class StoryUI extends JPanel{
 				JButton stageButton = new JButton(
 						selectorUI.selector.mode.get(0).stages.get(num).title);
 
-				stageButton.setBounds((int) (panelWidth * 0.2) * (j + 1),
-						(int) (panelHeight * 0.3) * (i + 1) + 60, 154, 154);
+				stageButton.setBounds((int) (panelWidth * 0.25) * (j + 1)-80,
+						(int) (panelHeight * 0.3) * (i + 1) -40, 154, 154);
 				stageButton.setVisible(true);
 				stageButton.addMouseListener(new EnterStageButtonListener(
-						selectorUI.mainPanel, selectorUI.selector.mode.get(0).stages.get(num)));
+						selectorUI.mainPanel,
+						selectorUI.selector.mode.get(0).stages.get(num)));
 
-				String imageString = "img/Button/btn-chap01" + "-stage0"
+				String imageString = "img/Button/stagebtn/btn-stage"
 						+ (num + 1) + "-normal.png";
-				String imageHoverString = "img/Button/btn-chap01"
-						+ "-stage0" + (num + 1) + "-hover.png";
+				String imageHoverString = "img/Button/stagebtn/btn-stage"
+						+ (num + 1) + "-hover.png";
 				ImageIcon image = new ImageIcon(imageString);
 				ImageIcon imageHover = new ImageIcon(imageHoverString);
 
@@ -64,7 +65,7 @@ public class StoryUI extends JPanel{
 				num++;
 			}
 		}
-		
+
 		addMouseWheelListener(new ScrollListener(this));
 	}
 }

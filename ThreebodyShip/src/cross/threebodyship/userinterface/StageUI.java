@@ -132,8 +132,4 @@ public class StageUI extends ThreebodyPanel implements Observer {
 		}
 	}
 	
-	public void finalize() throws Throwable{
-		super.finalize();
-		System.out.println("hasRemove");
-	}
 }
