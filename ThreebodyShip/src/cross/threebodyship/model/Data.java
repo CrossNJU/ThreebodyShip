@@ -433,7 +433,7 @@ public class Data {
 		
 	}
 
-	public void setGame16(){
+	public void setGame19(){
 		Star starOne = new Star();
 		SuperStar superStar = new SuperStar();
 		Rock rock = new Rock();
@@ -602,7 +602,7 @@ public class Data {
 		rocks.add(rockFour);
 	}
 	
-	public void setGame19(){
+	public void setGame16(){
 		BlackHole blackhole = new BlackHole();
 		Star starOne = new Star();
 		Star starTwo = new Star();
@@ -734,7 +734,7 @@ public class Data {
 		
 		planets.add(planetThree);
 		planets.add(planetTwo);
-		planets.add(planetTwo);
+		planets.add(planetOne);
 		
 		rocks.add(rockOne);
 		rocks.add(rockTwo);
@@ -742,7 +742,32 @@ public class Data {
 		
 	}
 	
-	public void setGame21(){}
+	public void setGame21(){
+		Star starOne = new Star();
+		Star starTwo = new Star();
+		Planet planetOne = new Planet();
+		Planet planetTwo = new Planet();
+		
+		starOne.setLocation(273, 312);
+		starOne.setSize(172);
+		starOne.setGravityScope(328);
+		
+		starTwo.setLocation(512, 560);
+		starTwo.setGravityScope(330);
+		starTwo.setSize(140);
+		
+		planetOne.Theta = 0;
+		planetOne.size = 58;
+		planetOne.roundR = 119;
+		planetOne.roundStar = starTwo;
+		planetOne.speed = 20;
+		
+		planetTwo.Theta = Math.PI;
+		planetTwo.size = 58;
+		planetTwo.roundR = 119;
+		planetTwo.roundStar = starTwo;
+		planetTwo.speed = 20;
+	}//Game21 special remain unsettled
 }
 //>>>>>>> origin/master
 
