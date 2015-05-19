@@ -189,13 +189,15 @@ public class Game extends Observable implements Runnable{
 				if(starList.get(i).style.equals("special2")){
 					SpecialTwo specialTwo = (SpecialTwo) starList.get(i);
 					if(specialTwo.enter == 0){
-						int ran = (int)Math.random()*3;
+						int ran = (int)(Math.random()*3);
 						specialTwo.connectedStars.get(ran).isExisted = true;
 						
-						for (int j = 0; j < specialTwo.conectedPlanets.size(); j++) {
-							specialTwo.conectedPlanets.get(i).isExisted = true;
-							Thread t1 = new Thread(specialTwo.conectedPlanets.get(i));
-							t1.start();
+						if(ran == 0){
+							for (int j = 0; j < specialTwo.conectedPlanets.size(); j++) {
+								specialTwo.conectedPlanets.get(i).isExisted = true;
+								Thread t1 = new Thread(specialTwo.conectedPlanets.get(i));
+								t1.start();
+							}
 						}
 						
 						specialTwo.isExisted = false;
@@ -242,6 +244,7 @@ public class Game extends Observable implements Runnable{
 		
 		//计算是否撞到行星
 		for(int i =0;i< planets.size(); i++){
+			if(!planets.get(i).isExisted) continue;
 			double distance = Math.sqrt((ship.getLocation().x-planets.get(i).location.x)*
 					(ship.getLocation().x-planets.get(i).location.x)+
 					(ship.getLocation().y-planets.get(i).location.y)*

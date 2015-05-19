@@ -115,8 +115,8 @@ public class GameUI extends ThreebodyPanel implements Observer {
 							- (int) game.data.planets.get(i).size/2, null);
 		}
 
-		paintplanet(g, game.planets);
 		paintstar(g, game.starList);
+		paintplanet(g, game.planets);
 		paintRocks(g, game.rockList);
 		// paintWinArea(g);
 		// paintstartArea(g);
@@ -178,16 +178,18 @@ public class GameUI extends ThreebodyPanel implements Observer {
 		for (int i = 0; i < starList.size(); i++) {
 			if(!starList.get(i).isExisted) continue;
 			
+			Color color = starList.get(i).color;
+			
 			double alpha = 100;
 
-			if (starList.get(i).style.equals("Super")) {
-				SuperStar superStar = (SuperStar) starList.get(i);
-				alpha = superStar.leftTime * 50;
-				if (alpha < 0)
-					alpha = 0;
-			}
+//			if (starList.get(i).style.equals("Super")) {
+//				SuperStar superStar = (SuperStar) starList.get(i);
+//				alpha = superStar.leftTime * 50;
+//				if (alpha < 0)
+//					alpha = 0;
+//			}
 			try {
-				g.setColor(new Color(0, 255, 0, (int) alpha));
+				g.setColor(color);
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -212,10 +214,11 @@ public class GameUI extends ThreebodyPanel implements Observer {
 	}
 
 	public void paintplanet(Graphics g, ArrayList<Planet> planets) {
-		g.setColor(Color.green);
 
 		for (int i = 0; i < planets.size(); i++) {
 			Planet planet = planets.get(i);
+			if(!planet.isExisted) continue;
+			g.setColor(planet.color);
 			g.fillOval((int) (planet.location.x - planet.size / 2),
 					(int) (planet.location.y - planet.size / 2), planet.size,
 					planet.size);

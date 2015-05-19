@@ -1,5 +1,7 @@
 package cross.threebodyship.model;
 
+import java.awt.Color;
+
 public class Star {
 	public static double G = 0.0000006672;
 	private double mass;
@@ -12,8 +14,11 @@ public class Star {
 	
 	public String style = "Normal";
 	
+	public Color color;
+	
 	public Star(){
 		centerPoint = new Point();
+		color = Color.YELLOW;
 //		this.mass = Math.PI*4/3*size*size*size;
 	}
 	

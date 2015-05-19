@@ -1,5 +1,6 @@
 package cross.threebodyship.model;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class SpecialTwo extends Star{
@@ -13,6 +14,7 @@ public class SpecialTwo extends Star{
 		conectedPlanets = new ArrayList<Planet>();
 		
 		style = "special2";
+		color = Color.WHITE;
 //		isExisted = false;
 	}
 }

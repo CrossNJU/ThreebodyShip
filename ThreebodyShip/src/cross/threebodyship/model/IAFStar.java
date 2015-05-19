@@ -1,5 +1,7 @@
 package cross.threebodyship.model;
 
+import java.awt.Color;
+
 public class IAFStar extends Star{
 	
 	public double SpeedChangeRate;
@@ -7,5 +9,6 @@ public class IAFStar extends Star{
 	
 	public IAFStar(){
 		style = "IAF";
+		color = Color.GREEN;
 	}
 }
