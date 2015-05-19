@@ -57,6 +57,28 @@ public class Mode {
 			addStage(new Stage("Game16"));
 			addStage(new Stage("Game17"));
 			addStage(new Stage("Game18"));
+//			System.out.println("stages:"+stages.size());
+//			读出数据
+			num = 0;
+			BufferedReader reader = null;
+			try {
+				reader = new BufferedReader(new FileReader((new File("data.txt"))));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				num = Integer.parseInt(reader.readLine());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			// System.out.println(num);
+			for (int i = 0; i < num; i++) {
+				stages.get(i).isLocked = false;
+			}
 		} else if (modeType == 2) {
 //			挑战模式章节
 			chap = new String[]{"challenge1"};
@@ -64,28 +86,6 @@ public class Mode {
 		}
 		
 		
-		// System.out.println("stages:"+stages.size());
-		// 读出数据
-//		num = 0;
-//		BufferedReader reader = null;
-//		try {
-//			reader = new BufferedReader(new FileReader((new File("data.txt"))));
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//		try {
-//			num = Integer.parseInt(reader.readLine());
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//		// System.out.println(num);
-//		for (int i = 0; i < num; i++) {
-//			stages.get(i).isLocked = false;
-//		}
 
 	}
 
