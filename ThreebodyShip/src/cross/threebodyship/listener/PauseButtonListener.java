@@ -20,7 +20,7 @@ public class PauseButtonListener implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		gameUI.game.setState(false);
+		gameUI.game.ship.setState(false);
 		
 //		pauseUI.setVisible(true);
 //		gameUI.add(pauseUI,0);

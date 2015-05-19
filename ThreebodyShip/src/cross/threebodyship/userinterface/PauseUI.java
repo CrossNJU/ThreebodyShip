@@ -40,6 +40,10 @@ public class PauseUI extends ThreebodyPanel {
 
 		setButton(resumeButton, "resume");
 		resumeButton.setBounds(403, 277, 190, 190);
+//		stageUI.initGamePanel(stageUI);
+		if (stageUI.gamePanel == null) {
+			System.out.println("not found");
+		}
 		resumeButton.addMouseListener(new ResumeButtonListener(stageUI.gamePanel, this));
 
 		setButton(restartButton, "restart");

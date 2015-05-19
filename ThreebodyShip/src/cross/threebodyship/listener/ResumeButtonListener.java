@@ -3,6 +3,7 @@ package cross.threebodyship.listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import cross.threebodyship.model.Game;
 import cross.threebodyship.userinterface.GameUI;
 import cross.threebodyship.userinterface.PauseUI;
 
@@ -22,6 +23,14 @@ public class ResumeButtonListener implements MouseListener{
 		// TODO Auto-generated method stub
 		pauseUI.adt.execute();
 //		gameUI.game.setState(true);
+		GameUI gameUi = gameUI;
+		if (gameUi != null) {
+			Game temp = gameUi.game;
+			temp.ship.setState(true);
+			
+		}else {
+			System.out.println(1);
+		}
 	}
 
 	@Override

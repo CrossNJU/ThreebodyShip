@@ -98,6 +98,7 @@ public class Game extends Observable implements Runnable{
 					superStar.isExisted = false;
 					if(ship.distanceToNowStar<superStar.getGravityScope()/2)
 						ship.setState(false);
+						isFailed = true;
 				}
 			}
 			
@@ -106,7 +107,10 @@ public class Game extends Observable implements Runnable{
 				if(nowStar.style.equals("BlackHole")){
 					BlackHole blackHole = (BlackHole)starList.get(i);
 					
-					if(ship.distanceToNowStar - ship.getSize()/2<blackHole.deadR) ship.setState(false);
+					if(ship.distanceToNowStar - ship.getSize()/2<blackHole.deadR) {
+						ship.setState(false);
+						isFailed = true;
+					}
 					else{
 						//修改distance
 					ship.distanceToNowStar = maxDistance;
@@ -403,6 +407,9 @@ public class Game extends Observable implements Runnable{
 				this.setChanged();
 				this.notifyObservers();
 			}
+//			if (!ship.getState()) {
+//				System.out.println("isn't alive");
+//			}
 		}
 		
 		for (int i = 0; i < planets.size(); i++) {

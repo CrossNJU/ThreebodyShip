@@ -59,27 +59,27 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 		//游戏阶段用户操作
 		if(game.inGame)
 			switch(keycode){
-				case KeyEvent.VK_SPACE:{
-					if(count == 1){
-						this.game.ship.setState(true);
-						count = 0;
-					}
-					else{
-						count++;
-						this.game.ship.setState(false);
-					}
-					break;
-				}
-				case KeyEvent.VK_UP:{
-					Ship temp = this.game.ship;
-					temp.setSpeed(this.game.speedChangeRate*temp.getSpeed());
-					break;
-				}
-				case KeyEvent.VK_DOWN:{
-					Ship temp = this.game.ship;
-					temp.setSpeed(temp.getSpeed()/this.game.speedChangeRate);
-					break;
-				}
+//				case KeyEvent.VK_SPACE:{
+//					if(count == 1){
+//						this.game.ship.setState(true);
+//						count = 0;
+//					}
+//					else{
+//						count++;
+//						this.game.ship.setState(false);
+//					}
+//					break;
+//				}
+//				case KeyEvent.VK_UP:{
+//					Ship temp = this.game.ship;
+//					temp.setSpeed(this.game.speedChangeRate*temp.getSpeed());
+//					break;
+//				}
+//				case KeyEvent.VK_DOWN:{
+//					Ship temp = this.game.ship;
+//					temp.setSpeed(temp.getSpeed()/this.game.speedChangeRate);
+//					break;
+//				}
 				case KeyEvent.VK_H:{
 					Ship temp = this.game.ship;
 					if(game.isInScope && temp.roundStar!=null){
@@ -99,7 +99,7 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 				}
 			}
 		
-		if(keycode == KeyEvent.VK_ENTER) this.game.reset();
+//		if(keycode == KeyEvent.VK_ENTER) this.game.reset();
 	}
 
 	@Override
