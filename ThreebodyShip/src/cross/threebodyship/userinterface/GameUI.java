@@ -131,7 +131,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 							- (int) game.data.planets.get(i).size / 2, null);
 		}
 
-<<<<<<< HEAD
+
 		// 画超新星
 		if ((game.gameNumber == 13) || (game.gameNumber == 14)
 				|| (game.gameNumber == 15)) {
@@ -158,8 +158,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 						null);
 			}
 		}
-=======
->>>>>>> origin/master
+
 		paintstar(g, game.starList);
 		paintplanet(g, game.planets);
 		paintRocks(g, game.rockList);
