@@ -28,7 +28,6 @@ public class OpaqueDisplayListener implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		mainPanel.add(newpanel);
-		mainPanel.currentPane.alpha = 0;
 		mainPanel.currentPane.repaint();
 		mainPanel.remove(mainPanel.currentPane);
 		mainPanel.currentPane = newpanel;

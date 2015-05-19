@@ -21,9 +21,11 @@ public class PauseUI extends ThreebodyPanel {
 	JButton menuButton = new JButton();
 
 	StageUI stageUI = null;
+	GameUI gameUI = null;
 
-	public PauseUI(StageUI stageUI) {
+	public PauseUI(StageUI stageUI,GameUI gameUI) {
 		this.stageUI = stageUI;
+		this.gameUI = gameUI;
 		initPauseUI();
 	}
 
@@ -40,11 +42,7 @@ public class PauseUI extends ThreebodyPanel {
 
 		setButton(resumeButton, "resume");
 		resumeButton.setBounds(403, 277, 190, 190);
-//		stageUI.initGamePanel(stageUI);
-		if (stageUI.gamePanel == null) {
-			System.out.println("not found");
-		}
-		resumeButton.addMouseListener(new ResumeButtonListener(stageUI.gamePanel, this));
+		resumeButton.addMouseListener(new ResumeButtonListener(gameUI, this));
 
 		setButton(restartButton, "restart");
 		restartButton.setBounds(600, 322, 99, 99);

@@ -92,7 +92,7 @@ public class SelectorUI extends ThreebodyPanel {
 		setOpaque(false);
 		
 		backButton = new JButton();
-		backButton.setBounds(924, 668, 70, 70);
+		backButton.setBounds(924, 668,60,60);
 		backButton.setIcon(new ImageIcon("img/Button/btn-back-normal.png"));
 		backButton.setRolloverIcon(new ImageIcon("img/Button/btn-back-hover.png"));
 		backButton.setContentAreaFilled(false);
@@ -108,7 +108,7 @@ public class SelectorUI extends ThreebodyPanel {
 		// 加入模式按钮
 		for (int i = 0; i < modeButton.size(); i++) {
 			modeButton.get(i).setBounds((int) (frameWidth * 0.05)-20,
-					222+67*i, 276, 67);
+					222+67*i, 260, 67);
 			modeButton.get(i).setVisible(true);
 			modeButton.get(i).addMouseListener(
 					new ModeButtonListener(this, modePane.get(i)));

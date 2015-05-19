@@ -97,6 +97,7 @@ public class ThreebodyPanel extends JPanel{
 			repaint();
 			isFinish = true;
 			setVisible(false);
+			adt = new AlphaDisappearThread();
 		}
 	}
 }

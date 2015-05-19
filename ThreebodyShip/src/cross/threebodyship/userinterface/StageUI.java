@@ -71,7 +71,6 @@ public class StageUI extends ThreebodyPanel implements Observer {
 		winUI = new WinUI(this);
 		beforeUI = new BeforeUI(this);
 		failUI = new FailUI(this);
-		pauseUI = new PauseUI(this);
 		
 		add(beforeUI);
 		currentPane = gamePanel;

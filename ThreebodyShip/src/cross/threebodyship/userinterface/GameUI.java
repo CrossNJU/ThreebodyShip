@@ -67,7 +67,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 		setSize(MainUI.WIDTH, MainUI.HEIGHT);
 		setOpaque(false);
 
-		pauseUI = new PauseUI(stageUI);
+		pauseUI = new PauseUI(stageUI,this);
 		pauseUI.setVisible(false);
 		add(pauseUI);
 
@@ -115,8 +115,8 @@ public class GameUI extends ThreebodyPanel implements Observer {
 							- (int) game.data.planets.get(i).size/2, null);
 		}
 
-//		paintplanet(g, game.planets);
-//		paintstar(g, game.starList);
+		paintplanet(g, game.planets);
+		paintstar(g, game.starList);
 		paintRocks(g, game.rockList);
 		// paintWinArea(g);
 		// paintstartArea(g);
@@ -248,10 +248,12 @@ public class GameUI extends ThreebodyPanel implements Observer {
 		repaint();
 	}
 
-	public class RotateThread extends SwingWorker<Boolean, Boolean> {
+	public class RotateThread extends Thread {
 
 		@Override
-		protected Boolean doInBackground() throws Exception {
+		public void run() {
+			// TODO Auto-generated method stub
+			super.run();
 			// TODO Auto-generated method stub
 			while (true) {
 				SwingUtilities.invokeLater(new Runnable() {
@@ -261,7 +263,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 						repaint();
 					}
 				});
-
+				
 				try {
 					Thread.sleep(10);
 				} catch (Exception e) {
@@ -280,7 +282,6 @@ public class GameUI extends ThreebodyPanel implements Observer {
 				}
 			}
 		}
-
 	}
 
 }

@@ -33,7 +33,7 @@ public class StageStartButtonListener implements MouseListener {
 		stageUI.repaint();
 		stageUI.stage.startStage();
 		stageUI.gamePanel.requestFocus();
-		stageUI.gamePanel.rt.execute();
+		stageUI.gamePanel.rt.start();
 	}
 
 	@Override
