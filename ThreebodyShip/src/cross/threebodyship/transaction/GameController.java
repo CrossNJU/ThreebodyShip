@@ -70,7 +70,7 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 //					}
 //					break;
 //				}
-				case KeyEvent.VK_UP:{
+				case KeyEvent.VK_RIGHT:{
 					Ship temp = this.game.ship;
 					if(temp.skill1 == 1){
 						temp.setSpeed(this.game.speedChangeRate*temp.getSpeed());
@@ -78,7 +78,7 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 					}
 					break;
 				}
-				case KeyEvent.VK_DOWN:{
+				case KeyEvent.VK_LEFT:{
 					Ship temp = this.game.ship;
 					if(temp.skill1 == 1){
 						temp.setSpeed(temp.getSpeed()/this.game.speedChangeRate);
@@ -86,23 +86,23 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 					}
 					break;
 				}
-				case KeyEvent.VK_H:{
-					Ship temp = this.game.ship;
-					if(game.isInScope && temp.roundStar!=null && temp.skill2){
-						temp.isRound = true;
-						temp.roundDtheta = temp.getSpeed()*(double)game.getRI()/100/temp.roundDistance;
-						break;
-					}
-				}
-				case KeyEvent.VK_Q:{
-					Ship temp = this.game.ship;
-					temp.isRound = false;
-					temp.roundStar = null;
-//					double d = temp.degreeToWest + Math.PI;
-//					if(d>=Math.PI*2) d-= Math.PI*2;
-//					temp.setDegreeToEast(d);
-					break;
-				}
+//				case KeyEvent.VK_H:{
+//					Ship temp = this.game.ship;
+//					if(game.isInScope && temp.roundStar!=null && temp.skill2){
+//						temp.isRound = true;
+//						temp.roundDtheta = temp.getSpeed()*(double)game.getRI()/100/temp.roundDistance;
+//						break;
+//					}
+//				}
+//				case KeyEvent.VK_Q:{
+//					Ship temp = this.game.ship;
+//					temp.isRound = false;
+//					temp.roundStar = null;
+////					double d = temp.degreeToWest + Math.PI;
+////					if(d>=Math.PI*2) d-= Math.PI*2;
+////					temp.setDegreeToEast(d);
+//					break;
+//				}
 			}
 		
 //		if(keycode == KeyEvent.VK_ENTER) this.game.reset();
@@ -144,6 +144,10 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 			game.ship.setDegreeToEast(theta);
 //			System.out.println("theta:"+Math.toDegrees(theta));
 		}
+		else{
+			game.mousePoint.x = e.getX();
+			game.mousePoint.y = e.getY();
+		}
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -153,17 +157,33 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 	@Override
 	public void mousePressed(MouseEvent e) {
 //		r.stop2 = false;
-		r = new Rect(this.game);
-		t = new Thread(r);
-		t.start();
+		if(game.isStarting){
+			r = new Rect(this.game);
+			t = new Thread(r);
+			t.start();
+		}else {
+			Ship temp = this.game.ship;
+			if(game.isInScope && temp.roundStar!=null && temp.skill2){
+				temp.isRound = true;
+				temp.roundDtheta = temp.getSpeed()*(double)game.getRI()/100/temp.roundDistance;
+//				break;
+			}
+		}
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		//t.interrupt();
-		r.stop2 = true;
-		game.isStarting = false;
-		game.inGame = true;
+		if(game.isStarting){
+			r.stop2 = true;
+			game.isStarting = false;
+			game.inGame = true;
+		}else {
+			Ship temp = this.game.ship;
+			temp.isRound = false;
+			temp.roundStar = null;
+			
+		}
 		//System.out.println("hi");
 	}
 	@Override
