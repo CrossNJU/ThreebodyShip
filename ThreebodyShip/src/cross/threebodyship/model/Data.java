@@ -602,7 +602,41 @@ public class Data {
 		rocks.add(rockFour);
 	}
 	
-	public void setGame19(){}
+	public void setGame19(){
+		BlackHole blackhole = new BlackHole();
+		Star starOne = new Star();
+		Star starTwo = new Star();
+		IAFStar ice = new IAFStar();
+		
+		ship.setSize(40);
+		//初始化星球
+		blackhole.style = "BlackHole";
+		blackhole.setLocation(189, 658);
+		blackhole.setSize(232);
+		blackhole.deadR = 51;
+		blackhole.FaddRate = 1.1;
+		blackhole.setGravityScope(408);
+		
+		starOne.setLocation(343, 278);
+		starOne.setSize(162);
+		starOne.setGravityScope(268);
+		
+		starTwo.setLocation(565, 521);
+		starTwo.setSize(152);
+		starTwo.setGravityScope(268);
+		
+		ice.style = "IAF";
+		ice.SpeedChangeRate = 0.7;
+		ice.setLocation(843, 435);
+		ice.setGravityScope(268);
+		ice.setSize(134);
+		
+		starList.add(ice);
+		starList.add(starOne);
+		starList.add(blackhole);
+		starList.add(starTwo);
+		
+	}
 	
 	public void setGame17(){
 		Star starOne = new Star();
@@ -656,24 +690,21 @@ public class Data {
 		specialNor.isExisted = false;
 		
 		//planets
-		planetOne.location.x = 600;
-		planetOne.location.y = 278;
+		planetOne.Theta = 0;
 		planetOne.roundR = 138;
 		planetOne.roundStar = specialNor;
 		planetOne.size = 38;
 		planetOne.speed = 20;
 		planetOne.isExisted = false;
 		
-		planetTwo.location.x = 381;
-		planetTwo.location.y = 384;
+		planetTwo.Theta = (Math.PI*2)/3;
 		planetTwo.roundR = 138;
 		planetTwo.roundStar = specialNor;
 		planetTwo.size = 38;
 		planetTwo.speed = 20;
 		planetTwo.isExisted = false;
 		
-		planetThree.location.x = 538;
-		planetThree.location.y = 520;
+		planetThree.Theta = (Math.PI*4)/3;
 		planetThree.roundR = 138;
 		planetThree.roundStar = specialNor;
 		planetThree.size = 38;

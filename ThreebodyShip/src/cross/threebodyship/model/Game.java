@@ -192,13 +192,13 @@ public class Game extends Observable implements Runnable{
 						int ran = (int)(Math.random()*3);
 						specialTwo.connectedStars.get(ran).isExisted = true;
 						
-						if(ran == 0){
+//						if(ran == 0){
 							for (int j = 0; j < specialTwo.conectedPlanets.size(); j++) {
 								specialTwo.conectedPlanets.get(i).isExisted = true;
 								Thread t1 = new Thread(specialTwo.conectedPlanets.get(i));
 								t1.start();
 							}
-						}
+//						}
 						
 						specialTwo.isExisted = false;
 						isInScope = false;
