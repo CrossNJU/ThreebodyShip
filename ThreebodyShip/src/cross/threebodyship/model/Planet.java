@@ -1,5 +1,7 @@
 package cross.threebodyship.model;
 
+import java.awt.Color;
+
 public class Planet implements Runnable {
 	
 	public Star roundStar;
@@ -11,6 +13,9 @@ public class Planet implements Runnable {
 	public static long time = 1;
 	
 	public boolean stop = false;
+	public boolean isExisted = true;
+	
+	public Color color = Color.BLUE;
 	
 	public Planet(){
 		location = new Point();

@@ -75,6 +75,7 @@ public class Game extends Observable implements Runnable{
 		//初始化万有引力
 		Force f = new Force();
 		f.f = 0;
+		
 		//考虑多星球
 		for(int i=0; i<starList.size(); i++){
 			
@@ -151,7 +152,6 @@ public class Game extends Observable implements Runnable{
 						star.changed = true;
 					}
 				}
-				
 //				if(starList.get(i).style.equals("Super")){
 //					SuperStar superStar = (SuperStar)starList.get(i);
 //					if(superStar.leftTime <= 0) {
@@ -169,6 +169,44 @@ public class Game extends Observable implements Runnable{
 				else{
 					if(ship.getLocation().x>starList.get(i).getLocation().x)
 						ship.degreeToWest += Math.PI;
+				}
+
+				//挑战1
+				if(starList.get(i).style.equals("special1")){
+					SpecialStarOne specialStarOne = (SpecialStarOne)starList.get(i);
+					
+					if(specialStarOne.enter == 0){
+						nowX = specialStarOne.getLocation().x + Math.cos(ship.degreeToWest+Math.PI/2);
+						nowY = specialStarOne.getLocation().y + Math.sin(ship.degreeToWest+Math.PI/2);
+					
+						isInScope = false;
+						
+						specialStarOne.enter = 1;
+					}
+				}
+				
+				//挑战2
+				if(starList.get(i).style.equals("special2")){
+					SpecialTwo specialTwo = (SpecialTwo) starList.get(i);
+					if(specialTwo.enter == 0){
+						int ran = (int)(Math.random()*3);
+						specialTwo.connectedStars.get(ran).isExisted = true;
+//						specialTwo.conectedPlanets.get(2).isExisted = true;
+//						Thread t2 = new Thread(specialTwo.conectedPlanets.get(2));
+//						t2.start();
+						
+						if(ran == 0){
+							for (int j = 0; j < specialTwo.conectedPlanets.size(); j++) {
+//								System.out.println("enter:"+j);
+								specialTwo.conectedPlanets.get(j).isExisted = true;
+								Thread t1 = new Thread(specialTwo.conectedPlanets.get(j));
+								t1.start();
+							}
+						}
+						
+						specialTwo.isExisted = false;
+						isInScope = false;
+					}
 				}
 				
 				//可环绕性
@@ -210,6 +248,7 @@ public class Game extends Observable implements Runnable{
 		
 		//计算是否撞到行星
 		for(int i =0;i< planets.size(); i++){
+			if(!planets.get(i).isExisted) continue;
 			double distance = Math.sqrt((ship.getLocation().x-planets.get(i).location.x)*
 					(ship.getLocation().x-planets.get(i).location.x)+
 					(ship.getLocation().y-planets.get(i).location.y)*
@@ -333,6 +372,8 @@ public class Game extends Observable implements Runnable{
 		ship.setLocation(-ship.getSize()*2, -ship.getSize()*2);
 		starList = data.starList;
 		planets = data.planets;
+		
+//		System.out.println("planets number:"+planets.size());
 		rockList = data.rocks;
 		
 		//设置技能
@@ -341,6 +382,8 @@ public class Game extends Observable implements Runnable{
 		
 		//启动planets线程
 		for(int i = 0; i<planets.size(); i++){
+			if(!planets.get(i).isExisted) continue;
+//			System.out.println("enter:"+i);
 			Thread t = new Thread(planets.get(i));
 			t.start();
 		}
