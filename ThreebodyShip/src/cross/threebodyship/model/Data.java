@@ -604,8 +604,8 @@ public class Data {
 	
 	public void setGame16(){
 		BlackHole blackhole = new BlackHole();
-		Star starOne = new Star();
-		Star starTwo = new Star();
+		SpecialStarOne starOne = new SpecialStarOne();
+		SpecialStarOne starTwo = new SpecialStarOne();
 		IAFStar ice = new IAFStar();
 		
 		ship.setSize(40);
