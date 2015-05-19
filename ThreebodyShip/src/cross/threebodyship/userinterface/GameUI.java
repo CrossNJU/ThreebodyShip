@@ -176,7 +176,8 @@ public class GameUI extends ThreebodyPanel implements Observer {
 	public void paintstar(Graphics g, ArrayList<Star> starList) {
 
 		for (int i = 0; i < starList.size(); i++) {
-
+			if(!starList.get(i).isExisted) continue;
+			
 			double alpha = 100;
 
 			if (starList.get(i).style.equals("Super")) {

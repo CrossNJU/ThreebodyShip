@@ -11,6 +11,7 @@ public class Planet implements Runnable {
 	public static long time = 1;
 	
 	public boolean stop = false;
+	public boolean isExisted = true;
 	
 	public Planet(){
 		location = new Point();
