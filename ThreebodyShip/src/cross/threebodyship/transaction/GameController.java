@@ -70,19 +70,25 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 //					}
 //					break;
 //				}
-//				case KeyEvent.VK_UP:{
-//					Ship temp = this.game.ship;
-//					temp.setSpeed(this.game.speedChangeRate*temp.getSpeed());
-//					break;
-//				}
-//				case KeyEvent.VK_DOWN:{
-//					Ship temp = this.game.ship;
-//					temp.setSpeed(temp.getSpeed()/this.game.speedChangeRate);
-//					break;
-//				}
+				case KeyEvent.VK_UP:{
+					Ship temp = this.game.ship;
+					if(temp.skill1 == 1){
+						temp.setSpeed(this.game.speedChangeRate*temp.getSpeed());
+						temp.skill1 = 2;
+					}
+					break;
+				}
+				case KeyEvent.VK_DOWN:{
+					Ship temp = this.game.ship;
+					if(temp.skill1 == 1){
+						temp.setSpeed(temp.getSpeed()/this.game.speedChangeRate);
+						temp.skill1 ++;
+					}
+					break;
+				}
 				case KeyEvent.VK_H:{
 					Ship temp = this.game.ship;
-					if(game.isInScope && temp.roundStar!=null){
+					if(game.isInScope && temp.roundStar!=null && temp.skill2){
 						temp.isRound = true;
 						temp.roundDtheta = temp.getSpeed()*(double)game.getRI()/100/temp.roundDistance;
 						break;

@@ -96,9 +96,10 @@ public class Game extends Observable implements Runnable{
 				if(superStar.leftTime>0) superStar.leftTime -= (double)refreshInterval/1000;
 				else {
 					superStar.isExisted = false;
-					if(ship.distanceToNowStar<superStar.getGravityScope()/2)
+					if(ship.distanceToNowStar<superStar.getGravityScope()/2){
 						ship.setState(false);
 						isFailed = true;
+					}
 				}
 			}
 			
@@ -333,6 +334,10 @@ public class Game extends Observable implements Runnable{
 		starList = data.starList;
 		planets = data.planets;
 		rockList = data.rocks;
+		
+		//设置技能
+		if (gameNumber >= 7) ship.skill1 = 1; else ship.skill1 = 0;
+		if (gameNumber >= 13) ship.skill2 = true; else ship.skill2 = false;
 		
 		//启动planets线程
 		for(int i = 0; i<planets.size(); i++){

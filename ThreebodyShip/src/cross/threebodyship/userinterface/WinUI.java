@@ -7,8 +7,12 @@ import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -65,6 +69,25 @@ public class WinUI extends ThreebodyPanel {
 		cat = new CompleteAnimeThread();
 		setup();
 
+		//更新记录数据
+		System.out.println(stageUI.mainPanel.num);
+		if(stageUI.mainPanel.num < stageUI.stage.game.gameNumber) stageUI.mainPanel.num = stageUI.stage.game.gameNumber;
+		System.out.println(stageUI.mainPanel.num);
+		
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter(new File("data.txt")));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			writer.write(String.valueOf(stageUI.mainPanel.num));
+			writer.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// bat = new BackgroundAnimeThread();
 		// bat.execute();
 	}

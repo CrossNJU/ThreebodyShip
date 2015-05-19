@@ -2,6 +2,12 @@ package cross.threebodyship.userinterface;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
@@ -16,12 +22,29 @@ public class MainPanel extends ThreebodyPanel {
 	public StarterUI starterUI;
 	public SelectorUI selectorUI;
 	public StageUI stageUI;
+	
+	public int num;
 
 	int bgX = 0;
 	BackgroundAnimeThread bat = new BackgroundAnimeThread();
 
 	public MainPanel(MainUI mainUI) {
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor stubScanner fileScanner = null;
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(new File("data.txt")));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			num = Integer.parseInt(reader.readLine());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		this.mainUI = mainUI;
 		init();
 	}

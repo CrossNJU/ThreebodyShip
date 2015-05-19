@@ -5,7 +5,7 @@ import java.util.Observable;
 public class Stage extends Observable implements Runnable {
 
 	public String title;
-	public boolean isLocked = false;
+	public boolean isLocked = true;
 	boolean isComplished;
 	boolean isFailed;
 	volatile boolean isBack;

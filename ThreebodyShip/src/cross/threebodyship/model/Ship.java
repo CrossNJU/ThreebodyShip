@@ -26,6 +26,10 @@ public class Ship {
 	public double roundDtheta;
 	public Star roundStar = null;
 	
+	//技能锁
+	public int skill1 = 0;
+	public boolean skill2 = false;
+	
 	public Ship(){
 		centerPoint = new Point();
 //		setLocation(-2*getSize(), -2*getSize());
