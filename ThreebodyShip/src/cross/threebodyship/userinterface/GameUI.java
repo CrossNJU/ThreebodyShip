@@ -218,6 +218,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 		for (int i = 0; i < planets.size(); i++) {
 			Planet planet = planets.get(i);
 			if(!planet.isExisted) continue;
+//			System.out.println("enter ui:"+i);
 			g.setColor(planet.color);
 			g.fillOval((int) (planet.location.x - planet.size / 2),
 					(int) (planet.location.y - planet.size / 2), planet.size,

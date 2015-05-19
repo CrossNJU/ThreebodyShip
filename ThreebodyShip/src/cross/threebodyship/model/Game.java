@@ -191,14 +191,18 @@ public class Game extends Observable implements Runnable{
 					if(specialTwo.enter == 0){
 						int ran = (int)(Math.random()*3);
 						specialTwo.connectedStars.get(ran).isExisted = true;
+//						specialTwo.conectedPlanets.get(2).isExisted = true;
+//						Thread t2 = new Thread(specialTwo.conectedPlanets.get(2));
+//						t2.start();
 						
-//						if(ran == 0){
+						if(ran == 0){
 							for (int j = 0; j < specialTwo.conectedPlanets.size(); j++) {
-								specialTwo.conectedPlanets.get(i).isExisted = true;
-								Thread t1 = new Thread(specialTwo.conectedPlanets.get(i));
+//								System.out.println("enter:"+j);
+								specialTwo.conectedPlanets.get(j).isExisted = true;
+								Thread t1 = new Thread(specialTwo.conectedPlanets.get(j));
 								t1.start();
 							}
-//						}
+						}
 						
 						specialTwo.isExisted = false;
 						isInScope = false;
@@ -368,6 +372,8 @@ public class Game extends Observable implements Runnable{
 		ship.setLocation(-ship.getSize()*2, -ship.getSize()*2);
 		starList = data.starList;
 		planets = data.planets;
+		
+//		System.out.println("planets number:"+planets.size());
 		rockList = data.rocks;
 		
 		//设置技能
@@ -377,6 +383,7 @@ public class Game extends Observable implements Runnable{
 		//启动planets线程
 		for(int i = 0; i<planets.size(); i++){
 			if(!planets.get(i).isExisted) continue;
+//			System.out.println("enter:"+i);
 			Thread t = new Thread(planets.get(i));
 			t.start();
 		}
