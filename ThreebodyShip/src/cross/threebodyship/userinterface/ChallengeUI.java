@@ -20,6 +20,7 @@ public class ChallengeUI extends JPanel {
 		setSize(panelWidth, panelHeight);
 		setOpaque(false);
 		setBackground(null);
+		setLayout(null);
 		
 		
 		// num表示的是关卡数，i表示的是章节数，j表示每个章节的第几关
