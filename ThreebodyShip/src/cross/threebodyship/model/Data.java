@@ -353,7 +353,7 @@ public class Data {
 		starTwo.setLocation(651, 461);
 		starTwo.setSize(290);
 		starTwo.setGravityScope(600);
-		starTwo.leftTime = 5;
+		starTwo.leftTime = 4;
 		starTwo.style = "Super";
 		starTwo.canBeRound = false;
 		
@@ -751,6 +751,7 @@ public class Data {
 	public void setGame21(){
 		Star starOne = new Star();
 		Star starTwo = new Star();
+		SpecialThree special = new SpecialThree();
 		Planet planetOne = new Planet();
 		Planet planetTwo = new Planet();
 		
@@ -761,6 +762,16 @@ public class Data {
 		starTwo.setLocation(512, 560);
 		starTwo.setGravityScope(330);
 		starTwo.setSize(140);
+		
+		special.setGravityScope(302);
+		special.setSize(146);
+		special.lefttime = 5;
+		special.style = "Special3";
+		special.place.x = 678;
+		special.place.y = 114;
+		special.height = 539;
+		special.width = 261;
+		special.isExisted = false;
 		
 		planetOne.Theta = 0;
 		planetOne.size = 58;
@@ -773,6 +784,13 @@ public class Data {
 		planetTwo.roundR = 119;
 		planetTwo.roundStar = starTwo;
 		planetTwo.speed = 20;
+		
+		starList.add(special);
+		starList.add(starOne);
+		starList.add(starTwo);
+		
+		planets.add(planetTwo);
+		planets.add(planetOne);
 	}//Game21 special remain unsettled
 }
 //>>>>>>> origin/master
