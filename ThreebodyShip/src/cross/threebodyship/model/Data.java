@@ -109,13 +109,13 @@ public class Data {
 		//初始化星球
 		
 		starOne.style = "IAF";
-		starOne.SpeedChangeRate = 1.5;
+		starOne.SpeedChangeRate = 1.3;
 		starOne.setLocation(240,515);
 		starOne.setSize(212);
 		starOne.setGravityScope(454);
 		
 		starTwo.style = "IAF";
-		starTwo.SpeedChangeRate = 1.3;
+		starTwo.SpeedChangeRate = 1.2;
 		starTwo.setLocation(679,337);
 		starTwo.setSize(326);
 		starTwo.setGravityScope(628);
@@ -180,7 +180,7 @@ public class Data {
 		//初始化星球
 		
 		starOne.style = "BlackHole";
-		starOne.FaddRate = 1.1;
+		starOne.FaddRate = 1.05;
 		starOne.setLocation(513,567);
 		starOne.setSize(306);
 		starOne.setGravityScope(756);
@@ -355,6 +355,7 @@ public class Data {
 		starTwo.setGravityScope(600);
 		starTwo.leftTime = 5;
 		starTwo.style = "Super";
+		starTwo.canBeRound = false;
 		
 		starList.add(starOne);
 		starList.add(starTwo);
@@ -379,6 +380,7 @@ public class Data {
 		starTwo.setLocation(656, 166);
 		starTwo.setSize(134);
 		starTwo.setGravityScope(294);
+		starTwo.canBeRound = false;
 		
 		starThree.style = "BlackHole";
 		starThree.deadR = 29;
@@ -386,7 +388,7 @@ public class Data {
 		starThree.setLocation(769, 564);
 		starThree.setSize(214);
 		starThree.setGravityScope(402);
-		
+		starThree.canBeRound = false;
 		starList.add(starOne);
 		starList.add(starTwo);
 		starList.add(starThree);
@@ -424,6 +426,7 @@ public class Data {
 		star.setLocation(801, 430);
 		star.setSize(142);
 		star.setGravityScope(342);
+		star.canBeRound = false;
 		
 		starList.add(superOne);
 		starList.add(superTwo);
@@ -447,6 +450,7 @@ public class Data {
 		superStar.setGravityScope(408);
 		superStar.leftTime = 5;
 		superStar.style = "Super";
+		superStar.canBeRound = false;
 		
 		rock.location.x = 233;
 		rock.location.y = 536;
@@ -455,6 +459,7 @@ public class Data {
 		starOne.setLocation(648, 385);
 		starOne.setSize(260);
 		starOne.setGravityScope(590);
+		starOne.canBeRound = false;
 		
 		planetOne.location.x = 782;
 		planetOne.location.y = 212;
@@ -507,6 +512,7 @@ public class Data {
 		fire.setLocation(754, 534);
 		fire.setSize(164);
 		fire.setGravityScope(356);
+		fire.canBeRound = false;
 		
 		planet.location.x = 862;
 		planet.location.y = 470;
