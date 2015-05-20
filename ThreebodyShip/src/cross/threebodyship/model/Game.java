@@ -88,6 +88,11 @@ public class Game extends Observable implements Runnable{
 				specialThree.lefttime -= (double)refreshInterval/1000;
 				if (specialThree.lefttime <= 0) {
 					specialThree.isExisted = true;
+					
+					double ranX = Math.random() * (specialThree.width-specialThree.getSize()) + specialThree.place.x + specialThree.getSize()/2;
+					double ranY = Math.random() * (specialThree.height-specialThree.getSize()) + specialThree.place.y + specialThree.getSize()/2;
+					
+					specialThree.setLocation(ranX, ranY);
 				}
 			}
 			
