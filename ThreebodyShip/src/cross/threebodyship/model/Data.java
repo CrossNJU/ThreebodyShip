@@ -433,7 +433,7 @@ public class Data {
 		
 	}
 
-	public void setGame19(){
+	public void setGame16(){
 		Star starOne = new Star();
 		SuperStar superStar = new SuperStar();
 		Rock rock = new Rock();
@@ -478,7 +478,7 @@ public class Data {
 		rocks.add(rock);
 		
 	}
-	public void setGame18(){
+	public void setGame17(){
 		Star starOne = new Star();
 		IAFStar ice = new IAFStar();
 		IAFStar fire = new IAFStar();
@@ -543,7 +543,7 @@ public class Data {
 		rocks.add(rockFour);
 	}
 	
-	public void setGame20(){
+	public void setGame18(){
 		Rock rockOne = new Rock();
 		Rock rockTwo = new Rock();
 		Rock rockThree = new Rock();
@@ -602,7 +602,7 @@ public class Data {
 		rocks.add(rockFour);
 	}
 	
-	public void setGame16(){
+	public void setGame19(){
 		BlackHole blackhole = new BlackHole();
 		SpecialStarOne starOne = new SpecialStarOne();
 		SpecialStarOne starTwo = new SpecialStarOne();
@@ -638,7 +638,7 @@ public class Data {
 		
 	}
 	
-	public void setGame17(){
+	public void setGame20(){
 		Star starOne = new Star();
 		IAFStar ice = new IAFStar();
 		

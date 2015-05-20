@@ -176,10 +176,42 @@ public class Game extends Observable implements Runnable{
 					SpecialStarOne specialStarOne = (SpecialStarOne)starList.get(i);
 					
 					if(specialStarOne.enter == 0){
-						nowX = specialStarOne.getLocation().x + Math.cos(ship.degreeToWest+Math.PI/2);
-						nowY = specialStarOne.getLocation().y + Math.sin(ship.degreeToWest+Math.PI/2);
+						if((ship.getLocation().y<specialStarOne.getLocation().y && 
+								(ship.getDegreeToEast() - ship.degreeToWest > 0 && ship.getDegreeToEast() - ship.degreeToWest < Math.PI)) || 
+						   (ship.getLocation().y>specialStarOne.getLocation().y && 
+								(ship.degreeToWest - ship.getDegreeToEast() < 0 || ship.degreeToWest - ship.getDegreeToEast() > Math.PI)))
+							ship.roundDirection = 1;
+						else {
+							ship.roundDirection = -1;
+						}
+						
+						ship.degreeToWest += ship.roundDirection*Math.PI/2;
+						if (ship.degreeToWest>Math.PI*2) {
+							ship.degreeToWest -= Math.PI*2;
+						}
+						
+						nowX = specialStarOne.getLocation().x + ship.distanceToNowStar*Math.cos(ship.degreeToWest);
+						nowY = specialStarOne.getLocation().y + ship.distanceToNowStar*Math.sin(ship.degreeToWest);
 					
 						isInScope = false;
+//						
+//						if((ship.getLocation().y<specialStarOne.getLocation().y && 
+//								(ship.getDegreeToEast() - ship.degreeToWest > 0 && ship.getDegreeToEast() - ship.degreeToWest < Math.PI)) || 
+//						   (ship.getLocation().y>specialStarOne.getLocation().y && 
+//								(ship.degreeToWest - ship.getDegreeToEast() < 0 || ship.degreeToWest - ship.getDegreeToEast() > Math.PI)))
+//							ship.roundDirection = 1;
+//						else {
+//							ship.roundDirection = -1;
+//						}
+						if(ship.roundDirection==1){
+						if(nowX - specialStarOne.getLocation().x<0 && nowY - specialStarOne.getLocation().y<0)
+							ship.setDegreeToEast(ship.degreeToWest + Math.PI*3/2);
+						else ship.setDegreeToEast(ship.degreeToWest - Math.PI/2);
+						}else{
+						if(nowX - specialStarOne.getLocation().x<0 && nowY - specialStarOne.getLocation().y>0)
+							ship.setDegreeToEast(ship.degreeToWest - Math.PI*3/2);
+						else ship.setDegreeToEast(ship.degreeToWest + Math.PI/2);
+						}
 						
 						specialStarOne.enter = 1;
 					}

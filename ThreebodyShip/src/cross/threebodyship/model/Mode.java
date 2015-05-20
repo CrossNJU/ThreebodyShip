@@ -76,6 +76,7 @@ public class Mode {
 			}
 			
 			// System.out.println(num);
+			if(num>18) num = 18; 
 			for (int i = 0; i < num; i++) {
 				stages.get(i).isLocked = false;
 			}
@@ -83,6 +84,8 @@ public class Mode {
 //			挑战模式章节
 			chap = new String[]{"challenge1"};
 //			加入挑战模式关卡
+			addStage(new Stage("cha1"));
+			addStage(new Stage("cha2"));
 		}
 		
 		
@@ -102,6 +105,7 @@ public class Mode {
 				stages.get(stages.size() - 1).nextStage = stage;
 			}
 			stages.add(stage);
+			stage.isLocked = false;
 			stage.num = stages.size()+18;
 			stage.game.gameNumber = stage.num;
 		}
