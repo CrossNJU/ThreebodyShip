@@ -86,6 +86,9 @@ public class Game extends Observable implements Runnable{
 			if(starList.get(i).style.equals("special3") && !starList.get(i).isExisted) {
 				SpecialThree specialThree = (SpecialThree) starList.get(i);
 				specialThree.lefttime -= (double)refreshInterval/1000;
+				
+//				System.out.println("left:"+specialThree.lefttime);
+				
 				if (specialThree.lefttime <= 0) {
 					specialThree.isExisted = true;
 					

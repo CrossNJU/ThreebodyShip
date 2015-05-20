@@ -758,6 +758,7 @@ public class Data {
 		starOne.setLocation(273, 312);
 		starOne.setSize(172);
 		starOne.setGravityScope(328);
+		starOne.canBeRound = false;
 		
 		starTwo.setLocation(512, 560);
 		starTwo.setGravityScope(330);
@@ -766,12 +767,13 @@ public class Data {
 		special.setGravityScope(302);
 		special.setSize(146);
 		special.lefttime = 5;
-		special.style = "Special3";
+		special.style = "special3";
 		special.place.x = 678;
 		special.place.y = 114;
 		special.height = 539;
 		special.width = 261;
 		special.isExisted = false;
+		special.canBeRound = false;
 		
 		planetOne.Theta = 0;
 		planetOne.size = 58;
