@@ -64,6 +64,7 @@ public class Game extends Observable implements Runnable{
 //		System.out.println("d to e:"+Math.toDegrees(ship.getDegreeToEast()));
 //		System.out.println("d to w:"+Math.toDegrees(ship.degreeToWest));
 //		System.out.println();
+		isInScope = false;
 		
 		//正常情况下飞船轨迹
 		double nowX = ship.getLocation().x;
@@ -81,6 +82,15 @@ public class Game extends Observable implements Runnable{
 			
 			//设置当前考虑的星球
 			Star nowStar;
+			
+			if(starList.get(i).style.equals("special3") && !starList.get(i).isExisted) {
+				SpecialThree specialThree = (SpecialThree) starList.get(i);
+				specialThree.lefttime -= (double)refreshInterval/1000;
+				if (specialThree.lefttime <= 0) {
+					specialThree.isExisted = true;
+				}
+			}
+			
 			if(starList.get(i).isExisted) nowStar = starList.get(i);
 			else continue;
 			
@@ -305,6 +315,9 @@ public class Game extends Observable implements Runnable{
 				break;
 			}
 		}
+//		
+//		System.out.println("ship is round:"+ship.isRound);
+//		System.out.println("ship is in scope:"+isInScope);
 		
 		//如果进入引力区
 		if((isInScope)&&(!ship.isRound)){
@@ -360,6 +373,9 @@ public class Game extends Observable implements Runnable{
 			
 		}else{
 			if(!ship.isRound){
+//				System.out.println(1);
+				ship.roundStar = null;
+				
 				nowX += vx*t;
 				nowY += vy*t;
 			}
