@@ -16,11 +16,13 @@ public class PauseButtonListener implements MouseListener{
 		this.pauseUI = pauseUI;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 		gameUI.game.ship.setState(false);
+//		gameUI.stageUI.stage.gameThread.suspend();
 		
 //		pauseUI.setVisible(true);
 //		gameUI.add(pauseUI,0);

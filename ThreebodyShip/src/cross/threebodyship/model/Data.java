@@ -632,7 +632,7 @@ public class Data {
 		starTwo.setGravityScope(268);
 		
 		ice.style = "IAF";
-		ice.SpeedChangeRate = 0.7;
+		ice.SpeedChangeRate = 0.5;
 		ice.setLocation(843, 435);
 		ice.setGravityScope(268);
 		ice.setSize(134);
@@ -671,28 +671,29 @@ public class Data {
 		ice.setLocation(790, 520);
 		ice.setSize(136);
 		ice.setGravityScope(242);
+		ice.canBeRound = false;
 		
 		specialICE.style = "IAF";
 		specialICE.setLocation(512, 384);
 		specialICE.setSize(218);
-		specialICE.setGravityScope(336);
+		specialICE.setGravityScope(350);
 		specialICE.SpeedChangeRate = 0.7;
 		specialICE.isExisted = false;
 		
 		specialFIRE.style = "IAF";
 		specialFIRE.setLocation(512, 384);
 		specialFIRE.setSize(218);
-		specialFIRE.setGravityScope(336);
+		specialFIRE.setGravityScope(350);
 		specialFIRE.SpeedChangeRate = 1.3;
 		specialFIRE.isExisted = false;
 		
 		specialcenter.setLocation(512, 384);
 		specialcenter.setSize(218);
-		specialcenter.setGravityScope(336);
+		specialcenter.setGravityScope(350);
 		
 		specialNor.setLocation(512, 384);
 		specialNor.setSize(218);
-		specialNor.setGravityScope(336);
+		specialNor.setGravityScope(350);
 		specialNor.isExisted = false;
 		
 		//planets

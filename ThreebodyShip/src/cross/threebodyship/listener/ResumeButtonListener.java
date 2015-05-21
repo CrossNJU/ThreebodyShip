@@ -18,6 +18,7 @@ public class ResumeButtonListener implements MouseListener{
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -27,7 +28,7 @@ public class ResumeButtonListener implements MouseListener{
 		if (gameUi != null) {
 			Game temp = gameUi.game;
 			temp.ship.setState(true);
-			
+//			gameUi.stageUI.stage.gameThread.resume();
 		}else {
 			System.out.println(1);
 		}

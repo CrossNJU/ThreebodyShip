@@ -36,6 +36,10 @@ public class Game extends Observable implements Runnable{
 	
 	public int gameNumber = 0;
 	
+	//special 2\3
+	public Star special2;
+	public SpecialThree special3;
+	
 	public Game(){
 		border = new Point();
 		startingPoint = new Point();
@@ -86,7 +90,7 @@ public class Game extends Observable implements Runnable{
 			if(starList.get(i).style.equals("special3") && !starList.get(i).isExisted) {
 				SpecialThree specialThree = (SpecialThree) starList.get(i);
 				specialThree.lefttime -= (double)refreshInterval/1000;
-				
+				special3 = specialThree;
 //				System.out.println("left:"+specialThree.lefttime);
 				
 				if (specialThree.lefttime <= 0) {
@@ -188,6 +192,8 @@ public class Game extends Observable implements Runnable{
 					if(ship.getLocation().x>starList.get(i).getLocation().x)
 						ship.degreeToWest += Math.PI;
 				}
+//				System.out.println("degree to west:"+Math.toDegrees(ship.degreeToWest));
+//				System.out.println("now point : "+nowX+"  "+nowY);
 
 				//挑战1
 				if(starList.get(i).style.equals("special1")){
@@ -198,19 +204,26 @@ public class Game extends Observable implements Runnable{
 								(ship.getDegreeToEast() - ship.degreeToWest > 0 && ship.getDegreeToEast() - ship.degreeToWest < Math.PI)) || 
 						   (ship.getLocation().y>specialStarOne.getLocation().y && 
 								(ship.degreeToWest - ship.getDegreeToEast() < 0 || ship.degreeToWest - ship.getDegreeToEast() > Math.PI)))
-							ship.roundDirection = 1;
-						else {
 							ship.roundDirection = -1;
+						else {
+							ship.roundDirection = 1;
 						}
 						
-						ship.degreeToWest += ship.roundDirection*Math.PI/2;
+						ship.degreeToWest += ship.roundDirection*(Math.PI*2/3);
 						if (ship.degreeToWest>Math.PI*2) {
 							ship.degreeToWest -= Math.PI*2;
 						}
+						if(ship.degreeToWest<0){
+							ship.degreeToWest += Math.PI*2;
+						}
+//						System.out.println("degree to west new :"+Math.toDegrees(ship.degreeToWest));
 						
-						nowX = specialStarOne.getLocation().x + ship.distanceToNowStar*Math.cos(ship.degreeToWest);
-						nowY = specialStarOne.getLocation().y + ship.distanceToNowStar*Math.sin(ship.degreeToWest);
+						nowX = specialStarOne.getLocation().x - ship.distanceToNowStar*Math.cos(ship.degreeToWest);
+						nowY = specialStarOne.getLocation().y - ship.distanceToNowStar*Math.sin(ship.degreeToWest);
 					
+//						System.out.println("new delta point : "+(nowX-specialStarOne.getLocation().x)+"  "+(nowY - specialStarOne.getLocation().y));
+//						System.out.println("new point : "+(nowX)+"  "+(nowY));
+//						System.out.println("star point：" +specialStarOne.getLocation().x+"  "+specialStarOne.getLocation().y);
 						isInScope = false;
 //						
 //						if((ship.getLocation().y<specialStarOne.getLocation().y && 
@@ -232,6 +245,7 @@ public class Game extends Observable implements Runnable{
 						}
 						
 						specialStarOne.enter = 1;
+//						System.out.println("change:"+Math.toDegrees(ship.degreeToWest));
 					}
 				}
 				
@@ -241,6 +255,7 @@ public class Game extends Observable implements Runnable{
 					if(specialTwo.enter == 0){
 						int ran = (int)(Math.random()*3);
 						specialTwo.connectedStars.get(ran).isExisted = true;
+						special2 = specialTwo.connectedStars.get(ran);
 //						specialTwo.conectedPlanets.get(2).isExisted = true;
 //						Thread t2 = new Thread(specialTwo.conectedPlanets.get(2));
 //						t2.start();

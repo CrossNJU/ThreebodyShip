@@ -13,6 +13,7 @@ public class Stage extends Observable implements Runnable {
 	public int num;
 	
 	public Stage nextStage;
+	public Thread gameThread;
 	
 	public Game game = new Game();
 	
@@ -27,7 +28,7 @@ public class Stage extends Observable implements Runnable {
 	}
 	
 	public void startStage() {
-		Thread gameThread = new Thread(game);
+		gameThread = new Thread(game);
 		gameThread.start();
 		stageThread = new Thread(this);
 		stageThread.start();
@@ -63,22 +64,18 @@ public class Stage extends Observable implements Runnable {
 		try {
 			while (!isBack) {
 				if(game.inGame){
-				if (game.isWin) {
-					win();
-					game.inGame = false;
-					break;
+					if (game.isWin) {
+						win();
+						game.inGame = false;
+						break;
+					}
+					if (game.isFailed) {
+						restart();
+						game.inGame = false;
+						break;
+					}
 				}
-				if (game.isFailed) {
-					restart();
-					game.inGame = false;
-					break;
-				}
-				}
-				else 
-				if (!game.isStarting) {
-					System.out.println(1);
-					game.setState(false);
-				}
+				else leave();
 				//System.out.println("Check if complished or else");
 				Thread.sleep(game.getRI());
 			}
