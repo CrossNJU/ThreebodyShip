@@ -111,8 +111,6 @@ public class GameUI extends ThreebodyPanel implements Observer {
 	}
 
 	public void paintComponent(Graphics g) {
-		// g.fillRect(0,0,MainUI.WIDTH,MainUI.HEIGHT);
-
 		Image cover = new ImageIcon("img/GameBackground/cover-game.png")
 				.getImage();
 		g.drawImage(cover, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0, 0, 1024, 768,
