@@ -86,8 +86,16 @@ public class Game extends Observable implements Runnable{
 			if(starList.get(i).style.equals("special3") && !starList.get(i).isExisted) {
 				SpecialThree specialThree = (SpecialThree) starList.get(i);
 				specialThree.lefttime -= (double)refreshInterval/1000;
+				
+//				System.out.println("left:"+specialThree.lefttime);
+				
 				if (specialThree.lefttime <= 0) {
 					specialThree.isExisted = true;
+					
+					double ranX = Math.random() * (specialThree.width-specialThree.getSize()) + specialThree.place.x + specialThree.getSize()/2;
+					double ranY = Math.random() * (specialThree.height-specialThree.getSize()) + specialThree.place.y + specialThree.getSize()/2;
+					
+					specialThree.setLocation(ranX, ranY);
 				}
 			}
 			

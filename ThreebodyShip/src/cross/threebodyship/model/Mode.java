@@ -86,6 +86,7 @@ public class Mode {
 //			加入挑战模式关卡
 			addStage(new Stage("cha1"));
 			addStage(new Stage("cha2"));
+			addStage(new Stage("cha3"));
 		}
 		
 		

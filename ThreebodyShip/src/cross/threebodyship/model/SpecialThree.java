@@ -8,7 +8,7 @@ public class SpecialThree extends Star{
 	public double height;
 	
 	public SpecialThree(){
-		style = "Special3";
+		style = "special3";
 		place = new Point();
 	}
 }

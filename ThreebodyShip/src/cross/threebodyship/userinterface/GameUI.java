@@ -245,7 +245,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 					alpha = 0;
 			}
 			try {
-				g.setColor(color);
+				g.setColor(new Color(0,255,0,(int)alpha));
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
