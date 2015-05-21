@@ -33,8 +33,8 @@ public class StageStartButtonListener implements MouseListener {
 		stageUI.stage.startStage();
 		stageUI.gamePanel.requestFocus();
 		stageUI.gamePanel.rt.start();
-		if ((stageUI.gamePanel.game.gameNumber == 13)
-				|| (stageUI.gamePanel.game.gameNumber == 14)) {
+		 if ((stageUI.gamePanel.game.gameNumber == 13)
+		 || (stageUI.gamePanel.game.gameNumber == 14)||(stageUI.gamePanel.game.gameNumber==16)) {
 			stageUI.gamePanel.sat1.start();
 		}else if((stageUI.gamePanel.game.gameNumber == 15)){
 			stageUI.gamePanel.sat2.start();

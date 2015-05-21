@@ -81,8 +81,8 @@ public class MainUI extends JFrame {
 		
 		currentPane = mainPanel;
 		
-		MusicPlayer mainMusic = new MusicPlayer("music/The Crisis.wav");
-		mainMusic.start();
+//		MusicPlayer mainMusic = new MusicPlayer("music/The Crisis.wav");
+//		mainMusic.start();
 		// 添加当前界面
 		add(mainPanel);
 		repaint();

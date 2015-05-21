@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.concurrent.SynchronousQueue;
 
 import javax.imageio.ImageIO;
+import javax.jws.soap.SOAPBinding.Style;
 import javax.sound.midi.Track;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -49,12 +50,13 @@ import cross.threebodyship.model.Stage;
 import cross.threebodyship.util.RotateImage;
 
 public class SelectorUI extends ThreebodyPanel {
+	public String style = "selector";
 	int frameWidth;
 	int frameHeight;
 	Selector selector = null;
 	MainPanel mainPanel = null;
 	ArrayList<JButton> modeButton = new ArrayList<JButton>();
-	ArrayList<Component> modePane = new ArrayList<Component>();
+	ArrayList<ThreebodyPanel> modePane = new ArrayList<ThreebodyPanel>();
 	public Component currentPane = null;// 存放当前的PANEL
 	
 	JButton backButton = new JButton();
@@ -215,8 +217,13 @@ public class SelectorUI extends ThreebodyPanel {
 
 	}
 
+	public String getStyle(){
+		return style;
+	}
 	
-	
+	public void reset(){
+		modePane.set(0, new StoryUI(this));
+	}
 	//闪烁的动画线程
 	class ShineAnimeThread extends SwingWorker<Boolean, Boolean>{
 		@Override

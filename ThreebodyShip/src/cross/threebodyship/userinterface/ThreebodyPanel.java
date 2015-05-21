@@ -5,6 +5,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 public class ThreebodyPanel extends JPanel{
+	public String style = "";
 	public float alpha;
 	public AlphaAnimeThread aat = null;
 	public AlphaDisappearThread adt = null;
@@ -26,6 +27,13 @@ public class ThreebodyPanel extends JPanel{
 		
 	}
 	
+	public String getStyle(){
+		return style;
+	}
+	
+	public void reset(){
+		
+	}
 	public class AlphaAnimeThread extends SwingWorker<Boolean, Boolean>{
 		@Override
 		protected Boolean doInBackground() throws Exception {

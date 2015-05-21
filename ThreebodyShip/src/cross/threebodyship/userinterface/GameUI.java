@@ -60,12 +60,13 @@ public class GameUI extends ThreebodyPanel implements Observer {
 	int currentSuper1 = 1;
 	int currentSuper2 = 1;
 	SuperStar[] superStar = new SuperStar[2];
-	Image[] superImage1 = new Image[49];
-	Image[] superImage2 = new Image[49];
+	Image[] superImage1 = new Image[51];
+	Image[] superImage2 = new Image[51];
 	MediaTracker tracker;
-	public superAnimeThread1 sat1;
-	public superAnimeThread2 sat2;
-	int left;
+	public SuperAnimeThread1 sat1;
+	public SuperAnimeThread2 sat2;
+	int left1;
+	int left2;
 
 	public GameUI(Game game, StageUI stageUI) {
 		this.stageUI = stageUI;
@@ -105,8 +106,8 @@ public class GameUI extends ThreebodyPanel implements Observer {
 
 		setupSuperImg1();
 		setupSuperImg2();
-		sat1 = new superAnimeThread1();
-		sat2 = new superAnimeThread2();
+		sat1 = new SuperAnimeThread1();
+		sat2 = new SuperAnimeThread2();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -131,10 +132,9 @@ public class GameUI extends ThreebodyPanel implements Observer {
 							- (int) game.data.planets.get(i).size / 2, null);
 		}
 
-
 		// 画超新星
 		if ((game.gameNumber == 13) || (game.gameNumber == 14)
-				|| (game.gameNumber == 15)) {
+				|| (game.gameNumber == 15)||(game.gameNumber==16)) {
 			int j = 0;
 			for (int i = 0; i < game.starList.size(); i++) {
 				if (game.starList.get(i).style.equals("Super")) {
@@ -142,28 +142,37 @@ public class GameUI extends ThreebodyPanel implements Observer {
 					j++;
 				}
 			}
-			g.drawImage(
-					superImage1[currentSuper1],
-					(int) superStar[0].getLocation().x - superStar[0].getSize(),
-					(int) superStar[0].getLocation().y - superStar[0].getSize(),
-					null);
-			if (game.gameNumber == 15) {
+			if (game.gameNumber == 16) {
 				g.drawImage(
-						superImage2[currentSuper2],
-						(int) superStar[1].getLocation().x
-								- superStar[1].getSize(),
-						(int) superStar[1].getLocation().y
-								- superStar[1].getSize(),
-						superStar[1].getSize() * 2, superStar[1].getSize() * 2,
-						null);
+						superImage1[currentSuper1],
+						(int) superStar[0].getLocation().x
+								- superStar[0].getGravityScope() / 2,
+						(int) superStar[0].getLocation().y
+								- superStar[0].getGravityScope() / 2+19, null);
+			}else{
+				g.drawImage(
+						superImage1[currentSuper1],
+						(int) superStar[0].getLocation().x
+								- superStar[0].getGravityScope() / 2,
+						(int) superStar[0].getLocation().y
+								- superStar[0].getGravityScope() / 2, null);
+				if (game.gameNumber == 15) {
+					g.drawImage(
+							superImage2[currentSuper2],
+							(int) superStar[1].getLocation().x
+									- superStar[1].getGravityScope() / 2,
+							(int) superStar[1].getLocation().y
+									- superStar[1].getGravityScope() / 2, null);
+				}
 			}
+			
 		}
+		
 
-		paintstar(g, game.starList);
-		paintplanet(g, game.planets);
-		paintRocks(g, game.rockList);
-
+//		paintstar(g, game.starList);
 		// paintplanet(g, game.planets);
+		// paintRocks(g, game.rockList);
+
 		// paintWinArea(g);
 		// paintstartArea(g);
 		paintShip(g, game.ship);
@@ -222,18 +231,19 @@ public class GameUI extends ThreebodyPanel implements Observer {
 	public void paintstar(Graphics g, ArrayList<Star> starList) {
 
 		for (int i = 0; i < starList.size(); i++) {
-			if(!starList.get(i).isExisted) continue;
-			
+			if (!starList.get(i).isExisted)
+				continue;
+
 			Color color = starList.get(i).color;
-			
+
 			double alpha = 100;
 
-//			if (starList.get(i).style.equals("Super")) {
-//				SuperStar superStar = (SuperStar) starList.get(i);
-//				alpha = superStar.leftTime * 50;
-//				if (alpha < 0)
-//					alpha = 0;
-//			}
+			if (starList.get(i).style.equals("Super")) {
+				SuperStar superStar = (SuperStar) starList.get(i);
+				alpha = superStar.leftTime * 50;
+				if (alpha < 0)
+					alpha = 0;
+			}
 			try {
 				g.setColor(color);
 			} catch (Exception e) {
@@ -263,8 +273,9 @@ public class GameUI extends ThreebodyPanel implements Observer {
 
 		for (int i = 0; i < planets.size(); i++) {
 			Planet planet = planets.get(i);
-			if(!planet.isExisted) continue;
-//			System.out.println("enter ui:"+i);
+			if (!planet.isExisted)
+				continue;
+			// System.out.println("enter ui:"+i);
 			g.setColor(planet.color);
 			g.fillOval((int) (planet.location.x - planet.size / 2),
 					(int) (planet.location.y - planet.size / 2), planet.size,
@@ -313,7 +324,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 		Toolkit toolkit = getToolkit();
 		for (int i = 0; i < superImage2.length; i++) {
 			superImage2[i] = toolkit.getImage("img/Gamebackground/Superstar"
-					+ game.gameNumber + "/super2-" + i + ".png");
+					+ game.gameNumber + "/super2/super" + i + ".png");
 		}
 
 		for (int i = 0; i < superImage2.length; i++) {
@@ -361,7 +372,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 		}
 	}
 
-	public class superAnimeThread1 extends Thread {
+	public class SuperAnimeThread1 extends Thread {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
@@ -372,7 +383,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 				e1.printStackTrace();
 			}
 			int maxTime = (int) superStar[0].leftTime;
-			while ((currentSuper1 < 48)) {
+			while ((currentSuper1 < 50)) {
 				try {
 					Thread.sleep(20);
 				} catch (Exception e) {
@@ -385,12 +396,12 @@ public class GameUI extends ThreebodyPanel implements Observer {
 					if (game.isFailed) {
 						break;
 					}
-					left = (int) superStar[0].leftTime;
+					left1 = (int) superStar[0].leftTime;
 					// System.out.println(currentSuper1);
-					if (left == maxTime) {
-						currentSuper1 = maxTime - left + 1;
+					if (left1 == maxTime) {
+						currentSuper1 = maxTime - left1 + 1;
 					} else {
-						currentSuper1 = maxTime - left;
+						currentSuper1 = maxTime - left1;
 					}
 				}
 			}
@@ -398,10 +409,9 @@ public class GameUI extends ThreebodyPanel implements Observer {
 		}
 	}
 
-	public class superAnimeThread2 extends Thread {
+	public class SuperAnimeThread2 extends Thread {
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 			try {
 				tracker.waitForID(1);
 			} catch (InterruptedException e1) {
@@ -409,7 +419,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 				e1.printStackTrace();
 			}
 			int maxTime = (int) superStar[1].leftTime;
-			while ((currentSuper2 < 48)) {
+			while ((currentSuper2 < 50)) {
 				try {
 					Thread.sleep(20);
 				} catch (Exception e) {
@@ -422,17 +432,16 @@ public class GameUI extends ThreebodyPanel implements Observer {
 					if (game.isFailed) {
 						break;
 					}
-					left = (int) superStar[1].leftTime;
-					System.out.println(currentSuper1);
-					if (left == maxTime) {
-						currentSuper2 = maxTime - left;
+					left2 = (int) superStar[1].leftTime;
+					// System.out.println(currentSuper1);
+					if (left2 == maxTime) {
+						currentSuper2 = maxTime - left2 + 1;
 					} else {
-						currentSuper2 = maxTime - 1 - left;
+						currentSuper2 = maxTime - left2;
 					}
 				}
 			}
 			System.out.println("done");
-
 		}
 	}
 

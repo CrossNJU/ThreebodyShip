@@ -30,10 +30,7 @@ import cross.threebodyship.transaction.GameController;
 import cross.threebodyship.util.DisplayPanel;
 
 public class StageUI extends ThreebodyPanel implements Observer {
-
-	/**
-	 * 
-	 */
+	public String style = "stage";
 	private static final long serialVersionUID = 1L;
 
 	public Component currentPane;
@@ -92,6 +89,8 @@ public class StageUI extends ThreebodyPanel implements Observer {
                 AlphaComposite.SRC_OVER, alpha));  
         
 	};
+	
+
 	@Override
 	public void update(Observable o, Object arg) {
 		String msg = (String) arg;
@@ -131,4 +130,7 @@ public class StageUI extends ThreebodyPanel implements Observer {
 		}
 	}
 	
+	public String getStyle(){
+		return style;
+	}
 }

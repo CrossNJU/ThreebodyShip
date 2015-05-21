@@ -23,10 +23,11 @@ import sun.audio.ContinuousAudioDataStream;
 public class MusicPlayer {
 	private AudioStream as; // 单次播放声音用
 	ContinuousAudioDataStream cas;// 循环播放声音
-	Clip clip;
-
+	public String name;
+	
 	// 构造函数
 	public MusicPlayer(String filename) {
+		name = filename;
 		try {
 			// 打开一个声音文件流作为输入
 			InputStream in = new FileInputStream(filename);

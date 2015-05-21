@@ -27,13 +27,22 @@ public class OpaqueDisplayListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		if((newpanel.getStyle().equals("selector"))||(newpanel.getStyle().equals("starter"))){
+			if(mainPanel.currentPane.getStyle().equals("stage")){
+				mainPanel.music.stop(mainPanel.music.currentMusic);
+				mainPanel.music.play(0);
+			}
+		}
+		
+		if(newpanel.getStyle().equals("selector")){
+			newpanel.reset();
+		}
 		mainPanel.add(newpanel);
 		mainPanel.currentPane.repaint();
 		mainPanel.remove(mainPanel.currentPane);
 		mainPanel.currentPane = newpanel;
 		mainPanel.validate();
 		mainPanel.repaint();
-		
 		newpanel.aat.execute();
 	}
 

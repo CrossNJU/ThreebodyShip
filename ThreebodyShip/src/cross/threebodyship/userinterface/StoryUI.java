@@ -2,6 +2,7 @@ package cross.threebodyship.userinterface;
 
 import java.awt.Color;
 
+import javax.naming.InitialContext;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,18 +12,25 @@ import cross.threebodyship.listener.EnterStageButtonListener;
 import cross.threebodyship.listener.ScrollListener;
 import cross.threebodyship.model.Mode;
 
-public class StoryUI extends JPanel {
+public class StoryUI extends ThreebodyPanel {
 	int panelWidth;
 	int panelHeight;
+	SelectorUI selectorUI;
 
 	public StoryUI(SelectorUI selectorUI) {
 		panelWidth = (int) (MainUI.WIDTH * 0.7);
 		panelHeight = MainUI.HEIGHT;
+		this.selectorUI = selectorUI;
+		init();
+	}
+	
+	public void init(){
 		setSize(panelWidth, panelHeight * 3);
 		setOpaque(false);
 		setBackground(null);
 		setLayout(null);
 
+		removeAll();
 		// num表示的是关卡数，i表示的是章节数，j表示每个章节的第几关
 		int num = 0;
 		for (int i = 0; i < selectorUI.selector.mode.get(0).chap.length; i++) {
@@ -52,11 +60,18 @@ public class StoryUI extends JPanel {
 						+ (num + 1) + "-normal.png";
 				String imageHoverString = "img/Button/stagebtn/btn-stage"
 						+ (num + 1) + "-hover.png";
-				ImageIcon image = new ImageIcon(imageString);
-				ImageIcon imageHover = new ImageIcon(imageHoverString);
+				String imageLockString  = "img/Button/stagebtn/btn-stage"
+						+ (num + 1) + "-disable.png";
+				if(num<selectorUI.mainPanel.num){
+					ImageIcon image = new ImageIcon(imageString);
+					ImageIcon imageHover = new ImageIcon(imageHoverString);
+					stageButton.setIcon(image);
+					stageButton.setRolloverIcon(imageHover);
+				}else {
+					ImageIcon imageLock = new ImageIcon(imageLockString);
+					stageButton.setIcon(imageLock);
+				}
 
-				stageButton.setIcon(image);
-				stageButton.setRolloverIcon(imageHover);
 				stageButton.setContentAreaFilled(false);
 				stageButton.setBorderPainted(false);
 				stageButton.setFocusPainted(false);
@@ -67,5 +82,8 @@ public class StoryUI extends JPanel {
 		}
 
 		addMouseWheelListener(new ScrollListener(this));
+		revalidate();
+//		System.out.println("init");
+		System.out.println(selectorUI.mainPanel.num);
 	}
 }

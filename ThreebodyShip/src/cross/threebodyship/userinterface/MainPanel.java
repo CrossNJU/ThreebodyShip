@@ -17,12 +17,13 @@ import cross.threebodyship.listener.OpaqueDisplayListener;
 import cross.threebodyship.model.Selector;
 
 public class MainPanel extends ThreebodyPanel {
+	public String style = "main";
 	public MainUI mainUI;
 	public ThreebodyPanel currentPane;
 	public StarterUI starterUI;
 	public SelectorUI selectorUI;
 	public StageUI stageUI;
-	
+	public Music music;
 	public int num;
 
 	int bgX = 0;
@@ -51,7 +52,8 @@ public class MainPanel extends ThreebodyPanel {
 
 	public void init() {
 		Selector selector = new Selector();
-
+		music = new Music();
+		music.play(0);
 		// 初始化开始界面
 		starterUI = new StarterUI(mainUI);
 		// 初始化选择界面
@@ -68,9 +70,13 @@ public class MainPanel extends ThreebodyPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-		Image B_img = new ImageIcon("img/GameBackground/bg.png").getImage();
+		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
 		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0 + bgX, 0,
 				1024 + bgX, 768, null);
+	}
+	
+	public String getStyle(){
+		return style;
 	}
 
 	class BackgroundAnimeThread extends Thread {

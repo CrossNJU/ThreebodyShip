@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import cross.threebodyship.listener.EnterStageButtonListener;
 import cross.threebodyship.listener.ScrollListener;
 
-public class ChallengeUI extends JPanel {
+public class ChallengeUI extends ThreebodyPanel {
 	int panelWidth;
 	int panelHeight;
 
@@ -65,7 +65,6 @@ public class ChallengeUI extends JPanel {
 				num++;
 			}
 		}
-
 		addMouseWheelListener(new ScrollListener(this));
 	}
 }

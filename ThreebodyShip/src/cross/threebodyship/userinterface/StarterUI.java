@@ -22,6 +22,7 @@ import cross.threebodyship.model.Point;
 import cross.threebodyship.model.RoundButton;
 
 public class StarterUI extends ThreebodyPanel {
+	public String style = "starter";
 	public JButton startGameButton = new JButton();
 	public RoundButton exitButton = new RoundButton();
 	public RoundButton aboutButton = new RoundButton();
@@ -99,6 +100,10 @@ public class StarterUI extends ThreebodyPanel {
 				.getImage();
 		g.drawImage(star, 0, 0, null);
 
+	}
+	
+	public String getStyle(){
+		return style;
 	}
 	
 	class BackgroundAnimeThread extends SwingWorker<Boolean, Boolean> {

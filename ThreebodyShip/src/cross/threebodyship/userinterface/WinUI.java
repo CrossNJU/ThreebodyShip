@@ -23,11 +23,14 @@ import javax.swing.SwingWorker;
 import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import cross.threebodyship.listener.EnterStageButtonListener;
+import cross.threebodyship.listener.OpaqueDisplayListener;
 import cross.threebodyship.userinterface.ThreebodyPanel.AlphaAnimeThread;
 import cross.threebodyship.util.RotateImage;
 
 public class WinUI extends ThreebodyPanel {
 	JButton nextStageButton;
+	JButton restartButton;
+	JButton menuButton;
 	StageUI stageUI = null;
 
 	WinAlphaAnimeThread waat;
@@ -64,16 +67,43 @@ public class WinUI extends ThreebodyPanel {
 				stageUI.mainPanel, stageUI.stage.nextStage));
 		add(nextStageButton);
 
+		restartButton = new JButton();
+		restartButton.setBounds(940, 697, 53, 53);
+		restartButton.setIcon(new ImageIcon(
+				"img/Button/btn-restartS-normal.png"));
+		restartButton.setRolloverIcon(new ImageIcon(
+				"img/Button/btn-restartS-hover.png"));
+		restartButton.setContentAreaFilled(false);
+		restartButton.setBorderPainted(false);
+		restartButton.setFocusPainted(false);
+		restartButton.addMouseListener(new EnterStageButtonListener(
+				stageUI.mainPanel, stageUI.stage));
+		add(restartButton);
+		
+		menuButton = new JButton();
+		menuButton.setBounds(883, 697, 53, 53);
+		menuButton.setIcon(new ImageIcon(
+				"img/Button/btn-menuS-normal.png"));
+		menuButton.setRolloverIcon(new ImageIcon(
+				"img/Button/btn-menuS-hover.png"));
+		menuButton.setContentAreaFilled(false);
+		menuButton.setBorderPainted(false);
+		menuButton.setFocusPainted(false);
+		menuButton.addMouseListener(new OpaqueDisplayListener(
+				stageUI.mainPanel, stageUI.mainPanel.selectorUI));
+		add(menuButton);
+
 		waat = new WinAlphaAnimeThread();
 
 		cat = new CompleteAnimeThread();
 		setup();
 
-		//更新记录数据
-//		System.out.println(stageUI.mainPanel.num);
-		if(stageUI.mainPanel.num < stageUI.stage.game.gameNumber) stageUI.mainPanel.num = stageUI.stage.game.gameNumber;
-//		System.out.println(stageUI.mainPanel.num);
-		
+		// 更新记录数据
+		// System.out.println(stageUI.mainPanel.num);
+		if (stageUI.mainPanel.num < stageUI.stage.game.gameNumber)
+			stageUI.mainPanel.num = stageUI.stage.game.gameNumber;
+		// System.out.println(stageUI.mainPanel.num);
+
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new FileWriter(new File("data.txt")));
@@ -106,9 +136,11 @@ public class WinUI extends ThreebodyPanel {
 		// 1024 + bgX, 768, null);
 
 		Image cover = new ImageIcon("img/Win/cover-after.png").getImage();
-		Image word = new ImageIcon("img/Win/chapAfter/stage"+stageUI.stage.num+"-after.png").getImage();
-		Image sentence = new ImageIcon("img/Win/chapAfter/stage"+stageUI.stage.num+"-after-sentence.png").getImage();
-		
+		Image word = new ImageIcon("img/Win/chapAfter/stage"
+				+ stageUI.stage.num + "-after.png").getImage();
+		Image sentence = new ImageIcon("img/Win/chapAfter/stage"
+				+ stageUI.stage.num + "-after-sentence.png").getImage();
+
 		g.drawImage(cover, 0, 0, null);
 		g.drawImage(completeAnime[currentAnime], 297, 308, 450, 99, null);
 		g.drawImage(word, 409, 281, null);
