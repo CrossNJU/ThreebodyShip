@@ -42,7 +42,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	StageUI stageUI;
+	public StageUI stageUI;
 	public PauseUI pauseUI;
 	GameController controller;
 	public Game game;
@@ -118,23 +118,51 @@ public class GameUI extends ThreebodyPanel implements Observer {
 		g.drawImage(cover, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0, 0, 1024, 768,
 				null);
 
-		Image GB_IMG = new ImageIcon("img/GameBackground/game-"
+		Image GB_IMG = new ImageIcon("img/GameBackground/Game"
 				+ game.gameNumber + ".png").getImage();
 		g.drawImage(GB_IMG, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0, 0, 1024, 768,
 				null);
+
 		// 画卫星
-		Image planet = new ImageIcon("img/Gamebackground/Planet/planet-"
-				+ game.gameNumber + ".png").getImage();
-		for (int i = 0; i < game.data.planets.size(); i++) {
-			g.drawImage(planet, (int) game.data.planets.get(i).location.x
-					- (int) game.data.planets.get(i).size / 2,
-					(int) game.data.planets.get(i).location.y
-							- (int) game.data.planets.get(i).size / 2, null);
-		}
+		paintPlanet(g);
 
 		// 画超新星
+		paintSuper(g);
+
+		// paintstar(g, game.starList);
+		// paintplanet(g, game.planets);
+		// paintRocks(g, game.rockList);
+		// paintWinArea(g);
+		// paintstartArea(g);
+		
+		paintShip(g, game.ship);
+		if (game.isStarting) {
+			paintPowerTank(g);
+		}
+
+	}
+
+	// 画特殊星球
+	public void paintSpecial(Graphics g) {
+		if (game.gameNumber == 20) {
+			Image normal = new ImageIcon(
+					"img/GameBackground/Specialstar/special_normal").getImage();
+			Image fire = new ImageIcon(
+					"img/GameBackground/Specialstar/special_fire").getImage();
+			Image ice = new ImageIcon(
+					"img/GameBackground/Specialstar/special_ice").getImage();
+
+		} else if (game.gameNumber == 21) {
+			Image special = new ImageIcon(
+					"img/GameBackground/Specialstar/special").getImage();
+
+		}
+	}
+
+	// 画超新星
+	public void paintSuper(Graphics g) {
 		if ((game.gameNumber == 13) || (game.gameNumber == 14)
-				|| (game.gameNumber == 15)||(game.gameNumber==16)) {
+				|| (game.gameNumber == 15) || (game.gameNumber == 16)) {
 			int j = 0;
 			for (int i = 0; i < game.starList.size(); i++) {
 				if (game.starList.get(i).style.equals("Super")) {
@@ -148,8 +176,8 @@ public class GameUI extends ThreebodyPanel implements Observer {
 						(int) superStar[0].getLocation().x
 								- superStar[0].getGravityScope() / 2,
 						(int) superStar[0].getLocation().y
-								- superStar[0].getGravityScope() / 2+19, null);
-			}else{
+								- superStar[0].getGravityScope() / 2 + 19, null);
+			} else {
 				g.drawImage(
 						superImage1[currentSuper1],
 						(int) superStar[0].getLocation().x
@@ -165,21 +193,22 @@ public class GameUI extends ThreebodyPanel implements Observer {
 									- superStar[1].getGravityScope() / 2, null);
 				}
 			}
-			
+
 		}
-		
-
-//		paintstar(g, game.starList);
-		// paintplanet(g, game.planets);
-		// paintRocks(g, game.rockList);
-
-		// paintWinArea(g);
-		// paintstartArea(g);
-		paintShip(g, game.ship);
-		if (game.isStarting) {
-			paintPowerTank(g);
+	}
+	
+	//画卫星
+	public void paintPlanet(Graphics g){
+		Image planet = new ImageIcon("img/Gamebackground/Planet/planet-"
+				+ game.gameNumber + ".png").getImage();
+		for (int i = 0; i < game.data.planets.size(); i++) {
+			if (game.planets.get(i).isExisted) {
+				g.drawImage(planet, (int) game.planets.get(i).location.x
+						- (int) game.planets.get(i).size / 2,
+						(int) game.planets.get(i).location.y
+								- (int) game.planets.get(i).size / 2, null);
+			}
 		}
-
 	}
 
 	public void paintPowerTank(Graphics g) {
@@ -245,7 +274,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 					alpha = 0;
 			}
 			try {
-				g.setColor(new Color(0,255,0,(int)alpha));
+				g.setColor(new Color(0, 255, 0, (int) alpha));
 			} catch (Exception e) {
 				// TODO: handle exception
 			}

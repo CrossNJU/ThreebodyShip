@@ -32,16 +32,16 @@ public class WinUI extends ThreebodyPanel {
 	JButton restartButton;
 	JButton menuButton;
 	StageUI stageUI = null;
+	public AchieveAfterUI achieveAfterUI;
+	public SkillUI skillUI;
+	public ChallengeAfterUI challengeAfterUI;
 
 	WinAlphaAnimeThread waat;
+	CompleteAnimeThread cat;
 
 	Image[] completeAnime = new Image[72];
 	MediaTracker tracker = null;
 	int currentAnime = 0;
-	CompleteAnimeThread cat;
-
-	// int bgX = 0;
-	// BackgroundAnimeThread bat = new BackgroundAnimeThread();
 
 	public WinUI(StageUI stageUI) {
 		this.stageUI = stageUI;
@@ -52,7 +52,18 @@ public class WinUI extends ThreebodyPanel {
 		setLayout(null);
 		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
 		setOpaque(false);
-
+		
+		achieveAfterUI = new AchieveAfterUI(this);
+		achieveAfterUI.setVisible(false);
+		skillUI = new SkillUI(this);
+		skillUI.setVisible(false);
+		challengeAfterUI = new ChallengeAfterUI();
+		challengeAfterUI.setVisible(false);
+		
+		add(achieveAfterUI);
+		add(skillUI);
+		add(challengeAfterUI);
+		
 		nextStageButton = new JButton("Next Stage >");
 		nextStageButton.setBounds((int) (MainUI.WIDTH * 0.75),
 				(int) (MainUI.HEIGHT * 0.40), 142, 142);
@@ -94,7 +105,6 @@ public class WinUI extends ThreebodyPanel {
 		add(menuButton);
 
 		waat = new WinAlphaAnimeThread();
-
 		cat = new CompleteAnimeThread();
 		setup();
 
@@ -118,23 +128,13 @@ public class WinUI extends ThreebodyPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// bat = new BackgroundAnimeThread();
-		// bat.execute();
+
 	}
 
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
 				alpha));
-		//
-		// Image img = new
-		// ImageIcon("img/GameBackground/bg-stage"+stageUI.stage.num+"-after.png").getImage();
-		// g.drawImage(img, 0, 0, null);
-
-		// Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
-		// g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0 + bgX, 0,
-		// 1024 + bgX, 768, null);
-
 		Image cover = new ImageIcon("img/Win/cover-after.png").getImage();
 		Image word = new ImageIcon("img/Win/chapAfter/stage"
 				+ stageUI.stage.num + "-after.png").getImage();
@@ -225,35 +225,14 @@ public class WinUI extends ThreebodyPanel {
 		public void done() {
 			repaint();
 			isFinish = true;
-			cat.execute();
+			if(stageUI.stage.num%3==0){
+				achieveAfterUI.setVisible(true);
+				achieveAfterUI.aat.execute();
+			}else {
+				cat.execute();
+			}
+			waat = new WinAlphaAnimeThread();
 		}
 	}
 
-	// class BackgroundAnimeThread extends SwingWorker<Boolean, Boolean> {
-	// @Override
-	// protected Boolean doInBackground() throws Exception {
-	//
-	// while (true) {
-	// SwingUtilities.invokeLater(new Runnable() {
-	//
-	// @Override
-	// public void run() {
-	// // TODO Auto-generated method stub
-	// repaint();
-	// }
-	// });
-	//
-	// try {
-	// Thread.sleep(60);
-	// } catch (Exception e) {
-	// // TODO: handle exception
-	// }
-	// bgX++;
-	// bgX %= 1669 - 1024;
-	// // System.out.println(SwingUtilities.isEventDispatchThread());
-	// }
-	// // return null;
-	// }
-	//
-	// }
 }
