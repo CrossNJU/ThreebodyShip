@@ -22,7 +22,7 @@ public class PauseButtonListener implements MouseListener{
 		// TODO Auto-generated method stub
 		
 		gameUI.game.ship.setState(false);
-//		gameUI.stageUI.stage.gameThread.suspend();
+		gameUI.stageUI.stage.gameThread.suspend();
 		
 //		pauseUI.setVisible(true);
 //		gameUI.add(pauseUI,0);

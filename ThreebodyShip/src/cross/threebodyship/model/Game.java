@@ -38,6 +38,7 @@ public class Game extends Observable implements Runnable{
 	
 	//special 2\3
 	public Star special2;
+	public boolean inSpecialScope = false;
 	public SpecialThree special3;
 	
 	public Game(){
@@ -255,6 +256,7 @@ public class Game extends Observable implements Runnable{
 					if(specialTwo.enter == 0){
 						int ran = (int)(Math.random()*3);
 						specialTwo.connectedStars.get(ran).isExisted = true;
+						inSpecialScope = true;
 						special2 = specialTwo.connectedStars.get(ran);
 //						specialTwo.conectedPlanets.get(2).isExisted = true;
 //						Thread t2 = new Thread(specialTwo.conectedPlanets.get(2));

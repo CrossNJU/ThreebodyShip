@@ -28,7 +28,7 @@ public class ResumeButtonListener implements MouseListener{
 		if (gameUi != null) {
 			Game temp = gameUi.game;
 			temp.ship.setState(true);
-//			gameUi.stageUI.stage.gameThread.resume();
+			gameUi.stageUI.stage.gameThread.resume();
 		}else {
 			System.out.println(1);
 		}
