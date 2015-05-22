@@ -21,7 +21,7 @@ public class CoverPanel extends ThreebodyPanel {
         g2d.setComposite(AlphaComposite.getInstance(  
                 AlphaComposite.SRC_OVER, alpha));  
         
-        Image cover = new ImageIcon("img/GameBackground/cover-40.png").getImage();
+        Image cover = new ImageIcon("img/GameBackground/cover-65.png").getImage();
         g.drawImage(cover, 0, 0, null);
 	};
 }

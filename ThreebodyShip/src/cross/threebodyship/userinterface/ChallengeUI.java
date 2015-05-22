@@ -27,9 +27,9 @@ public class ChallengeUI extends ThreebodyPanel {
 		int num = 0;
 		for (int i = 0; i < selectorUI.selector.mode.get(1).chap.length; i++) {
 			JLabel chapLabel = new JLabel();
-			chapLabel.setBounds((int) (panelWidth * 0.2) - 40,
-					(int) (panelHeight * 0.3) * (i + 1) - 100, 220, 60);
-			chapLabel.setIcon(new ImageIcon("img/Selector/chap0" + i + ".png"));
+			chapLabel.setBounds((int) (panelWidth * 0.2) - 75,
+					(int) (panelHeight * 0.3) * (i + 1)-30 , 240, 50);
+			chapLabel.setIcon(new ImageIcon("img/Selector/challenge_name.png"));
 			chapLabel.setForeground(Color.BLACK);
 			chapLabel.setVisible(true);
 			add(chapLabel);
@@ -38,25 +38,24 @@ public class ChallengeUI extends ThreebodyPanel {
 				if (num == selectorUI.selector.mode.get(1).stages.size()) {
 					break;
 				}
-				JButton stageButton = new JButton(
-						selectorUI.selector.mode.get(1).stages.get(num).title);
+				JButton stageButton = new JButton();
 
-				stageButton.setBounds((int) (panelWidth * 0.25) * (j + 1) - 80,
-						(int) (panelHeight * 0.3) * (i + 1) - 40, 154, 154);
+				stageButton.setBounds((int) (panelWidth * 0.3) * (j + 1) - 175,
+						(int) (panelHeight * 0.3) * (i + 1) +50, 230, 230);
 				stageButton.setVisible(true);
 				stageButton.addMouseListener(new EnterStageButtonListener(
 						selectorUI.mainPanel,
 						selectorUI.selector.mode.get(1).stages.get(num)));
 
-				String imageString = "img/Button/stagebtn/btn-challenge"
-						+ (num + 1) + "-normal.png";
+				String imageString = "img/Button/stagebtn/challenge_button"
+						+ (num + 1) + ".png";
 				String imageHoverString = "img/Button/stagebtn/btn-challenge"
 						+ (num + 1) + "-hover.png";
 				ImageIcon image = new ImageIcon(imageString);
-				ImageIcon imageHover = new ImageIcon(imageHoverString);
+//				ImageIcon imageHover = new ImageIcon(imageHoverString);
 
 				stageButton.setIcon(image);
-				stageButton.setRolloverIcon(imageHover);
+//				stageButton.setRolloverIcon(imageHover);
 				stageButton.setContentAreaFilled(false);
 				stageButton.setBorderPainted(false);
 				stageButton.setFocusPainted(false);

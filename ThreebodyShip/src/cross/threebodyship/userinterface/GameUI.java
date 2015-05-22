@@ -164,13 +164,15 @@ public class GameUI extends ThreebodyPanel implements Observer {
 
 		} else if (game.gameNumber == 21) {
 			Image special = new ImageIcon(
-					"img/GameBackground/Specialstar/special").getImage();
-			if (game.special3.lefttime<0) {
-				g.drawImage(special, (int) game.special3.getLocation().x
+					"img/GameBackground/Specialstar/special.png").getImage();
+			if (game.inspecialScope3) {
+				if(game.special3.lefttime<0){
+					g.drawImage(special, (int) game.special3.getLocation().x
 						- (int) game.special3.getGravityScope() / 2,
 						(int) game.special3.getLocation().y
 								- (int) game.special3.getGravityScope() / 2,
 						null);
+				}
 			}
 		}
 	}
