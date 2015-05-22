@@ -40,6 +40,7 @@ public class Game extends Observable implements Runnable{
 	public Star special2;
 	public boolean inSpecialScope = false;
 	public SpecialThree special3;
+	public boolean inspecialScope3 = false;
 	
 	public Game(){
 		border = new Point();
@@ -91,6 +92,7 @@ public class Game extends Observable implements Runnable{
 			if(starList.get(i).style.equals("special3") && !starList.get(i).isExisted) {
 				SpecialThree specialThree = (SpecialThree) starList.get(i);
 				specialThree.lefttime -= (double)refreshInterval/1000;
+				inspecialScope3 = true;
 				special3 = specialThree;
 //				System.out.println("left:"+specialThree.lefttime);
 				
