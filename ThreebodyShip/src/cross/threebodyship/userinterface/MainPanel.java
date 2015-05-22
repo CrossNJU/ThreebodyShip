@@ -23,6 +23,7 @@ public class MainPanel extends ThreebodyPanel {
 	public StarterUI starterUI;
 	public SelectorUI selectorUI;
 	public StageUI stageUI;
+	public StartUI startUI;
 	public Music music;
 	public int num;
 
@@ -62,11 +63,17 @@ public class MainPanel extends ThreebodyPanel {
 		starterUI.startGameButton.addMouseListener(new OpaqueDisplayListener(
 				this, selectorUI));
 
+		startUI = new StartUI(this);
+		add(startUI);
+		
 		currentPane = starterUI;
+		starterUI.setVisible(false);
 		add(currentPane);
 
 		bat = new BackgroundAnimeThread();
 		bat.start();
+		
+		startUI.at.start();
 	}
 
 	public void paintComponent(Graphics g) {

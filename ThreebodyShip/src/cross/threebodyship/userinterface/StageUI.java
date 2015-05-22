@@ -40,6 +40,7 @@ public class StageUI extends ThreebodyPanel implements Observer {
 	FailUI failUI = null;
 	PauseUI pauseUI = null;
 	ChapUI chapUI = null;
+	EndUI endUI = null;
 
 	public GameUI gamePanel;
 	MainPanel mainPanel = null;
@@ -49,29 +50,29 @@ public class StageUI extends ThreebodyPanel implements Observer {
 	public StageUI(MainPanel mainPanel, Stage stage) {
 		this.stage = stage;
 		this.mainPanel = mainPanel;
-		
+
 		init();
 	}
-	
-	public void init(){
+
+	public void init() {
 		stage.addObserver(this);
 
 		setLayout(null);
 		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
-//		setBackground(Color.BLUE);
+		// setBackground(Color.BLUE);
 		setVisible(true);
 		setOpaque(false);
 
 		// Game部分
 		initGamePanel(this);
-	    
-		
+
 		winUI = new WinUI(this);
 		beforeUI = new BeforeUI(this);
 		failUI = new FailUI(this);
 		chapUI = new ChapUI(this);
-		
-		if((stage.num%3==1)&&(stage.num!=19)){
+		endUI = new EndUI(this);
+
+		if ((stage.num % 3 == 1) && (stage.num != 19)) {
 			beforeUI.setVisible(false);
 			add(chapUI);
 			chapUI.aat.execute();
@@ -84,60 +85,61 @@ public class StageUI extends ThreebodyPanel implements Observer {
 
 	public void initGamePanel(StageUI stageUI) {
 		GameController gameController = new GameController(stage.game);
-		gamePanel = new GameUI(stage.game,this);
+		gamePanel = new GameUI(stage.game, this);
 		stage.game.addObserver(gamePanel);
 		gamePanel.setSize(MainUI.WIDTH, MainUI.HEIGHT);
 		gamePanel.setLocation(0, 0);
 	}
 
 	protected void paintComponent(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;  
-        g2d.setComposite(AlphaComposite.getInstance(  
-                AlphaComposite.SRC_OVER, alpha));  
-        
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+				alpha));
+
 	};
-	
 
 	@Override
 	public void update(Observable o, Object arg) {
 		String msg = (String) arg;
 		// WinGame之后
 		if (msg.equals("win")) {
-			System.out.println("To Next in Starter");
-			Stage stage = (Stage) o;
-			remove(currentPane);
-			currentPane = winUI;
-			add(currentPane);
-			revalidate();
-			repaint();
-			winUI.waat.execute();
+			if (stage.num != 18) {
+				System.out.println("To Next in Starter");
+				remove(currentPane);
+				currentPane = winUI;
+				add(currentPane);
+				revalidate();
+				repaint();
+				winUI.waat.execute();
+			} else {
+				System.out.println("To Next in Starter");
+				remove(currentPane);
+				currentPane = endUI;
+				add(currentPane);
+				revalidate();
+				repaint();
+				endUI.aat.execute();
+			}
+
 		}
 
 		if (msg.equals("fail")) {
 			SwingUtilities.invokeLater(new Runnable() {
-				
+
 				@Override
 				public void run() {
-					// TODO Auto-generated method stub
-					//
-					// try {
-					// Thread.sleep(10000);
-					// } catch (InterruptedException e) {
-					// // TODO Auto-generated catch block
-					// e.printStackTrace();
-					// }
 					failUI.setVisible(true);
-					gamePanel.add(failUI,0);
+					gamePanel.add(failUI, 0);
 					gamePanel.validate();
 					gamePanel.repaint();
 					failUI.aat.execute();
 				}
 			});
-			
+
 		}
 	}
-	
-	public String getStyle(){
+
+	public String getStyle() {
 		return style;
 	}
 }

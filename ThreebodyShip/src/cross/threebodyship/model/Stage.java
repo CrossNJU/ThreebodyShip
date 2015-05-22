@@ -11,59 +11,60 @@ public class Stage extends Observable implements Runnable {
 	volatile boolean isBack;
 	String achievement = null;
 	public int num;
-	
+
 	public Stage nextStage;
 	public Thread gameThread;
-	
+
 	public Game game = new Game();
-	
+
 	Thread stageThread;
-	
+
 	public Stage(String title) {
 		this.title = title;
 		this.isComplished = false;
 		this.isFailed = false;
 		this.isBack = false;
-//		this.game = game;
+		// this.game = game;
 	}
-	
+
 	public void startStage() {
 		gameThread = new Thread(game);
 		gameThread.start();
 		stageThread = new Thread(this);
 		stageThread.start();
 	}
-	
+
 	public void win() {
 		checkAchievement();
 		System.out.println("Win");
-		this.nextStage.isLocked = false;
+		if (num != 18 && num != 21)
+			this.nextStage.isLocked = false;
 		setChanged();
 		notifyObservers("win");
 	}
-	
+
 	public void restart() {
 		System.out.println("Restart");
 		setChanged();
 		notifyObservers("fail");
 	}
-	
+
 	public void checkAchievement() {
-		
+
 	}
-	
+
 	public void leave() {
 		isBack = true;
 		game.setState(false);
-		//game = null;
-		//stageThread = null;
+		// game = null;
+		// stageThread = null;
 	}
-	
+
 	@Override
 	public void run() {
 		try {
 			while (!isBack) {
-				if(game.inGame){
+				if (game.inGame) {
 					if (game.isWin) {
 						win();
 						game.inGame = false;
@@ -75,14 +76,14 @@ public class Stage extends Observable implements Runnable {
 						break;
 					}
 				}
-//				else leave();
-				//System.out.println("Check if complished or else");
+				// else leave();
+				// System.out.println("Check if complished or else");
 				Thread.sleep(game.getRI());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

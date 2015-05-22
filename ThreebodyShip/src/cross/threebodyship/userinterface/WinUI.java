@@ -88,7 +88,7 @@ public class WinUI extends ThreebodyPanel {
 		nextStageButton.setContentAreaFilled(false);
 		nextStageButton.setBorderPainted(false);
 		nextStageButton.setFocusPainted(false);
-		if(stageUI.stage.num!=21){
+		if((stageUI.stage.num!=21)&&(stageUI.stage.num!=18)){
 			nextStageButton.addMouseListener(new EnterStageButtonListener(
 					stageUI.mainPanel, stageUI.stage.nextStage));
 			add(nextStageButton);
