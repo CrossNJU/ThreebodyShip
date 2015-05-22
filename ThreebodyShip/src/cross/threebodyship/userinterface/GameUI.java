@@ -88,7 +88,6 @@ public class GameUI extends ThreebodyPanel implements Observer {
 		addMouseListener(controller);
 		addMouseMotionListener(controller);
 
-
 		pauseButton = new JButton();
 		pauseButton.setBounds(924, 0, 100, 100);
 		pauseButton.setIcon(new ImageIcon("img/Button/btn-pause-normal.png"));
@@ -119,14 +118,14 @@ public class GameUI extends ThreebodyPanel implements Observer {
 
 		paintPlanet(g);
 		paintSuper(g);
-//		paintSpecial(g);
+		paintSpecial(g);
 
 		// paintstar(g, game.starList);
 		// paintplanet(g, game.planets);
 		// paintRocks(g, game.rockList);
 		// paintWinArea(g);
 		// paintstartArea(g);
-		
+
 		paintShip(g, game.ship);
 		if (game.isStarting) {
 			paintPowerTank(g);
@@ -138,22 +137,41 @@ public class GameUI extends ThreebodyPanel implements Observer {
 	public void paintSpecial(Graphics g) {
 		if (game.gameNumber == 20) {
 			Image normal = new ImageIcon(
-					"img/GameBackground/Specialstar/special_normal").getImage();
+					"img/GameBackground/Specialstar/special_normal.png")
+					.getImage();
 			Image fire = new ImageIcon(
-					"img/GameBackground/Specialstar/special_fire").getImage();
+					"img/GameBackground/Specialstar/special_fire.png")
+					.getImage();
 			Image ice = new ImageIcon(
-					"img/GameBackground/Specialstar/special_ice").getImage();
-			if(game.special2.style.equals("IAF")){
-				IAFStar iafStar = (IAFStar) game.special2;
-				if(iafStar.SpeedChangeRate>1){
-					g.drawImage(fire, 0, 0, null);
+					"img/GameBackground/Specialstar/special_ice.png")
+					.getImage();
+			if (game.inSpecialScope) {
+				if (game.special2.style.equals("IAF")) {
+					IAFStar iafStar = (IAFStar) game.special2;
+					if (iafStar.SpeedChangeRate > 1) {
+						g.drawImage(fire, (int) iafStar.getLocation().x - 140,
+								(int) iafStar.getLocation().y - 140, null);
+					} else {
+						g.drawImage(ice, (int) iafStar.getLocation().x - 140,
+								(int) iafStar.getLocation().y - 140, null);
+					}
+				} else {
+					g.drawImage(normal,
+							(int) game.special2.getLocation().x - 140,
+							(int) game.special2.getLocation().y - 140, null);
 				}
 			}
 
 		} else if (game.gameNumber == 21) {
 			Image special = new ImageIcon(
 					"img/GameBackground/Specialstar/special").getImage();
-
+			if (game.special3.lefttime<0) {
+				g.drawImage(special, (int) game.special3.getLocation().x
+						- (int) game.special3.getGravityScope() / 2,
+						(int) game.special3.getLocation().y
+								- (int) game.special3.getGravityScope() / 2,
+						null);
+			}
 		}
 	}
 
@@ -194,9 +212,9 @@ public class GameUI extends ThreebodyPanel implements Observer {
 
 		}
 	}
-	
-	//画卫星
-	public void paintPlanet(Graphics g){
+
+	// 画卫星
+	public void paintPlanet(Graphics g) {
 		Image planet = new ImageIcon("img/Gamebackground/Planet/planet-"
 				+ game.gameNumber + ".png").getImage();
 		for (int i = 0; i < game.data.planets.size(); i++) {

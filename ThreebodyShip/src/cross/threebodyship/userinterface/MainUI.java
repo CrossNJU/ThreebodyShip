@@ -61,7 +61,7 @@ public class MainUI extends JFrame {
 		
 		//添加鼠标
 		Toolkit kit = Toolkit.getDefaultToolkit();
-		Image cur = new ImageIcon("img/Component/mouse.png").getImage();
+		Image cur = new ImageIcon("img/Component/mouseN.gif").getImage();
 		Cursor cu = kit.createCustomCursor(cur, new Point(0,0),"stick");
 		
 		setCursor(cu);
