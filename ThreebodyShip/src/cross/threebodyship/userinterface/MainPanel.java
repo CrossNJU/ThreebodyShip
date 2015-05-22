@@ -69,7 +69,7 @@ public class MainPanel extends ThreebodyPanel {
 		currentPane = starterUI;
 		starterUI.setVisible(false);
 		add(currentPane);
-
+		
 		bat = new BackgroundAnimeThread();
 		bat.start();
 		

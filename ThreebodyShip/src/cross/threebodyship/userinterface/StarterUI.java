@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import cross.threebodyship.listener.AboutButtonListener;
 import cross.threebodyship.listener.ExitButtonListener;
 import cross.threebodyship.model.Point;
 import cross.threebodyship.model.RoundButton;
@@ -34,6 +35,8 @@ public class StarterUI extends ThreebodyPanel {
 	Thread anime;
 	int bgX = 0;
 	BackgroundAnimeThread bat;
+	
+	public AboutUI aboutUI;
 
 	public StarterUI(MainUI mainUI) {
 		this.mainUI = mainUI;
@@ -45,8 +48,12 @@ public class StarterUI extends ThreebodyPanel {
 		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
 		setOpaque(false);
 		alpha = 1;
-		startGameButton.setBounds(663, 327, 188, 188);
 		
+		aboutUI = new AboutUI(this);
+		aboutUI.setVisible(false);
+		add(aboutUI);
+		
+		startGameButton.setBounds(663, 327, 188, 188);
 		startGameButton.setIcon(new ImageIcon("img/Button/btn-start-normal.png"));
 		startGameButton.setRolloverIcon(new ImageIcon("img/Button/btn-start-hover.png"));
 		startGameButton.setFocusable(false);
@@ -67,6 +74,7 @@ public class StarterUI extends ThreebodyPanel {
 		aboutButton.setFocusable(false);
 		aboutButton.setContentAreaFilled(false);
 		aboutButton.setBorderPainted(false);
+		aboutButton.addMouseListener(new AboutButtonListener(this));
 		
 		
 		add(startGameButton);

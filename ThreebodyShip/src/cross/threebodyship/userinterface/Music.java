@@ -11,7 +11,6 @@ public class Music {
 	}
 	public void init(){
 		musicPlayers.add(new MusicPlayer("music/The Crisis.wav"));
-		musicPlayers.add(new MusicPlayer("music/周杰伦 - 斗牛.wav"));
 	}
 	
 	public void play(int num){

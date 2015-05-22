@@ -61,7 +61,7 @@ public class WinUI extends ThreebodyPanel {
 		challengeAfterUI = new ChallengeAfterUI(this);
 		challengeAfterUI.setVisible(false);
 		coverPanel = new CoverPanel();
-		if(stageUI.stage.num%3!=0){
+		if(stageUI.stage.num%3!=0||stageUI.stage.num==21){
 			coverPanel.setVisible(false);
 		}else {
 			coverPanel.alpha=1;

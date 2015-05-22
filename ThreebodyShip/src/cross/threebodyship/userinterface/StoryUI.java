@@ -25,7 +25,7 @@ public class StoryUI extends ThreebodyPanel {
 	}
 	
 	public void init(){
-		setSize(panelWidth, panelHeight * 3);
+		setSize(panelWidth, (int)(panelHeight * 2.2));
 		setOpaque(false);
 		setBackground(null);
 		setLayout(null);

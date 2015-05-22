@@ -22,6 +22,8 @@ public class StartUI extends ThreebodyPanel {
 	int currentAnime = 0;
 	AnimeThread at;
 	AlphaDisappearThread adt;
+	
+	
 
 	public StartUI(MainPanel mainPanel) {
 		// TODO Auto-generated constructor stub
@@ -33,6 +35,8 @@ public class StartUI extends ThreebodyPanel {
 		setLayout(null);
 		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
 		setOpaque(false);
+		
+	
 
 		alpha = 1;
 		at = new AnimeThread();
