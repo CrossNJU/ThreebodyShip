@@ -10,7 +10,11 @@ public class Music {
 		init();
 	}
 	public void init(){
-		musicPlayers.add(new MusicPlayer("music/The Crisis.wav"));
+		musicPlayers.add(new MusicPlayer("music/Breath and Life.wav"));
+		musicPlayers.add(new MusicPlayer("music/Nostalgia.wav"));
+		musicPlayers.add(new MusicPlayer("music/Out Of Africa.wav"));
+		musicPlayers.add(new MusicPlayer("music/Secrets AMFB Onerepublic.wav"));
+
 	}
 	
 	public void play(int num){

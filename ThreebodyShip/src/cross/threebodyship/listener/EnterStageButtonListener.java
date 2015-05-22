@@ -32,13 +32,13 @@ public class EnterStageButtonListener implements MouseListener {
 			System.out.println("you can't goto this stage!");
 		else {
 			//播放音乐
-//			if((mainPanel.currentPane.style.equals("selector"))||(mainPanel.currentPane.style.equals("starter"))){
-//				mainPanel.music.stop(0);
-//				mainPanel.music.play((stage.num-1/3)+1);
-//			}else if(mainPanel.music.currentMusic!=((stage.num-1)/3+1)){
-//				mainPanel.music.stop(mainPanel.music.currentMusic);
-//				mainPanel.music.play((stage.num-1)/3+1);
-//			}
+			if((mainPanel.currentPane.style.equals("selector"))||(mainPanel.currentPane.style.equals("starter"))){
+				mainPanel.music.stop(0);
+				mainPanel.music.play((stage.num-1/9)+1);
+			}else if(mainPanel.music.currentMusic!=((stage.num-1)/3+1)){
+				mainPanel.music.stop(mainPanel.music.currentMusic);
+				mainPanel.music.play((stage.num-1)/9+1);
+			}
 			stage.game = new Game();
 			stage.game.gameNumber = stage.num;
 			mainPanel.remove(mainPanel.currentPane);
