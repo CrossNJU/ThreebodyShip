@@ -70,6 +70,12 @@ public class AchieveAfterUI extends ThreebodyPanel{
 					alpha = 1f;
 				}
 			}
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return null;
 		
 		}
@@ -77,12 +83,7 @@ public class AchieveAfterUI extends ThreebodyPanel{
 		public void done(){
 			repaint();
 			isFinish = true;
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 			adt.execute();
 			aat = new AlphaAnimeThread();
 		}

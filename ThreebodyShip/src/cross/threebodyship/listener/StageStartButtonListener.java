@@ -26,8 +26,7 @@ public class StageStartButtonListener implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		// DisplayPanel.stageDisplay(stageUI, newPane);
-		beforeUI.aat.execute();
-		stageUI.remove(beforeUI);
+		beforeUI.adt.execute();
 		stageUI.revalidate();
 		stageUI.repaint();
 		stageUI.stage.startStage();

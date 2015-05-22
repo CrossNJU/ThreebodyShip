@@ -39,6 +39,7 @@ public class StageUI extends ThreebodyPanel implements Observer {
 	WinUI winUI = null;
 	FailUI failUI = null;
 	PauseUI pauseUI = null;
+	ChapUI chapUI = null;
 
 	public GameUI gamePanel;
 	MainPanel mainPanel = null;
@@ -68,7 +69,13 @@ public class StageUI extends ThreebodyPanel implements Observer {
 		winUI = new WinUI(this);
 		beforeUI = new BeforeUI(this);
 		failUI = new FailUI(this);
+		chapUI = new ChapUI(this);
 		
+		if((stage.num%3==1)&&(stage.num!=19)){
+			beforeUI.setVisible(false);
+			add(chapUI);
+			chapUI.aat.execute();
+		}
 		add(beforeUI);
 		currentPane = gamePanel;
 		add(currentPane);

@@ -75,7 +75,7 @@ public class Stage extends Observable implements Runnable {
 						break;
 					}
 				}
-				else leave();
+//				else leave();
 				//System.out.println("Check if complished or else");
 				Thread.sleep(game.getRI());
 			}

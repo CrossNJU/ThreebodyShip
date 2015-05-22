@@ -1,10 +1,12 @@
 package cross.threebodyship.userinterface;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -42,7 +44,7 @@ public class StarterUI extends ThreebodyPanel {
 		setLayout(null);
 		setBounds(0, 0, MainUI.WIDTH, MainUI.HEIGHT);
 		setOpaque(false);
-
+		alpha = 1;
 		startGameButton.setBounds(663, 327, 188, 188);
 		
 		startGameButton.setIcon(new ImageIcon("img/Button/btn-start-normal.png"));
@@ -91,7 +93,10 @@ public class StarterUI extends ThreebodyPanel {
 //		Image B_img = new ImageIcon("img/GameBackground/bg.jpg").getImage();
 //		g.drawImage(B_img, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0 + bgX, 0,
 //				1024 + bgX, 768, null);
-		
+		Graphics2D g2d = (Graphics2D) g;  
+        g2d.setComposite(AlphaComposite.getInstance(  
+                AlphaComposite.SRC_OVER, alpha)); 
+        
 		Image cover = new ImageIcon("img/Starter/cover-starter-85.png")
 				.getImage();
 		g.drawImage(cover, 0, 0, null);

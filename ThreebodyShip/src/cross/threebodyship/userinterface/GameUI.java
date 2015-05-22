@@ -29,6 +29,7 @@ import javax.swing.SwingWorker;
 import cross.threebodyship.listener.PauseButtonListener;
 //import cross.threebodyship.listener.PauseButtonListener;
 import cross.threebodyship.model.Game;
+import cross.threebodyship.model.IAFStar;
 import cross.threebodyship.model.Planet;
 import cross.threebodyship.model.Rock;
 import cross.threebodyship.model.Ship;
@@ -46,11 +47,8 @@ public class GameUI extends ThreebodyPanel implements Observer {
 	public PauseUI pauseUI;
 	GameController controller;
 	public Game game;
-	JLabel speedLabel;
-	JLabel degreeLabel;
 	public int num;
 	JButton pauseButton;
-	public BeforeUI beforeUI;
 	JLabel stageTitle = null;
 
 	int degree = 0;
@@ -90,8 +88,6 @@ public class GameUI extends ThreebodyPanel implements Observer {
 		addMouseListener(controller);
 		addMouseMotionListener(controller);
 
-		// beforeUI = new BeforeUI(this);
-		// add(beforeUI);
 
 		pauseButton = new JButton();
 		pauseButton.setBounds(924, 0, 100, 100);
@@ -121,11 +117,9 @@ public class GameUI extends ThreebodyPanel implements Observer {
 		g.drawImage(GB_IMG, 0, 0, MainUI.WIDTH, MainUI.HEIGHT, 0, 0, 1024, 768,
 				null);
 
-		// 画卫星
 		paintPlanet(g);
-
-		// 画超新星
 		paintSuper(g);
+//		paintSpecial(g);
 
 		// paintstar(g, game.starList);
 		// paintplanet(g, game.planets);
@@ -149,6 +143,12 @@ public class GameUI extends ThreebodyPanel implements Observer {
 					"img/GameBackground/Specialstar/special_fire").getImage();
 			Image ice = new ImageIcon(
 					"img/GameBackground/Specialstar/special_ice").getImage();
+			if(game.special2.style.equals("IAF")){
+				IAFStar iafStar = (IAFStar) game.special2;
+				if(iafStar.SpeedChangeRate>1){
+					g.drawImage(fire, 0, 0, null);
+				}
+			}
 
 		} else if (game.gameNumber == 21) {
 			Image special = new ImageIcon(
