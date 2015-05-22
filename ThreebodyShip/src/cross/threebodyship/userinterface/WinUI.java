@@ -74,8 +74,13 @@ public class WinUI extends ThreebodyPanel {
 		add(coverPanel);
 
 		nextStageButton = new JButton("Next Stage >");
-		nextStageButton.setBounds((int) (MainUI.WIDTH * 0.75),
-				(int) (MainUI.HEIGHT * 0.40), 142, 142);
+		if(stageUI.stage.num<19){
+			nextStageButton.setBounds((int) (MainUI.WIDTH * 0.75),
+					(int) (MainUI.HEIGHT * 0.40), 142, 142);
+		}else {
+			nextStageButton.setBounds((int) (MainUI.WIDTH * 0.75)+75,
+					(int) (MainUI.HEIGHT * 0.40), 142, 142);
+		}
 		nextStageButton.setIcon(new ImageIcon(
 				"img/Button/btn-nextstage-normal.png"));
 		nextStageButton.setRolloverIcon(new ImageIcon(
@@ -83,9 +88,12 @@ public class WinUI extends ThreebodyPanel {
 		nextStageButton.setContentAreaFilled(false);
 		nextStageButton.setBorderPainted(false);
 		nextStageButton.setFocusPainted(false);
-		nextStageButton.addMouseListener(new EnterStageButtonListener(
-				stageUI.mainPanel, stageUI.stage.nextStage));
-		add(nextStageButton);
+		if(stageUI.stage.num!=21){
+			nextStageButton.addMouseListener(new EnterStageButtonListener(
+					stageUI.mainPanel, stageUI.stage.nextStage));
+			add(nextStageButton);
+		}
+		
 
 		restartButton = new JButton();
 		restartButton.setBounds(940, 697, 53, 53);
