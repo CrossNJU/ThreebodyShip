@@ -84,7 +84,7 @@ public class StartUI extends ThreebodyPanel {
 			}
 			while (currentAnime < 120) {
 				try {
-					sleep(10);
+					sleep(20);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
