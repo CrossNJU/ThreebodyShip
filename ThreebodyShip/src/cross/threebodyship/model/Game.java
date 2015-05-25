@@ -75,6 +75,8 @@ public class Game extends Observable implements Runnable{
 //		System.out.println("d to w:"+Math.toDegrees(ship.degreeToWest));
 //		System.out.println();
 		isInScope = false;
+		isInFire = false;
+		isInIce = false;
 		
 		//正常情况下飞船轨迹
 		double nowX = ship.getLocation().x;
@@ -92,8 +94,6 @@ public class Game extends Observable implements Runnable{
 			
 			//设置当前考虑的星球
 			Star nowStar;
-			isInFire = false;
-			isInIce = false;
 			
 			if(starList.get(i).style.equals("special3") && !starList.get(i).isExisted) {
 				SpecialThree specialThree = (SpecialThree) starList.get(i);
