@@ -42,6 +42,10 @@ public class Game extends Observable implements Runnable{
 	public SpecialThree special3;
 	public boolean inspecialScope3 = false;
 	
+	//
+	public boolean isInFire =  false;
+	public boolean isInIce = false;
+	
 	public Game(){
 		border = new Point();
 		startingPoint = new Point();
@@ -88,6 +92,8 @@ public class Game extends Observable implements Runnable{
 			
 			//设置当前考虑的星球
 			Star nowStar;
+			isInFire = false;
+			isInIce = false;
 			
 			if(starList.get(i).style.equals("special3") && !starList.get(i).isExisted) {
 				SpecialThree specialThree = (SpecialThree) starList.get(i);
@@ -175,6 +181,11 @@ public class Game extends Observable implements Runnable{
 						vx*=star.SpeedChangeRate;
 						vy*=star.SpeedChangeRate;
 						star.changed = true;
+					}
+					if (star.SpeedChangeRate>1) {
+						isInFire = true;
+					}else {
+						isInIce = true;
 					}
 				}
 //				if(starList.get(i).style.equals("Super")){
