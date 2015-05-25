@@ -12,7 +12,7 @@ public class Selector {
 		addMode("故事模式");
 		addMode("挑战模式");
 		addMode("成就");
-//		addMode("设置");s
+		addMode("设置");
 		
 	}
 	

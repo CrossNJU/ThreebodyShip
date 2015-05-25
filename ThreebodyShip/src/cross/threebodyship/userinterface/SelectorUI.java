@@ -110,7 +110,7 @@ public class SelectorUI extends ThreebodyPanel {
 		// 加入模式按钮
 		for (int i = 0; i < modeButton.size(); i++) {
 			modeButton.get(i).setBounds((int) (frameWidth * 0.05)-20,
-					250+90*i, 260, 67);
+					220+90*i, 260, 67);
 			modeButton.get(i).setVisible(true);
 			modeButton.get(i).addMouseListener(
 					new ModeButtonListener(this, modePane.get(i)));

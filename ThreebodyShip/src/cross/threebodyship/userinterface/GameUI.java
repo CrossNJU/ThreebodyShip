@@ -409,7 +409,14 @@ public class GameUI extends ThreebodyPanel implements Observer {
 				degree %= 360;
 				BufferedImage src;
 				try {
-					src = ImageIO.read(new File("img/Ship/ship-0.125.png"));
+//					System.out.println(game.isInFire);
+					if(game.isInFire){
+						src = ImageIO.read(new File("img/Ship/ship-fire.png"));
+					}else if(game.isInIce){
+						src = ImageIO.read(new File("img/Ship/ship-ice.png"));
+					}else {
+						src = ImageIO.read(new File("img/Ship/ship-0.125.png"));
+					}
 					ship_img = RotateImage.Rotate(src, degree);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
