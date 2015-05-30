@@ -410,9 +410,9 @@ public class GameUI extends ThreebodyPanel implements Observer {
 				BufferedImage src;
 				try {
 //					System.out.println(game.isInFire);
-					if(game.isInFire){
+					if(game.isInFire||game.inSkill1==1){
 						src = ImageIO.read(new File("img/Ship/ship-fire.png"));
-					}else if(game.isInIce){
+					}else if(game.isInIce||game.inSkill1==-1){
 						src = ImageIO.read(new File("img/Ship/ship-ice.png"));
 					}else {
 						src = ImageIO.read(new File("img/Ship/ship-0.125.png"));

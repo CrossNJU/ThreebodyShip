@@ -73,7 +73,8 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 				case KeyEvent.VK_RIGHT:{
 					Ship temp = this.game.ship;
 					if(temp.skill1 == 1){
-						temp.setSpeed(this.game.speedChangeRate*temp.getSpeed());
+						temp.setSpeed(2*temp.getSpeed());
+						game.inSkill1 = 1;
 						temp.skill1 = 2;
 					}
 					break;
@@ -81,7 +82,8 @@ public class GameController implements KeyListener,MouseMotionListener,MouseList
 				case KeyEvent.VK_LEFT:{
 					Ship temp = this.game.ship;
 					if(temp.skill1 == 1){
-						temp.setSpeed(temp.getSpeed()/this.game.speedChangeRate);
+						temp.setSpeed(temp.getSpeed()/2);
+						game.inSkill1 = -1;
 						temp.skill1 ++;
 					}
 					break;

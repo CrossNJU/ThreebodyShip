@@ -45,6 +45,7 @@ public class Game extends Observable implements Runnable{
 	//
 	public boolean isInFire =  false;
 	public boolean isInIce = false;
+	public int inSkill1 = 0;
 	
 	public Game(){
 		border = new Point();

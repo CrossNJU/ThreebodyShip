@@ -109,13 +109,13 @@ public class Data {
 		//初始化星球
 		
 		starOne.style = "IAF";
-		starOne.SpeedChangeRate = 1.3;
+		starOne.SpeedChangeRate = 2;
 		starOne.setLocation(240,515);
 		starOne.setSize(212);
 		starOne.setGravityScope(454);
 		
 		starTwo.style = "IAF";
-		starTwo.SpeedChangeRate = 1.2;
+		starTwo.SpeedChangeRate = 2;
 		starTwo.setLocation(679,337);
 		starTwo.setSize(326);
 		starTwo.setGravityScope(628);
@@ -131,13 +131,13 @@ public class Data {
 		//初始化星球
 		
 		starOne.style = "IAF";
-		starOne.SpeedChangeRate = 0.8;
+		starOne.SpeedChangeRate = 0.4;
 		starOne.setLocation(320,210);
 		starOne.setSize(300);
 		starOne.setGravityScope(640);
 		
 		starTwo.style = "IAF";
-		starTwo.SpeedChangeRate = 0.8;
+		starTwo.SpeedChangeRate = 0.4;
 		starTwo.setLocation(709,546);
 		starTwo.setSize(300);
 		starTwo.setGravityScope(640);
