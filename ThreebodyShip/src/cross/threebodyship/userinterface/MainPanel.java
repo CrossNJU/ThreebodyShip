@@ -34,7 +34,7 @@ public class MainPanel extends ThreebodyPanel {
 		// TODO Auto-generated constructor stubScanner fileScanner = null;
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader(new File("data.txt")));
+			reader = new BufferedReader(new FileReader(new File("data")));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

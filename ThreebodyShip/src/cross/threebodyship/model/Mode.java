@@ -62,7 +62,7 @@ public class Mode {
 			num = 0;
 			BufferedReader reader = null;
 			try {
-				reader = new BufferedReader(new FileReader((new File("data.txt"))));
+				reader = new BufferedReader(new FileReader((new File("data"))));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -106,7 +106,7 @@ public class Mode {
 				stages.get(stages.size() - 1).nextStage = stage;
 			}
 			stages.add(stage);
-			stage.isLocked = false;
+//			stage.isLocked = false;
 			stage.num = stages.size()+18;
 			stage.game.gameNumber = stage.num;
 		}

@@ -132,7 +132,7 @@ public class WinUI extends ThreebodyPanel {
 
 		BufferedWriter writer = null;
 		try {
-			writer = new BufferedWriter(new FileWriter(new File("data.txt")));
+			writer = new BufferedWriter(new FileWriter(new File("data")));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
