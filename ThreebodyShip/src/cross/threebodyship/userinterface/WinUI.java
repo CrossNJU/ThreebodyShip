@@ -126,7 +126,7 @@ public class WinUI extends ThreebodyPanel {
 
 		// 更新记录数据
 		// System.out.println(stageUI.mainPanel.num);
-		if (stageUI.mainPanel.num < stageUI.stage.game.gameNumber)
+		if (stageUI.mainPanel.num < stageUI.stage.game.gameNumber && stageUI.stage.game.gameNumber<=18)
 			stageUI.mainPanel.num = stageUI.stage.game.gameNumber;
 		// System.out.println(stageUI.mainPanel.num);
 

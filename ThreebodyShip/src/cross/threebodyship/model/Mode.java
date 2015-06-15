@@ -107,6 +107,7 @@ public class Mode {
 			}
 			stages.add(stage);
 //			stage.isLocked = false;
+//			stages.get(6).nextChallengeStage = stage;
 			stage.num = stages.size()+18;
 			stage.game.gameNumber = stage.num;
 		}

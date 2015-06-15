@@ -14,6 +14,13 @@ public class Selector {
 		addMode("成就");
 		addMode("设置");
 		
+		Mode story = mode.get(0);
+		Mode challenge = mode.get(1);
+		
+		story.stages.get(8).nextChallengeStage = challenge.stages.get(0);
+		story.stages.get(11).nextChallengeStage = challenge.stages.get(1);
+		story.stages.get(14).nextChallengeStage = challenge.stages.get(2);
+//		story.
 	}
 	
 	//添加模式

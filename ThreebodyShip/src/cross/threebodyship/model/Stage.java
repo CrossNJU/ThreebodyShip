@@ -13,6 +13,7 @@ public class Stage extends Observable implements Runnable {
 	public int num;
 
 	public Stage nextStage;
+	public Stage nextChallengeStage = null;
 	public Thread gameThread;
 
 	public Game game = new Game();
@@ -39,6 +40,7 @@ public class Stage extends Observable implements Runnable {
 		System.out.println("Win");
 		if (num != 18 && num != 21)
 			this.nextStage.isLocked = false;
+		if (num == 9 || num == 12 || num == 15) this.nextChallengeStage.isLocked = false;
 		setChanged();
 		notifyObservers("win");
 	}
