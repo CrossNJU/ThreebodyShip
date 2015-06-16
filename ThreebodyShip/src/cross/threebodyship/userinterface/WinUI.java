@@ -124,26 +124,7 @@ public class WinUI extends ThreebodyPanel {
 		cat = new CompleteAnimeThread();
 		setup();
 
-		// 更新记录数据
-		// System.out.println(stageUI.mainPanel.num);
-		if (stageUI.mainPanel.num < stageUI.stage.game.gameNumber && stageUI.stage.game.gameNumber<=18)
-			stageUI.mainPanel.num = stageUI.stage.game.gameNumber;
-		// System.out.println(stageUI.mainPanel.num);
-
-		BufferedWriter writer = null;
-		try {
-			writer = new BufferedWriter(new FileWriter(new File("data")));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			writer.write(String.valueOf(stageUI.mainPanel.num));
-			writer.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 	}
 

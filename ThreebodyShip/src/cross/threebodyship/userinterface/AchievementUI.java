@@ -25,7 +25,7 @@ public class AchievementUI extends ThreebodyPanel {
 		// TODO Auto-generated method stub
 		super.paintComponent(g);
 		if(selectorUI.mainPanel.num<=18){
-			lockNum = selectorUI.mainPanel.num;
+			lockNum = selectorUI.mainPanel.num-1;
 		}
 		for(int i = 0 ; i<lockNum/3;i++){
 			if(i<3){

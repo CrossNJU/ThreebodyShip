@@ -110,7 +110,7 @@ public class SelectorUI extends ThreebodyPanel {
 		// 加入模式按钮
 		for (int i = 0; i < modeButton.size(); i++) {
 			modeButton.get(i).setBounds((int) (frameWidth * 0.05)-20,
-					220+90*i, 260, 67);
+					250+90*i, 260, 67);
 			modeButton.get(i).setVisible(true);
 			modeButton.get(i).addMouseListener(
 					new ModeButtonListener(this, modePane.get(i)));
@@ -222,7 +222,8 @@ public class SelectorUI extends ThreebodyPanel {
 	}
 	
 	public void reset(){
-		modePane.set(0, new StoryUI(this));
+		modePane.get(0).reset();
+		modePane.get(1).reset();
 	}
 	//闪烁的动画线程
 	class ShineAnimeThread extends SwingWorker<Boolean, Boolean>{

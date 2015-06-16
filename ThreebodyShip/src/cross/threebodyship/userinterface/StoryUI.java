@@ -1,6 +1,8 @@
 package cross.threebodyship.userinterface;
 
+import java.awt.Button;
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.naming.InitialContext;
 import javax.swing.ImageIcon;
@@ -16,6 +18,7 @@ public class StoryUI extends ThreebodyPanel {
 	int panelWidth;
 	int panelHeight;
 	SelectorUI selectorUI;
+	ArrayList<JButton> stageBtn = new ArrayList<>();
 
 	public StoryUI(SelectorUI selectorUI) {
 		panelWidth = (int) (MainUI.WIDTH * 0.7);
@@ -48,7 +51,8 @@ public class StoryUI extends ThreebodyPanel {
 				}
 				JButton stageButton = new JButton(
 						selectorUI.selector.mode.get(0).stages.get(num).title);
-
+				stageBtn.add(stageButton);
+				
 				stageButton.setBounds((int) (panelWidth * 0.25) * (j + 1)-80,
 						(int) (panelHeight * 0.3) * (i + 1) -40, 154, 154);
 				stageButton.setVisible(true);
@@ -62,7 +66,7 @@ public class StoryUI extends ThreebodyPanel {
 						+ (num + 1) + "-hover.png";
 				String imageLockString  = "img/Button/stagebtn/btn-stage"
 						+ (num + 1) + "-disable.png";
-				if(num<selectorUI.mainPanel.num){
+				if(!selectorUI.selector.mode.get(0).stages.get(num).isLocked){
 					ImageIcon image = new ImageIcon(imageString);
 					ImageIcon imageHover = new ImageIcon(imageHoverString);
 					stageButton.setIcon(image);
@@ -80,10 +84,36 @@ public class StoryUI extends ThreebodyPanel {
 				num++;
 			}
 		}
+		
 
 		addMouseWheelListener(new ScrollListener(this));
 		revalidate();
 //		System.out.println("init");
 		System.out.println(selectorUI.mainPanel.num);
 	}
+	
+	public void reset(){
+		for (int num = 0;num<18;num++){
+			String imageString = "img/Button/stagebtn/btn-stage"
+					+ (num + 1) + "-normal.png";
+			String imageHoverString = "img/Button/stagebtn/btn-stage"
+					+ (num + 1) + "-hover.png";
+			String imageLockString  = "img/Button/stagebtn/btn-stage"
+					+ (num + 1) + "-disable.png";
+			if(!selectorUI.selector.mode.get(0).stages.get(num).isLocked){
+				ImageIcon image = new ImageIcon(imageString);
+				ImageIcon imageHover = new ImageIcon(imageHoverString);
+				stageBtn.get(num).setIcon(image);
+				stageBtn.get(num).setRolloverIcon(imageHover);
+			}else {
+				ImageIcon imageLock = new ImageIcon(imageLockString);
+				stageBtn.get(num).setIcon(imageLock);
+			}
+			
+			stageBtn.get(num).repaint();
+		}
+		
+		
+	}
+	
 }

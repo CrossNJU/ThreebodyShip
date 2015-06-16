@@ -1,6 +1,7 @@
 package cross.threebodyship.userinterface;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +14,8 @@ import cross.threebodyship.listener.ScrollListener;
 public class ChallengeUI extends ThreebodyPanel {
 	int panelWidth;
 	int panelHeight;
+	ArrayList<JButton> stagebtn = new ArrayList<>();
+	SelectorUI selectorUI;
 
 	public ChallengeUI(SelectorUI selectorUI) {
 		panelWidth = (int) (MainUI.WIDTH * 0.7);
@@ -21,6 +24,7 @@ public class ChallengeUI extends ThreebodyPanel {
 		setOpaque(false);
 		setBackground(null);
 		setLayout(null);
+		this.selectorUI = selectorUI;
 		
 		
 		// num表示的是关卡数，i表示的是章节数，j表示每个章节的第几关
@@ -39,7 +43,8 @@ public class ChallengeUI extends ThreebodyPanel {
 					break;
 				}
 				JButton stageButton = new JButton();
-
+				stagebtn.add(stageButton);
+				
 				stageButton.setBounds((int) (panelWidth * 0.3) * (j + 1) - 175,
 						(int) (panelHeight * 0.3) * (i + 1) +50, 230, 230);
 				stageButton.setVisible(true);
@@ -51,11 +56,17 @@ public class ChallengeUI extends ThreebodyPanel {
 						+ (num + 1) + ".png";
 				String imageHoverString = "img/Button/stagebtn/btn-challenge"
 						+ (num + 1) + "-hover.png";
+				String imageDisableString = "img/Button/stagebtn/challenge_button"
+						+ (num + 1) + "-disable.png";
+				
 				ImageIcon image = new ImageIcon(imageString);
-//				ImageIcon imageHover = new ImageIcon(imageHoverString);
+				ImageIcon imageDisable = new ImageIcon(imageDisableString);
 
-				stageButton.setIcon(image);
-//				stageButton.setRolloverIcon(imageHover);
+				if(!selectorUI.selector.mode.get(1).stages.get(num).isLocked){
+					stageButton.setIcon(image);
+				}else{
+					stageButton.setIcon(imageDisable);
+				}
 				stageButton.setContentAreaFilled(false);
 				stageButton.setBorderPainted(false);
 				stageButton.setFocusPainted(false);
@@ -65,5 +76,29 @@ public class ChallengeUI extends ThreebodyPanel {
 			}
 		}
 		addMouseWheelListener(new ScrollListener(this));
+	}
+	
+	@Override
+	public void reset() {
+		
+		for(int num = 0 ;num<3;num++){
+			String imageString = "img/Button/stagebtn/challenge_button"
+					+ (num + 1) + ".png";
+			String imageHoverString = "img/Button/stagebtn/btn-challenge"
+					+ (num + 1) + "-hover.png";
+			String imageDisableString = "img/Button/stagebtn/challenge_button"
+					+ (num + 1) + "-disable.png";
+			
+			ImageIcon image = new ImageIcon(imageString);
+			ImageIcon imageDisable = new ImageIcon(imageDisableString);
+
+			if(!selectorUI.selector.mode.get(1).stages.get(num).isLocked){
+				stagebtn.get(num).setIcon(image);
+			}else{
+				stagebtn.get(num).setIcon(imageDisable);
+			}
+			stagebtn.get(num).repaint();
+		}
+		
 	}
 }

@@ -11,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -120,7 +124,29 @@ public class StageUI extends ThreebodyPanel implements Observer {
 				repaint();
 				endUI.aat.execute();
 			}
+			
+			// 更新记录数据
+			// System.out.println(stageUI.mainPanel.num);
+			if (mainPanel.num <stage.game.gameNumber+1 && stage.game.gameNumber<=18)
+				mainPanel.num = stage.game.gameNumber+1;
+			// System.out.println(stageUI.mainPanel.num);
 
+			BufferedWriter writer = null;
+			try {
+				writer = new BufferedWriter(new FileWriter(new File("data")));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				writer.write(String.valueOf(mainPanel.num));
+				writer.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("update");
+			System.out.println(mainPanel.num);
 		}
 
 		if (msg.equals("fail")) {
