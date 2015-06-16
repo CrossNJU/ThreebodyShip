@@ -56,7 +56,7 @@ public class MainPanel extends ThreebodyPanel {
 		music = new Music();
 		music.play(0);
 		// 初始化开始界面
-		starterUI = new StarterUI(mainUI);
+		starterUI = new StarterUI(this);
 		// 初始化选择界面
 		selectorUI = new SelectorUI(selector, this);
 

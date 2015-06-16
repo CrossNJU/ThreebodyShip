@@ -130,6 +130,7 @@ public class SkillUI extends ThreebodyPanel{
 			isFinish = true;
 			setVisible(false);
 			if((stageNum==12)){
+				winUI.challengeAfterUI.setVisible(true);
 				winUI.challengeAfterUI.aat.execute();
 			}else {
 				winUI.cat.execute();

@@ -49,7 +49,6 @@ public class MusicPlayer {
 			return;
 		} else {
 			AudioPlayer.player.start(as);
-
 		}
 	}
 

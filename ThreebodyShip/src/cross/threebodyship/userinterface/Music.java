@@ -14,7 +14,8 @@ public class Music {
 		musicPlayers.add(new MusicPlayer("music/Nostalgia.wav"));
 		musicPlayers.add(new MusicPlayer("music/Out Of Africa.wav"));
 		musicPlayers.add(new MusicPlayer("music/Secrets AMFB Onerepublic.wav"));
-
+		musicPlayers.add(new MusicPlayer("music/Click_click.wav"));
+		musicPlayers.add(new MusicPlayer("music/Click_enter.wav"));
 	}
 	
 	public void play(int num){

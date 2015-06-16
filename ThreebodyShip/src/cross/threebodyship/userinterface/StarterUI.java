@@ -29,7 +29,7 @@ public class StarterUI extends ThreebodyPanel {
 	public JButton startGameButton = new JButton();
 	public RoundButton exitButton = new RoundButton();
 	public RoundButton aboutButton = new RoundButton();
-	MainUI mainUI = null;
+	public MainPanel mainPanel;
 	int i = 0;
 	int j = 50;
 	Thread anime;
@@ -38,8 +38,8 @@ public class StarterUI extends ThreebodyPanel {
 	
 	public AboutUI aboutUI;
 
-	public StarterUI(MainUI mainUI) {
-		this.mainUI = mainUI;
+	public StarterUI(MainPanel mainPanel) {
+		this.mainPanel = mainPanel;
 		init();
 	}
 
@@ -66,7 +66,7 @@ public class StarterUI extends ThreebodyPanel {
 		exitButton.setFocusable(false);
 		exitButton.setContentAreaFilled(false);
 		exitButton.setBorderPainted(false);
-		exitButton.addMouseListener(new ExitButtonListener(mainUI));
+		exitButton.addMouseListener(new ExitButtonListener(mainPanel.mainUI));
 		
 //		aboutButton.setBounds(529, 427, 92, 92);
 		aboutButton.setIcon(new ImageIcon("img/Button/btn-about-normal.png"));
