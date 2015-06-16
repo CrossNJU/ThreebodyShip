@@ -17,6 +17,23 @@ public class Mode {
 	public int num;
 
 	public Mode(String modeName) {
+//		读出数据
+		num = 0;
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader((new File("data"))));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			num = Integer.parseInt(reader.readLine());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		this.modeName = modeName;
 		switch (modeName) {
 		case "故事模式":
@@ -58,24 +75,7 @@ public class Mode {
 			addStage(new Stage("Game17"));
 			addStage(new Stage("Game18"));
 //			System.out.println("stages:"+stages.size());
-//			读出数据
-			num = 0;
-			BufferedReader reader = null;
-			try {
-				reader = new BufferedReader(new FileReader((new File("data"))));
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
-			try {
-				num = Integer.parseInt(reader.readLine());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			// System.out.println(num);
 			if(num>18) num = 18; 
 			for (int i = 0; i < num; i++) {
 				stages.get(i).isLocked = false;
@@ -87,6 +87,10 @@ public class Mode {
 			addStage(new Stage("cha1"));
 			addStage(new Stage("cha2"));
 			addStage(new Stage("cha3"));
+			
+			if(num > 9) stages.get(0).isLocked = false;
+			if(num > 12) stages.get(1).isLocked = false;
+			if(num > 15) stages.get(2).isLocked = false;
 		}
 		
 		

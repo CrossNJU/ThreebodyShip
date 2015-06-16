@@ -120,7 +120,7 @@ public class GameUI extends ThreebodyPanel implements Observer {
 		paintSuper(g);
 		paintSpecial(g);
 
-		// paintstar(g, game.starList);
+//		 paintstar(g, game.starList);
 		// paintplanet(g, game.planets);
 		// paintRocks(g, game.rockList);
 		// paintWinArea(g);

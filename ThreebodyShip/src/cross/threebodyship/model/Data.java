@@ -268,7 +268,7 @@ public class Data {
 		Planet starThree = new Planet();
 
 		//初始化星球
-		starOne.style = "IAFStar";
+		starOne.style = "IAF";
 		starOne.SpeedChangeRate = 0.7;
 		starOne.setLocation(233, 512);
 		starOne.setSize(154);
@@ -303,7 +303,7 @@ public class Data {
 		starOne.setSize(228);
 		starOne.setGravityScope(526);
 		
-		starTwo.style = "IAFStar";
+		starTwo.style = "IAF";
 		starTwo.SpeedChangeRate = 0.5;
 		starTwo.setLocation(768, 368);
 		starTwo.setSize(140);
