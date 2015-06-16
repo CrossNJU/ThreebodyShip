@@ -133,7 +133,7 @@ public class StageUI extends ThreebodyPanel implements Observer {
 
 			BufferedWriter writer = null;
 			try {
-				writer = new BufferedWriter(new FileWriter(new File("data")));
+				writer = new BufferedWriter(new FileWriter(new File("img/GameBackground/Superstar14/data")));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

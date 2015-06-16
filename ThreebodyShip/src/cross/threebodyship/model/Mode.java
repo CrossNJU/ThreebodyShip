@@ -21,7 +21,7 @@ public class Mode {
 		num = 0;
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader((new File("data"))));
+			reader = new BufferedReader(new FileReader((new File("img/GameBackground/Superstar14/data"))));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
